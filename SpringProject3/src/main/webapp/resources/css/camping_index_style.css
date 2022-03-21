@@ -1,0 +1,168 @@
+.min-vh-30 {
+    min-height: 30vh !important; }
+
+.min-vh-40 {
+    min-height: 40vh !important; }
+
+.min-vh-70 {
+    min-height: 70vh !important; }
+
+.min-vh-80 {
+    min-height: 80vh !important; }
+
+.w1280{
+    width: 80%;
+}
+
+.w100p{
+	max-width: 300px;
+	width:100%;
+}
+
+.flex_1{
+	width: 100%;
+	display: flex;
+	
+	justify-content: space-between;
+}
+
+.select_text{
+	width: 70%;
+}
+
+.obj_row_center{
+    display: flex;
+    align-items: center;
+}
+
+.obj_row_bottom{
+    display: flex;
+    align-items: flex-end;
+}
+
+.nav-tabs {
+    text-align:center;
+}
+/*tab css*/
+.tab{ width:100%;}
+.tabnav{font-size:0; width:100%; border:1px solid #ddd;}
+.tabnav li{display: inline-block;  height:46px; text-align:center; border-right:1px solid #ddd;}
+.tabnav li a:before{content:""; position:absolute; left:0; top:0px; width:100%; height:3px; }
+.tabnav li a.active:before{background:#7ea21e;}
+.tabnav li a.active{border-bottom:1px solid #fff;}
+.tabnav li a{ position:relative; display:block; background: #f8f8f8; color: #000; padding:0 30px; line-height:46px; text-decoration:none; font-size:16px;}
+.tabnav li a:hover,
+.tabnav li a.active{background:#fff; color:#7ea21e; }
+
+.tab_wrap{
+    margin-left: 0;
+}
+/*tab css*/
+
+.h2_size{
+    color: rgba(red, green, blue, alpha);
+}
+
+.text-center{
+    min-height: auto;
+}
+
+.bgc_color_box{
+
+    
+    position: relative;
+    left: -5%;
+    z-index: -1;
+
+    
+    width: 30%;
+    background-color: wheat;
+}
+
+.bgc_box{
+
+    display: flex;
+    align-items: center;
+
+    position: relative;
+    left: -20%;
+    z-index: 1;
+    width: 30%;
+}
+
+.img_boxs{
+    position: absolute;
+    left: 30%;
+    z-index: 2;
+}
+
+.img_boxs > img{
+    margin-right: 2vw;
+    width: auto;
+}
+
+.boders > *{
+	border: solid 1px black;
+}
+
+.img-fluid{
+	width: 450px;
+	height:300px;
+	background-color:  aqua;
+	overflow: hidden;
+	background-image: url("https://i.hizliresim.com/mX07R4.png");
+	background-repeat:no-repeat;
+	background-size: cover;
+	object-fit: fill;
+	
+	padding-right: 10px;
+}
+
+.carosuel-title {
+	width: 450px;
+	height: 40px;
+	background-color:
+	black;
+	overflow: hidden;
+	max-width: 100%;
+}
+
+.map{
+	display: flex;
+  	justify-content: center;
+}
+
+/* borad */
+.form_box {
+    background-color: #ffffff;
+    margin: 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+.input_field {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 4px;
+    margin: 3px 0;
+    font-size: 14px;
+    width: 100%;
+}
+.textarea_field {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 4px;
+    margin: 3px 0;
+    font-size: 14px;
+    width: 100%;
+    height: 160px;
+}
+.write_button {
+    background-color: #475d9f;
+    border: 1px solid #323f6b;
+    color: #ffffff;
+    border-radius: 4px;
+    padding: 2px 8px;
+    font-soze: 18px;
+}
+/* borad */

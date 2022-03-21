@@ -1,0 +1,17 @@
+@charset "EUC-KR";
+
+.container {
+  padding: 0;
+  margin-right: auto;
+  margin-left: auto; }
+  @media (min-width: 1400px) {
+    .container {
+      max-width: 1320px; } 
+ }
+ 
+@media (min-width: 1400px) {
+  .container, .container-sm, .container-md, .container-lg, .container-xl .ftco-navbar-light{
+    max-width: 1320px; } 
+}
+
+/* nav바 영역 너비 조정*/
