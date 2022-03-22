@@ -109,6 +109,18 @@ public class PostController {
 		log.info("GetId: " + id);
 		return null;
 	}
+	
+	@GetMapping("/main_paragraph")
+	public String mainContents(Model model, Integer post_id) {
+		log.info("post_id: " + post_id);
+		
+		PostVO post = postService.getContents(post_id);
+		log.info(post);
+		
+		model.addAttribute("contents", post);
+		return "main_paragraph";
+	}
+	
 }
 
 

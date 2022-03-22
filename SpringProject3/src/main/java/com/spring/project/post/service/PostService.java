@@ -12,5 +12,7 @@ public interface PostService {
 	
 	public List<PostVO> getSupportPostList(SearchVO search, PagingVO pvo);
 	public List<PostVO> getSupportSearch(SearchVO search, PagingVO pvo);
+	
+	public PostVO getContents(Integer post_id);
 
 }

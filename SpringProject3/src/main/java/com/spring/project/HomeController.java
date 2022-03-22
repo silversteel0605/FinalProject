@@ -46,12 +46,6 @@ public class HomeController {
 		return "manager";
 	}
 	
-	@RequestMapping(value = "/main_paragraph", method = RequestMethod.GET)
-	public String mainParagraph() {
-		logger.info("Connect MainParagraph");
-		return "main_paragraph";
-	}
-
 	@RequestMapping(value = "/camping_index", method = RequestMethod.GET )
 	public String camping_index() {
 		logger.info("Connect camping_index");

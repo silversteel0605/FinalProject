@@ -120,14 +120,16 @@
 			    				<c:otherwise>수정요청</c:otherwise>
 			    			</c:choose>
 			    		</td>
-			    		<td><a href="#Redirect">${supportContents.title }</a></td>
+			    		<td id="${supportContents.post_id }" class="contentsTitle" onClick="mainContents(${supportContents.post_id})">${supportContents.title }</td>
 			    		<td class="userId" id="${supportContents.member_id }">${supportContents.member_id }</td>
 			    		<td>${supportContents.reg_date }</td>
-			    		<td><c:choose>
-			    				<c:when test="${supportContents.process eq 1}">미결</c:when>
-			    				<c:when test="${supportContents.process eq 2}">해결</c:when>
-			    				<c:otherwise>test</c:otherwise>
-			    			</c:choose></td>
+			    		<td>
+		    			<c:choose>
+		    				<c:when test="${supportContents.process eq 1}">미결</c:when>
+		    				<c:when test="${supportContents.process eq 2}">해결</c:when>
+		    				<c:otherwise>-</c:otherwise>
+		    			</c:choose>
+		    			</td>
 			    	</tr>
 			    </c:forEach>
 			  </tbody>
@@ -297,6 +299,7 @@
 <script src="<c:url value="/resources/js/main.js"/>"></script>
 <!-- 개인 JS -->
 <script src="<c:url value="/resources/js/jangSupport.js"/>"></script>
+<script src="<c:url value="/resources/js/jangec.js"/>"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
 </body>

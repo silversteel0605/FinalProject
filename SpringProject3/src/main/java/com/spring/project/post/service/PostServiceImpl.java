@@ -45,6 +45,11 @@ public class PostServiceImpl implements PostService {
 		
 		return postMapper.getSupportSearch(search, pvo);
 	}
+	
+	@Override
+	public PostVO getContents(Integer post_id) {
+		return postMapper.getContents(post_id);
+	}
 }
 
 

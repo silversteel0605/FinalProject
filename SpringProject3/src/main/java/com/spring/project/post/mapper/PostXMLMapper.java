@@ -14,5 +14,7 @@ public interface PostXMLMapper {
 	
 	public List<PostVO> getSupportPostList(@Param("search") SearchVO search, @Param("pvo") PagingVO pvo);
 	public List<PostVO> getSupportSearch(@Param("search") SearchVO search, @Param("pvo") PagingVO pvo);
+	
+	public PostVO getContents(Integer Post_id);
 
 }

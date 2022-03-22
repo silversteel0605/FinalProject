@@ -11,7 +11,7 @@ public class PostVO {
 	private String member_id;
 	private int comment_id;
 	private String title;
-	private String content;
+	private String contents;
 	private String reg_date;
 	private String edit_date;
 	private int board_class;

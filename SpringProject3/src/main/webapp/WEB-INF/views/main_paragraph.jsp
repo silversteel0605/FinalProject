@@ -20,7 +20,7 @@
   <link rel="stylesheet" href="<c:url value="/resources/css/jquery.timepicker.css"/>"/>
   <link rel="stylesheet" href="<c:url value="/resources/css/flaticon.css"/>" />
   <link rel="stylesheet" href="<c:url value="/resources/css/style.css"/>"/>
-  <!-- JangEc 개인 CSS/Script -->
+  <!-- 페이지 CSS-->
   <link rel="stylesheet" href="<c:url value="/resources/css/jangec.css"/>"/>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -64,17 +64,14 @@
 	<div class="container">
 		<!-- 컨텐츠 -->
 		<div class="contents">
-			<p class="fs-3">고객센터 게시판이 개설되었습니다</p>
+			<p class="fs-3">${contents.title }</p>
 			<div class="paragraph_header d-flex justify-content-between">
-				<span id="id" data-bs-toggle="modal" data-bs-target="#memberDescription">관리자</span>
-				<span>2020. 01. 01.</span>
+				<span id="${contents.member_id }" class="userId">${contents.member_id }</span>
+				<span>${contents.reg_date }</span>
 			</div> <hr/>
 			<div class="paragraph_body">
 				<p>
-					Star Trek is an American science fiction media franchise created by Gene Roddenberry, 
-					which began with the eponymous 1960s series and quickly became a worldwide pop-culture phenomenon. 
-					The franchise has been expanded into various films, television series, video games, novels, and comic books. 
-					With an estimated $10.6 billion in revenue, Star Trek is one of the most recognizable and highest-grossing media franchises of all time.
+					${contents.contents }
 				</p>
 			</div>
 			<div class="paragraph_comments">
@@ -117,8 +114,8 @@
 			</div> <hr />
 			<div class="paragraph_footer d-flex justify-content-end">
 				<button class="btn">수정</button>
-				<button id="paragraphDeleteBtn" class="btn">삭제</button>
-				<button class="btn">목록</button>
+				<button id="contentsDelete" class="btn">삭제</button>
+				<button id="goBoard" class="btn">목록</button>
 			</div>
 		</div>		
 		<!-- /컨텐츠 -->
@@ -131,6 +128,13 @@
 	<swal-button type="confirm">확인</swal-button>
 	<swal-button type="cancel">취소</swal-button>
 </template>
+
+<div id="popUpMenu" style="display:none;">
+	<ul class="list-group list-group-flush">
+		<li id="memberInfo" class="indiPopUp list-group-item list-group-item-primary opacity-75" style="cursor:pointer">회원정보 보기</li>
+		<li id="memberPost" class="indiPopUp list-group-item list-group-item-primary opacity-75" style="cursor:pointer">작성글 보기</li>
+	</ul>
+</div>
 <!-- /Modal -->
 	
 <!-- /수정 -->
@@ -235,7 +239,10 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 <script src="<c:url value="/resources/js/google-map.js"/>"></script>
 <script src="<c:url value="/resources/js/main.js"/>"></script>
+<!-- 개인 JS -->
+<script src="<c:url value="/resources/js/jang_main_paragraph.js"/>"></script>
 <script src="<c:url value="/resources/js/jangec.js"/>"></script>
+<script src="sweetalert2.all.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
 </body>

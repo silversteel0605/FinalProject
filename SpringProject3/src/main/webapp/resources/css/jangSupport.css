@@ -1,4 +1,4 @@
 @charset "EUC-KR";
-.userId {
+.userId, .contentsTitle {
 	cursor: pointer;
 }

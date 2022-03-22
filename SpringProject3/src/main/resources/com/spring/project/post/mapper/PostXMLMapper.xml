@@ -92,4 +92,23 @@
 		ORDER BY 
 			post.rownumber DESC
 	</select>
+	
+	<select id="getContents" resultType="com.spring.project.post.dto.PostVO">
+		SELECT 
+			post.rownumber, post.post_id,  member.member_id, post.comment_id, post.title, post.contents,to_char(post.reg_date, 'yyyy. MM. dd.'), 
+			to_char(post.edit_date, 'yyyy. MM. dd.'), post.board_class, post.contents_category, post.process 
+		FROM 
+			(
+				SELECT 
+					rownum as rownumber, post_id, member_id, comment_id, title, contents, reg_date, 
+					edit_date, board_class, contents_category, process 
+				FROM 
+					post
+			) 
+			post, member
+		WHERE
+			post.member_id = member.member_num_id 
+		AND 
+			post.post_id = #{post_id}
+	</select>
 </mapper>
