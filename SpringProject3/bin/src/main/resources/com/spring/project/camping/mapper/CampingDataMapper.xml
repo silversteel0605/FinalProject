@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.project.camping.mapper.CampingDataMapper">
+	
+	<insert id="initData">
+		insert into camping_list (
+		contentId, facltNm, lineIntro, addr1, firstImageUrl, doNm,
+		sigunguNm, lctCl, facltDivNm, induty, themaEnvrnCl, sbrsCl,
+		mapX, mapY
+		) 
+		values (
+		#{contentId}, #{facltNm}, #{lineIntro}, #{addr1}, #{firstImageUrl},
+		#{doNm}, #{sigunguNm}, #{lctCl}, #{facltDivNm}, #{induty},
+		#{themaEnvrnCl}, #{sbrsCl}, #{mapX}, #{mapY}
+		)
+	</insert>
+	<select id="getInfo" resultType="com.spring.project.camping.DTO.CampingVO">
+        SELECT * from camping_list where contentId=#{contentId}
+    </select>
+
+    <select id="getSearchData" resultType="com.spring.project.camping.DTO.CampingVO">
+    	SELECT * 
+		FROM (
+			SELECT ROWNUM RN, A.* 
+				FROM (
+				    select * from camping_list
+				    <if test="searchTy != null">
+				   		<choose>
+			    		<when test='searchTy.equals("condition")'>
+			    			<where>
+				    			<if test='!keyword.equals("")'>
+				    				facltNm like '%${keyword}%'
+				    			</if>
+				    			<if test='!sido.equals("")'>
+				    				and doNm = #{sido}
+				    			</if>
+				    			<if test='!gugun.equals("")'>
+				    				and sigunguNm = #{gugun}
+				    			</if>
+				    			<if test='!locThem.equals("")'>
+				    				and lctCl = #{locThem}
+				    			</if>
+				    			<if test='facltDivNm != null &amp;&amp; facltDivNm.length != 0'>
+				    				and
+				    				<foreach collection="facltDivNm" item="index" separator="or">
+										 facltDivNm like '%${index}%'
+									</foreach>
+				    			</if>
+				    			<if test='induty != null &amp;&amp; induty.length != 0'>
+				    				and
+				    				<foreach collection="induty" item="index" separator="or">
+										 induty like '%${index}%'
+									</foreach>
+				    			</if>
+				    			<if test='themaEnvrnCl != null &amp;&amp; themaEnvrnCl.length != 0'>
+				    				and
+				    				<foreach collection="themaEnvrnCl" item="index" separator="or">
+										 themaEnvrnCl like '%${index}%'
+									</foreach>
+				    			</if>
+				    			<if test='sbrsCl != null &amp;&amp; sbrsCl.length != 0'>
+				    				and
+				    				<foreach collection="sbrsCl" item="index" separator="or">
+										 sbrsCl like '%${index}%'
+									</foreach>
+				    			</if>
+			    			</where>
+			    		</when>
+			    		<when test='searchTy.equals("tag")'>
+			    			<where>
+			    				<if test='tagId != null &amp;&amp; tagId.length != 0'>
+				    				<foreach collection="tagId" item="index" separator="or">
+										 tagId like '%${index}%'
+									</foreach>
+				    			</if>
+			    			</where>
+			    		</when>
+			    	</choose>
+			    </if>
+				
+		    	<if test='order != null'>
+					order by ${order} desc
+				</if>
+						) A
+				)
+		WHERE RN BETWEEN #{start} AND #{end}
+    </select>
+    
+    <select id="getSearchTotal" resultType="_int">
+    	select count(*) from camping_list
+    	<if test="searchTy != null">
+    		<choose>
+    		<when test='searchTy.equals("condition")'>
+    			<where>
+	    			<if test='!keyword.equals("")'>
+	    				facltNm like '%${keyword}%'
+	    			</if>
+	    			<if test='!sido.equals("")'>
+	    				and doNm = #{sido}
+	    			</if>
+	    			<if test='!gugun.equals("")'>
+	    				and sigunguNm = #{gugun}
+	    			</if>
+	    			<if test='!locThem.equals("")'>
+	    				and lctCl = #{locThem}
+	    			</if>
+	    			<if test='facltDivNm != null &amp;&amp; facltDivNm.length != 0'>
+	    				and
+	    				<foreach collection="facltDivNm" item="index" separator="or">
+							 facltDivNm like '%${index}%'
+						</foreach>
+	    			</if>
+	    			<if test='induty != null &amp;&amp; induty.length != 0'>
+	    				and
+	    				<foreach collection="induty" item="index" separator="or">
+							 induty like '%${index}%'
+						</foreach>
+	    			</if>
+	    			<if test='themaEnvrnCl != null &amp;&amp; themaEnvrnCl.length != 0'>
+	    				and
+	    				<foreach collection="themaEnvrnCl" item="index" separator="or">
+							 themaEnvrnCl like '%${index}%'
+						</foreach>
+	    			</if>
+	    			<if test='sbrsCl != null &amp;&amp; sbrsCl.length != 0'>
+	    				and
+	    				<foreach collection="sbrsCl" item="index" separator="or">
+							 sbrsCl like '%${index}%'
+						</foreach>
+	    			</if>
+    			</where>
+    		</when>
+    		<when test='searchTy.equals("tag")'>
+    			<where>
+    				<if test='tagId != null &amp;&amp; tagId.length != 0'>
+	    				<foreach collection="tagId" item="index" separator="or">
+							 tagId like '%${index}%'
+						</foreach>
+	    			</if>
+    			</where>
+    		</when>
+    	</choose>
+    	</if>
+    </select>
+    <update id="addViews">
+    	update camping_list set views = views + 1 where contentId = #{contentId}
+    </update>
+    
+    <select id="getReviewAllInfoList"  resultType="com.spring.project.camping.DTO.CampingReviewDTO">
+    	SELECT * from review_table where contentId=#{contentId}
+    </select>
+    
+    <select id="getReviewInfo"  resultType="com.spring.project.camping.DTO.CampingReviewDTO">
+    	SELECT * from review_table where reviewId=#{reviewId}
+    </select>
+    
+    <insert id="initReviewData" parameterType="com.spring.project.camping.DTO.CampingReviewDTO">
+    	insert INTO review_table VALUES (REVIEW_SEQ.nextval, 0, #{contentId}, #{title}, SYSDATE, #{contentValue}, null, #{starRanking}, 0)
+    </insert>
+    
+    <update id="reviewClickNumUp" parameterType="com.spring.project.camping.DTO.CampingReviewDTO">
+    	UPDATE review_table set clickNum=clickNum+1 WHERE reviewId = #{reviewId}
+    </update>
+</mapper>
