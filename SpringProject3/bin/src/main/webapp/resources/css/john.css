@@ -1,0 +1,117 @@
+@charset "EUC-KR";
+
+ul {
+	padding: 0;
+	margin-bottom: 0;
+}
+.ftco-section .nav-item .active {
+	color: var(--orange) !important;
+}
+.ftco-section .nav-link {
+	color: black !important;
+}
+
+ 
+ .row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  width: 100%;
+  margin: 0;
+ }
+ 
+.col-md-12, .col-md-6 {
+   padding: 0;  
+   position: relative;
+   width: 100%;
+}
+
+.pb-6,
+.py-6 {
+  padding-bottom: 10rem !important; }
+
+.map-list {
+	height: 700px;
+	
+}
+
+#map {
+	width: 70%;	
+}
+
+.camplist {
+	width: 30%;
+}
+
+#list {
+  margin-bottom: 0;
+  height: 650px; 
+  overflow: scroll;
+  overflow-x: hidden; 
+}
+
+.camplist li {
+  list-style: none;
+  padding: 20px 10px;
+  color: black;
+  border-bottom: 1px solid #dddddd;
+}
+
+
+.camplist li:last-child {
+
+  border-bottom: none;
+}
+
+.paging {
+  border: 1px solid #dddddd;
+}
+
+.camplist .paging li {
+  height: 50px;
+  border: none;
+  padding: 0 10px;
+  line-height: 50px;
+}
+
+.camplist .paging li a {
+  display: inline-block;
+  height: 100%;
+}
+
+.camplist .paging li:nth-child(1) {
+  border-right: 1px solid #dddddd;
+}
+.camplist .paging li:nth-child(3) {
+  border-left: 1px solid #dddddd;
+}
+
+@media (max-width: 992px) {
+    .map-list{
+      flex-direction: column; } 
+    #map {
+    	height: 450px
+    } 
+    .camplist {
+    	width:100%;
+    	height: 250px;
+    }
+    #list{
+    	height: 200px
+    }
+    .paging {
+    	height: 50px
+
+    }
+ }
+ 
+#mores {
+	display: none;
+}
+     
+      
+      
+      
+      

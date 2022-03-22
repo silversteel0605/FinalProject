@@ -1,0 +1,42 @@
+@charset "EUC-KR";
+
+.ftco-navbar-light{
+	background: none;
+	background-color: #F2EFC7;
+}
+
+.text-center{
+	text-align: center;
+}
+
+.item-center{
+	display: flex;
+	flex-direction: column;
+    align-items: center;
+}
+
+.rating-css {
+	width: 400px;
+ 	padding: 20px;
+}
+.rating-css div {
+  color: #ffe400;
+  text-align: center;
+  text-transform: uppercase;
+  padding: 20px 0;
+}
+.rating-css input {
+  display: none;
+}
+.rating-css input + label {
+  font-size: 60px;
+  text-shadow: 1px 1px 0 #ffe400;
+  cursor: pointer;
+}
+.rating-css input:checked + label ~ label {
+  color: #838383;
+}
+.rating-css label:active {
+  transform: scale(0.8);
+  transition: 0.3s ease;
+}

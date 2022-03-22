@@ -1,0 +1,37 @@
+@charset "EUC-KR";
+
+p, div {
+	margin: 0px;
+	padding: 0px;
+}
+
+#id {
+	cursor: pointer;
+}
+
+.paragraph_body {
+	min-height: 300px;
+}
+
+.comment_icon {
+	cursor: pointer;
+}
+
+#co_comment {
+	display: none;
+}
+
+.card-body, .card-footer {
+	padding: 0px;
+}
+
+.card-body p {
+	width: 100%; 
+	overflow: hidden; 
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+  	-webkit-box-orient: vertical;
+
+}
+
