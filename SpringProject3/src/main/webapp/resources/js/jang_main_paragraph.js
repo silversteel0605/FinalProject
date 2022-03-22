@@ -5,15 +5,15 @@ goBoard.addEventListener('click', (e) => {
 
 const contentsDelete = document.getElementById('contentsDelete');
 contentsDelete.addEventListener('click', (e) => {
-	var deleteParagraph = swal.fire({
+	Swal.fire({
 		template: '#deleteModal'
-	});
-	
-	if (deleteParagraph.isConfirm) {
-		alert("Delete");
-	} else {
-		alert("Cancel");
-	}
+	}).then((result) => {
+		if (result.isConfirmed) {
+			Swal.fire(
+				'DELETED!!'
+			)
+		}
+	})
 });
 
 // 코멘트
@@ -34,14 +34,3 @@ co_comment_cancelBtn.addEventListener('click', (e) => {
 	co_comment.style.display = 'none';
 });
 
-paragraphDeleteBtn.addEventListener('click', (e) => {
-	var deleteParagraph = swal.fire({
-		template: '#deleteModal'
-	});
-	
-	if (deleteParagraph.isConfirm) {
-		alert("Delete");
-	} else {
-		alert("Cancel");
-	}
-});
