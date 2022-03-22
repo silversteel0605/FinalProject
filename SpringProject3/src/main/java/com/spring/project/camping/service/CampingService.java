@@ -26,14 +26,17 @@ public interface CampingService {
 	public int getDbSearchTotal(SearchVO vo);
 	
 	public CampingVO getInfo(String contentId);
-	
-	public void addViews(String contentId);
-	
-	
+
 	//Review
 	public List<CampingReviewDTO> getReviewAllInfoList(String contentId);	//All Reviews
 	public CampingReviewDTO getReviewInfo(int reviewId);					//Review Data Select
 	public void initReviewData(CampingReviewDTO c_dto);						//Review Data Insert
 	public void reviewClickNumUp(int reviewId);								//ReviewClickNum Data Updata
+	public void reviewUpdate(CampingReviewDTO c_dto);						//ReviewData Updata
+	public int getReviewAllPageCnt();										//Review Page Count Total
+	//Review
+	
+	public void addViews(String contentId);
+
 	
 }

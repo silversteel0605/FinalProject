@@ -24,6 +24,10 @@
   <link rel="stylesheet" href="<c:url value="./resources/css/width.css"/>" />
   <!-- naver map -->
   <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=rlwhiqh9cv"></script>
+  
+  <!-- review -->
+  <script type="text/javascript" src="./resources/js/page_tab.js"></script>
+  
   <link rel="stylesheet" href="./resources/css/camping_index_style.css">
 </head>
 <body>
@@ -96,7 +100,7 @@
 	
 	<section id="main_content" class="wrap ftco-section services-section text-center">
 		<div class="container">
-			<div class="tab">
+			<div class="tab" id="tab">
 				<ul class="nav nav-tabs nav-justified">
 				  <li class="nav-item">
 				    <a class="nav-link active" data-toggle="tab"  href="#tab01">상세정보</a>
@@ -109,7 +113,7 @@
 				  </li>
 				</ul>
 			</div>
-			
+
 			<div class="tab-content">
 		     	<div class="tab-pane fade show active min-vh-80" id="tab01">
 		       		<div class = "tab_warp row obj_row_center">
@@ -119,6 +123,7 @@
 		         			
 		           			<div>
 		             			<h2 class="h2_size"><%= info.getFacltNm() %></h2>
+		             			
 		             			<hr>
 		             			<div>
 									<a class="carousel-control-prev2 bg-dark w-auto" href="#recipeCarousel" role="button" data-slide="prev">
@@ -176,7 +181,7 @@
 					
 					<div>
 						<div class = "camping_text">
-	
+							
 							<p><%=info.getLineIntro() %></p>
 							
 						</div>
@@ -199,11 +204,12 @@
 					<div class = "map_warp">
 					
 						<div class="map_text">
-							<p><%= info.getAddr1() %>/p>
+							<p><%= info.getAddr1() %></p>
 						</div>
 						
 						<div id = "map" style="width:500px;height:500px;">
 							<script type="text/javascript" src="./resources/js/naver_map.js"></script>
+							<script> createMap(<%=info.getMapY()%>, <%=info.getMapX()%>) </script>
 						</div>
 					
 					</div>
@@ -211,7 +217,7 @@
 		
 		     	<div class="tab-pane fade min-vh-80" id="tab03">
 		
-					<section class="ftco-section">
+					<section id="reivew" class="ftco-section">
 						<div class="container">
 							<!-- 최신순 / 추천순 / 평점순  -->
 							<div id="top_box" class="flex_1">
@@ -229,7 +235,7 @@
 								
 								<div id="write_btn_box" class="right-sort">
 									<button id="write_btn" class="write_button">
-										<a href="/project/review_write?contentId=<%=info.getContentId() %>">글쓰기</a>
+										<a href="/project/review_write?type=0&contentId=<%=info.getContentId() %>">글쓰기</a>
 									</button>
 								</div>
 							</div>
@@ -255,6 +261,49 @@
 					  					</div>
 									</div>
 								</c:forEach>
+								
+								
+								<div class="row mt-5">
+								  <div class="col text-center">
+								    <div class="block-27">
+								      <ul> 	
+										<li>
+											<a data-toggle="tab" href="./TempCampInfo?contentId=<%= info.getContentId() %>&nowPage=1&cntPerPage=${paging.cntPerPage}${search.uri}&type=3#tab03">&lt;&lt;</a>
+										</li>
+										
+										<c:choose>
+											<c:when test="${paging.startPage != 1}">
+												<li><a href="./TempCampInfo?contentId=<%= info.getContentId() %>&nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}${search.uri}&type=3#tab03">&lt;</a></li>
+											</c:when>
+											<c:otherwise>
+												<li><a href="./TempCampInfo?contentId=<%= info.getContentId() %>&nowPage=${paging.startPage }&cntPerPage=${paging.cntPerPage}${search.uri}&type=3#tab03">&lt;</a></li>
+											</c:otherwise>
+										</c:choose>
+										      
+										<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
+											<c:choose>
+												<c:when test="${p == paging.nowPage }">
+													<li class="active"><a href="./TempCampInfo?contentId=<%= info.getContentId() %>&nowPage=${p }&cntPerPage=${paging.cntPerPage}${search.uri}&type=3#tab03">${p }</a></li>
+												</c:when>
+												<c:when test="${p != paging.nowPage }">
+													<li><a href="./TempCampInfo?contentId=<%= info.getContentId() %>&nowPage=${p }&cntPerPage=${paging.cntPerPage}${search.uri}&type=3#tab03">${p }</a></li>
+												</c:when>
+											</c:choose>
+										</c:forEach>
+										
+										<c:choose>
+											<c:when test="${paging.endPage != paging.lastPage}">
+												<li><a href="./TempCampInfo?contentId=<%= info.getContentId() %>&nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}${search.uri}&type=3#tab03">&gt;</a></li>
+											</c:when>
+											<c:otherwise>
+												<li><a href="./TempCampInfo?contentId=<%= info.getContentId() %>&nowPage=${paging.endPage }&cntPerPage=${paging.cntPerPage}${search.uri}&type=3#tab03">&gt;</a></li>
+											</c:otherwise>
+										</c:choose>
+										<li><a href="./TempCampInfo?contentId=<%= info.getContentId() %>&nowPage=${paging.lastPage }&cntPerPage=${paging.cntPerPage}${search.uri}&type=3#tab03">&gt;&gt;</a></li>
+								      </ul>
+								</div>
+								</div>
+								</div>
 							</div>
 						</div>
 					</section>	
@@ -279,7 +328,8 @@
 		</div>
 	</section>
 	
-	<footer class="ftco-footer bg-bottom ftco-no-pt" style="background-image: url(images/bg_3.jpg);">
+	
+	<footer id="footer" class="ftco-footer bg-bottom ftco-no-pt" style="background-image: url(images/bg_3.jpg);">
 		 <div class="container">
 		   <div class="row mb-5">
 		     <div class="col-md pt-5">
@@ -358,8 +408,13 @@
 <script src="./resources/js/scrollax.min.js"></script>
 <script src="./resources/js/comping_index_carousel_js.js"></script>
 <script src="./resources/js/main.js"></script>
-
-
 <script src="./resources/js/camping_index.js"></script>
+
+<c:if test="${type == 3}">
+	<script>
+		review();
+	</script>
+</c:if> 
+
 </body>
 </html>

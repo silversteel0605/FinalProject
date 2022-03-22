@@ -46,17 +46,22 @@ public class CampingController {
 	}
 	
 	@RequestMapping(value = "/TempCampInfo", method = RequestMethod.GET)
-	public String info(Model m, @RequestParam(value="contentId") String contentId) throws IOException, JDOMException {
+	public String info(Model m, @RequestParam(value="contentId") String contentId, @RequestParam(value="nowPage", required=false)String nowPage, SearchVO vo, @RequestParam(value="type", required=false)String type) throws IOException, JDOMException {
+
 		service.addViews(contentId);
 		CampingVO info = service.getInfo(contentId);
 		
 		List<CampingReviewDTO> reviewInfoList = service.getReviewAllInfoList(contentId);
+
+		type = type != null ? type :"1";
+		
+		log.info(type);
 		
 		m.addAttribute("info", info);
 		m.addAttribute("reviewInfoList", reviewInfoList);
+		m.addAttribute("type", type);
 		
-		System.out.println(reviewInfoList);
-		System.out.println(info);
+		reviewControlling(m, nowPage, contentId, vo);
 		
 		return "camping_index";
 	}
@@ -105,6 +110,45 @@ public class CampingController {
 	@RequestMapping(value = "/init", method = RequestMethod.GET)
 	public String init() {
 		return "init";
+	}
+	public void reviewControlling(Model m, @RequestParam(value="nowPage", required=false)String nowPage, @RequestParam(value="contentId") String contentId, SearchVO vo) {
+		
+		int reviewTotal;
+		List<CampingReviewDTO> reviews;
+		PagingVO pvo;
+		
+		reviewTotal = service.getReviewAllPageCnt();
+		
+		String searchTy;
+		
+		nowPage = nowPage != null ? nowPage :"1";
+		
+		searchTy = vo.getSearchTy();
+		
+		pvo = new PagingVO(reviewTotal, Integer.parseInt(nowPage), cntPerPage);
+		vo.calcStartEnd(Integer.parseInt(nowPage), pvo.getCntPerPage());
+		log.info("vo.getStart() " + vo.getStart());
+		log.info("vo.getEnd() " +vo.getEnd());
+		if (searchTy != null) {
+			if (searchTy.equals("condition")) {
+				vo.setConditionUri();
+			} else {
+				vo.setTagUri();
+			}
+		}
+		vo.setOrderUri();
+		log.info("vo.getUri() " +vo.getUri());
+		
+		reviews = service.getReviewAllInfoList(contentId);
+		
+		log.info(nowPage);
+		log.info("reviewTotal " + reviewTotal);
+		log.info("reviews " + reviews);
+		
+		m.addAttribute("search", vo);
+		m.addAttribute("paging", pvo);
+		m.addAttribute("lists", reviews);
+		
 	}
 	
 	public void controlling(Model m, @RequestParam(value="nowPage", required=false)String nowPage, SearchVO vo) {
