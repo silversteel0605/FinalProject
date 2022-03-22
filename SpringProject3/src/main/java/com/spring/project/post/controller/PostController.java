@@ -43,95 +43,60 @@ public class PostController {
 	}
 
 	@GetMapping("/support")
-	public String supportPage(HttpServletRequest request, Model model, String categoryName, String nowPage) {
+	public String supportPage(HttpServletRequest request, Model model, String categoryName, String nowPage, SearchVO search) {
 		HttpSession session = request.getSession();
-		session.setAttribute("categoryName", categoryNameMap.get("supportAll"));
 		
-		Integer cntPerPage = 9;
+		// 檬扁 技记 积己
+		if (session.getAttribute("search") == null) {
+			Integer category = categoryNameMap.get("supportAll");
+			search.setBoard_class(boardClassMap.get("supportBoard"));
+			search.setCategory(category);
+			
+			session.setAttribute("search", search);
+		}
+		
+		// 技记 乐阑 版快
+		if (categoryName != null) {
+			search.setCategory(categoryNameMap.get(categoryName));
+			search.setBoard_class(boardClassMap.get("supportBoard"));
+			session.setAttribute("search", search);
+		}
 		
 		// Paging
+		Integer cntPerPage = 9;
+		
 		nowPage = nowPage != null ? nowPage :"1";
-		Integer total = postService.getCount(boardClassMap.get("supportBoard"));
+		Integer total = postService.getCount((SearchVO) session.getAttribute("search"));
 		PagingVO pvo = new PagingVO(total, Integer.parseInt(nowPage), cntPerPage);
 		model.addAttribute("paging", pvo);
 		
-		if (categoryName != null) {
-			session.setAttribute("categoryName", categoryNameMap.get(categoryName));
-		}
-		
-		Integer category = (Integer)session.getAttribute("categoryName");
-		
 		List<PostVO> postList = new ArrayList<>();
-		postList = postService.getSupportPostList(boardClassMap.get("supportBoard"), category, pvo);
-		
+		postList = postService.getSupportPostList((SearchVO) session.getAttribute("search"), pvo);
 		model.addAttribute("supportContentsList", postList);
-		
-		
-		
 		return "support";
 	}
 	
 	@PostMapping("/support")
 	public String supportSearch(HttpServletRequest request, Model model, SearchVO search, String nowPage) {
 		HttpSession session = request.getSession();
+		
 		search.setBoard_class(boardClassMap.get("supportBoard"));
-		
-		Integer category = (Integer)session.getAttribute("categoryName");
-		search.setCategory(category);
-		
-		List<PostVO> postList = new ArrayList<>();
-		postList = postService.getSupportSearch(search);
-		model.addAttribute("supportContentsList", postList);
-		
-		Integer cntPerPage = 9;
+		search.setCategory(((SearchVO) session.getAttribute("search")).getCategory());
+		session.setAttribute("search", search);
 		
 		// Paging
+		Integer cntPerPage = 9;
+		
 		nowPage = nowPage != null ? nowPage :"1";
-		Integer total = postService.getCount(boardClassMap.get("supportBoard"));
+		Integer total = postService.getCount((SearchVO) session.getAttribute("search"));
 		PagingVO pvo = new PagingVO(total, Integer.parseInt(nowPage), cntPerPage);
 		model.addAttribute("paging", pvo);
 		
+		List<PostVO> postList = new ArrayList<>();
+		postList = postService.getSupportSearch((SearchVO) session.getAttribute("search"), pvo);
+		model.addAttribute("supportContentsList", postList);
 		return "support";
 	}
-//	@GetMapping("/support")
-//	public String support(String searchKeyword, String searchByWhat, String categoryName, Model model, 
-//			@RequestParam(value="nowPage", required=false) String nowPage) {
-//		
-//		Integer cntPerPage = 9;
-//		
-//		// Paging
-//		nowPage = nowPage != null ? nowPage :"1";
-//		Integer total = postService.getCount(postNumber.get("supportBoard"));
-//		PagingVO pvo = new PagingVO(total, Integer.parseInt(nowPage));
-//		model.addAttribute("paging", pvo);
-//		
-//		//Controller
-//		if (categoryName == null) {
-//			
-//			if (searchKeyword == null) {
-//				model.addAttribute("supportContentsList", 
-//						postService.getAllSupportPost(postNumber.get("supportBoard"), Integer.parseInt(nowPage), cntPerPage));
-//			} else {
-//				model.addAttribute("supportContentsList", 
-//						postService.getSupportSearchResult(searchKeyword, searchByWhat, postNumber.get("supportBoard")));
-//			}
-//			
-//		} else {
-//			if (categoryNameMap.get(categoryName) == 0) {
-//				model.addAttribute("supportContentsList", 
-//						postService.getAllSupportPost(postNumber.get("supportBoard"), Integer.parseInt(nowPage), cntPerPage));
-//			} else {
-//				if (searchKeyword == null) {
-//					model.addAttribute("supportContentsList", 
-//							postService.getAllSupportPostWithCategory(postNumber.get("supportBoard"), categoryNameMap.get(categoryName)));
-//				} else {
-//					model.addAttribute("supportContentsList", 
-//							postService.getSupportSearchResultWhitCategory(searchKeyword, searchByWhat, postNumber.get("supportBoard"), categoryNameMap.get(categoryName)));
-//				}
-//			}
-//		}
-//		return "support";
-//	}
 	
 	@GetMapping("/tempIndividualInfo")
 	public String tempIndividualInfo(String id) {

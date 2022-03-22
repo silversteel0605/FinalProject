@@ -30,15 +30,6 @@ document.addEventListener('click', (e) => {
 	
 });
 
-// 세션 삭제
-const categoryClasses = document.getElementsByClassName('categoryClass');
-
-for (var categoryClass of categoryClasses) {
-	categoryClass.addEventListener('click', (e) => {
-		session.removeAttribute("searchkeyword");
-		session.removeAttribute("searchByWhat");
-	});
-}
 
 
 

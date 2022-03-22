@@ -46,12 +46,6 @@ public class HomeController {
 		return "manager";
 	}
 	
-	@RequestMapping(value = "/support", method = RequestMethod.GET)
-	public String support() {
-		logger.info("Connect Support");
-		return "support";
-	}
-	
 	@RequestMapping(value = "/main_paragraph", method = RequestMethod.GET)
 	public String mainParagraph() {
 		logger.info("Connect MainParagraph");

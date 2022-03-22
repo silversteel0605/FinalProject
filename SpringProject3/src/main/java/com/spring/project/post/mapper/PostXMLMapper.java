@@ -10,17 +10,9 @@ import com.spring.project.utill.PagingVO;
 
 public interface PostXMLMapper {
 	
-	public Integer getCount(Integer board_class);
+	public Integer getCount(SearchVO search);
 	
-	public List<PostVO> getSupportPostList(@Param("board_class") Integer board_class, @Param("category") Integer category, PagingVO pvo);
-	public List<PostVO> getSupportSearch(SearchVO search);
+	public List<PostVO> getSupportPostList(@Param("search") SearchVO search, @Param("pvo") PagingVO pvo);
+	public List<PostVO> getSupportSearch(@Param("search") SearchVO search, @Param("pvo") PagingVO pvo);
 
-	public List<PostVO> getAllSupportPost(@Param("board_class") Integer board_class, @Param("page") Integer page, @Param("plusPage") Integer plusPage);
-	public List<PostVO> getAllSupportSearchResult(@Param("searchKeyword") String searchKeyword, @Param("board_class") Integer board_class);
-	public List<PostVO> getSpecificSupportSearchResult(@Param("searchKeyword") String searchKeyword, @Param("searchByWhat") String searchByWhat, @Param("board_class") Integer board_class);
-	
-	public List<PostVO> getAllSupportPostWithCategory(@Param("board_class") Integer board_class, @Param("categoryName") Integer categoryName);
-	public List<PostVO> getAllSupportPostWithCategoryWithCategory(@Param("searchKeyword") String searchKeyword, @Param("board_class")  Integer board_class, @Param("categoryName") Integer categoryName);
-	public List<PostVO> getSpecificSupportPostWithCategoryWithCategory(@Param("searchKeyword") String searchKeyword, @Param("searchByWhat") String searchByWhat, @Param("board_class")  Integer board_class, @Param("categoryName") Integer categoryName);
-	
 }

@@ -8,15 +8,9 @@ import com.spring.project.utill.PagingVO;
 
 public interface PostService {
 	
-	public Integer getCount(Integer board_class);
+	public Integer getCount(SearchVO search);
 	
-	public List<PostVO> getSupportPostList(Integer board_class, Integer category, PagingVO pvo);
-	public List<PostVO> getSupportSearch(SearchVO search);
+	public List<PostVO> getSupportPostList(SearchVO search, PagingVO pvo);
+	public List<PostVO> getSupportSearch(SearchVO search, PagingVO pvo);
 
-	public List<PostVO> getAllSupportPost(Integer board_class, Integer nowPage, Integer cntPerPage);
-	public List<PostVO> getSupportSearchResult(String searchKeyword, String searchByWhat, Integer board_class);
-	
-	public List<PostVO> getAllSupportPostWithCategory(Integer board_class, Integer categoryName);
-	public List<PostVO> getSupportSearchResultWhitCategory(String searchKeyword, String searchByWhat, Integer board_class, Integer categoryName);
-	
 }

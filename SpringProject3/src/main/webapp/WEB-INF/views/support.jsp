@@ -84,13 +84,13 @@
 			      </form>
 			      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 			        <li class="nav-item">
-			          <a class="nav-link categoryClass active" aria-current="page" href="./support?categoryName=supportAll">전체</a>
+			          <a class="nav-link categoryClass active" aria-current="page" href="./support?categoryName=supportAll" onClick="sessionDelete()">전체</a>
 			        </li>
 			        <li class="nav-item">
-			          <a class="nav-link categoryClass " href="./support?categoryName=notice">공지사항</a>
+			          <a class="nav-link categoryClass " href="./support?categoryName=notice" onClick="sessionDelete()">공지사항</a>
 			        </li>
 			        <li class="nav-item">
-			          <a class="nav-link categoryClass " href="./support?categoryName=askEdit">수정요청</a>
+			          <a class="nav-link categoryClass " href="./support?categoryName=askEdit" onClick="sessionDelete()">수정요청</a>
 			        </li>
 			      </ul>
 			    </div>
