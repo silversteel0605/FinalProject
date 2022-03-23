@@ -1,18 +1,10 @@
 
-
 //전체
-function create_review_save_content(contentId){
+function create_review_save_content(contentId, type, r_dto){
 	
-	var testMainForm = document.getElementById("form");
-	/*
-	const newMainForm = document.createElement("form");
-	newMainForm.setAttribute("id", "form");
-	newMainForm.setAttribute("name", "form");
-	newMainForm.setAttribute("method", "get");
-	newMainForm.setAttribute("action", "./reviewSave");
-	*/
-	
-	var testTextNode = document.createTextNode(contentId);
+	console.log(contentId, type);
+	var content = document.getElementById("contentBox");
+	var testMainForm = create_review_form(type);
 	
 	var req_campingId = document.createElement("input");
 	req_campingId.setAttribute("type", "text");
@@ -24,7 +16,7 @@ function create_review_save_content(contentId){
 	
 	let submit = document.createElement("input");
 	let previous = document.createElement("button");
-	let previousTxt = document.createTextNode("목록");
+	let previousTxt = document.createTextNode("제목");
 	
 	submit.setAttribute("type", "submit");
 	submit.setAttribute("class", "btn btn-sm btn-primary");
@@ -35,26 +27,44 @@ function create_review_save_content(contentId){
 	previous.setAttribute("onclick", "back()");
 	previous.appendChild(previousTxt);
 	
-	testMainForm.appendChild(testTextNode);
 	testMainForm.appendChild(req_campingId);
-	testMainForm.appendChild(create_review_star_rank("캠핑장", 5));
-	testMainForm.appendChild(create_review_save_user_title());
-	testMainForm.appendChild(create_review_save_user_content());
+	testMainForm.appendChild(create_review_star_rank(type));
+	testMainForm.appendChild(create_review_user_title(type));
+	testMainForm.appendChild(create_review_user_content(type));
 	testMainForm.appendChild(submit);
 	testMainForm.appendChild(previous);
+	
+	content.appendChild(testMainForm);
 }
 
-//별 평점
-function create_review_star_rank(text, starNum){
+function create_review_form(type){
+	
+	const newMainForm = document.createElement("form");
+	
+	newMainForm.setAttribute("id", "form");
+	newMainForm.setAttribute("name", "form");
+	newMainForm.setAttribute("method", "get");
+	
+	console.log(type);
+	
+	if(type == 1){
+		newMainForm.setAttribute("action", "./reviewUpdata");
+	}else{
+		newMainForm.setAttribute("action", "./reviewSave");	
+	}
+	
+	return newMainForm;
+}
+
+//제목
+function create_review_star_rank(type){
 	
 	//box
 	var wrap = document.createElement("div");
-	var starText = document.createTextNode("이 "+text+" 추천하시겠습니까?");
+	var starText = document.createTextNode("이 캠핑장을 추천하시겠습니까?");
 	var container = document.createElement("div");
 	var content = document.createElement("div"); 
 	var starIcon = document.createElement("div");
-	
-	console.log(starText);
 	
 	wrap.setAttribute("class", "text-center");
 	container.setAttribute("class", "item-center");
@@ -64,7 +74,7 @@ function create_review_star_rank(text, starNum){
 	//data
 	let radio = [];
 	let starLabel = [];
-	for(index = 0; index < starNum; index++){
+	for(index = 0; index < 5; index++){
 		
 		radio.push(document.createElement("input"));
 		radio[index].setAttribute("type", "radio");
@@ -89,8 +99,9 @@ function create_review_star_rank(text, starNum){
 	return wrap;
 }
 
+
 //유저 데이터
-function create_review_save_user_title(){
+function create_review_user_title(type, title){
 	
 	var content = document.createElement("div");
 	content.setAttribute("class", "mb-3");
@@ -106,7 +117,16 @@ function create_review_save_user_title(){
 	titleTxt.setAttribute("class","form-control");
 	titleTxt.setAttribute("name", "title");
 	titleTxt.setAttribute("id","title");
-	titleTxt.setAttribute("placeholder", "제목을 입력해 주세요");
+	
+	console.log(type);
+	
+	if(type == 1){
+		titleTxt.setAttribute("placeholder", title);
+		titleTxt.setAttribute("value", title);
+	}else{
+		titleTxt.setAttribute("placeholder", "제목을 입력해주세요");
+	}
+	
 	
 	content.appendChild(titleLabel);
 	content.appendChild(titleTxt);
@@ -114,7 +134,7 @@ function create_review_save_user_title(){
 	return content;
 }
 
-function create_review_save_user_content(){
+function create_review_user_content(type, contentItem){
 	
 	var content = document.createElement("div");
 	content.setAttribute("class", "mb-3");
@@ -133,7 +153,12 @@ function create_review_save_user_content(){
 	contentTextarea.setAttribute("rows", "5");
 	contentTextarea.setAttribute("name", "contentValue");
 	contentTextarea.setAttribute("id", "content");
-	contentTextarea.setAttribute("placeholder", "내용을 입력해 주세요");
+	if(type == 1){
+		contentTextarea.setAttribute("placeholder", contentItem);
+		contentTextarea.setAttribute("value", contentItem);
+	}else{
+		contentTextarea.setAttribute("placeholder", "내용을 입력해주세요");	
+	}
 	
 	contentScript.setAttribute("type", "text/javascript");
 	contentScript.appendChild(contentScriptTxt);

@@ -235,7 +235,7 @@
 								
 								<div id="write_btn_box" class="right-sort">
 									<button id="write_btn" class="write_button">
-										<a href="/project/review_write?type=0&contentId=<%=info.getContentId() %>">글쓰기</a>
+										<a href="/project/review?type=0&contentId=<%=info.getContentId() %>">글쓰기</a>
 									</button>
 								</div>
 							</div>

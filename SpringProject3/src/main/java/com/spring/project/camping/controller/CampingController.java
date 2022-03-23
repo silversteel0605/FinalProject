@@ -68,44 +68,49 @@ public class CampingController {
 		return "camping_index";
 	}
 	
-	@RequestMapping(value = "/review_write_updata", method = RequestMethod.GET)
-	public String reviewUpdata(Model m, @RequestParam(value="type") int type, @RequestParam(value="reviewId") String reviewId, @RequestParam(value="contentId") String contentId) {
+	@RequestMapping(value = "/review", method = RequestMethod.GET)
+	public String review(Model m, @RequestParam(value="type", required=false) String type, @RequestParam(value="reviewId", required=false) String reviewId, @RequestParam(value="contentId") String contentId) {
 		
-		int r_id = Integer.parseInt(reviewId);
 		
-		log.info(type);
-		log.info(contentId);
-		log.info(reviewId);
 		
-		CampingReviewDTO c_dto = service.getReviewInfo(r_id);
-		
-		m.addAttribute("type", type);
-		m.addAttribute("contentId", contentId);
-		m.addAttribute("reviewId", reviewId);
-		m.addAttribute("c_dto", c_dto);
+		try {
+			int r_id = Integer.parseInt(reviewId);
+			CampingReviewDTO r_dto = service.getReviewInfo(r_id);
+			m.addAttribute("reviewId", r_id);
+			m.addAttribute("r_dto", r_dto);
+			log.info("수정페이지");
+		} catch (Exception e) {
+			log.info("생성페이지");
+		} finally {
+			log.info(type);
+			log.info(contentId);
+			log.info(reviewId);
+			m.addAttribute("type", Integer.parseInt(type));
+			m.addAttribute("contentId", contentId);
+		}
 		
 		return "review_write";
 	}
 
-	@RequestMapping(value = "/review_write", method = RequestMethod.GET)
-	public String review(Model m, @RequestParam(value="contentId") String contentId) {
-		
-		log.info(contentId);
-		
-		m.addAttribute("contentId", contentId);
-		
-		return "review_write";
-	}
-	
 	@RequestMapping(value = "/reviewSave", method = RequestMethod.GET)
 	public String reviewSave(Model m, CampingReviewDTO c_dto) {
 		
 		log.info(c_dto);
 		
+		//content 처리
+		String str = c_dto.getContentValue();
+		str = str.replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", "");
+		str = str.replace("\r\n", "\\<br\\>");
+		
+		c_dto.setContentValue(str);
+		
+		log.info(c_dto.getContentValue());
+		
 		service.initReviewData(c_dto);
 		log.info("정상수행");
-		
-		return "search";
+		//./TempCampInfo?contentId=<%= info.getContentId() %>&nowPage=${p }&cntPerPage=${paging.cntPerPage}${search.uri}&type=3#tab03">
+		m.addAttribute("contentId", c_dto.getContentId());
+		return "TempCampInfo";
 	}
 	@RequestMapping(value = "/reviewViewer", method = RequestMethod.GET)
 	public String reviewViewer(Model m, String reviewId) {

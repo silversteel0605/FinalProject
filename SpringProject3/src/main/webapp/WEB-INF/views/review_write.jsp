@@ -65,18 +65,14 @@
 	</section>
 	
 	<section class="ftco-section services-section">
-	  	<div class="container">
-			<form name="form" id="form" role="form" method="get" action="./reviewSave">
-				
-				<!-- <input type="text" style="display: none" name="contentId" value="<%= request.getAttribute("contentId")%>"> -->
-				<!-- create review JSP JavaScript -->
-				<script type="text/javascript" charset="EUC-KR" src="./resources/js/create_code/create_review_content.js"></script >
-				
-				<script>
-					create_review_save_content(<%= request.getAttribute("contentId")%>);
-				</script>
-				
-			</form>
+	  	<div class="container" id ="contentBox">
+	  	
+	  		<!-- create review JSP JavaScript -->
+			<script type="text/javascript" charset="EUC-KR" src="./resources/js/create_code/create_review_content.js"></script >
+			
+			<script>
+				create_review_save_content(<%= request.getAttribute("contentId")%>, ${type}, ${r_dto});				
+			</script>
 			
 		</div>
 	</section>
