@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.spring.project.post.dto.DeleteVO;
 import com.spring.project.post.dto.PostVO;
 import com.spring.project.post.dto.SearchVO;
 import com.spring.project.post.service.PostService;
@@ -77,8 +78,14 @@ public class PostController {
 	}
 	
 	@PostMapping("/support")
-	public String supportSearch(HttpServletRequest request, Model model, SearchVO search, String nowPage) {
+	public String supportSearch(HttpServletRequest request, Model model, SearchVO search, String nowPage, DeleteVO del) {
 		HttpSession session = request.getSession();
+		log.info("supportSession: " + session.getAttribute("tempPostId"));
+		log.info("PostID: " + del.getPost_id());
+		log.info("booleanDelete: " + del.isDelete());
+		session.removeAttribute("tempPostId");
+		log.info("supportSessionAfter: " + session.getAttribute("tempPostId"));
+		
 		
 		search.setBoard_class(boardClassMap.get("supportBoard"));
 		search.setCategory(((SearchVO) session.getAttribute("search")).getCategory());
@@ -111,8 +118,13 @@ public class PostController {
 	}
 	
 	@GetMapping("/main_paragraph")
-	public String mainContents(Model model, Integer post_id) {
+	public String mainContents(HttpServletRequest request, Model model, Integer post_id, boolean delete) {
+		HttpSession session = request.getSession();
+		
 		log.info("post_id: " + post_id);
+		log.info("delete: " + delete);
+		session.setAttribute("tempPostId", post_id);
+		log.info("mainContentsSession: " + session.getAttribute("tempPostId"));
 		
 		PostVO post = postService.getContents(post_id);
 		log.info(post);

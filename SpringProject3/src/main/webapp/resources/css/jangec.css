@@ -1,27 +1,20 @@
 @charset "EUC-KR";
 
 /* °øÅë */
-.comment_icon {
-	cursor: pointer;
-}
 
 p, div {
 	margin: 0px;
 	padding: 0px;
 }
 
-/* #id {
+.userId, .contentsTitle {
 	cursor: pointer;
-} */
+}
+
+/* Free Board */
 
 .paragraph_body {
 	min-height: 300px;
-}
-
-
-
-#co_comment {
-	display: none;
 }
 
 .card-body, .card-footer {
@@ -37,6 +30,3 @@ p, div {
   	-webkit-box-orient: vertical;
 
 }
-
-
-/* Support Page */
