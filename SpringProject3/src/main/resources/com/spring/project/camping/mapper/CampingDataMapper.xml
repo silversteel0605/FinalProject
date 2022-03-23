@@ -175,8 +175,8 @@
     	select count(*) from review_table
     </select>
     
-    <select id="getReviewSearchData" resultType="com.spring.project.review.DTO.CampingReviewDTO">
-    	SELECT * FROM ( SELECT ROWNUM RN, A.* FROM ( select * from review_table where #{contentId} ) A ) WHERE RN BETWEEN #{start} AND #{end}
+    <select id="getReviewSearchData" resultType="com.spring.project.review.DTO.CampingReviewDTO" parameterType="Map">
+    	SELECT * FROM ( SELECT ROWNUM RN, A.* FROM ( select * from review_table where contentId = #{contentId} ) A ) WHERE RN BETWEEN #{start} AND #{end}
     </select>
     <!-- Reviews -->
 </mapper>

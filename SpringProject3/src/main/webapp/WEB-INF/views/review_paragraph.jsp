@@ -119,7 +119,7 @@
 				<div class="comments_footer"></div>
 			</div> <hr />
 			<div class="paragraph_footer d-flex justify-content-end">
-				<button class="btn">수정</button>
+				<button class="btn"><a href="/project/review_write_updata?type=1&reviewId=<%= info.getReviewId() %>&contentId=<%=info.getContentId() %>">수정</a></button>
 				<button id="paragraphDeleteBtn" class="btn">삭제</button>
 				<button class="btn">목록</button>
 			</div>

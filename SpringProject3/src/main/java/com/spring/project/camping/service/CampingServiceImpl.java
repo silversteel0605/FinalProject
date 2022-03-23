@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
+import java.util.Map;
 
 import org.jdom2.Document;
 import org.jdom2.Element;
@@ -299,8 +300,8 @@ public class CampingServiceImpl implements CampingService{
 	}
 	
 	@Override
-	public List<CampingReviewDTO> getReviewSearchData(SearchVO vo, int contentId) {
-		return dataMapper.getReviewSearchData(vo, contentId);
+	public List<CampingReviewDTO> getReviewSearchData(Map<String, Object> reviewMap) {
+		return dataMapper.getReviewSearchData(reviewMap);
 	}
 	
 	/*	Review	*/

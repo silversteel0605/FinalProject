@@ -1,7 +1,9 @@
 package com.spring.project.camping.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.jdom2.JDOMException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,6 +67,25 @@ public class CampingController {
 		
 		return "camping_index";
 	}
+	
+	@RequestMapping(value = "/review_write_updata", method = RequestMethod.GET)
+	public String reviewUpdata(Model m, @RequestParam(value="type") int type, @RequestParam(value="reviewId") String reviewId, @RequestParam(value="contentId") String contentId) {
+		
+		int r_id = Integer.parseInt(reviewId);
+		
+		log.info(type);
+		log.info(contentId);
+		log.info(reviewId);
+		
+		CampingReviewDTO c_dto = service.getReviewInfo(r_id);
+		
+		m.addAttribute("type", type);
+		m.addAttribute("contentId", contentId);
+		m.addAttribute("reviewId", reviewId);
+		m.addAttribute("c_dto", c_dto);
+		
+		return "review_write";
+	}
 
 	@RequestMapping(value = "/review_write", method = RequestMethod.GET)
 	public String review(Model m, @RequestParam(value="contentId") String contentId) {
@@ -117,6 +138,7 @@ public class CampingController {
 		int reviewTotal;
 		List<CampingReviewDTO> reviews;
 		PagingVO pvo;
+		Map<String, Object> reviewMap = new HashMap();
 		
 		reviewTotal = service.getReviewAllPageCnt();
 		
@@ -142,7 +164,11 @@ public class CampingController {
 		
 		log.info("vo.getUri() " + vo.getUri());
 		
-		reviews = service.getReviewSearchData(vo, Integer.parseInt(contentId));
+		reviewMap.put("contentId", Integer.parseInt(contentId));
+		reviewMap.put("start", vo.getStart());
+		reviewMap.put("end", vo.getEnd());
+		
+		reviews = service.getReviewSearchData(reviewMap);
 		
 		log.info(nowPage);
 		log.info("reviewTotal " + reviewTotal);

@@ -240,7 +240,7 @@
 								</div>
 							</div>
 							<div class="row d-flex">
-								<c:forEach var="review" items="${reviews}">
+								<c:forEach var="review" items="${lists}">
 					             	<div class="col-md-4 d-flex ftco-animate flex_1">
 					              		<div class="blog-entry justify-content-end w100p">
 					               			<a href="blog-single.html" class="block-20" style="background-image: url('./resources/images/image_1.jpg');"></a>

@@ -2,6 +2,7 @@ package com.spring.project.camping.service;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import org.jdom2.JDOMException;
 
@@ -34,7 +35,7 @@ public interface CampingService {
 	public void reviewClickNumUp(int reviewId);								//ReviewClickNum Data Updata
 	public void reviewUpdate(CampingReviewDTO c_dto);						//ReviewData Updata
 	public int getReviewAllPageCnt();										//Review Page Count Total
-	public List<CampingReviewDTO> getReviewSearchData(SearchVO vo, int contentId); //Review Page Search Data (미완)
+	public List<CampingReviewDTO> getReviewSearchData(Map<String, Object> reviewMap); //Review Page Search Data (미완)
 	//Review
 	
 	public void addViews(String contentId);
