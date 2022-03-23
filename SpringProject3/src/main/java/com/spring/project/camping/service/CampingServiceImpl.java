@@ -12,10 +12,10 @@ import org.jdom2.input.SAXBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.spring.project.camping.DTO.CampingReviewDTO;
 import com.spring.project.camping.DTO.CampingVO;
 import com.spring.project.camping.DTO.SearchVO;
 import com.spring.project.camping.mapper.CampingDataMapper;
+import com.spring.project.review.DTO.CampingReviewDTO;
 import com.spring.project.utill.PagingVO;
 
 import lombok.extern.log4j.Log4j;
@@ -298,14 +298,16 @@ public class CampingServiceImpl implements CampingService{
 		return dataMapper.getReviewAllPageCnt();
 	}
 	
+	@Override
+	public List<CampingReviewDTO> getReviewSearchData(SearchVO vo, int contentId) {
+		return dataMapper.getReviewSearchData(vo, contentId);
+	}
+	
 	/*	Review	*/
 
 	
 	public void addViews(String contentId) {
 		dataMapper.addViews(contentId);
 	}
-
-	
-
 
 }

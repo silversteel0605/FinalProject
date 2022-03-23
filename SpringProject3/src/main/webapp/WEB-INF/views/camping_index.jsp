@@ -1,4 +1,4 @@
-<%@page import="com.spring.project.camping.DTO.CampingReviewDTO"%>
+<%@page import="com.spring.project.review.DTO.CampingReviewDTO"%>
 <%@page import="com.spring.project.camping.DTO.CampingVO"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
@@ -240,7 +240,7 @@
 								</div>
 							</div>
 							<div class="row d-flex">
-								<c:forEach var="review" items="${reviewInfoList}">
+								<c:forEach var="review" items="${reviews}">
 					             	<div class="col-md-4 d-flex ftco-animate flex_1">
 					              		<div class="blog-entry justify-content-end w100p">
 					               			<a href="blog-single.html" class="block-20" style="background-image: url('./resources/images/image_1.jpg');"></a>

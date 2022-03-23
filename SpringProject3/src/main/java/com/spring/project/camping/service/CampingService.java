@@ -5,9 +5,9 @@ import java.util.List;
 
 import org.jdom2.JDOMException;
 
-import com.spring.project.camping.DTO.CampingReviewDTO;
 import com.spring.project.camping.DTO.CampingVO;
 import com.spring.project.camping.DTO.SearchVO;
+import com.spring.project.review.DTO.CampingReviewDTO;
 
 public interface CampingService {
 	
@@ -34,6 +34,7 @@ public interface CampingService {
 	public void reviewClickNumUp(int reviewId);								//ReviewClickNum Data Updata
 	public void reviewUpdate(CampingReviewDTO c_dto);						//ReviewData Updata
 	public int getReviewAllPageCnt();										//Review Page Count Total
+	public List<CampingReviewDTO> getReviewSearchData(SearchVO vo, int contentId); //Review Page Search Data (¹Ì¿Ï)
 	//Review
 	
 	public void addViews(String contentId);

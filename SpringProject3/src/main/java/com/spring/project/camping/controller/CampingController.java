@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.spring.project.camping.DTO.CampingReviewDTO;
 import com.spring.project.camping.DTO.CampingVO;
 import com.spring.project.camping.DTO.SearchVO;
 import com.spring.project.camping.service.CampingService;
+import com.spring.project.review.DTO.CampingReviewDTO;
 import com.spring.project.utill.PagingVO;
 
 import lombok.extern.log4j.Log4j;
@@ -61,7 +61,7 @@ public class CampingController {
 		m.addAttribute("reviewInfoList", reviewInfoList);
 		m.addAttribute("type", type);
 		
-		reviewControlling(m, nowPage, contentId, vo);
+		reviewControlling(m, nowPage, contentId, vo);		
 		
 		return "camping_index";
 	}
@@ -111,6 +111,7 @@ public class CampingController {
 	public String init() {
 		return "init";
 	}
+	
 	public void reviewControlling(Model m, @RequestParam(value="nowPage", required=false)String nowPage, @RequestParam(value="contentId") String contentId, SearchVO vo) {
 		
 		int reviewTotal;
@@ -129,6 +130,7 @@ public class CampingController {
 		vo.calcStartEnd(Integer.parseInt(nowPage), pvo.getCntPerPage());
 		log.info("vo.getStart() " + vo.getStart());
 		log.info("vo.getEnd() " +vo.getEnd());
+		
 		if (searchTy != null) {
 			if (searchTy.equals("condition")) {
 				vo.setConditionUri();
@@ -137,9 +139,10 @@ public class CampingController {
 			}
 		}
 		vo.setOrderUri();
-		log.info("vo.getUri() " +vo.getUri());
 		
-		reviews = service.getReviewAllInfoList(contentId);
+		log.info("vo.getUri() " + vo.getUri());
+		
+		reviews = service.getReviewSearchData(vo, Integer.parseInt(contentId));
 		
 		log.info(nowPage);
 		log.info("reviewTotal " + reviewTotal);
@@ -174,6 +177,7 @@ public class CampingController {
 				vo.setTagUri();
 			}
 		}
+		
 		vo.setOrderUri();
 		log.info(vo.getUri());
 		ar = service.getDbSearchData(vo);
