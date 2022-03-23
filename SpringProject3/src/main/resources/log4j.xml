@@ -9,6 +9,20 @@
 			<param name="ConversionPattern" value="%-5p: %c - %m%n" />
 		</layout>
 	</appender>
+<<<<<<< HEAD
+=======
+
+	<!-- log4jdbc -->
+<!-- 	<logger name="jdbc.connection">
+		<level value="info" />
+	</logger> -->
+	<logger name="jdbc.sqlonly">
+		<level value="info"/>
+	</logger>
+<!-- 	<logger name="jdbc.resultsettable">
+		<level value="info"/>
+	</logger> -->
+>>>>>>> refs/heads/jang
 	
 	<!-- Application Loggers -->
 	<logger name="com.spring.project">
