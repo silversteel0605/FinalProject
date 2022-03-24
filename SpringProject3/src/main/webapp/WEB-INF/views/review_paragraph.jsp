@@ -24,10 +24,13 @@
   <!-- JangEc 개인 CSS/Script -->
   <link rel="stylesheet" href="<c:url value="/resources/css/jangec.css"/>"/>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  
+  <script src="<c:url value="/resources/js/review.js"/>" ></script>
 </head>
 <body>
-	<% CampingReviewDTO info = (CampingReviewDTO)request.getAttribute("c_dto"); %>
+	<% CampingReviewDTO info = (CampingReviewDTO)request.getAttribute("r_dto"); %>
 	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
    <div class="container">
      <a class="navbar-brand" href="index.html">Pacific<span>Travel Agency</span></a>
@@ -120,7 +123,8 @@
 			</div> <hr />
 			<div class="paragraph_footer d-flex justify-content-end">
 				<button class="btn"><a href="/project/review?type=1&reviewId=<%= info.getReviewId() %>&contentId=<%=info.getContentId() %>">수정</a></button>
-				<button id="paragraphDeleteBtn" class="btn">삭제</button>
+				<button id="reivewDelete" class="btn" onclick="showPopUp('<%= info.getReviewId() %>','<%=info.getContentId() %>')">삭제</button>
+				<!-- '<%= info.getReviewId() %>','<%=info.getContentId() %>' -->
 				<button class="btn">목록</button>
 			</div>
 		</div>		

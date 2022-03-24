@@ -163,6 +163,10 @@
     	insert INTO review_table VALUES (REVIEW_SEQ.nextval, 0, #{contentId}, #{title}, SYSDATE, #{contentValue}, null, #{starRanking}, 0)
     </insert>
     
+    <delete id="deleteReviewData" parameterType="_int">
+    	DELETE FROM review_table WHERE reviewId = #{reviewId}
+    </delete>
+    
     <update id="reviewClickNumUp" parameterType="com.spring.project.review.DTO.CampingReviewDTO">
     	UPDATE review_table set clickNum=clickNum+1 WHERE reviewId = #{reviewId}
     </update>

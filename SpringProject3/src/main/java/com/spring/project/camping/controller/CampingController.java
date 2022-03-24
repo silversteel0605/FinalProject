@@ -106,12 +106,28 @@ public class CampingController {
 		r_dto.setContentValue(new WordChange().javaScriptSpace(r_dto.getContentValue()));
 		*/
 		
-		log.info(reviewId);
-		
 		service.reviewUpdate(r_dto);
 		m.addAttribute("reviewId",r_dto.getReviewId());
 		
 		return "redirect:reviewViewer";
+	}
+	
+	@RequestMapping(value = "/reviewDelete", method = RequestMethod.GET)
+	public String reviewDelete(Model m, @RequestParam(value="reviewId", required=false) String reviewId, @RequestParam(value="contentId", required=false) String contentId) {
+		
+		log.info(reviewId);
+		log.info(contentId);
+		
+		service.deleteReview(Integer.parseInt(reviewId));
+		
+		log.info("정상수행");
+		
+		String type = "3"; 
+		
+		m.addAttribute("contentId", contentId);
+		m.addAttribute("type", type);
+		
+		return "redirect:TempCampInfo#tab03";
 	}
 
 	@RequestMapping(value = "/reviewSave", method = RequestMethod.GET)
@@ -135,10 +151,10 @@ public class CampingController {
 		int r_id = Integer.parseInt(reviewId);
 		
 		service.reviewClickNumUp(r_id);
-		CampingReviewDTO c_dto = service.getReviewInfo(r_id);
+		CampingReviewDTO r_dto = service.getReviewInfo(r_id);
 		
-		log.info(c_dto);
-		m.addAttribute("c_dto", c_dto);
+		log.info(r_dto);
+		m.addAttribute("r_dto", r_dto);
 		
 		return "review_paragraph";
 	}

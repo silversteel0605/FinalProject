@@ -309,6 +309,11 @@ public class CampingServiceImpl implements CampingService{
 		return dataMapper.getReviewCreateReviewID();
 	}
 	
+	@Override
+	public void deleteReview(int reviewId) {
+		dataMapper.deleteReview(reviewId);
+	}
+	
 	/*	Review	*/
 
 	
@@ -316,6 +321,6 @@ public class CampingServiceImpl implements CampingService{
 		dataMapper.addViews(contentId);
 	}
 
-	
+
 
 }
