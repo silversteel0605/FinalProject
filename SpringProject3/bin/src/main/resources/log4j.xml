@@ -10,17 +10,16 @@
 		</layout>
 	</appender>
 
-	
-	<logger name="jdbc.connection">
+	<!-- log4jdbc -->
+<!-- 	<logger name="jdbc.connection">
 		<level value="info" />
-	</logger>
-	
+	</logger> -->
 	<logger name="jdbc.sqlonly">
 		<level value="info"/>
 	</logger>
-	<logger name="jdbc.resultsettable">
+<!-- 	<logger name="jdbc.resultsettable">
 		<level value="info"/>
-	</logger>
+	</logger> -->
 	
 	<!-- Application Loggers -->
 	<logger name="com.spring.project">

@@ -1,21 +1,24 @@
 @charset "EUC-KR";
 
+/* °øÅë */
+.comment_icon {
+	cursor: pointer;
+}
+
 p, div {
 	margin: 0px;
 	padding: 0px;
 }
 
-#id {
+/* #id {
 	cursor: pointer;
-}
+} */
 
 .paragraph_body {
 	min-height: 300px;
 }
 
-.comment_icon {
-	cursor: pointer;
-}
+
 
 #co_comment {
 	display: none;
@@ -35,3 +38,5 @@ p, div {
 
 }
 
+
+/* Support Page */

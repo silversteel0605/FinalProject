@@ -93,7 +93,7 @@
 			        </li>
 			      </ul>
 			    </div>
-			   	<button class="btn" href="#">글쓰기</button>
+			   	<a class="" href="./write?board_class=supportBoard">글쓰기</a>
 			  </div>
 			</nav>
 			<!-- /Support Board Nav -->
