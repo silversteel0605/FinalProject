@@ -168,7 +168,7 @@
     </update>
     
     <update id="reviewUpdate" parameterType="com.spring.project.review.DTO.CampingReviewDTO">
-    	UPDATE review_table SET title=#{title}, contentValue=#{contentValue}, startRanking=#{starRanking} WHERE reviewId = #{reviewId}
+    	UPDATE review_table SET title=#{title}, contentValue=#{contentValue}, starRanking=#{starRanking} WHERE reviewId = #{reviewId}
     </update>
     
     <select id="getReviewAllPageCnt" resultType="_int">
@@ -177,6 +177,10 @@
     
     <select id="getReviewSearchData" resultType="com.spring.project.review.DTO.CampingReviewDTO" parameterType="Map">
     	SELECT * FROM ( SELECT ROWNUM RN, A.* FROM ( select * from review_table where contentId = #{contentId} ) A ) WHERE RN BETWEEN #{start} AND #{end}
+    </select>
+    
+    <select id="getReviewCreateReviewID" resultType="_int">
+    	select last_number from seq where sequence_name = 'REVIEW_SEQ';
     </select>
     <!-- Reviews -->
 </mapper>

@@ -36,6 +36,7 @@ public interface CampingService {
 	public void reviewUpdate(CampingReviewDTO c_dto);						//ReviewData Updata
 	public int getReviewAllPageCnt();										//Review Page Count Total
 	public List<CampingReviewDTO> getReviewSearchData(Map<String, Object> reviewMap); //Review Page Search Data (¹Ì¿Ï)
+	public int getReviewCreateReviewID();									//db last seq id select
 	//Review
 	
 	public void addViews(String contentId);

@@ -1,22 +1,48 @@
 
 //전체
-function create_review_save_content(contentId, type, r_dto){
+function create_review_save_content(type, r_dto){
 	
-	console.log(contentId, type);
+	console.log(r_dto.contentId, type);
 	var content = document.getElementById("contentBox");
 	var testMainForm = create_review_form(type);
 	
+	var req_reviewId = document.createElement("input");
+	var req_loginId = document.createElement("input");
 	var req_campingId = document.createElement("input");
+	var req_createDate = document.createElement("input");
+	var req_imgUrl = document.createElement("input");
+	var req_clickNum = document.createElement("input");
+	
 	req_campingId.setAttribute("type", "text");
 	req_campingId.setAttribute("name", "contentId");
-	req_campingId.setAttribute("value", contentId);
+	req_campingId.setAttribute("value", r_dto.contentId);
 	req_campingId.style.display = "none";
+	
+	req_reviewId.setAttribute("name", "reviewId");
+	req_reviewId.setAttribute("value", r_dto.reviewId);
+	req_reviewId.style.display = "none";
+	
+	req_loginId.setAttribute("name", "loginId");
+	req_loginId.setAttribute("value", r_dto.loginId);
+	req_loginId.style.display = "none";
+	
+	req_createDate.setAttribute("name", "createDate");
+	req_createDate.setAttribute("value", r_dto.createDate);
+	req_createDate.style.display = "none";
+	
+	req_imgUrl.setAttribute("name", "imgUrl");
+	req_imgUrl.setAttribute("value", r_dto.imgUrl);
+	req_imgUrl.style.display = "none";
+	
+	req_clickNum.setAttribute("name", "clickNum");
+	req_clickNum.setAttribute("value", r_dto.clickNum);
+	req_clickNum.style.display = "none";
 	
 	//newMainForm.appendChild(campingId);
 	
 	let submit = document.createElement("input");
 	let previous = document.createElement("button");
-	let previousTxt = document.createTextNode("제목");
+	let previousTxt = document.createTextNode("목록");
 	
 	submit.setAttribute("type", "submit");
 	submit.setAttribute("class", "btn btn-sm btn-primary");
@@ -28,8 +54,13 @@ function create_review_save_content(contentId, type, r_dto){
 	previous.appendChild(previousTxt);
 	
 	testMainForm.appendChild(req_campingId);
+	testMainForm.appendChild(req_reviewId);
+	testMainForm.appendChild(req_loginId);
+	testMainForm.appendChild(req_createDate);
+	testMainForm.appendChild(req_imgUrl);
+	testMainForm.appendChild(req_clickNum);
 	testMainForm.appendChild(create_review_star_rank(type));
-	testMainForm.appendChild(create_review_user_title(type));
+	testMainForm.appendChild(create_review_user_title(type, r_dto.title));
 	testMainForm.appendChild(create_review_user_content(type));
 	testMainForm.appendChild(submit);
 	testMainForm.appendChild(previous);
@@ -102,7 +133,7 @@ function create_review_star_rank(type){
 
 //유저 데이터
 function create_review_user_title(type, title){
-	
+	var str =  str_replace(title);
 	var content = document.createElement("div");
 	content.setAttribute("class", "mb-3");
 	
@@ -121,8 +152,8 @@ function create_review_user_title(type, title){
 	console.log(type);
 	
 	if(type == 1){
-		titleTxt.setAttribute("placeholder", title);
-		titleTxt.setAttribute("value", title);
+		titleTxt.setAttribute("placeholder", str);
+		titleTxt.setAttribute("value", str);
 	}else{
 		titleTxt.setAttribute("placeholder", "제목을 입력해주세요");
 	}
@@ -134,7 +165,9 @@ function create_review_user_title(type, title){
 	return content;
 }
 
-function create_review_user_content(type, contentItem){
+function create_review_user_content(){
+	
+	
 	
 	var content = document.createElement("div");
 	content.setAttribute("class", "mb-3");
@@ -153,12 +186,6 @@ function create_review_user_content(type, contentItem){
 	contentTextarea.setAttribute("rows", "5");
 	contentTextarea.setAttribute("name", "contentValue");
 	contentTextarea.setAttribute("id", "content");
-	if(type == 1){
-		contentTextarea.setAttribute("placeholder", contentItem);
-		contentTextarea.setAttribute("value", contentItem);
-	}else{
-		contentTextarea.setAttribute("placeholder", "내용을 입력해주세요");	
-	}
 	
 	contentScript.setAttribute("type", "text/javascript");
 	contentScript.appendChild(contentScriptTxt);
@@ -171,7 +198,15 @@ function create_review_user_content(type, contentItem){
 	return content;
 }
 
-
+function str_replace(str){
+	
+	str = str.replaceAll("&#32", " ");
+	str = str.replaceAll("&#09", "	");
+	str = str.replaceAll("&#10", "<br>");
+	str = str.replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", "");
+	
+	return str;
+}
 
 
 

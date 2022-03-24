@@ -18,6 +18,7 @@ import com.spring.project.camping.DTO.SearchVO;
 import com.spring.project.camping.service.CampingService;
 import com.spring.project.review.DTO.CampingReviewDTO;
 import com.spring.project.utill.PagingVO;
+import com.spring.project.utill.WordChange;
 
 import lombok.extern.log4j.Log4j;
 
@@ -71,11 +72,17 @@ public class CampingController {
 	@RequestMapping(value = "/review", method = RequestMethod.GET)
 	public String review(Model m, @RequestParam(value="type", required=false) String type, @RequestParam(value="reviewId", required=false) String reviewId, @RequestParam(value="contentId") String contentId) {
 		
-		
-		
 		try {
 			int r_id = Integer.parseInt(reviewId);
 			CampingReviewDTO r_dto = service.getReviewInfo(r_id);
+			WordChange wc = new WordChange();
+			
+			log.info(wc.javaScriptSpace(r_dto.getTitle()));
+			log.info(wc.javaScriptSpace(r_dto.getContentValue()));
+			
+			r_dto.setTitle(wc.javaScriptSpace(r_dto.getTitle()));
+			r_dto.setContentValue(wc.javaScriptSpace(r_dto.getContentValue()));
+			
 			m.addAttribute("reviewId", r_id);
 			m.addAttribute("r_dto", r_dto);
 			log.info("수정페이지");
@@ -91,27 +98,37 @@ public class CampingController {
 		
 		return "review_write";
 	}
+	
+	@RequestMapping(value = "/reviewUpdata", method = RequestMethod.GET)
+	public String reviewUpdata(Model m, @RequestParam(value="reviewId", required=false) String reviewId, CampingReviewDTO r_dto) {
+		/*
+		r_dto.setTitle(new WordChange().javaScriptSpace(r_dto.getTitle()));
+		r_dto.setContentValue(new WordChange().javaScriptSpace(r_dto.getContentValue()));
+		*/
+		
+		log.info(reviewId);
+		
+		service.reviewUpdate(r_dto);
+		m.addAttribute("reviewId",r_dto.getReviewId());
+		
+		return "redirect:reviewViewer";
+	}
 
 	@RequestMapping(value = "/reviewSave", method = RequestMethod.GET)
-	public String reviewSave(Model m, CampingReviewDTO c_dto) {
+	public String reviewSave(Model m, CampingReviewDTO r_dto) {
 		
-		log.info(c_dto);
+		service.initReviewData(r_dto);
 		
-		//content 처리
-		String str = c_dto.getContentValue();
-		str = str.replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", "");
-		str = str.replace("\r\n", "\\<br\\>");
-		
-		c_dto.setContentValue(str);
-		
-		log.info(c_dto.getContentValue());
-		
-		service.initReviewData(c_dto);
 		log.info("정상수행");
-		//./TempCampInfo?contentId=<%= info.getContentId() %>&nowPage=${p }&cntPerPage=${paging.cntPerPage}${search.uri}&type=3#tab03">
-		m.addAttribute("contentId", c_dto.getContentId());
-		return "TempCampInfo";
+		
+		String type = "3"; 
+		
+		m.addAttribute("contentId", r_dto.getContentId());
+		m.addAttribute("type", type);
+		
+		return "redirect:TempCampInfo#tab03";
 	}
+	
 	@RequestMapping(value = "/reviewViewer", method = RequestMethod.GET)
 	public String reviewViewer(Model m, String reviewId) {
 		
@@ -123,7 +140,7 @@ public class CampingController {
 		log.info(c_dto);
 		m.addAttribute("c_dto", c_dto);
 		
-		return "/review_paragraph";
+		return "review_paragraph";
 	}
 	
 	

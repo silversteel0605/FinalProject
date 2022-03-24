@@ -71,7 +71,18 @@
 			<script type="text/javascript" charset="EUC-KR" src="./resources/js/create_code/create_review_content.js"></script >
 			
 			<script>
-				create_review_save_content(<%= request.getAttribute("contentId")%>, ${type}, ${r_dto});				
+				var r_dto = {
+						reviewId : ${r_dto.reviewId},
+						loginId : ${r_dto.loginId},
+						contentId : ${r_dto.contentId},
+						title : '${r_dto.title}',
+						createDate : '${r_dto.createDate}',
+						contentValue : '${r_dto.contentValue}',
+						imgUrl : '${r_dto.imgUrl}',
+						starRanking : ${r_dto.starRanking},
+						clickNum : ${r_dto.clickNum}
+				};
+				create_review_save_content(${type}, r_dto);		
 			</script>
 			
 		</div>

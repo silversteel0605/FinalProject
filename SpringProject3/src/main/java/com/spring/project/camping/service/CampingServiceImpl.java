@@ -304,11 +304,18 @@ public class CampingServiceImpl implements CampingService{
 		return dataMapper.getReviewSearchData(reviewMap);
 	}
 	
+	@Override
+	public int getReviewCreateReviewID() {
+		return dataMapper.getReviewCreateReviewID();
+	}
+	
 	/*	Review	*/
 
 	
 	public void addViews(String contentId) {
 		dataMapper.addViews(contentId);
 	}
+
+	
 
 }
