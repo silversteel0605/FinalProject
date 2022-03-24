@@ -12,9 +12,10 @@ public interface PostXMLMapper {
 	
 	public Integer getCount(SearchVO search);
 	
-	public List<PostVO> getSupportPostList(@Param("search") SearchVO search, @Param("pvo") PagingVO pvo);
-	public List<PostVO> getSupportSearch(@Param("search") SearchVO search, @Param("pvo") PagingVO pvo);
+	public List<PostVO> getPostList(@Param("search") SearchVO search, @Param("pvo") PagingVO pvo);
+	public List<PostVO> getPostSearch(@Param("search") SearchVO search, @Param("pvo") PagingVO pvo);
 	
-	public PostVO getContents(Integer Post_id);
+	public PostVO getContents(Integer post_id);
+	public void deletePost(Integer post_id);
 
 }

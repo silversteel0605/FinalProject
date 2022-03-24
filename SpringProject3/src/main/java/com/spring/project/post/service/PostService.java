@@ -10,9 +10,11 @@ public interface PostService {
 	
 	public Integer getCount(SearchVO search);
 	
-	public List<PostVO> getSupportPostList(SearchVO search, PagingVO pvo);
-	public List<PostVO> getSupportSearch(SearchVO search, PagingVO pvo);
+	public List<PostVO> getPostList(SearchVO search, PagingVO pvo);
+	public List<PostVO> getPostSearch(SearchVO search, PagingVO pvo);
 	
 	public PostVO getContents(Integer post_id);
+	public void deletePost(Integer post_id);
+	
 
 }

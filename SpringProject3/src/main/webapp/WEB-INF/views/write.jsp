@@ -55,38 +55,37 @@
    </div>
  </div>
 </section>
-
+<!-- 컨텐츠 -->
 <section class="ftco-section services-section">
-  <div class="container">
-			<form name="form" id="form" role="form" method="post" action="${pageContext.request.contextPath}/board/saveBoard">
-				<div class="mb-3">
-					<label for="title">제목</label>
-					<input type="text" class="form-control" name="title" id="title" placeholder="제목을 입력해 주세요">
-				</div>
-				<div class="mb-3">
-					<label for="reg_id">작성자</label>
-					<input type="text" class="form-control" name="reg_id" id="reg_id" placeholder="이름을 입력해 주세요">
-				</div>				
-				<div class="mb-3">
-					<label for="content">내용</label>
-					<textarea class="form-control" rows="5" name="content" id="content" placeholder="내용을 입력해 주세요" ></textarea>
-					<script type="text/javascript">	// 글쓰기 editor 및 사진 업로드 기능
-					CKEDITOR.replace('content',
-					{filebrowserUploadUrl:'/food/imageUpload.do'
-					});
-					</script>
-				</div>				
-				<div class="mb-3">
-					<label for="tag">TAG</label>
-					<input type="text" class="form-control" name="tag" id="tag" placeholder="태그를 입력해 주세요">
-				</div>	
-			</form>
-			<button type="button" class="btn btn-sm btn-primary" id="btnSave">저장</button>
-				<button type="button" class="btn btn-sm btn-primary" id="btnList">목록</button>
+	<div class="container">
+		<form name="form" id="form" role="form" method="post" action="${pageContext.request.contextPath}/board/saveBoard">
+			<div class="mb-3">
+				<label for="title">제목</label>
+				<input type="text" class="form-control" name="title" id="title" placeholder="제목을 입력해 주세요">
 			</div>
+			<div class="mb-3">
+				<label for="reg_id">작성자</label>
+				<input type="text" class="form-control" name="reg_id" id="reg_id" placeholder="이름을 입력해 주세요">
+			</div>				
+			<div class="mb-3">
+				<label for="content">내용</label>
+				<textarea class="form-control" rows="5" name="content" id="content" placeholder="내용을 입력해 주세요" ></textarea>
+				<script type="text/javascript">	// 글쓰기 editor 및 사진 업로드 기능
+				CKEDITOR.replace('content',
+				{filebrowserUploadUrl:'/food/imageUpload.do'
+				});
+				</script>
+			</div>				
+			<div class="mb-3">
+				<label for="tag">TAG</label>
+				<input type="text" class="form-control" name="tag" id="tag" placeholder="태그를 입력해 주세요">
+			</div>	
+		</form>
+		<button type="button" class="btn btn-sm btn-primary" id="btnSave">저장</button>
+		<button type="button" class="btn btn-sm btn-primary" id="btnList">목록</button>
+	</div>
 </section>
-
-
+<!-- /컨텐츠 -->
 <section class="ftco-section ftco-about img"style="background-image: url(resources/images/bg_4.jpg);">
  <div class="overlay"></div>
  <div class="container py-md-5">

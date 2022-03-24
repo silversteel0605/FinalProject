@@ -67,13 +67,11 @@
 		<div class="contents">
 			<p class="fs-3">${contents.title }</p>
 			<div class="paragraph_header d-flex justify-content-between">
-				<span id="${contents.member_id }" class="userId">${contents.member_id }</span>
+				<span id="${contents.member_id }" class="userId pointer">${contents.member_id }</span>
 				<span>${contents.reg_date }</span>
 			</div> <hr/>
 			<div class="paragraph_body">
-				<p>
-					${contents.contents }
-				</p>
+				<p>${contents.contents }</p>
 			</div>
 			<div class="paragraph_comments">
 				<div class="comments_header">
@@ -114,25 +112,18 @@
 				<div class="comments_footer"></div>
 			</div> <hr />
 			<div class="paragraph_footer d-flex justify-content-end">
-					<button class="btn">수정</button>
-					<button id="contentsDelete" class="btn">삭제</button>
-					<button id="goBoard" class="btn">목록</button>
+				<button class="btn">수정</button>
+				<button id="contentsDelete" class="btn">삭제</button>
+				<button id="goBoard" class="btn" onClick="goBoard(${contents.board_class })">목록</button>
 			</div>
-			<form action="./support" method="POST" id="deleteForm">
-				<input type="hidden" name="delete" value="true" />
-			</form>
 		</div>		
 		<!-- /컨텐츠 -->
 	</div>
 </section>
+<!-- 변수 -->
+<input type="hidden" id="board_class" value="${contents.board_class }" />
 
 <!-- Modal -->
-<template id="deleteModal">
-	<swal-title>삭제하시겠습니까?</swal-title>
-	<swal-button type="confirm">확인</swal-button>
-	<swal-button type="cancel">취소</swal-button>
-</template>
-
 <div id="popUpMenu" style="display:none;">
 	<ul class="list-group list-group-flush">
 		<li id="memberInfo" class="indiPopUp list-group-item list-group-item-primary opacity-75" style="cursor:pointer">회원정보 보기</li>

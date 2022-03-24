@@ -52,15 +52,10 @@ public class HomeController {
 		return "camping_index";
 	}
 	
-	@RequestMapping(value = "/write", method = RequestMethod.GET )
-	public String width() {
-		logger.info("Connect write");
-		return "write";
+	@RequestMapping(value = "/test", method = RequestMethod.GET )
+	public String test() {
+		logger.info("Connect test");
+		return "freeBoard2";
 	}
 	
-	@RequestMapping(value = "/board", method = RequestMethod.GET)
-	public String board() {
-		logger.info("Connect FreeBoard");
-		return "freeBoard";
-	}
 }

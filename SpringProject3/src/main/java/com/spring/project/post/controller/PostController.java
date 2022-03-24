@@ -13,6 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.spring.project.post.dto.DeleteVO;
 import com.spring.project.post.dto.PostVO;
@@ -38,17 +40,24 @@ public class PostController {
 		boardClassMap.put("supportBoard", 1);
 		
 		categoryNameMap = new HashMap<>();
-		categoryNameMap.put("supportAll", 5);
+		categoryNameMap.put("boardAll", 0);
+		categoryNameMap.put("supportAll", 1);
+		categoryNameMap.put("daily", 2);
+		categoryNameMap.put("showoff", 3);
+		categoryNameMap.put("buy", 4);
+		categoryNameMap.put("sell", 5);
 		categoryNameMap.put("notice", 6);
 		categoryNameMap.put("askEdit", 7);
 	}
 
+	// 고객센터 게시판 
+	
 	@GetMapping("/support")
-	public String supportPage(HttpServletRequest request, Model model, String categoryName, String nowPage, SearchVO search) {
+	public String supportPage(HttpServletRequest request, Model model, String nowPage, String categoryName, SearchVO search, boolean delete) {
 		HttpSession session = request.getSession();
-		
+		log.info("들어오는 세션: " + session.getAttribute("search"));
 		// 초기 세션 생성
-		if (session.getAttribute("search") == null) {
+		if (session.getAttribute("search") == null || ((SearchVO)session.getAttribute("search")).getBoard_class() != 1) {
 			Integer category = categoryNameMap.get("supportAll");
 			search.setBoard_class(boardClassMap.get("supportBoard"));
 			search.setCategory(category);
@@ -56,11 +65,18 @@ public class PostController {
 			session.setAttribute("search", search);
 		}
 		
-		// 세션 있을 경우
+		// 이미 세션 있을 경우
 		if (categoryName != null) {
 			search.setCategory(categoryNameMap.get(categoryName));
 			search.setBoard_class(boardClassMap.get("supportBoard"));
 			session.setAttribute("search", search);
+		}
+		
+		// 게시글 삭제
+		if (delete) {
+			log.info("고객센터 삭제됨");
+			postService.deletePost((Integer) session.getAttribute("tempPostId"));
+			session.removeAttribute("tempPostId");
 		}
 		
 		// Paging
@@ -72,21 +88,18 @@ public class PostController {
 		model.addAttribute("paging", pvo);
 		
 		List<PostVO> postList = new ArrayList<>();
-		postList = postService.getSupportPostList((SearchVO) session.getAttribute("search"), pvo);
+		postList = postService.getPostList((SearchVO) session.getAttribute("search"), pvo);
 		model.addAttribute("supportContentsList", postList);
+		
+		log.info("나가는 세션: " + session.getAttribute("search"));
 		return "support";
 	}
 	
 	@PostMapping("/support")
 	public String supportSearch(HttpServletRequest request, Model model, SearchVO search, String nowPage, DeleteVO del) {
 		HttpSession session = request.getSession();
-		log.info("supportSession: " + session.getAttribute("tempPostId"));
-		log.info("PostID: " + del.getPost_id());
-		log.info("booleanDelete: " + del.isDelete());
-		session.removeAttribute("tempPostId");
-		log.info("supportSessionAfter: " + session.getAttribute("tempPostId"));
-		
-		
+		log.info("들어오는 세션: " + session.getAttribute("search"));
+		// 검색 출력
 		search.setBoard_class(boardClassMap.get("supportBoard"));
 		search.setCategory(((SearchVO) session.getAttribute("search")).getCategory());
 		session.setAttribute("search", search);
@@ -100,10 +113,107 @@ public class PostController {
 		model.addAttribute("paging", pvo);
 		
 		List<PostVO> postList = new ArrayList<>();
-		postList = postService.getSupportSearch((SearchVO) session.getAttribute("search"), pvo);
+		postList = postService.getPostSearch((SearchVO) session.getAttribute("search"), pvo);
 		model.addAttribute("supportContentsList", postList);
+		
+		log.info("나가는 세션: " + session.getAttribute("search"));
 		return "support";
 	}
+	
+	// 일반 게시판
+	
+	@GetMapping("/board")
+	public String board(HttpServletRequest request, Model model, String nowPage, SearchVO search, String categoryName, boolean delete) {
+		HttpSession session = request.getSession();
+		log.info("들어오는 세션: " + session.getAttribute("search"));
+		
+		// 초기 세션 생성
+		if (session.getAttribute("search") == null || ((SearchVO)session.getAttribute("search")).getBoard_class() != 0) {
+			Integer category = categoryNameMap.get("boardAll");
+			search.setBoard_class(boardClassMap.get("freeBoard"));
+			search.setCategory(category);
+			
+			session.setAttribute("search", search);
+		}
+		
+		// 이미 세션 있을 경우
+		if (categoryName != null) {
+			search.setCategory(categoryNameMap.get(categoryName));
+			search.setBoard_class(boardClassMap.get("freeBoard"));
+			session.setAttribute("search", search);
+		}
+		
+		// 게시글 삭제
+		if (delete) {
+			log.info("일반게시판 삭제됨");
+			postService.deletePost((Integer) session.getAttribute("tempPostId"));
+			session.removeAttribute("tempPostId");
+		}
+		
+		// 페이징
+		Integer cntPerPage = 9;
+		
+		nowPage = nowPage != null ? nowPage :"1";
+		Integer total = postService.getCount((SearchVO) session.getAttribute("search"));
+		PagingVO pvo = new PagingVO(total, Integer.parseInt(nowPage), cntPerPage);
+		model.addAttribute("paging", pvo);
+		
+		List<PostVO> postList = new ArrayList<>();
+		postList = postService.getPostList((SearchVO) session.getAttribute("search"), pvo);
+		model.addAttribute("freeBoardContentsList", postList);
+		
+		log.info("나가는 세션: " + session.getAttribute("search"));
+		return "freeBoard";
+	}
+	
+	@PostMapping("/board")
+	public String boardSearch(HttpServletRequest request, Model model, SearchVO search, String nowPage) {
+		HttpSession session = request.getSession();
+		log.info("들어오는 세션: " + session.getAttribute("search"));
+		// 검색 출력
+		search.setBoard_class(boardClassMap.get("freeBoard"));
+		search.setCategory(((SearchVO) session.getAttribute("search")).getCategory());
+		session.setAttribute("search", search);
+		
+		// Paging
+		Integer cntPerPage = 9;
+		
+		nowPage = nowPage != null ? nowPage :"1";
+		Integer total = postService.getCount((SearchVO) session.getAttribute("search"));
+		PagingVO pvo = new PagingVO(total, Integer.parseInt(nowPage), cntPerPage);
+		model.addAttribute("paging", pvo);
+		
+		List<PostVO> postList = new ArrayList<>();
+		postList = postService.getPostSearch((SearchVO) session.getAttribute("search"), pvo);
+		model.addAttribute("freeBoardContentsList", postList);
+		
+		log.info("나가는 세션: " + session.getAttribute("search"));
+		return "freeBoard";
+	}
+	
+	// 글보기
+	@GetMapping("/main_paragraph")
+	public String mainContents(HttpServletRequest request, Model model, Integer post_id, boolean delete) {
+		HttpSession session = request.getSession();
+		log.info("들어오는 세션: " + session.getAttribute("search"));
+		
+		session.setAttribute("tempPostId", post_id);
+		PostVO post = postService.getContents(post_id);
+		model.addAttribute("contents", post);
+		
+		log.info("나가는 세션: " + session.getAttribute("search"));
+		return "main_paragraph";
+	}
+	
+	//글작성하기
+	@GetMapping("/write")
+	public String write(String board_class) {
+		log.info("board_class: " + board_class);
+		
+		return "write";
+	}
+	
+	// 기타
 	
 	@GetMapping("/tempIndividualInfo")
 	public String tempIndividualInfo(String id) {
@@ -117,21 +227,6 @@ public class PostController {
 		return null;
 	}
 	
-	@GetMapping("/main_paragraph")
-	public String mainContents(HttpServletRequest request, Model model, Integer post_id, boolean delete) {
-		HttpSession session = request.getSession();
-		
-		log.info("post_id: " + post_id);
-		log.info("delete: " + delete);
-		session.setAttribute("tempPostId", post_id);
-		log.info("mainContentsSession: " + session.getAttribute("tempPostId"));
-		
-		PostVO post = postService.getContents(post_id);
-		log.info(post);
-		
-		model.addAttribute("contents", post);
-		return "main_paragraph";
-	}
 	
 }
 

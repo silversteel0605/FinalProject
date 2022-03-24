@@ -25,30 +25,35 @@ public class PostServiceImpl implements PostService {
 	}
 	
 	@Override
-	public List<PostVO> getSupportPostList(SearchVO search, PagingVO pvo) {
+	public List<PostVO> getPostList(SearchVO search, PagingVO pvo) {
 		
 		Integer startNum = pvo.getTotal() - (pvo.getCntPerPage() * pvo.getNowPage());
 		Integer endNum = pvo.getTotal() - (pvo.getCntPerPage() * (pvo.getNowPage() - 1));
 		pvo.setStart(startNum);
 		pvo.setEnd(endNum);
 		
-		return postMapper.getSupportPostList(search, pvo);
+		return postMapper.getPostList(search, pvo);
 	}
 	
 	@Override
-	public List<PostVO> getSupportSearch(SearchVO search, PagingVO pvo) {
+	public List<PostVO> getPostSearch(SearchVO search, PagingVO pvo) {
 		
 		Integer startNum = pvo.getTotal() - (pvo.getCntPerPage() * pvo.getNowPage());
 		Integer endNum = pvo.getTotal() - (pvo.getCntPerPage() * (pvo.getNowPage() - 1));
 		pvo.setStart(startNum);
 		pvo.setEnd(endNum);
 		
-		return postMapper.getSupportSearch(search, pvo);
+		return postMapper.getPostSearch(search, pvo);
 	}
 	
 	@Override
 	public PostVO getContents(Integer post_id) {
 		return postMapper.getContents(post_id);
+	}
+	
+	@Override
+	public void deletePost(Integer post_id) {
+		postMapper.deletePost(post_id);
 	}
 }
 

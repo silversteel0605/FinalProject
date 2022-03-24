@@ -1,18 +1,38 @@
-const goBoard = document.getElementById('goBoard');
+/*const goBoard = document.getElementById('goBoard');
 goBoard.addEventListener('click', (e) => {
 	location.href = `/project/support`
-});
+});*/
 
+function goBoard(board_class) {
+	if (board_class == 0) {
+		location.href = `/project/board`	
+	} else if (board_class == 1) {
+		location.href = `/project/support`
+	}
+}
+
+// 게시글 삭제
 const contentsDelete = document.getElementById('contentsDelete');
+const contentsClassNumber = document.getElementById('board_class').value;
+if (contentsClassNumber == 0) {
+	contentsClass = 'board';
+} else if (contentsClassNumber == 1) {
+	contentsClass = 'support';
+}
+
 contentsDelete.addEventListener('click', (e) => {
 	Swal.fire({
-		template: '#deleteModal'
+		title: '삭제하시겠습니까?',
+		text: "복구가 불가능합니다!",
+		icon: 'warning',
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		confirmButtonText: 'Yes'
 	}).then((result) => {
 		if (result.isConfirmed) {
-			Swal.fire(
-				document.getElementById('deleteForm').submit()
-			)
-		}
+  			location.href = `/project/${contentsClass}?delete=true`
+  		}
 	})
 });
 
