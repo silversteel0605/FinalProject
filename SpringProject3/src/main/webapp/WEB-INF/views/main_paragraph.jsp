@@ -77,40 +77,21 @@
 				<div class="comments_header">
 					<p>COMMENTS</p>
 				</div> <hr />
-				<div class="comments_body">
-					<p>숲속의바다펜션사장</p>
-					<div class="d-flex justify-content-start">
-						<p>축하해요 ㄹㄹ</p>
-						<i class="bi bi-x-circle comment_icon"></i>
-						<i id="co_comment_addBtn" class="bi bi-pen comment_icon"></i>
-						<i id="co_comment_newBtn" class="bi bi-chat-dots comment_icon"></i>
+				<div class="comments_body mb-5" id="comments_body"></div>
+				<!-- comments 입력 -->
+				<div id="comment">
+					<div class="form-floating">
+					  <input type="hidden" class="commentForm" name="commentPostId" value="${contents.post_id }"/>
+					  <input type="hidden" class="commentForm" name="commentBoardClass" value="${contents.board_class }"/>
+					  <textarea class="form-control commentForm" placeholder="Leave a comment here" name="commentComments" id="commentTextarea"></textarea>
+					  <label for="commentTextarea">Comments</label>
 					</div>
-					<div id="co_comment">
-						<form action="">
-							<div class="form-floating">
-							  <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea">Test Text</textarea>
-							  <label for="floatingTextarea">Comments</label>
-							</div>
-							<div class="d-flex justify-content-end">
-								<button id="co_comment_saveBtn" class="btn btn-outline-success" type="submit">저장</button>
-								<button id="co_comment_cancelBtn" class="btn btn-outline-success" type="button">취소</button>
-							</div>
-						</form>
-					</div>
-					<div id="comment">
-						<form action="">
-							<div class="form-floating">
-							  <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
-							  <label for="floatingTextarea">Comments</label>
-							</div>
-							<div class="d-flex justify-content-end">
-								<button id="comment_saveBtn" class="btn btn-outline-success" type="submit">저장</button>
-							</div>
-						</form>
+					<div class="d-flex justify-content-end">
+						<button id="comment_saveBtn" class="btn btn-outline-success">저장</button>
 					</div>
 				</div>
-				<div class="comments_footer"></div>
-			</div> <hr />
+				<!-- /comments 입력 -->
+			</div> <hr/>
 			<div class="paragraph_footer d-flex justify-content-end">
 				<button class="btn">수정</button>
 				<button id="contentsDelete" class="btn">삭제</button>
@@ -129,6 +110,18 @@
 		<li id="memberInfo" class="indiPopUp list-group-item list-group-item-primary opacity-75" style="cursor:pointer">회원정보 보기</li>
 		<li id="memberPost" class="indiPopUp list-group-item list-group-item-primary opacity-75" style="cursor:pointer">작성글 보기</li>
 	</ul>
+</div>
+
+<div id="co_commentInput" class="co_commentInput">
+	<div class="form-floating">
+		<textarea class="form-control" placeholder="Leave a Comment" id="coCommentTextarea"></textarea>
+		<label for="coCommentTextarea">Comments</label>
+	</div>
+	<div class="d-flex justify-content-end">
+		<input />
+		<button class="btn btn-outline-success co_comment_saveBtn">저장</button>
+		<button class="btn btn-outline-success co_comment_cancelBtn">취소</button>
+	</div>
 </div>
 <!-- /Modal -->
 	

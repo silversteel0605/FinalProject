@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.project.post.dto.CommentVO;
 import com.spring.project.post.dto.PostVO;
 import com.spring.project.post.dto.SearchVO;
 import com.spring.project.post.mapper.PostXMLMapper;
@@ -55,6 +56,10 @@ public class PostServiceImpl implements PostService {
 	public void deletePost(Integer post_id) {
 		postMapper.deletePost(post_id);
 	}
+	
+	public void addComment(CommentVO comment) {
+		postMapper.addComment(comment);
+	};
 }
 
 

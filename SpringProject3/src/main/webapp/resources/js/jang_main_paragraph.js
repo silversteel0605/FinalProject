@@ -1,8 +1,3 @@
-/*const goBoard = document.getElementById('goBoard');
-goBoard.addEventListener('click', (e) => {
-	location.href = `/project/support`
-});*/
-
 function goBoard(board_class) {
 	if (board_class == 0) {
 		location.href = `/project/board`	
@@ -11,7 +6,7 @@ function goBoard(board_class) {
 	}
 }
 
-// ê²Œì‹œê¸€ ì‚­ì œ
+// °Ô½Ã±Û »èÁ¦
 const contentsDelete = document.getElementById('contentsDelete');
 const contentsClassNumber = document.getElementById('board_class').value;
 if (contentsClassNumber == 0) {
@@ -22,8 +17,8 @@ if (contentsClassNumber == 0) {
 
 contentsDelete.addEventListener('click', (e) => {
 	Swal.fire({
-		title: 'ì‚­ì œí•˜ì‹œê² ìŠµë‹ˆê¹Œ?',
-		text: "ë³µêµ¬ê°€ ë¶ˆê°€ëŠ¥í•©ë‹ˆë‹¤!",
+		title: '»èÁ¦ÇÏ½Ã°Ú½À´Ï±î?',
+		text: 'º¹±¸°¡ ºÒ°¡´ÉÇÕ´Ï´Ù',
 		icon: 'warning',
 		showCancelButton: true,
 		confirmButtonColor: '#3085d6',
@@ -36,15 +31,67 @@ contentsDelete.addEventListener('click', (e) => {
 	})
 });
 
-// ì½”ë©˜íŠ¸
-const co_comment = document.getElementById('co_comment');
+// ÄÚ¸àÆ® ÀúÀå
+
+const xhttpComments = new XMLHttpRequest();
+const comment_saveBtn = document.getElementById('comment_saveBtn');
+
+comment_saveBtn.addEventListener('click', (e) => {
+	
+	console.log('ÀúÀå¹öÆ° ´­¸²');
+	const comments = document.querySelectorAll('#comment .commentForm');
+	const newCommentData = {
+		post_id: comments[0].value,
+		category_id: comments[1].value,
+		comments: comments[2].value,
+		classnum: 0,
+		ordernum: 0
+	}
+	xhttpComments.open('POST', '/project/main_paragraph', true);
+	xhttpComments.setRequestHeader('content-type', 'application/json;charset=utf-8');
+	xhttpComments.send(JSON.stringify(newCommentData));
+	
+	comments[2].value = null;
+	
+});
+
+const comments_body = document.getElementById('comments_body');
+
+xhttpComments.addEventListener('readystatechange', (e) => {
+	const readyState = e.target.readyState;
+	const status = e.target.status;
+	
+	console.log('readystate: ', readyState);
+    console.log('httpstatus: ', status);
+    
+    if (readyState == 1) {
+		console.log('ºñµ¿±â ¿¬°áÀ» ¼­¹ö·Î Àü¼ÛÇÔ(¼ö¸³)');	
+	} else if (readyState == 2) {
+		console.log('¼­¹ö°¡ ³» ¿äÃ»À» ¹Þ¾ÒÀ½');
+	} else if (readyState == 3) {
+		console.log('¼­¹ö°¡ ³» ¿äÃ»¿¡ ´ëÇÑ Ã³¸®¸¦ ½ÃÀÛÇÔ');
+	} else if (readyState == 4 && status == 200)  {
+		console.log('¿äÃ»¿¡ ´ëÇÑ Ã³¸®°¡ ³¡³­ ÈÄ ÀÀ´äÀÌ µµÂøÇÔ');
+		console.log('readyState°¡ 4¹øÀÌ¹Ç·Î µ¥ÀÌÅÍ Ã³¸®¸¦ ½ÃÀÛ');
+		console.log("responseText: ", e.target.responseText);
+		
+		const comment = JSON.parse(e.target.responseText);
+		console.log('post_id: ', comment.post_id);
+		console.log('comments: ', comment.comments);
+		console.log('category_id: ', comment.category_id);
+		console.log('member_id: ', comment.member_id);
+		
+		comments_body.innerHTML += mkComment(comment.member_id, comment.comments);
+		
+	}
+	
+});
+
+// ÄÚÄÚ¸àÆ®
 const co_comment_newBtn = document.getElementById('co_comment_newBtn');
 const co_comment_saveBtn = document.getElementById('co_comment_saveBtn');
 const co_comment_cancelBtn = document.getElementById('co_comment_cancelBtn');
 
-co_comment_newBtn.addEventListener('click', (e) => {
-	co_comment.style.display = 'block';
-});
 
 co_comment_saveBtn.addEventListener('click', (e) => {
 	co_comment.style.display = 'none';
@@ -53,4 +100,47 @@ co_comment_saveBtn.addEventListener('click', (e) => {
 co_comment_cancelBtn.addEventListener('click', (e) => {
 	co_comment.style.display = 'none';
 });
+
+// https://hianna.tistory.com/484 Âü°íÇØ¼­ ´Ù½Ã ¸¸µé±â
+
+function mkComment(member_id, comments) {
+	return `<div class="md-3">
+				<span class="userId">${member_id}</span><br/>
+				<div class="d-flex justify-content-start">
+					<p>${comments}</p>
+					<i class="bi bi-x-circle comment_icon"></i>
+					<i id="co_comment_addBtn" class="bi bi-pen comment_icon"></i>
+					<i id="co_comment_newBtn" class="bi bi-chat-dots comment_icon"></i>
+				</div>
+			</div>`;
+}
+
+function mkCoComment(member_id, comments) {
+	return `<div class="md-3">
+				<span class="userId">${member_id}</span><br/>
+				<div class="d-flex justify-content-start">
+					<p>${comments}</p>
+					<i class="bi bi-x-circle comment_icon"></i>
+					<i id="co_comment_addBtn" class="bi bi-pen comment_icon"></i>
+					<i id="co_comment_newBtn" class="bi bi-chat-dots comment_icon"></i>
+				</div>
+			</div>`;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

@@ -201,7 +201,11 @@ public class PostController {
 		PostVO post = postService.getContents(post_id);
 		model.addAttribute("contents", post);
 		
+		log.info("post: " + post);
 		log.info("나가는 세션: " + session.getAttribute("search"));
+		
+		// 임시 ID 세션 저장
+		session.setAttribute("tempId", "testID");
 		return "main_paragraph";
 	}
 	
@@ -214,7 +218,6 @@ public class PostController {
 	}
 	
 	// 기타
-	
 	@GetMapping("/tempIndividualInfo")
 	public String tempIndividualInfo(String id) {
 		log.info("GetId: " + id);

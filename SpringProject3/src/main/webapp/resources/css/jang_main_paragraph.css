@@ -4,6 +4,6 @@
 	cursor: pointer;
 }
 
-#co_comment {
+.co_commentInput {
 	display: none;
 }

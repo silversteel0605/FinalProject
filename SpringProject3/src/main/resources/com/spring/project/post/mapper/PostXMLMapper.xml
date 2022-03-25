@@ -30,13 +30,13 @@
 	
 	<select id="getPostList" resultType="com.spring.project.post.dto.PostVO">
 		SELECT 
-			post.rownumber, post.post_id,  member.member_id, post.comment_id, post.title, post.contents,to_char(post.reg_date, 'yyyy. MM. dd.'), 
-			to_char(post.edit_date, 'yyyy. MM. dd.'), post.board_class, post.contents_category, post.process 
+			post.rownumber, post.post_id,  post.member_id, post.title, post.contents,to_char(post.reg_date, 'yyyy. MM. dd.'), 
+			post.board_class, post.contents_category, post.process 
 		FROM 
 			(
 				SELECT 
-					rownum as rownumber, post_id, member_id, comment_id, title, contents, reg_date, 
-					edit_date, board_class, contents_category, process 
+					rownum as rownumber, post_id, member_id, title, contents, reg_date, 
+					board_class, contents_category, process 
 				FROM 
 					post
 				WHERE
@@ -46,11 +46,9 @@
 					contents_category = #{search.category}
 				</if>
 			) 
-			post, member
+			post
 		WHERE
-			post.member_id = member.member_num_id 
-		<!-- Paging -->
-		AND
+			<!-- Paging -->
 			post.rownumber BETWEEN #{pvo.start} AND #{pvo.end}
 		ORDER 
 			BY post.rownumber DESC
@@ -58,13 +56,13 @@
 	
 	<select id="getPostSearch" resultType="com.spring.project.post.dto.PostVO" parameterType="com.spring.project.post.dto.SearchVO">
 		SELECT 
-			post.rownumber, post.post_id,  member.member_id, post.comment_id, post.title, post.contents,to_char(post.reg_date, 'yyyy. MM. dd.'), 
-			to_char(post.edit_date, 'yyyy. MM. dd.'), post.board_class, post.contents_category, post.process 
+			post.rownumber, post.post_id,  post.member_id, post.title, post.contents,to_char(post.reg_date, 'yyyy. MM. dd.'), 
+			post.board_class, post.contents_category, post.process 
 		FROM 
 			(
 				SELECT 
-					rownum as rownumber, post_id, member_id, comment_id, title, contents, reg_date, 
-					edit_date, board_class, contents_category, process 
+					rownum as rownumber, post_id, member_id, title, contents, reg_date, 
+					board_class, contents_category, process 
 				FROM 
 					post
 				WHERE
@@ -84,11 +82,9 @@
 					contents_category = #{search.category}
 				</if>
 			) 
-			post, member
+			post
 		WHERE
-			post.member_id = member.member_num_id
-		<!-- Paging -->
-		AND
+			<!-- Paging -->
 			post.rownumber BETWEEN #{pvo.start} AND #{pvo.end}
 		ORDER BY 
 			post.rownumber DESC
@@ -97,23 +93,41 @@
 	<!-- mainContents -->
 	<select id="getContents" resultType="com.spring.project.post.dto.PostVO">
 		SELECT 
-			post.rownumber, post.post_id,  member.member_id, post.comment_id, post.title, post.contents,to_char(post.reg_date, 'yyyy. MM. dd.'), 
-			to_char(post.edit_date, 'yyyy. MM. dd.'), post.board_class, post.contents_category, post.process 
+			post.rownumber, post.post_id,  post.member_id, post.title, post.contents,to_char(post.reg_date, 'yyyy. MM. dd.'), 
+			post.board_class, post.contents_category, post.process 
 		FROM 
 			(
 				SELECT 
-					rownum as rownumber, post_id, member_id, comment_id, title, contents, reg_date, 
-					edit_date, board_class, contents_category, process 
+					rownum as rownumber, post_id, member_id, title, contents, reg_date, 
+					board_class, contents_category, process 
 				FROM 
 					post
 			) 
-			post, member
+			post
 		WHERE
-			post.member_id = member.member_num_id 
-		AND 
 			post.post_id = #{post_id}
 	</select>
 	<delete id="deletePost">
 		DELETE FROM post WHERE post_id = #{post_id}
 	</delete>
+	<insert id="addComment">
+		<selectKey keyProperty="comment_id" resultType="_integer" order="BEFORE">
+	    	select comment_id_seq.nextval from dual
+		</selectKey>
+		INSERT INTO comments VALUES (#{comment_id}, #{post_id}, #{category_id}, #{member_id}, #{comments}, #{classnum}, #{ordernum}, #{comment_id} )
+	</insert>
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
