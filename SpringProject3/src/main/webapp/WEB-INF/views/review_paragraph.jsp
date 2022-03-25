@@ -124,8 +124,7 @@
 			<div class="paragraph_footer d-flex justify-content-end">
 				<button class="btn"><a href="/project/review?type=1&reviewId=<%= info.getReviewId() %>&contentId=<%=info.getContentId() %>">수정</a></button>
 				<button id="reivewDelete" class="btn" onclick="showPopUp('<%= info.getReviewId() %>','<%=info.getContentId() %>')">삭제</button>
-				<!-- '<%= info.getReviewId() %>','<%=info.getContentId() %>' -->
-				<button class="btn">목록</button>
+				<button class="btn" onclick="back()">목록</button>
 			</div>
 		</div>		
 		<!-- /컨텐츠 -->

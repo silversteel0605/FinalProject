@@ -2,7 +2,7 @@
 //전체
 function create_review_save_content(type, r_dto){
 	
-	console.log(r_dto.contentId, type);
+	console.log(r_dto.contentId, type, r_dto);
 	var content = document.getElementById("contentBox");
 	var testMainForm = create_review_form(type);
 	
@@ -13,7 +13,6 @@ function create_review_save_content(type, r_dto){
 	var req_imgUrl = document.createElement("input");
 	var req_clickNum = document.createElement("input");
 	
-	req_campingId.setAttribute("type", "text");
 	req_campingId.setAttribute("name", "contentId");
 	req_campingId.setAttribute("value", r_dto.contentId);
 	req_campingId.style.display = "none";
@@ -27,7 +26,7 @@ function create_review_save_content(type, r_dto){
 	req_loginId.style.display = "none";
 	
 	req_createDate.setAttribute("name", "createDate");
-	req_createDate.setAttribute("value", r_dto.createDate);
+	req_createDate.setAttribute("value", getYmd10(r_dto.createDate));
 	req_createDate.style.display = "none";
 	
 	req_imgUrl.setAttribute("name", "imgUrl");
@@ -208,6 +207,15 @@ function str_replace(str){
 	return str;
 }
 
+function getYmd10(d) {
+    //yyyy-mm-dd 포맷 날짜 생성
+    if(d == 'Invalid Date'){
+		d = new Date();
+	}
+	
+	return d.getFullYear() + "-" + ((d.getMonth() + 1) > 9 ? (d.getMonth() + 1).toString() : "0" + (d.getMonth() + 1)) + "-" + (d.getDate() > 9 ? d.getDate().toString() : "0" + d.getDate().toString());
+    
+}
 
 
 

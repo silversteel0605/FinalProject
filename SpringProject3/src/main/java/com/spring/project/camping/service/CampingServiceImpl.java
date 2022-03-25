@@ -310,8 +310,8 @@ public class CampingServiceImpl implements CampingService{
 	}
 	
 	@Override
-	public void deleteReview(int reviewId) {
-		dataMapper.deleteReview(reviewId);
+	public void deleteReviewData(int reviewId) {
+		dataMapper.deleteReviewData(reviewId);
 	}
 	
 	/*	Review	*/
