@@ -22,4 +22,9 @@
 	});
 	
 });
+
+function select_click_event(value, contentId){
+	
+	location.href="/project/reviewDelete?value="+value+"&contentId="+contentId;
+}
  

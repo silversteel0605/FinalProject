@@ -314,13 +314,17 @@ public class CampingServiceImpl implements CampingService{
 		dataMapper.deleteReviewData(reviewId);
 	}
 	
+	@Override
+	public List<CampingReviewDTO> getSortReviewDatas(Map<String, Object> reviewMap) {
+		return dataMapper.getSortReviewDatas(reviewMap);
+	}
+	
 	/*	Review	*/
 
 	
 	public void addViews(String contentId) {
 		dataMapper.addViews(contentId);
 	}
-
 
 
 }

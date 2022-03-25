@@ -175,6 +175,10 @@
     	UPDATE review_table SET title=#{title}, contentValue=#{contentValue}, starRanking=#{starRanking} WHERE reviewId = #{reviewId}
     </update>
     
+    <select id="getSortReviewDatas" parameterType="map" resultType="com.spring.project.review.DTO.CampingReviewDTO">
+    	select * from review_table where contentid=#{contentId} order by #{colType} DESC;
+    </select>
+    
     <select id="getReviewAllPageCnt" resultType="_int">
     	select count(*) from review_table
     </select>

@@ -69,6 +69,26 @@ public class CampingController {
 		return "camping_index";
 	}
 	
+	@RequestMapping(value = "/reviewSort", method = RequestMethod.GET)
+	public String reviewSort(Model m, String value, String contentId) {
+		
+		Map<String, Object> reviewMap = new HashMap<String, Object>();
+		
+		reviewMap.put("value", value);
+		reviewMap.put("contentId", contentId);
+		
+		List<CampingReviewDTO> r_dto = service.getSortReviewDatas(reviewMap);
+		
+		String type = "2"; 
+		
+		m.addAttribute("r_dto", r_dto);
+		m.addAttribute("contentId", contentId);
+		m.addAttribute("type", type);
+		
+		return "redirect:TempCampInfo#tab03";
+	}
+	
+	
 	@RequestMapping(value = "/review", method = RequestMethod.GET)
 	public String review(Model m, @RequestParam(value="type", required=false) String type, @RequestParam(value="reviewId", required=false) String reviewId, @RequestParam(value="contentId") String contentId) {
 		
@@ -166,6 +186,7 @@ public class CampingController {
 		
 		return "review_paragraph";
 	}
+	
 	
 	
 	@RequestMapping(value = "/map", method = RequestMethod.GET)

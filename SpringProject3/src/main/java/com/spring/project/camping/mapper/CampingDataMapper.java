@@ -26,7 +26,8 @@ public interface CampingDataMapper {
 	public int getReviewAllPageCnt();										//Review Page Count Total
 	public List<CampingReviewDTO> getReviewSearchData(Map<String, Object> reviewMap); //Review Page Search Data (¹Ì¿Ï)
 	public int getReviewCreateReviewID();									//db last seq id select
-	public void deleteReviewData(int reviewId);									//Review Data Delete
+	public void deleteReviewData(int reviewId);								//Review Data Delete
+	public List<CampingReviewDTO> getSortReviewDatas(Map<String, Object> reviewMap); //Review Sort Data
 	//Review
 
 	public void addViews(String contentId);

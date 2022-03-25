@@ -222,15 +222,10 @@
 							<!-- 최신순 / 추천순 / 평점순  -->
 							<div id="top_box" class="flex_1">
 								<div class="left-sort">
-									<select name="review_search_select_box">
-										<option value="최신순">최신순</option>
-										<option value="추천순">추천순</option>
-										<option value="평점순">평점순</option>
+									<select name="review_search_select_box" onchange="select_click_event(this.options[this.selectedIndex].value,)">
+										<option value="reviewId">최신순</option>
+										<option value="starRanking">평점순</option>
 									</select>
-									
-									<input class="text" type="text" placeholder="검색어를 입력해주세요">
-								
-									<button id = "select_keyword">검색</button>
 								</div>
 								
 								<div id="write_btn_box" class="right-sort">
