@@ -13,14 +13,12 @@ if (joinProhibit == false) {
 
 joinProhibitSwitch.addEventListener('change', (e) => {
 	
-	if (joinProhibitSwitch.checked == true) {
+	if (!joinProhibitSwitch.checked == true) {
 		joinProhibit = true;
-		console.log("회원가입 허용")
 		joinProhibitSentence.innerHTML = '가입허용';
 		
 		
 	} else {
-		console.log("회원가입 금지")
 		joinProhibit = false;
 		joinProhibitSentence.innerHTML = '가입금지';
 	}

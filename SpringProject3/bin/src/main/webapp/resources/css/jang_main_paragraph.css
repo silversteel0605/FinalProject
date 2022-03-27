@@ -1,0 +1,9 @@
+@charset "EUC-KR";
+
+.comment_icon {
+	cursor: pointer;
+}
+
+#co_comment {
+	display: none;
+}
