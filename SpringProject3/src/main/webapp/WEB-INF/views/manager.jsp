@@ -241,7 +241,7 @@ String se = (String)session.getAttribute("auth");
 						  	</div>
 						  	<div class="col-md-6">
 							    <label for="specificAdrOfSite" class="form-label">&nbsp;</label>
-							    <input type="text" class="form-control" id="addr1" placeholder="惑技林家">
+							    <input type="text" class="form-control" id="addr2" placeholder="惑技林家">
 						  	</div>
 					  	</div>
 					  	<div class="mb-3">
