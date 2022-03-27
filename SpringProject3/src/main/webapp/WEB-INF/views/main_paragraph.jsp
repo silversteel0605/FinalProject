@@ -77,7 +77,25 @@
 				<div class="comments_header">
 					<p>COMMENTS</p>
 				</div> <hr />
-				<div class="comments_body mb-5" id="comments_body"></div>
+				<div class="comments_body mb-5" id="comments_body">
+					<c:if test="${not empty commentsList }">
+						<c:forEach items="${commentsList }" var="comment">
+						<div id="${comment.comment_id }" class="mb-3 border-bottom">
+							<span class="userId">${comment.member_id}</span><br/>
+							<div class="d-flex justify-content-start">
+								<p>${comment.comments}</p>
+								<i class="bi bi-x-circle comment_icon"></i>
+								<i id="co_comment_editBtn" class="bi bi-pen comment_icon"></i>
+								<i id="co_comment_newBtn_${comment.comment_id}" class="bi bi-chat-dots comment_icon co_comment_newBtn"></i>
+								<input id="comment_commentId_${comment.comment_id }" type="hidden" value="${comment.comment_id }" />
+								<input id="comment_postId" type="hidden" value="${comment.post_id }" />
+								<input id="comment_ordernum" type="hidden" value="${comment.ordernum }" />
+								<input id="comment_categoryId" type="hidden" value="${comment.category_id }" />
+							</div>
+						</div>
+						</c:forEach>
+					</c:if>
+				</div>
 				<!-- comments 입력 -->
 				<div id="comment">
 					<div class="form-floating">
@@ -111,7 +129,7 @@
 		<li id="memberPost" class="indiPopUp list-group-item list-group-item-primary opacity-75" style="cursor:pointer">작성글 보기</li>
 	</ul>
 </div>
-
+<!-- 
 <div id="co_commentInput" class="co_commentInput">
 	<div class="form-floating">
 		<textarea class="form-control" placeholder="Leave a Comment" id="coCommentTextarea"></textarea>
@@ -122,7 +140,7 @@
 		<button class="btn btn-outline-success co_comment_saveBtn">저장</button>
 		<button class="btn btn-outline-success co_comment_cancelBtn">취소</button>
 	</div>
-</div>
+</div> -->
 <!-- /Modal -->
 	
 <!-- /수정 -->

@@ -57,9 +57,15 @@ public class PostServiceImpl implements PostService {
 		postMapper.deletePost(post_id);
 	}
 	
+	@Override
 	public void addComment(CommentVO comment) {
 		postMapper.addComment(comment);
 	};
+	
+	@Override
+	public List<PostVO> getComments(PostVO post) {
+		return postMapper.getComments(post);
+	}
 }
 
 

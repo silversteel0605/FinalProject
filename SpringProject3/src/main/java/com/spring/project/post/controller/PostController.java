@@ -204,8 +204,12 @@ public class PostController {
 		log.info("post: " + post);
 		log.info("나가는 세션: " + session.getAttribute("search"));
 		
+		// 댓글 불러오기
+		List<PostVO> commentsList = postService.getComments(post);
+		model.addAttribute("commentsList", commentsList);
+		
 		// 임시 ID 세션 저장
-		session.setAttribute("tempId", "testID");
+		session.setAttribute("tempId2", "testID2");
 		return "main_paragraph";
 	}
 	
