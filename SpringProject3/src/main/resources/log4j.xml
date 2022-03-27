@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE log4j:configuration PUBLIC "-//APACHE//DTD LOG4J 1.2//EN" "log4j.dtd">
+<!DOCTYPE log4j:configuration PUBLIC "-//APACHE//DTD LOG4J 1.2//EN" "http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd">
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
 
 	<!-- Appenders -->
@@ -9,22 +9,20 @@
 			<param name="ConversionPattern" value="%-5p: %c - %m%n" />
 		</layout>
 	</appender>
-<<<<<<< HEAD
-=======
 
-	<!-- log4jdbc -->
-<!-- 	<logger name="jdbc.connection">
+
+ 	<logger name="jdbc.connection">
 		<level value="info" />
-	</logger> -->
+	</logger>
+	 
 	<logger name="jdbc.sqlonly">
 		<level value="info"/>
 	</logger>
-<!-- 	<logger name="jdbc.resultsettable">
-		<level value="info"/>
-	</logger> -->
->>>>>>> refs/heads/jang
 	
-	<!-- Application Loggers -->
+	<logger name="jdbc.resultsettable">
+		<level value="info"/>
+	</logger> 
+	
 	<logger name="com.spring.project">
 		<level value="info" />
 	</logger>

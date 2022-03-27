@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.project.post.mapper.PostXMLMapper">
+	<select id="getCount" resultType="_integer">
+		SELECT 
+			count(*) FROM post 
+		WHERE 
+			board_class = #{board_class}
+		<if test='category eq 6 or category eq 7'>
+		AND
+			contents_category = #{category}
+		</if>
+		<if test="searchKeyword != null">
+		<choose>
+		<when test="'all'.equals(searchByWhat)">
+		AND
+			(contents LIKE '%'||#{searchKeyword}||'%' OR title LIKE '%'||#{searchKeyword}||'%')
+		</when>
+		<when test="'contents'.equals(searchByWhat) or 'title'.equals(searchByWhat)">
+		AND
+			${searchByWhat} LIKE '%'||#{searchKeyword}||'%'
+		</when>
+		</choose>
+		</if>
+	</select>
+	
+	<select id="getSupportPostList" resultType="com.spring.project.post.dto.PostVO">
+		SELECT 
+			post.rownumber, post.post_id,  member.member_id, post.comment_id, post.title, post.contents,to_char(post.reg_date, 'yyyy. MM. dd.'), 
+			to_char(post.edit_date, 'yyyy. MM. dd.'), post.board_class, post.contents_category, post.process 
+		FROM 
+			(
+				SELECT 
+					rownum as rownumber, post_id, member_id, comment_id, title, contents, reg_date, 
+					edit_date, board_class, contents_category, process 
+				FROM 
+					post
+				WHERE
+					board_class = #{search.board_class}
+				<if test='search.category eq 6 or search.category eq 7'>
+				AND
+					contents_category = #{search.category}
+				</if>
+			) 
+			post, member
+		WHERE
+			post.member_id = member.member_num_id 
+		<!-- Paging -->
+		AND
+			post.rownumber BETWEEN #{pvo.start} AND #{pvo.end}
+		ORDER 
+			BY post.rownumber DESC
+	</select>
+	
+	<select id="getSupportSearch" resultType="com.spring.project.post.dto.PostVO" parameterType="com.spring.project.post.dto.SearchVO">
+		SELECT 
+			post.rownumber, post.post_id,  member.member_id, post.comment_id, post.title, post.contents,to_char(post.reg_date, 'yyyy. MM. dd.'), 
+			to_char(post.edit_date, 'yyyy. MM. dd.'), post.board_class, post.contents_category, post.process 
+		FROM 
+			(
+				SELECT 
+					rownum as rownumber, post_id, member_id, comment_id, title, contents, reg_date, 
+					edit_date, board_class, contents_category, process 
+				FROM 
+					post
+				WHERE
+					board_class = #{search.board_class}
+				<choose>
+				<when test="'all'.equals(search.searchByWhat)">
+				AND
+					(contents LIKE '%'||#{search.searchKeyword}||'%' OR title LIKE '%'||#{search.searchKeyword}||'%')
+				</when>
+				<when test="'contents'.equals(search.searchByWhat) or 'title'.equals(search.searchByWhat)">
+				AND
+					${search.searchByWhat} LIKE '%'||#{search.searchKeyword}||'%'
+				</when>
+				</choose>
+				<if test='search.category eq 6 or search.category eq 7'>
+				AND
+					contents_category = #{search.category}
+				</if>
+			) 
+			post, member
+		WHERE
+			post.member_id = member.member_num_id
+		<!-- Paging -->
+		AND
+			post.rownumber BETWEEN #{pvo.start} AND #{pvo.end}
+		ORDER BY 
+			post.rownumber DESC
+	</select>
+	
+	<select id="getContents" resultType="com.spring.project.post.dto.PostVO">
+		SELECT 
+			post.rownumber, post.post_id,  member.member_id, post.comment_id, post.title, post.contents,to_char(post.reg_date, 'yyyy. MM. dd.'), 
+			to_char(post.edit_date, 'yyyy. MM. dd.'), post.board_class, post.contents_category, post.process 
+		FROM 
+			(
+				SELECT 
+					rownum as rownumber, post_id, member_id, comment_id, title, contents, reg_date, 
+					edit_date, board_class, contents_category, process 
+				FROM 
+					post
+			) 
+			post, member
+		WHERE
+			post.member_id = member.member_num_id 
+		AND 
+			post.post_id = #{post_id}
+	</select>
+</mapper>

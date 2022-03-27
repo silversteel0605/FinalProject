@@ -1,14 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%
+String se = (String)session.getAttribute("auth");
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="EUC-KR">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Bootstrap CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <title>Insert title here</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Arizonia&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -19,10 +22,17 @@
   <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap-datepicker.css"/>"/>
   <link rel="stylesheet" href="<c:url value="/resources/css/jquery.timepicker.css"/>"/>
   <link rel="stylesheet" href="<c:url value="/resources/css/flaticon.css"/>" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <link rel="stylesheet" href="<c:url value="/resources/css/style.css"/>"/>
   <link rel="stylesheet" href="<c:url value="/resources/css/jangec.css"/>"/>
 </head>
 <body>
+	<script>
+		if(<%=se%> == null) {
+			alert("권한이 없습니다");
+			history.back();			
+		}
+	</script>
 	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
    <div class="container">
      <a class="navbar-brand" href="index.html">Pacific<span>Travel Agency</span></a>
@@ -69,7 +79,7 @@
 	        <a class="nav-link" data-toggle="tab" href="#reservationManagement">예약관리</a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" data-toggle="tab" href="#siteManagement">캠핑장관리</a>
+	        <a class="nav-link" data-toggle="tab" href="#siteManagement" id="camp">캠핑장관리</a>
 	      </li>
 	      <li class="nav-item">
 	        <a class="nav-link" data-toggle="tab" href="#supportManagement">고객센터</a>
@@ -110,7 +120,7 @@
 								<th></th>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody >
 							<tr>
 								<td>1</td>
 								<td>김덕팔</td>
@@ -172,20 +182,25 @@
 				    <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">캠핑장검색</button>
 				  </li>
 				  <li class="nav-item" role="presentation">
-				    <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">캠핑장추가</button>
+				    <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">캠핑장 추가</button>
 				  </li>
 				</ul>
+				<select id="camp_selc">
+					<option value="keyword">캠핑장 이름으로 검색</option>
+					<option value="contentId">캠핑장 ID로 검색</option>
+				</select>
 				<div class="tab-content" id="pills-tabContent">
 				  <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 					<div class="reservationManagement">
 						<div class="d-flex justify-content-between mb-3">
 							<p class="">캠핑장검색</p>
-							<form class="d-flex flex-row">
-								<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-								<button class="btn btn-outline-success" type="submit">Search</button>
-							</form>
+							
+							<div class="d-flex flex-row">
+								<input class="form-control me-2" id="camp_search" type="search" placeholder="Search" aria-label="Search">
+								<button class="btn btn-outline-success" id="camp_submit">Search</button>
+							</div>
 						</div>
-						<table class="table">
+					<table class="table">
 							<thead>
 								<tr>
 									<th>#</th>
@@ -196,18 +211,8 @@
 									<th></th>
 								</tr>
 							</thead>
-							<tbody>
-								<tr>
-									<td>1</td>
-									<td>바다 아래 캠핑장</td>
-									<td>a-123456</td>
-									<td>2022/01/01</td>
-									<td>산위에 있음</td>
-									<td>
-										<button type="button" class="btn btn-link">수정</button>
-										<button type="button" class="btn btn-link">삭제</button>
-									</td>
-								</tr>
+							<tbody id="camp_body">
+								
 							</tbody>
 						</table>
 					</div>
@@ -216,27 +221,27 @@
 			      	<form action="" class="row">
 					    <div class="col-md-6">
 						    <label for="nameOfSite" class="form-label">캠핑장 이름</label>
-						    <input type="password" class="form-control" id="nameOfSite">
+						    <input type="text" class="form-control" id="nameOfSite">
 					  	</div>
 			      		<div class="col-md-6">
-						    <label for="nameOfApplicant" class="form-label">신청인 이름</label>
-						    <input type="text" class="form-control" id="nameOfApplicant">
+						    <label for="lineIntro" class="form-label">한줄소개</label>
+						    <input type="text" class="form-control" id="lineIntro">
 					  	</div>
 					  	<div class="col-md-4 mb-3">
 							<label for="postNumOfSite" class="form-label">우편번호</label>
 					  		<div class="input-group">
 							  	<input type="text" class="form-control" id="postNumOfSite" readonly>
-							  	<button class="btn btn-outline-secondary" type="button" id="findAdrr" onclick="findAdr()">우편번호찾기</button>
+							  	<button class="btn btn-outline-secondary" type="button" id="post" onclick="findAdr()">우편번호찾기</button>
 							</div>
 					  	</div>
 					  	<div class="row mb-3">
 						  	<div class="col-md-6">
 							    <label for="adrOfSite" class="form-label">캠핑장 주소</label>
-							    <input type="text" class="form-control" id="adrOfSite" readonly>
+							    <input type="text" class="form-control" id="addr1" readonly>
 						  	</div>
 						  	<div class="col-md-6">
 							    <label for="specificAdrOfSite" class="form-label">&nbsp;</label>
-							    <input type="text" class="form-control" id="specificAdrOfSite" placeholder="상세주소">
+							    <input type="text" class="form-control" id="addr1" placeholder="상세주소">
 						  	</div>
 					  	</div>
 					  	<div class="mb-3">
@@ -244,6 +249,7 @@
 						  <input class="form-control form-control-sm" id="pictureOfSite" type="file" multiple>
 						</div>
 			      	</form>
+			      	<button type="button" class="btn btn-primary" id="camp_add">추가</button>
 				  </div>
 				</div>
 	      	</div>	
@@ -290,24 +296,15 @@
 	      	<!-- /고객지원 -->
 	    </div>
 	<!-- /컨텐츠 -->
-	
-	<!-- 페이지 번호 -->
-	<!-- <div class="row mt-5">
-	  <div class="col text-center">
-	    <div class="block-27">
-	      <ul>
-	        <li><a href="#">&lt;</a></li>
-	        <li class="active"><span>1</span></li>
-	        <li><a href="#">2</a></li>
-	        <li><a href="#">3</a></li>
-	        <li><a href="#">4</a></li>
-	        <li><a href="#">5</a></li>
-	        <li><a href="#">&gt;</a></li>
-	      </ul>
-	    </div>
-	  </div>
-	</div> -->
-	<!-- /페이지 번호 -->
+</div>
+<div class="row mt-5">
+  <div class="col text-center">
+    <div class="block-27">
+      <ul id="paging"> 	
+		
+      </ul>
+</div>
+</div>
 </div>
 </section>
 
@@ -329,8 +326,10 @@
     </div>
   </div>
 </div>
-	
+
 <!-- /수정 -->
+
+
 
 <section class="ftco-intro ftco-section ftco-no-pt">
  <div class="container">
@@ -414,9 +413,7 @@
 
 
 <!-- loader -->
-<%-- <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div> --%>
-
-
+<div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 <script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
 <script src="<c:url value="/resources/js/jquery-migrate-3.0.1.min.js"/>"></script>
 <script src="<c:url value="/resources/js/popper.min.js"/>"></script>
@@ -429,13 +426,17 @@
 <script src="<c:url value="/resources/js/jquery.animateNumber.min.js"/>"></script>
 <script src="<c:url value="/resources/js/bootstrap-datepicker.js"/>"></script>
 <script src="<c:url value="/resources/js/scrollax.min.js"/>"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-<script src="<c:url value="/resources/js/google-map.js"/>"></script>
 <script src="<c:url value="/resources/js/main.js"/>"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
-<script src="<c:url value="/resources/js/jangManager.js"/>"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" ></script>
+<script src="<c:url value="/resources/js/pagination.js?after"/>"></script>
+<script src="<c:url value="/resources/js/jangManager.js?after"/>"></script>
+<script src="<c:url value="/resources/js/contextpath.js?after"/>"></script>
+<script src="<c:url value="/resources/js/set.post.js?after"/>"></script>
+<script src="<c:url value="/resources/js/manager.set.data.js?after"/>"></script>
+<script src="<c:url value="/resources/js/manager.rest.js?after"/>"></script>
+
 <!-- 주소검색 -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-</html>
+</html></html>

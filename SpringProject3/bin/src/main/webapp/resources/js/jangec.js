@@ -1,32 +1,31 @@
-const co_comment = document.getElementById('co_comment');
-const co_comment_newBtn = document.getElementById('co_comment_newBtn');
-const co_comment_saveBtn = document.getElementById('co_comment_saveBtn');
-const co_comment_cancelBtn = document.getElementById('co_comment_cancelBtn');
+// PopUp 메뉴
+const popUpMenu = document.getElementById('popUpMenu');
 
-co_comment_newBtn.addEventListener('click', (e) => {
-	co_comment.style.display = 'block';
-});
-
-co_comment_saveBtn.addEventListener('click', (e) => {
-	co_comment.style.display = 'none';
-});
-
-co_comment_cancelBtn.addEventListener('click', (e) => {
-	co_comment.style.display = 'none';
-});
-
-const paragraphDeleteBtn = document.getElementById('paragraphDeleteBtn');
-
-paragraphDeleteBtn.addEventListener('click', (e) => {
-	var deleteParagraph = swal.fire({
-		template: '#deleteModal'
+document.addEventListener('click', (e) => {
+	const className = e.target.className;
+	const targetId = e.target.id;
+	
+	if (className === 'userId') {
+		popUpMenu.style.position = 'absolute';
+		popUpMenu.style.zIndex = 99999;
+		popUpMenu.style.left = `${e.pageX}px`;
+		popUpMenu.style.top = `${e.pageY}px`;
+		popUpMenu.style.display = 'block';
+	} else {
+		popUpMenu.style.display = 'none';
+	}
+	
+	const memberInfo = document.getElementById('memberInfo');
+	const memberPost = document.getElementById('memberPost');
+	
+	memberInfo.addEventListener('click', (e) => {
+		console.log(targetId);
+		location.href = `/project/tempIndividualInfo?id=${targetId}`;
 	});
 	
-	if (deleteParagraph.isConfirm) {
-		alert("Delete");
-	} else {
-		alert("Cancel");
-	}
+	memberPost.addEventListener('click', (e) => {
+		console.log(targetId);
+		location.href = `/project/tempIndividualPost?id=${targetId}`;
+	});
+	
 });
-
-

@@ -19,16 +19,19 @@
   <link rel="stylesheet" href="<c:url value="resources/css/style.css"/>"/>
 </head>
 <body>
+<%
+String se = (String)session.getAttribute("auth");
+%>
 	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
    <div class="container">
-     <a class="navbar-brand" href="index.html">Pacific<span>Travel Agency</span></a>
+     <a class="navbar-brand" href="index.html"><%=  se%><span>Travel Agency</span></a>
      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
        <span class="oi oi-menu"></span> Menu
      </button>
 
      <div class="collapse navbar-collapse" id="ftco-nav">
        <ul class="navbar-nav ml-auto">
-         <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+         <li class="nav-item"><a  class="nav-link" id="logging" state="<%=se%>"></a></li>
          <li class="nav-item active"><a href="about.html" class="nav-link">About</a></li>
          <li class="nav-item"><a href="destination.html" class="nav-link">Destination</a></li>
          <li class="nav-item"><a href="hotel.html" class="nav-link">Hotel</a></li>
@@ -349,12 +352,27 @@
   </div>
 </div>
 </footer>
+<script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
+
+<script>
+if($('#logging').attr('state') === "true") {
+	$('#logging').text('로그아웃');
+} else {
+	$('#logging').text('로그인');		
+}
+		
+
+$('#logging').click(function() {
+	if($('#logging').text() === "로그아웃") {
+		location.href = "./member/logout";
+	} else {
+		location.href = "./login";
+	}
+})
+</script>
 
 
 
-
-
-<script src="/resources/js/jquery.min.js"></script>
 <script src="/resources/js/jquery-migrate-3.0.1.min.js"></script>
 <script src="/resources/js/popper.min.js"></script>
 <script src="/resources/js/bootstrap.min.js"></script>

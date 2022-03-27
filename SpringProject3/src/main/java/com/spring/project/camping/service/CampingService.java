@@ -29,6 +29,12 @@ public interface CampingService {
 	
 	public void addViews(String contentId);
 	
+	public int addData(CampingVO vo);
+	
+	public int updateData(CampingVO vo);
+	
+	public int deleteData(String contentId);
+	
 	
 	//Review
 	public List<CampingReviewDTO> getReviewAllInfoList(String contentId);	//All Reviews

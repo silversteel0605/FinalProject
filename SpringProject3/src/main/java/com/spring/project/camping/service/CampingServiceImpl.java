@@ -94,6 +94,7 @@ public class CampingServiceImpl implements CampingService{
 			vo.setFacltNm(item.getChildText("facltNm"));
 			vo.setLineIntro(item.getChildText("lineIntro"));
 			vo.setAddr1(item.getChildText("addr1"));
+			vo.setAddr2(item.getChildText("addr2"));
 			vo.setFirstImageUrl(item.getChildText("firstImageUrl") != null ? 
 					item.getChildText("firstImageUrl") : "https://via.placeholder.com/300");
 			vo.setDoNm(item.getChildText("doNm"));
@@ -288,6 +289,20 @@ public class CampingServiceImpl implements CampingService{
 		//ReviewClickNum Data Updata
 		dataMapper.reviewClickNumUp(reviewId);
 	}
-	
-	/*	Review	*/
+
+	@Override
+	public int addData(CampingVO vo) {
+		return dataMapper.addData(vo);
+	}
+
+	@Override
+	public int updateData(CampingVO vo) {
+		return dataMapper.updateData(vo);
+	}
+
+	@Override
+	public int deleteData(String contentId) {
+		dataMapper.deleteData(contentId);
+		return 1;
+	}
 }

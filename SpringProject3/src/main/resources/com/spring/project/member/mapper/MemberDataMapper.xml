@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.project.member.mapper.MemberDataMapper">
+	<select id="idChk" resultType="int">
+		select count(*) from camper where member_id = #{id}
+	</select>
+	
+	<select id="join" resultType="_int">
+		select count(*) from camper where member_id = #{id} and member_pwd = #{pwd}
+	</select>
+	
+	<insert id="signin">
+		insert into camper (member_id, member_pwd, member_type, member_name, email, birthday, post, addr1, addr2) 
+		values (#{id}, #{pwd}, #{member_type}, #{name}, #{email}, #{birthday}, #{post}, #{addr1}, #{addr2})
+	</insert>
+</mapper>

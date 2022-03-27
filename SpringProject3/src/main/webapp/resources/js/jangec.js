@@ -4,7 +4,7 @@ const popUpMenu = document.getElementById('popUpMenu');
 document.addEventListener('click', (e) => {
 	const className = e.target.className;
 	const targetId = e.target.id;
-	
+
 	if (className === 'userId') {
 		popUpMenu.style.position = 'absolute';
 		popUpMenu.style.zIndex = 99999;
