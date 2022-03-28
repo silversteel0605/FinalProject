@@ -58,22 +58,26 @@
 <!-- 컨텐츠 -->
 <section class="ftco-section services-section">
 	<div class="container">
-		<form name="form" id="form" role="form" method="post" action="${pageContext.request.contextPath}/board/saveBoard">
+		<div class="h3">
+		<c:choose>
+		<c:when test="${board_class eq 'freeBoard' }">자유게시판</c:when>
+		<c:otherwise>고객센터</c:otherwise>
+		</c:choose>
+		</div>
+		<form name="writeForm" id="writeForm" role="form" method="POST" action="./write">
 			<div class="mb-3">
 				<label for="title">제목</label>
-				<input type="text" class="form-control" name="title" id="title" placeholder="제목을 입력해 주세요">
+				<input type="text" class="form-control" name="title" id="title" placeholder="제목을 입력해 주세요" value="writeTestTitle">
 			</div>
 			<div class="mb-3">
 				<label for="reg_id">작성자</label>
-				<input type="text" class="form-control" name="reg_id" id="reg_id" placeholder="이름을 입력해 주세요">
+				<input type="text" class="form-control" name="reg_id" id="reg_id" placeholder="이름을 입력해 주세요" value="writeTestID">
 			</div>				
 			<div class="mb-3">
 				<label for="content">내용</label>
 				<textarea class="form-control" rows="5" name="content" id="content" placeholder="내용을 입력해 주세요" ></textarea>
 				<script type="text/javascript">	// 글쓰기 editor 및 사진 업로드 기능
-				CKEDITOR.replace('content',
-				{filebrowserUploadUrl:'/food/imageUpload.do'
-				});
+					CKEDITOR.replace('content',	{filebrowserUploadUrl:'/food/imageUpload.do'});
 				</script>
 			</div>				
 			<div class="mb-3">
@@ -81,8 +85,8 @@
 				<input type="text" class="form-control" name="tag" id="tag" placeholder="태그를 입력해 주세요">
 			</div>	
 		</form>
-		<button type="button" class="btn btn-sm btn-primary" id="btnSave">저장</button>
-		<button type="button" class="btn btn-sm btn-primary" id="btnList">목록</button>
+		<button type="button" class="btn btn-sm btn-primary" id="writeSavBtn">저장</button>
+		<button type="button" class="btn btn-sm btn-primary" id="WriteListBtn">목록</button>
 	</div>
 </section>
 <!-- /컨텐츠 -->
@@ -345,6 +349,8 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 <script src="resources/js/google-map.js"></script>
 <script src="resources/js/main.js"></script>
+<!-- 페이지 js -->
+<script src="https://cdn.ckeditor.com/ckeditor5/33.0.0/classic/ckeditor.js"></script>
 
 </body>
 </html>

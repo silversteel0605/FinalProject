@@ -7,29 +7,33 @@ function goBoard(board_class) {
 }
 
 // 게시글 삭제
-const contentsDelete = document.getElementById('contentsDelete');
-const contentsClassNumber = document.getElementById('board_class').value;
-if (contentsClassNumber == 0) {
-	contentsClass = 'board';
-} else if (contentsClassNumber == 1) {
-	contentsClass = 'support';
+const editAuth = document.getElementById('editAuth').value;
+console.log('edit권한: ', editAuth);
+if (editAuth) {
+	const contentsDelete = document.getElementById('contentsDelete');
+	const contentsClassNumber = document.getElementById('board_class').value;
+	if (contentsClassNumber == 0) {
+		contentsClass = 'board';
+	} else if (contentsClassNumber == 1) {
+		contentsClass = 'support';
+	}
+	
+	contentsDelete.addEventListener('click', (e) => {
+		Swal.fire({
+			title: '삭제하시겠습니까?',
+			text: '복구가 불가능합니다',
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Yes'
+		}).then((result) => {
+			if (result.isConfirmed) {
+	  			location.href = `/project/${contentsClass}?delete=true`
+	  		}
+		})
+	});
 }
-
-contentsDelete.addEventListener('click', (e) => {
-	Swal.fire({
-		title: '삭제하시겠습니까?',
-		text: '복구가 불가능합니다',
-		icon: 'warning',
-		showCancelButton: true,
-		confirmButtonColor: '#3085d6',
-		cancelButtonColor: '#d33',
-		confirmButtonText: 'Yes'
-	}).then((result) => {
-		if (result.isConfirmed) {
-  			location.href = `/project/${contentsClass}?delete=true`
-  		}
-	})
-});
 
 // 코멘트 저장
 
@@ -216,9 +220,6 @@ function mkCoCommentInput(comment_id) {
 function textNode(str) {
 	return document.createTextNode(str);
 }
-
-
-
 
 
 

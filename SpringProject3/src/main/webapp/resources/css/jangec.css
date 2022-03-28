@@ -34,3 +34,7 @@ p, div {
 .b {
 	border: solid 1px black;
 }
+
+.ck-editor__editable {
+    min-height: 300px;
+}

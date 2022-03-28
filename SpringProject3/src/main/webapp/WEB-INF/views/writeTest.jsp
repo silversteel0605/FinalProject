@@ -20,11 +20,9 @@
   <link rel="stylesheet" href="<c:url value="/resources/css/jquery.timepicker.css"/>"/>
   <link rel="stylesheet" href="<c:url value="/resources/css/flaticon.css"/>" />
   <link rel="stylesheet" href="<c:url value="/resources/css/style.css"/>"/>
-  <!-- 페이지 CSS-->
+  <!-- 페이지 css/js -->
   <link rel="stylesheet" href="<c:url value="/resources/css/jangec.css"/>"/>
-  <link rel="stylesheet" href="<c:url value="/resources/css/jang_main_paragraph.css"/>"/>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
-  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.ckeditor.com/ckeditor5/33.0.0/classic/ckeditor.js"></script>
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
@@ -65,86 +63,51 @@
 	<div class="container">
 		<!-- 컨텐츠 -->
 		<div class="contents">
-			<p class="fs-3">${contents.title }</p>
-			<div class="paragraph_header d-flex justify-content-between">
-				<span id="${contents.member_id }" class="userId pointer">${contents.member_id }</span>
-				<span>${contents.reg_date }</span>
-			</div> <hr/>
-			<div class="paragraph_body">
-				<p>${contents.contents }</p>
-			</div>
-			<div class="paragraph_comments">
-				<div class="comments_header">
-					<p>COMMENTS</p>
-				</div> <hr />
-				<div class="comments_body mb-5" id="comments_body">
-					<c:if test="${not empty commentsList }">
-						<c:forEach items="${commentsList }" var="comment">
-						<div id="${comment.comment_id }" class="mb-3 border-bottom">
-							<span class="userId">${comment.member_id}</span><br/>
-							<div class="d-flex justify-content-start">
-								<p>${comment.comments}</p>
-								<i class="bi bi-x-circle comment_icon"></i>
-								<i id="co_comment_editBtn" class="bi bi-pen comment_icon"></i>
-								<i id="co_comment_newBtn_${comment.comment_id}" class="bi bi-chat-dots comment_icon co_comment_newBtn"></i>
-								<input id="comment_commentId_${comment.comment_id }" type="hidden" value="${comment.comment_id }" />
-								<input id="comment_postId" type="hidden" value="${comment.post_id }" />
-								<input id="comment_ordernum" type="hidden" value="${comment.ordernum }" />
-								<input id="comment_categoryId" type="hidden" value="${comment.category_id }" />
-							</div>
-						</div>
-						</c:forEach>
-					</c:if>
+			<div class="container">
+				<div class="h3">
+				<c:choose>
+				<c:when test="${board_class eq 'freeBoard' }">자유게시판</c:when>
+				<c:otherwise>고객센터</c:otherwise>
+				</c:choose>
 				</div>
-				<!-- comments 입력 -->
-				<div id="comment">
-					<div class="form-floating">
-					  <input type="hidden" class="commentForm" name="commentPostId" value="${contents.post_id }"/>
-					  <input type="hidden" class="commentForm" name="commentBoardClass" value="${contents.board_class }"/>
-					  <textarea class="form-control commentForm" placeholder="Leave a comment here" name="commentComments" id="commentTextarea"></textarea>
-					  <label for="commentTextarea">Comments</label>
+			    <form id="writeForm">
+			    	<c:choose>
+					<c:when test="${board_class eq 'freeBoard' }">
+ 					<div class="input-group mb-3">
+						<select id="writeCategory" class="form-select col-md-3" name="searchByWhat">
+							<option selected value="daily">자유</option>
+							<option value="showoff">자랑</option>
+							<option value="buy">삽니다</option>
+							<option value="sell">팝니다</option>
+						</select>
+						<input type="text" class="form-control" aria-label="Text input with dropdown button" name="title" id="title" placeholder="제목을 입력해 주세요" value="writeTestTitle">
 					</div>
-					<div class="d-flex justify-content-end">
-						<button id="comment_saveBtn" class="btn btn-outline-success">저장</button>
+					</c:when>
+					<c:otherwise>
+ 					<div class="input-group mb-3">
+						<select id="writeCategory" class="form-select col-md-3" name="searchByWhat">
+							<option selected value="notice">공지사항</option>
+							<option value="askEdit">건의사항</option>
+						</select>
+						<input type="text" class="form-control" aria-label="Text input with dropdown button" name="title" id="title" placeholder="제목을 입력해 주세요" value="writeTestTitle">
 					</div>
-				</div>
-				<!-- /comments 입력 -->
-			</div> <hr/>
-			<div class="paragraph_footer d-flex justify-content-end">
-				<c:if test="${editAuth eq true }">
-					<button class="btn">수정</button>
-					<button id="contentsDelete" class="btn">삭제</button>
-				</c:if>
-				<input id="editAuth" type="hidden" value="${editAuth }" />
-				<button id="goBoard" class="btn" onClick="goBoard(${contents.board_class })">목록</button>
+					</c:otherwise>
+			    </c:choose>
+			        <!-- <textarea name="content" id="writeEditor"></textarea> -->
+	       			<div class="mb-3">
+						<label for="writeEditor">내용</label>
+						<textarea class="form-control" rows="5" name="content" id="writeEditor" placeholder="내용을 입력해 주세요" ></textarea>
+					</div>	
+					<input type="hidden" id="board_class" value="${board_class }" />
+			    </form>
+				<button id="writeSavBtn" class="btn">저장</button>
 			</div>
+		<!-- /컨텐츠 -->	
 		</div>		
-		<!-- /컨텐츠 -->
 	</div>
 </section>
-<!-- 변수 -->
-<input type="hidden" id="board_class" value="${contents.board_class }" />
 
 <!-- Modal -->
-<div id="popUpMenu" style="display:none;">
-	<ul class="list-group list-group-flush">
-		<li id="memberInfo" class="indiPopUp list-group-item list-group-item-primary opacity-75" style="cursor:pointer">회원정보 보기</li>
-		<li id="memberPost" class="indiPopUp list-group-item list-group-item-primary opacity-75" style="cursor:pointer">작성글 보기</li>
-	</ul>
-</div>
-<!-- 
-<div id="co_commentInput" class="co_commentInput">
-	<div class="form-floating">
-		<textarea class="form-control" placeholder="Leave a Comment" id="coCommentTextarea"></textarea>
-		<label for="coCommentTextarea">Comments</label>
-	</div>
-	<div class="d-flex justify-content-end">
-		<input />
-		<button class="btn btn-outline-success co_comment_saveBtn">저장</button>
-		<button class="btn btn-outline-success co_comment_cancelBtn">취소</button>
-	</div>
-</div> -->
-<!-- /Modal -->
 	
 <!-- /수정 -->
 
@@ -248,10 +211,9 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 <script src="<c:url value="/resources/js/google-map.js"/>"></script>
 <script src="<c:url value="/resources/js/main.js"/>"></script>
-<!-- 개인 JS -->
-<script src="<c:url value="/resources/js/jang_main_paragraph.js"/>"></script>
+<!-- 페이지 js -->
 <script src="<c:url value="/resources/js/jangec.js"/>"></script>
-<script src="sweetalert2.all.min.js"></script>
+<script src="<c:url value="/resources/js/jangWrite.js"/>"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
 </body>

@@ -27,7 +27,7 @@ public class PostRestController {
 	public CommentVO comments(HttpServletRequest request, @RequestBody CommentVO comment) throws UnsupportedEncodingException {
 		HttpSession session = request.getSession();
 		log.info("¼öÁ¤ Àü: " + comment);
-		comment.setMember_id((String)session.getAttribute("tempId2"));
+		comment.setMember_id((String)session.getAttribute("currentUser"));
 		
 		// Integer groupNum = postService.getGroupnum();
 		

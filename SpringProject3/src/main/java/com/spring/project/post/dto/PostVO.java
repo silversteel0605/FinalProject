@@ -2,9 +2,11 @@ package com.spring.project.post.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class PostVO {
 	private Integer rownumber;
 	private Integer post_id;
@@ -15,5 +17,6 @@ public class PostVO {
 	private Integer board_class;
 	private Integer contents_category;
 	private Integer process;
+	private String imgURL;
 	
 }

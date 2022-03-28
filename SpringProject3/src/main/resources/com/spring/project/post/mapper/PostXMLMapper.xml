@@ -29,13 +29,13 @@
 	
 	<select id="getPostList" resultType="com.spring.project.post.dto.PostVO">
 		SELECT 
-			post.rownumber, post.post_id,  post.member_id, post.title, post.contents,to_char(post.reg_date, 'yyyy. MM. dd.'), 
-			post.board_class, post.contents_category, post.process 
+			post.rownumber, post.post_id,  post.member_id, post.title, post.contents, to_char(post.reg_date, 'yyyy. MM. dd.'), 
+			post.board_class, post.contents_category, post.process, post.imgurl 
 		FROM 
 			(
 				SELECT 
 					rownum as rownumber, post_id, member_id, title, contents, reg_date, 
-					board_class, contents_category, process 
+					board_class, contents_category, process, imgurl
 				FROM 
 					post
 				WHERE
@@ -56,12 +56,12 @@
 	<select id="getPostSearch" resultType="com.spring.project.post.dto.PostVO" parameterType="com.spring.project.post.dto.SearchVO">
 		SELECT 
 			post.rownumber, post.post_id,  post.member_id, post.title, post.contents,to_char(post.reg_date, 'yyyy. MM. dd.'), 
-			post.board_class, post.contents_category, post.process 
+			post.board_class, post.contents_category, post.process, post.imgurl
 		FROM 
 			(
 				SELECT 
 					rownum as rownumber, post_id, member_id, title, contents, reg_date, 
-					board_class, contents_category, process 
+					board_class, contents_category, process, imgurl
 				FROM 
 					post
 				WHERE
@@ -93,12 +93,12 @@
 	<select id="getContents" resultType="com.spring.project.post.dto.PostVO">
 		SELECT 
 			post.rownumber, post.post_id,  post.member_id, post.title, post.contents,to_char(post.reg_date, 'yyyy. MM. dd.'), 
-			post.board_class, post.contents_category, post.process 
+			post.board_class, post.contents_category, post.process, post.imgurl
 		FROM 
 			(
 				SELECT 
 					rownum as rownumber, post_id, member_id, title, contents, reg_date, 
-					board_class, contents_category, process 
+					board_class, contents_category, process, imgurl
 				FROM 
 					post
 			) 
@@ -132,6 +132,20 @@
 	<select id="getComments" resultType="com.spring.project.post.dto.CommentVO">
 		SELECT * FROM comments WHERE post_id = #{post_id} AND category_id = #{board_class}
 	</select>
+	
+	<!-- addPost -->
+	<insert id="addPost">
+		<selectKey keyProperty="post_id" resultType="_integer" order="BEFORE">
+    		SELECT post_id_seq.nextval FROM dual
+		</selectKey>
+			INSERT INTO 
+				post 
+			VALUES (
+				#{post_id}, #{member_id}, #{title}, #{contents}, sysdate, 
+				#{board_class}, #{contents_category}, #{process}, null
+			)
+	</insert>
+	
 </mapper>
 
 

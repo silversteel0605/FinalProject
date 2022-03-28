@@ -66,6 +66,11 @@ public class PostServiceImpl implements PostService {
 	public List<PostVO> getComments(PostVO post) {
 		return postMapper.getComments(post);
 	}
+	
+	@Override
+	public void addPost(PostVO post) {
+		postMapper.addPost(post);
+	}
 }
 
 

@@ -1,5 +1,6 @@
 package com.spring.project.post.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -55,6 +56,10 @@ public class PostController {
 	@GetMapping("/support")
 	public String supportPage(HttpServletRequest request, Model model, String nowPage, String categoryName, SearchVO search, boolean delete) {
 		HttpSession session = request.getSession();
+		
+		// 임시 ID 세션 저장
+		session.setAttribute("currentUser", "testAuth1");
+		
 		log.info("들어오는 세션: " + session.getAttribute("search"));
 		// 초기 세션 생성
 		if (session.getAttribute("search") == null || ((SearchVO)session.getAttribute("search")).getBoard_class() != 1) {
@@ -125,6 +130,10 @@ public class PostController {
 	@GetMapping("/board")
 	public String board(HttpServletRequest request, Model model, String nowPage, SearchVO search, String categoryName, boolean delete) {
 		HttpSession session = request.getSession();
+		
+		// 임시 ID 세션 저장
+		session.setAttribute("currentUser", "testAuth1");
+		
 		log.info("들어오는 세션: " + session.getAttribute("search"));
 		
 		// 초기 세션 생성
@@ -197,9 +206,22 @@ public class PostController {
 		HttpSession session = request.getSession();
 		log.info("들어오는 세션: " + session.getAttribute("search"));
 		
+		// 임시 ID 세션 저장
+		session.setAttribute("currentUser", "testAuth1");
+		
 		session.setAttribute("tempPostId", post_id);
 		PostVO post = postService.getContents(post_id);
 		model.addAttribute("contents", post);
+		
+		// 수정권한 부여
+		String member_id = (String) session.getAttribute("currentUser");
+		log.info("세션아이디: " + member_id);
+		log.info("가져온 아이디: " + post.getMember_id());
+		
+		if (post.getMember_id().equals(member_id)) {
+			log.info("수정권한 인증됨");
+			model.addAttribute("editAuth", true);
+		}
 		
 		log.info("post: " + post);
 		log.info("나가는 세션: " + session.getAttribute("search"));
@@ -208,17 +230,43 @@ public class PostController {
 		List<PostVO> commentsList = postService.getComments(post);
 		model.addAttribute("commentsList", commentsList);
 		
-		// 임시 ID 세션 저장
-		session.setAttribute("tempId2", "testID2");
 		return "main_paragraph";
 	}
 	
 	//글작성하기
 	@GetMapping("/write")
-	public String write(String board_class) {
+	public String write(Model model, String board_class) {
 		log.info("board_class: " + board_class);
+		model.addAttribute("board_class", board_class);
+		model.addAttribute("boardString", board_class.equals("freeBoard") ? "board" : "support");
+		return "writeTest";
+	}
+	
+	@PostMapping("/write")
+	public String write(HttpServletRequest request) throws UnsupportedEncodingException {
+		HttpSession session = request.getSession();
+		request.setCharacterEncoding("EUC-KR");
+		String data = request.getParameter("contents");
 		
-		return "write";
+		PostVO post = new PostVO();
+		String[] dataArr = data.split(",");
+		for(String item : dataArr) {
+			log.info(item);
+		}
+		
+		post.setMember_id((String)session.getAttribute("currentUser"));
+		post.setTitle(dataArr[0]);
+		post.setContents(dataArr[1]);
+		post.setBoard_class(boardClassMap.get(dataArr[2]));
+		post.setContents_category(categoryNameMap.get(dataArr[3]));
+		
+		if (boardClassMap.get(dataArr[2]) == 1) {
+			post.setProcess(1);
+		}
+		
+		postService.addPost(post);
+		
+		return "redirect:" + mkUri(dataArr[2]);
 	}
 	
 	// 기타
@@ -234,6 +282,13 @@ public class PostController {
 		return null;
 	}
 	
+	private String mkUri(String boardClass) {
+		if (boardClass.equals("freeBoard")) {
+			return "board";
+		} else {
+			return "support";
+		}
+	}
 	
 }
 

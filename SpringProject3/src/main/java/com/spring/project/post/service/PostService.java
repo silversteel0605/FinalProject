@@ -20,4 +20,6 @@ public interface PostService {
 	public void addComment(CommentVO comment);
 	public List<PostVO> getComments(PostVO post);
 	
+	public void addPost(PostVO post);
+	
 }
