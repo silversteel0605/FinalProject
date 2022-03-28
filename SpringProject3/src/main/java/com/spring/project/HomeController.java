@@ -36,7 +36,6 @@ public class HomeController {
 		return "home";
 	}
 	
-<<<<<<< HEAD
 	@RequestMapping(value = "/camping_index", method = RequestMethod.GET )
 	public String camping_index() {
 		logger.info("Connect camping_index");
@@ -48,7 +47,4 @@ public class HomeController {
 		logger.info("Connect test");
 		return "freeBoard2";
 	}
-	
-=======
->>>>>>> refs/heads/master
 }
