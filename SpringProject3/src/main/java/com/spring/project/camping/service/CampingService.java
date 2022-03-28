@@ -16,6 +16,8 @@ public interface CampingService {
 	
 	public void getAllXML() throws  IOException, JDOMException;
 	
+	public void getCampingImgXML();
+	
 	public CampingVO[] getXMLData();
 
 	public CampingVO[] getDbSearchData(SearchVO vo);

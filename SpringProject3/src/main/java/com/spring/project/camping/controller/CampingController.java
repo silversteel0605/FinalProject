@@ -49,39 +49,38 @@ public class CampingController {
 	}
 	
 	@RequestMapping(value = "/TempCampInfo", method = RequestMethod.GET)
-	public String info(Model m, @RequestParam(value="contentId") String contentId, @RequestParam(value="nowPage", required=false)String nowPage, SearchVO vo, @RequestParam(value="type", required=false)String type) throws IOException, JDOMException {
-
+	public String info(
+			Model m, 
+			@RequestParam(value="contentId") String contentId, 
+			@RequestParam(value="nowPage", required=false)String nowPage, 
+			SearchVO vo, 
+			@RequestParam(value="type", required=false)String type, 
+			@RequestParam(value="value", required=false)String value
+		) throws IOException, JDOMException {
+		
+		log.info("value : " + value);
+		
 		service.addViews(contentId);
 		CampingVO info = service.getInfo(contentId);
-		
-		List<CampingReviewDTO> reviewInfoList = service.getReviewAllInfoList(contentId);
 
 		type = type != null ? type :"1";
 		
 		log.info(type);
 		
 		m.addAttribute("info", info);
-		m.addAttribute("reviewInfoList", reviewInfoList);
 		m.addAttribute("type", type);
 		
-		reviewControlling(m, nowPage, contentId, vo);		
+		reviewControlling(m, nowPage, contentId, vo, value);		
 		
 		return "camping_index";
 	}
 	
 	@RequestMapping(value = "/reviewSort", method = RequestMethod.GET)
-	public String reviewSort(Model m, String value, String contentId) {
+	public String reviewSort(Model m, @RequestParam(value="value") String value, @RequestParam(value="contentId") String contentId) {
 		
-		Map<String, Object> reviewMap = new HashMap<String, Object>();
+		String type = "3"; 
 		
-		reviewMap.put("value", value);
-		reviewMap.put("contentId", contentId);
-		
-		List<CampingReviewDTO> r_dto = service.getSortReviewDatas(reviewMap);
-		
-		String type = "2"; 
-		
-		m.addAttribute("r_dto", r_dto);
+		m.addAttribute("value", value);
 		m.addAttribute("contentId", contentId);
 		m.addAttribute("type", type);
 		
@@ -200,7 +199,13 @@ public class CampingController {
 		return "init";
 	}
 	
-	public void reviewControlling(Model m, @RequestParam(value="nowPage", required=false)String nowPage, @RequestParam(value="contentId") String contentId, SearchVO vo) {
+	public void reviewControlling(
+			Model m, 
+			@RequestParam(value="nowPage", required=false)String nowPage, 
+			@RequestParam(value="contentId") String contentId, 
+			SearchVO vo,
+			String value
+		) {
 		
 		int reviewTotal;
 		List<CampingReviewDTO> reviews;
@@ -234,6 +239,12 @@ public class CampingController {
 		reviewMap.put("contentId", Integer.parseInt(contentId));
 		reviewMap.put("start", vo.getStart());
 		reviewMap.put("end", vo.getEnd());
+		
+		if(value == null) {
+			reviewMap.put("value", "createDate");
+		}else {
+			reviewMap.put("value", value);
+		}
 		
 		reviews = service.getReviewSearchData(reviewMap);
 		

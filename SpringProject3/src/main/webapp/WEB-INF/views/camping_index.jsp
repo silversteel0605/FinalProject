@@ -222,7 +222,7 @@
 							<!-- 최신순 / 추천순 / 평점순  -->
 							<div id="top_box" class="flex_1">
 								<div class="left-sort">
-									<select name="review_search_select_box" onchange="select_click_event(this.options[this.selectedIndex].value,)">
+									<select name="review_search_select_box" onchange="select_click_event(this.options[this.selectedIndex].value,<%=info.getContentId() %>)">
 										<option value="reviewId">최신순</option>
 										<option value="starRanking">평점순</option>
 									</select>

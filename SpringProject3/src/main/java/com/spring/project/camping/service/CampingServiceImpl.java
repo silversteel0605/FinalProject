@@ -57,6 +57,12 @@ public class CampingServiceImpl implements CampingService{
 	}
 	
 	@Override
+	public void getCampingImgXML() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
 	public void getAllXML() throws IOException, JDOMException {
 		StringBuffer sb = new StringBuffer("http://api.visitkorea.or.kr/openapi/service/rest/GoCamping/basedList?");
 		getSearchXML("1");
@@ -325,6 +331,5 @@ public class CampingServiceImpl implements CampingService{
 	public void addViews(String contentId) {
 		dataMapper.addViews(contentId);
 	}
-
 
 }
