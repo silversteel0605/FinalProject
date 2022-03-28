@@ -20,19 +20,18 @@
 	<link rel="stylesheet" href="<c:url value="/resources/css/flaticon.css"/>"/>
 	<link rel="stylesheet" href="<c:url value="/resources/css/style.css"/>"/>
 	<link rel="stylesheet" href="<c:url value="/resources/css/home.css"/>"/>
-	<!-- 캐러셀 -->
-	<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+	
 	<!-- dropdown -->
 	<link rel="stylesheet" href="<c:url value="/resources/css/dropdown.css"/>"/>
     <!--다크모드 관련 css-->
     <link rel="stylesheet" href="<c:url value="/resources/css/darkmode.css"/>"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/nav.css"/>"/>
-	<link rel="stylesheet" href="<c:url value="/resources/css/reservation.css"/>"/>
 </head>
 <body style="overflow-x: hidden">
 	
 	<!-- header 호출 -->
 	<jsp:include page='nav.jsp'/>
+	
 	
 	<section id="mainimg" class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('resources/images/bg_1.jpg');">
 	  <div class="overlay"></div>
@@ -47,28 +46,7 @@
 	</section>
 	
 	<!-- 실내용 기입란 -->
-	<section id="maincon">
-		<div id="carousel">
-			<div class="swiper mySwiper">
-		      <div class="swiper-wrapper">
-		        <div class="swiper-slide"><img src="resources/images/hotel-resto-1.jpg"></div>
-		        <div class="swiper-slide"><img src="resources/images/hotel-resto-2.jpg"></div>
-		        <div class="swiper-slide"><img src="resources/images/hotel-resto-3.jpg"></div>
-		        <div class="swiper-slide"><img src="resources/images/hotel-resto-4.jpg"></div>
-		        <div class="swiper-slide"><img src="resources/images/hotel-resto-5.jpg"></div>
-		        <div class="swiper-slide"><img src="resources/images/hotel-resto-6.jpg"></div>
-		        <div class="swiper-slide"><img src="resources/images/hotel-resto-7.jpg"></div>
-		        <div class="swiper-slide"><img src="resources/images/hotel-resto-8.jpg"></div>
-		        <div class="swiper-slide"><img src="resources/images/hotel-resto-9.jpg"></div>
-		      </div>
-		      <div class="swiper-button-next"></div>
-		      <div class="swiper-button-prev"></div>
-		    </div>
-		    <div>
-		    	<h2>캠핑장 이름</h2>
-		    </div>
-		</div>
-	</section>
+	
 	
 	
 	
@@ -106,17 +84,6 @@
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script src="<c:url value="/resources/js/darkmode.js"/>"></script>
-    
-    <!-- 캐러셀 -->
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <script>
-      var swiper = new Swiper(".mySwiper", {
-        navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
-        },
-      });
-    </script>
 </body>
 
 </html>

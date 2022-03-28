@@ -7,7 +7,25 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
- 
+ <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Arizonia&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="<c:url value="/resources/css/animate.css"/>"/>
+	<link rel="stylesheet" href="<c:url value="/resources/css/owl.carousel.min.css"/>"/>
+	<link rel="stylesheet" href="<c:url value="/resources/css/owl.theme.default.min.css"/>"/>
+	<link rel="stylesheet" href="<c:url value="/resources/css/magnific-popup.css"/>"/>
+	<link rel="stylesheet" href="<c:url value="/resources/css/bootstrap-datepicker.css"/>"/>
+	<link rel="stylesheet" href="<c:url value="/resources/css/jquery.timepicker.css"/>"/>
+	<link rel="stylesheet" href="<c:url value="/resources/css/flaticon.css"/>"/>
+	<link rel="stylesheet" href="<c:url value="/resources/css/style.css"/>"/>
+	<link rel="stylesheet" href="<c:url value="/resources/css/home.css"/>"/>
+	<!-- dropdown -->
+	<link rel="stylesheet" href="<c:url value="/resources/css/dropdown.css"/>"/>
+    <!--캐러셀-->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+    <!--다크모드 관련 css-->
+    <link rel="stylesheet" href="<c:url value="/resources/css/darkmode.css"/>"/>
+    <link rel="stylesheet" href="<c:url value="/resources/css/nav.css"/>"/>
 <link rel="stylesheet" href="<c:url value="resources/css/style2.css"/>"/>
 
 </head>

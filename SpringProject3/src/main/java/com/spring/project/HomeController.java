@@ -35,8 +35,5 @@ public class HomeController {
 		
 		return "home";
 	}
-	@RequestMapping(value = "/test", method = RequestMethod.GET)
-	public String profile() {
-		return "camping_index";
-	}
+	
 }
