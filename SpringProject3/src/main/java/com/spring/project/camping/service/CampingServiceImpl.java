@@ -2,7 +2,9 @@ package com.spring.project.camping.service;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +15,7 @@ import org.jdom2.input.SAXBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.project.camping.DTO.CampingImgVO;
 import com.spring.project.camping.DTO.CampingVO;
 import com.spring.project.camping.DTO.SearchVO;
 import com.spring.project.camping.mapper.CampingDataMapper;
@@ -57,12 +60,6 @@ public class CampingServiceImpl implements CampingService{
 	}
 	
 	@Override
-	public void getCampingImgXML() {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	@Override
 	public void getAllXML() throws IOException, JDOMException {
 		StringBuffer sb = new StringBuffer("http://api.visitkorea.or.kr/openapi/service/rest/GoCamping/basedList?");
 		getSearchXML("1");
@@ -86,6 +83,51 @@ public class CampingServiceImpl implements CampingService{
 		Element root = document.getRootElement();
 		body = root.getChild("body");
 		
+	}
+	
+	@Override
+	public List<CampingImgVO> getCampingImgXML(String contentId) throws IOException, JDOMException {
+		// TODO Auto-generated method stub
+		
+		StringBuffer sb = new StringBuffer("http://api.visitkorea.or.kr/openapi/service/rest/GoCamping/imageList?");
+		
+		sb.append("ServiceKey=BSB%2BAVJtGeeYeTI1z0QkTWviASTC4BHieJzLrJls7C%2F0tpX9h75z347M%2FqQwTZsuya4Z2fMERT5YYljGpkDwog%3D%3D");
+		sb.append("&MobileOS=ETC");
+		sb.append("&MobileApp=AppTest");
+		sb.append("&contentId="+contentId);
+		
+		URL url = new URL(sb.toString());
+
+		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+		conn.setRequestProperty("Content-Type","application/xml");
+		
+		conn.connect();
+		SAXBuilder builder = new SAXBuilder();
+		
+		Document document = builder.build(conn.getInputStream());
+		
+		Element root = document.getRootElement();
+		//루트의 자식!이니까 child를 얻어야한다!
+		body = root.getChild("body");
+		
+		Element items = body.getChild("items");
+		List<Element> item_list = items.getChildren("item");
+		List<CampingImgVO> vos = new ArrayList<CampingImgVO>();
+		
+		for(Element item:item_list) {
+			
+			CampingImgVO vo = new CampingImgVO();
+			
+			vo.setContentId(item.getChildText("contentId"));
+			vo.setImgURL(item.getChildText("imageUrl"));
+			vo.setSerialnum(item.getChildText("serialnum"));
+			vo.setCreatedtime(item.getChildText("createdtim"));
+			vo.setModifiedtime(item.getChildText("modifiedtime"));
+			
+			vos.add(vo);
+		}
+		
+		return vos;
 	}
 
 	@Override

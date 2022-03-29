@@ -1,11 +1,13 @@
 package com.spring.project.camping.service;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.List;
 import java.util.Map;
 
 import org.jdom2.JDOMException;
 
+import com.spring.project.camping.DTO.CampingImgVO;
 import com.spring.project.camping.DTO.CampingVO;
 import com.spring.project.camping.DTO.SearchVO;
 import com.spring.project.review.DTO.CampingReviewDTO;
@@ -15,8 +17,6 @@ public interface CampingService {
 	public void getSearchXML(String nowPage) throws  IOException, JDOMException;
 	
 	public void getAllXML() throws  IOException, JDOMException;
-	
-	public void getCampingImgXML();
 	
 	public CampingVO[] getXMLData();
 
@@ -29,6 +29,10 @@ public interface CampingService {
 	public int getDbSearchTotal(SearchVO vo);
 	
 	public CampingVO getInfo(String contentId);
+	
+	//Img Data
+	public List<CampingImgVO> getCampingImgXML(String contentId) throws IOException, JDOMException;
+	//Img Data
 
 	//Review
 	public List<CampingReviewDTO> getReviewAllInfoList(String contentId);	//All Reviews

@@ -59,68 +59,18 @@
 	  <div class="container">
 	    <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
 	      <div class="col-md-9 ftco-animate pb-5 text-center">
-	       <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="fa fa-chevron-right"></i></a></span> <span>Blog <i class="fa fa-chevron-right"></i></span></p>
-	       <h1 class="mb-0 bread">Blog</h1>
+	       <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="fa fa-chevron-right"></i></a></span> <span><%= info.getFacltNm() %> <i class="fa fa-chevron-right"></i></span></p>
+	       <h1 class="mb-0 bread"><%= info.getFacltNm() %></h1>
 	     </div>
 	   </div>
 	 </div>
 	</section>
- 	
- 	<!-- 
-	<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('./resources/images/bg_1.jpg');">
-		<div class="overlay"></div>
-		<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-			<ol class="carousel-indicators">
-				<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-				<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-				<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-			</ol>
-			<div class="carousel-inner">
-				<div class="carousel-item active">
-					<img src="./resources/images/dark_6000.jpg" class="d-block w-100" alt="1">
-				</div>
-				<div class="carousel-item">
-					<img src="./resources/images/dark_6000.jpg" class="d-block w-100" alt="2">
-				</div>
-				<div class="carousel-item">
-					<img src="./resources/images/dark_6000.jpg" class="d-block w-100" alt="3">
-				</div>
-			</div>
-			<button class="carousel-control-prev" type="button" data-target="#carouselExampleIndicators" data-slide="prev">
-				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-				<span class="sr-only">Previous</span>
-			</button>
-			<button class="carousel-control-next" type="button" data-target="#carouselExampleIndicators" data-slide="next">
-				<span class="carousel-control-next-icon" aria-hidden="true"></span>
-				<span class="sr-only">Next</span>
-			</button>
-		</div>
-	</section>
-	-->
 	
 	<section id="main_content" class="wrap ftco-section services-section text-center">
-		<div class="container">
-			<div class="tab" id="tab">
-				<ul class="nav nav-tabs nav-justified">
-				  <li class="nav-item">
-				    <a class="nav-link active" data-toggle="tab"  href="#tab01">상세정보</a>
-				  </li>
-				  <li class="nav-item">
-				    <a class="nav-link" data-toggle="tab"  href="#tab02">위치정보</a>
-				  </li>
-				  <li class="nav-item">
-				    <a class="nav-link" data-toggle="tab"  href="#tab03">리뷰</a>
-				  </li>
-				</ul>
-			</div>
-
-			<div class="tab-content">
-		     	<div class="tab-pane fade show active min-vh-80" id="tab01">
-		       		<div class = "tab_warp row obj_row_center">
+	
+		<div class = "container tab_warp row obj_row_center">
 		         		<div class = "bgc_color_box col-md-4 min-vh-70"></div>
 		         		<div class="bgc_box col-md-4 ftco-section align-items-center min-vh-70">
-		         		
-		         			
 		           			<div>
 		             			<h2 class="h2_size"><%= info.getFacltNm() %></h2>
 		             			
@@ -141,43 +91,44 @@
 							</div>
 						</div>
 						
-						<div class="container text-center my-3 img_boxs">
-				    		<div id="recipeCarousel" class="carousel slide w-100" data-ride="carousel">
-				        		<div class="carousel-inner w-100" role="listbox">
-						            <div class="carousel-item row no-gutters active boders">
-						                <div class="col-3 float-left">
-						                	<img class="img-fluid" src="<%=info.getFirstImageUrl()%>">
-						                	<div class="carosuel-title">사이트</div>
-						                </div>
-						                <div class="col-3 float-left">
-						                	<img class="img-fluid" src="./resources/images/bg_1.jpg">
-						                	<div class="carosuel-title">test</div>
-						                </div>
-						                <div class="col-3 float-left">
-						                	<img class="img-fluid" src="./resources/images/bg_1.jpg">
-						                	<div class="carosuel-title">test</div>
+						<div class="carousel_size text-center my-3">
+						    <div class="row mx-auto my-auto">
+						        <div id="recipeCarousel" class="carousel slide w-100" data-ride="carousel">
+						            <div class="carousel-inner w-100" role="listbox">
+						               	<div class="carousel-item active">
+						                    <img class="card-img d-block col-3" src="<%= info.getFirstImageUrl() %>">
 						                </div>
 						                
-						            </div>
-						            <div class="carousel-item row no-gutters boders">
-						                <div class="col-3 float-left">
-						                	<img class="img-fluid" src="./resources/images/bg_1.jpg">
-						                	<div class="carosuel-title">test</div>
-						                </div>
-						                <div class="col-3 float-left">
-						                	<img class="img-fluid" src="./resources/images/bg_1.jpg">
-						                	<div class="carosuel-title">test</div>
-						                </div>
-						                <div class="col-3 float-left">
-						                	<img class="img-fluid" src="./resources/images/bg_1.jpg">
-						                	<div class="carosuel-title">test</div>
-						                </div>
-						                
+						               	<c:forEach var="item" items="${img_vo}">
+						               		<div class="carousel-item">
+						                    	<img class="card-img d-block col-3" src="${ item.imgURL }">
+						                	</div>
+						               	</c:forEach>
+						               	
 						            </div>
 						        </div>
 						    </div>
 						</div>
 					</div>
+	
+		<div class="container">
+			<div class="tab" id="tab">
+				<ul class="nav nav-tabs nav-justified">
+				  <li class="nav-item">
+				    <a class="nav-link active" data-toggle="tab"  href="#tab01">상세정보</a>
+				  </li>
+				  <li class="nav-item">
+				    <a class="nav-link" data-toggle="tab"  href="#tab02">위치정보</a>
+				  </li>
+				  <li class="nav-item">
+				    <a class="nav-link" data-toggle="tab"  href="#tab03">리뷰</a>
+				  </li>
+				</ul>
+			</div>
+			
+
+			<div class="tab-content">
+		     	<div class="tab-pane fade show active min-vh-80" id="tab01">
 					
 					<div>
 						<div class = "camping_text">

@@ -4,6 +4,9 @@ import lombok.Data;
 
 @Data
 public class CampingImgVO {
-	private String contentId;
-	private String imgURL;
+	private String contentId;		// Camping ID
+	private String imgURL;			// IMG URL
+	private String serialnum;		// Serial Number
+	private String createdtime;		// Create Day
+	private String modifiedtime;	// Update Day
 }

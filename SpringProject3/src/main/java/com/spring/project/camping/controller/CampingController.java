@@ -1,6 +1,7 @@
 package com.spring.project.camping.controller;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.spring.project.camping.DTO.CampingImgVO;
 import com.spring.project.camping.DTO.CampingVO;
 import com.spring.project.camping.DTO.SearchVO;
 import com.spring.project.camping.service.CampingService;
@@ -60,6 +62,10 @@ public class CampingController {
 		
 		log.info("value : " + value);
 		
+		List<CampingImgVO> img_vo = service.getCampingImgXML(contentId);
+		
+		log.info("img_vo : " + img_vo);
+		
 		service.addViews(contentId);
 		CampingVO info = service.getInfo(contentId);
 
@@ -69,6 +75,7 @@ public class CampingController {
 		
 		m.addAttribute("info", info);
 		m.addAttribute("type", type);
+		m.addAttribute("img_vo", img_vo);
 		
 		reviewControlling(m, nowPage, contentId, vo, value);		
 		
