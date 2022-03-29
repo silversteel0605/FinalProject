@@ -134,11 +134,14 @@ ul {
       </ul>
       <div>
         <ul>
-          <li><a href="">회원가입</a></li>
-          <li><a href="">아이디 찾기</a></li>
-          <li><a href="">비밀번호 찾기</a></li>
+          <li><a href="./signin">회원가입</a></li>
+          <li><a href="./findid">아이디 찾기</a></li>
+          <li><a href="./findpw">비밀번호 찾기</a></li>
         </ul>
       </div>
+      <a href="https://kauth.kakao.com/oauth/authorize?client_id=ab2dbc463528e52eff1939322fb6704c&redirect_uri=http://localhost:8090/project/kakao/login&response_type=code">
+      	<img src="<c:url value="/resources/images/kakaologin.png"/>" alt="카카오 로그인" />
+      </a>
     </section>
 <script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
 <script src="<c:url value="/resources/js/login.js"/>"></script>

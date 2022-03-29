@@ -23,7 +23,7 @@ $('#join').click(function() {
 	   },
 	   success : function(result) {
 	    	if(result === 1) {
-			  location.href = '/project/member/login';				
+			  location.href = `/project/member/login?id=${id}`;				
 			} else {
 				alert("ID/PW가 잘못 되었습니다");
 			}

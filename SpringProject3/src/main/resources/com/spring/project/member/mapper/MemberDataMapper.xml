@@ -13,7 +13,16 @@
 	</select>
 	
 	<insert id="signin">
-		insert into camper (member_id, member_pwd, member_type, member_name, email, birthday, post, addr1, addr2) 
-		values (#{id}, #{pwd}, #{member_type}, #{name}, #{email}, #{birthday}, #{post}, #{addr1}, #{addr2})
+		insert into camper (member_id, member_pwd, member_type, member_name, email, birthday, post, addr1, addr2, tel) 
+		values (#{id}, #{pwd}, #{member_type}, #{name}, #{email}, #{birthday}, #{post}, #{addr1}, #{addr2}, #{phone})
 	</insert>
+	
+	<select id="findid" resultType="String">
+		select member_id from camper where member_name = #{name} and tel = #{phone}	
+	</select>
+	
+	<select id="findpw" resultType="int">
+		select count(*) from camper where member_id = #{id} and email = #{email}	
+	</select>
+	
 </mapper>

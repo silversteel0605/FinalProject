@@ -36,4 +36,9 @@ public class RestMemberController {
 	public int join(MemberVO vo) {
 		return service.join(vo);
 	}
+	
+	@PostMapping(value = "/findpw")
+	public int findpw(MemberVO vo) {
+		return service.findpw(vo);
+	}
 }

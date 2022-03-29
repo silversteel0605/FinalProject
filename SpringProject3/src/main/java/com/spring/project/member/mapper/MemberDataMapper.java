@@ -10,4 +10,8 @@ public interface MemberDataMapper {
 	public int signin(MemberVO vo);
 	
 	public int join(MemberVO vo);
+	
+	public String findid(MemberVO vo);
+	
+	public int findpw(MemberVO vo);
 }

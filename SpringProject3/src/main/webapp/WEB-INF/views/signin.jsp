@@ -74,12 +74,12 @@
      <tr>
        <th class="text-right danger" width="15%">전화번호</th>
        <td width=85%>
-         <select name=tel1>
+         <select name=tel1 id="tel1">
            <option>010</option>
            <option>011</option>
            <option>017</option>
          </select>
-         <input type=text name=tel2 class="input-sm" size=15>
+         <input type=number name=tel2 class="input-sm" size=15 id="tel2">
        </td>
      </tr>
      <tr>
@@ -175,7 +175,15 @@ $(function(){
 		{
 			$('#addr2').focus();
 			return;
-		}$.ajax({
+		}
+		if(tel2=="")
+		{
+			$('#tel2').focus();
+			return;
+		}
+		
+		const tel = $('#tel1 option:selected').val() + $('#tel2').val();
+		$.ajax({
 		   url : '/project/rest/signin',
 		   type: "POST",
 		   dataType : "json",
@@ -188,8 +196,8 @@ $(function(){
 			   "addr1" : addr1,
 			   "addr2" : addr2,
 			   "member_type" : 0,
-			   "email" : email
-			   
+			   "email" : email,
+			   "phone" : tel
 		   },
 		   success : function(result) {
 			  alert("회원가입에 성공했습니다. 로그인 해주십시오");

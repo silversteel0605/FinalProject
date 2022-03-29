@@ -1,5 +1,7 @@
 package com.spring.project.member.service;
 
+import java.util.HashMap;
+
 import com.spring.project.member.DTO.MemberVO;
 
 public interface MemberService {
@@ -9,4 +11,13 @@ public interface MemberService {
 	public int signin(MemberVO vo);
 	
 	public int join(MemberVO vo);
+	
+	public String getAccessToken (String authorize_code);
+	
+	public HashMap<String, Object> getUserInfo(String access_Token);
+	
+	public String findid(MemberVO vo);
+	
+	public int findpw(MemberVO vo);
+	
 }

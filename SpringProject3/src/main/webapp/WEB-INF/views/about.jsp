@@ -20,18 +20,25 @@
 </head>
 <body>
 <%
-String se = (String)session.getAttribute("auth");
+String auth = (String)session.getAttribute("auth");
 %>
 	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
    <div class="container">
-     <a class="navbar-brand" href="index.html"><%=  se%><span>Travel Agency</span></a>
+     <a class="navbar-brand" href="index.html"><%=  auth%><span>Travel Agency</span></a>
      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
        <span class="oi oi-menu"></span> Menu
      </button>
 
      <div class="collapse navbar-collapse" id="ftco-nav">
        <ul class="navbar-nav ml-auto">
-         <li class="nav-item"><a  class="nav-link" id="logging" state="<%=se%>"></a></li>
+       <c:choose>
+	       <c:when test="${empty auth }">
+	         <li class="nav-item"><a  class="nav-link" onclick="location.href='./login'">로그인</a></li>
+	       </c:when>
+	       <c:otherwise>
+	       	<li class="nav-item"><a  class="nav-link" onclick="logout('${auth}')">로그아웃</a></li>
+	       </c:otherwise>
+       </c:choose>
          <li class="nav-item active"><a href="about.html" class="nav-link">About</a></li>
          <li class="nav-item"><a href="destination.html" class="nav-link">Destination</a></li>
          <li class="nav-item"><a href="hotel.html" class="nav-link">Hotel</a></li>
@@ -341,7 +348,7 @@ String se = (String)session.getAttribute("auth");
        </div>
      </div>
    </div>
- </div>
+ </div>   
  <div class="row">
   <div class="col-md-12 text-center">
 
@@ -352,24 +359,19 @@ String se = (String)session.getAttribute("auth");
   </div>
 </div>
 </footer>
-<script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
 
 <script>
-if($('#logging').attr('state') === "true") {
-	$('#logging').text('로그아웃');
-} else {
-	$('#logging').text('로그인');		
-}
-		
-
-$('#logging').click(function() {
-	if($('#logging').text() === "로그아웃") {
-		location.href = "./member/logout";
-	} else {
-		location.href = "./login";
+	<!-- logout.js -->
+	function logout(auth) {
+		if(auth === 'kakao') {
+			location.href = 'https://kauth.kakao.com/oauth/logout?client_id=ab2dbc463528e52eff1939322fb6704c&logout_redirect_uri=http://localhost:8090/project/kakao/logout&state=state';
+		} else {
+			location.href = './' + auth + '/logout';
+		}
 	}
-})
 </script>
+
+<script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
 
 
 
