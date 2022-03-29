@@ -130,13 +130,7 @@
     animation-delay: 1s;
     animation-duration: 3s;
 }
-.nightsky>span:nth-child(7){
-    top:100vw;
-    right: 23vw;
-    left: initial;
-    animation-delay: 1.2s;
-    animation-duration: 1.75s;
-}
+
 .nightsky>span:nth-child(8){
     top:0px;
     right: 70vw;

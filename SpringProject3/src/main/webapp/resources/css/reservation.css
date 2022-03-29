@@ -29,12 +29,61 @@
       }
 
 #maincon{
-	margin-left:15%;
-	margin-right:15%
+	margin-left:20%;
+	margin-right:20%
 }
 #carousel
 {
 	margin-top: 20px;
 	margin-left:10%;
 	margin-right:10%
+}
+#blue{
+	color:blue;
+}
+#all_area{
+	padding-top:30px;
+}
+.area{
+	display:flex;
+	margin:30px;
+	heigth:50vh;
+	border:1px solid gray;
+}
+.area>img{
+	padding-top:20px;
+	padding-bottom:20px;
+	padding-left:20px;
+	width:40%;
+}
+.infor{
+	padding:20px;
+	width:60%;
+}
+.infor_1{
+	display:flex;
+	justify-content: space-between;
+}
+.infor_2{
+	height:70%;
+	color:gray;
+}
+.infor_3{
+	display:flex;
+	justify-content: space-between;
+	color:black;
+}
+@media (max-width: 960px) {
+  .area {
+    flex-direction: column;
+  }
+  .area>img{
+  	width:100%;
+  }
+  .infor_1{
+  flex-direction: column;
+  }
+  .infor_3{
+  flex-direction: column;
+  }
 }
