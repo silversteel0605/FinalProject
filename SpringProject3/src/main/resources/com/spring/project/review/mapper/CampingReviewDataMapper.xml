@@ -25,6 +25,10 @@
     	UPDATE review set views=views+1 WHERE reviewId = #{reviewId}
     </update>
     
+    <update id="reviewDcelClickNumUp" parameterType="com.spring.project.review.DTO.CampingReviewDTO">
+    	UPDATE review set dcel=dcel+1 WHERE reviewId = #{reviewId}
+    </update>
+    
     <update id="reviewUpdate" parameterType="com.spring.project.review.DTO.CampingReviewDTO">
     	UPDATE review SET title=#{title}, review=#{contentValue}, starRanking=#{starRanking} WHERE reviewId = #{reviewId}
     </update>
