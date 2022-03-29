@@ -22,7 +22,15 @@
   <link rel="stylesheet" href="<c:url value="/resources/css/style.css"/>"/>
   <!-- 페이지 css/js -->
   <link rel="stylesheet" href="<c:url value="/resources/css/jangec.css"/>"/>
-  <script src="https://cdn.ckeditor.com/ckeditor5/33.0.0/classic/ckeditor.js"></script>
+  <script src="resources/js/ckeditor/ckeditor.js"></script>
+  <script>
+	var ckeditor_config = {
+  			resize_enaleb: false,
+  			enterMode: CKEDITOR.RNTER_BR,
+  			filebrowserUploadMethod: "form",
+  			filebrowserUploadUrl: "./upload/image"
+  	}
+  </script>
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
@@ -70,7 +78,7 @@
 				<c:otherwise>고객센터</c:otherwise>
 				</c:choose>
 				</div>
-			    <form id="writeForm">
+			    <form id="writeForm" enctype="multipart/form-data">
 			    	<c:choose>
 					<c:when test="${board_class eq 'freeBoard' }">
  					<div class="input-group mb-3">
@@ -93,13 +101,15 @@
 					</div>
 					</c:otherwise>
 			    </c:choose>
-			        <!-- <textarea name="content" id="writeEditor"></textarea> -->
 	       			<div class="mb-3">
 						<label for="writeEditor">내용</label>
 						<textarea class="form-control" rows="5" name="content" id="writeEditor" placeholder="내용을 입력해 주세요" ></textarea>
 					</div>	
 					<input type="hidden" id="board_class" value="${board_class }" />
 			    </form>
+			    <script>
+			    	editor = CKEDITOR.replace('writeEditor', ckeditor_config);
+			    </script>
 				<button id="writeSavBtn" class="btn">저장</button>
 			</div>
 		<!-- /컨텐츠 -->	

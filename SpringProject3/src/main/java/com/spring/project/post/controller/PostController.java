@@ -1,22 +1,32 @@
 package com.spring.project.post.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.google.gson.JsonObject;
 import com.spring.project.post.dto.DeleteVO;
 import com.spring.project.post.dto.PostVO;
 import com.spring.project.post.dto.SearchVO;
@@ -289,6 +299,97 @@ public class PostController {
 			return "support";
 		}
 	}
+	
+	
+	@Resource(name="uploadPath") private String uploadPath;
+	
+	/*
+	 * 
+	 * @RequestMapping(value = "/upload/image", method = RequestMethod.POST) public
+	 * void uploadImage(HttpServletRequest request, HttpServletResponse response,
+	 * Model model, @RequestParam MultipartFile upload) throws Exception {
+	 * log.info("이미지 업로드 들어옴");
+	 * 
+	 * // 랜덤 문자 생성 UUID uid = UUID.randomUUID(); log.info("uid: " + uid);
+	 * 
+	 * OutputStream out = null; PrintWriter printWriter = null;
+	 * response.setCharacterEncoding("EUC-KR");
+	 * response.setContentType("text/html;charset=EUC-KR");
+	 * 
+	 * 
+	 * String fileName = upload.getOriginalFilename(); log.info("fileName: " +
+	 * fileName); byte[] bytes = upload.getBytes(); log.info("bytes: " + bytes);
+	 * 
+	 * // 업로드 경로 String ckUploadPath = uploadPath + File.separator + uid + "_" +
+	 * fileName; log.info("ckUploadPath: " + ckUploadPath);
+	 * 
+	 * out = new FileOutputStream(new File(ckUploadPath)); out.write(bytes);
+	 * out.flush(); // out에 저장된 데이터를 전송하고 초기화
+	 * 
+	 * String callback = request.getParameter("CKEditorFuncNum");
+	 * log.info("callback: " + callback); printWriter = response.getWriter(); String
+	 * fileUrl = "D:\\JAVA_Ethan\\upload\\" + uid + "_" + fileName; //작성화면
+	 * log.info("fileUrl: " + fileUrl);
+	 * 
+	 * printWriter.println("<script type='text/javascript'>" +
+	 * "window.parent.CKEDITOR.tools.callFunction(" + callback+",'"+
+	 * fileUrl+"','이미지를 업로드하였습니다.')" + "</script>");
+	 * 
+	 * printWriter.flush(); }
+	 */
+	
+	@PostMapping("/upload/image")
+	    public void postImage(MultipartHttpServletRequest multiFile, HttpServletResponse resp, HttpServletRequest req) throws IOException{
+		
+			JsonObject json = new JsonObject();
+			PrintWriter printWriter = null;
+	        OutputStream out = null;
+	        MultipartFile file = multiFile.getFile("upload");	
+	        
+	        if (file != null) {
+	        	if (file.getSize() > 0) {
+	        		if (file.getContentType().toLowerCase().startsWith("image/")) {
+	        			try {
+	        				String fileName = file.getName();
+	        				byte[] bytes = file.getBytes();
+	        				String uploadPath = req.getServletContext().getRealPath("/img");
+	        				File uploadFile = new File(uploadPath);
+	        				if (!uploadFile.exists()) {
+	        					uploadFile.mkdirs();
+	        				}
+	        				fileName = UUID.randomUUID().toString();
+	        				uploadPath = uploadPath + "/" + fileName;
+	        				out = new FileOutputStream(new File(uploadPath));
+	        				out.write(bytes);
+	        				
+	        				printWriter = resp.getWriter();
+	        				resp.setContentType("text/html");
+	        				String fileUrl = req.getContextPath() + "/img/" + fileName;
+	        				
+	        				// json 데이터로 등록
+	        				// {"uploaded" : 1, "fileName : "test.jpg", "url" : "/img/test.jpg"}
+	        				// 이런 형태로 리턴이 되어야 함
+	        				json.addProperty("uploaded", 1);
+	        				json.addProperty("fileName", fileName);
+	        				json.addProperty("url", fileUrl);
+	        				
+	        				printWriter.println(json);
+	        				
+	        			} catch (IOException e) {
+	        				e.printStackTrace();
+	        			} finally {
+	        				if (out != null) {
+	        					out.close();
+	        				}
+	        				
+	        				if (printWriter != null) {
+	        					printWriter.close();
+	        				}
+	        			}
+	        		}
+	        	}
+	        }
+	    }
 	
 }
 

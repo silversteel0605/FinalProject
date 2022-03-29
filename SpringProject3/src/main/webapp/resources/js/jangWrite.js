@@ -1,15 +1,8 @@
+
 const writeSavBtn = document.getElementById('writeSavBtn');
 const writeEditor = document.getElementById('writeEditor');
 const writeForm = document.getElementById('writeForm');
 
-ClassicEditor
-    .create(document.querySelector( '#writeEditor' ))
-    .then(newEditor => {
-		editor = newEditor;
-	})
-    .catch( error => {
-		console.error( error );
-	});
 
 writeSavBtn.addEventListener('click', (e) => {
 	console.log('버튼 클릭됨');
@@ -44,4 +37,5 @@ function wirteSend(url, params) {
 	
 	document.body.appendChild(form);
 	form.submit();
-}
+};
+
