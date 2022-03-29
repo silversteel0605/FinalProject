@@ -30,10 +30,9 @@ public class CampingController {
 	@Autowired
 	CampingService service;
 	
-	/*
 	@Autowired
 	CampingReviewService reviewService = null;
-	*/
+
 	private static int cntPerPage = 9;
 	
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
