@@ -14,7 +14,7 @@
     </select>
     
     <insert id="initReviewData" parameterType="com.spring.project.review.DTO.CampingReviewDTO">
-    	insert INTO review VALUES (REVIEW_SEQ.nextval, 0, #{contentId}, #{title}, SYSDATE, #{contentValue}, null, #{starRanking}, 0)
+    	insert INTO review VALUES (REVIEW_SEQ.nextval, 0, #{contentId}, #{title}, SYSDATE, null, #{contentValue}, null, #{starRanking}, 0, 0)
     </insert>
     
     <delete id="deleteReviewData" parameterType="_int">
@@ -23,6 +23,10 @@
     
     <update id="reviewClickNumUp" parameterType="com.spring.project.review.DTO.CampingReviewDTO">
     	UPDATE review set views=views+1 WHERE reviewId = #{reviewId}
+    </update>
+    
+    <update id="reviewDeclClickNumUp" parameterType="com.spring.project.review.DTO.CampingReviewDTO">
+    	UPDATE review set decl=decl+1 WHERE reviewId = #{reviewId}
     </update>
     
     <update id="reviewUpdate" parameterType="com.spring.project.review.DTO.CampingReviewDTO">
