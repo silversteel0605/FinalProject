@@ -43,7 +43,7 @@ public class MemberController {
 	
 	@RequestMapping(value = "/member/login")
 	public String login(HttpSession session, MemberVO vo) {
-		String id = vo.getId();
+		String id = vo.getMember_id();
 		session.setAttribute("auth", "member");
 		session.setAttribute("member_id", id);		
 		return "redirect:/about";
@@ -60,9 +60,12 @@ public class MemberController {
 		String access_Token = service.getAccessToken(code);
 		
 		HashMap<String, Object> userInfo = service.getUserInfo(access_Token);
-	
-		session.setAttribute("kakao_token", access_Token);
-		session.setAttribute("auth", "kakao");
+		if(access_Token != null) {
+			session.setAttribute("kakao_token", access_Token);
+			session.setAttribute("auth", "kakao");			
+		} else {			
+			session.setAttribute("auth", "failed");			
+		}
 			
 		return "redirect:/about";
 	}

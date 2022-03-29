@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.spring.project.camping.DTO.CampingReviewDTO;
 import com.spring.project.camping.DTO.CampingVO;
-import com.spring.project.camping.DTO.SearchVO;
+import com.spring.project.camping.DTO.CampingSearchVO;
 import com.spring.project.camping.service.CampingService;
 import com.spring.project.utill.PagingVO;
 
@@ -29,21 +29,11 @@ public class CampingController {
 	private static int cntPerPage = 9;
 	
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
-	public String search(Model m, @RequestParam(value="nowPage", required=false)String nowPage, SearchVO vo)  throws  IOException, JDOMException {
+	public String search(Model m, @RequestParam(value="nowPage", required=false)String nowPage, CampingSearchVO vo)  throws  IOException, JDOMException {
 		controlling(m, nowPage, vo);
 		return "search";
 	}
-	
-	//rest로 태그 검색하기  ※지금 안씀
-	@RequestMapping(value = "/search2", method = RequestMethod.GET)
-	public String search2(Model m, SearchVO vo, @RequestParam(value="nowPage", required=false)String nowPage)  throws  IOException, JDOMException {
-		log.info(vo);
-		nowPage = nowPage != null ? nowPage :"1";
-		vo.setTagUri();
-		m.addAttribute("tags", vo);
-		m.addAttribute("nowPage", nowPage);
-		return "rest_search";
-	}
+
 	
 	@RequestMapping(value = "/TempCampInfo", method = RequestMethod.GET)
 	public String info(Model m, @RequestParam(value="contentId") String contentId) throws IOException, JDOMException {
@@ -97,7 +87,7 @@ public class CampingController {
 	
 	
 	@RequestMapping(value = "/map", method = RequestMethod.GET)
-	public String map(Model m, @RequestParam(value="nowPage", required=false)String nowPage, SearchVO vo) {
+	public String map(Model m, @RequestParam(value="nowPage", required=false)String nowPage, CampingSearchVO vo) {
 		controlling(m, nowPage, vo);
 		return "map-search";
 	}
@@ -107,7 +97,7 @@ public class CampingController {
 		return "init";
 	}
 	
-	public void controlling(Model m, @RequestParam(value="nowPage", required=false)String nowPage, SearchVO vo) {
+	public void controlling(Model m, @RequestParam(value="nowPage", required=false)String nowPage, CampingSearchVO vo) {
 		CampingVO[] ar;
 		PagingVO pvo;
 		int total;

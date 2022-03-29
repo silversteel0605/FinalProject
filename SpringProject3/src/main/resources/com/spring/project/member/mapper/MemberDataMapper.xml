@@ -25,4 +25,18 @@
 		select count(*) from camper where member_id = #{id} and email = #{email}	
 	</select>
 	
+	<select id="getMembers" resultType="com.spring.project.member.DTO.MemberVO">
+		SELECT * 
+		FROM (
+			SELECT ROWNUM RN, A.* 
+				FROM (
+				    select * from camper
+				    ) A
+				)
+		WHERE RN BETWEEN #{start} AND #{end}
+	</select>
+	
+	<select id="MemberCnt" resultType="int">
+		select count(*) from camper
+	</select>
 </mapper>

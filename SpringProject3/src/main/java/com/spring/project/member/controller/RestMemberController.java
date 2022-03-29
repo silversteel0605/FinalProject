@@ -1,14 +1,12 @@
 package com.spring.project.member.controller;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.spring.project.member.DTO.MemberSearchVO;
 import com.spring.project.member.DTO.MemberVO;
 import com.spring.project.member.service.MemberService;
 
@@ -40,5 +38,13 @@ public class RestMemberController {
 	@PostMapping(value = "/findpw")
 	public int findpw(MemberVO vo) {
 		return service.findpw(vo);
+	}
+	
+	@GetMapping(value="/manager/member")
+	public MemberVO[] getMembers(MemberSearchVO vo) {
+		vo.calcStartEnd(10);
+		MemberVO[] mvo = service.getMembers(vo);
+		mvo[0].setTotal(service.MemberCnt());
+		return mvo;
 	}
 }

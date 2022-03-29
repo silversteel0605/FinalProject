@@ -7,7 +7,7 @@ import org.jdom2.JDOMException;
 
 import com.spring.project.camping.DTO.CampingReviewDTO;
 import com.spring.project.camping.DTO.CampingVO;
-import com.spring.project.camping.DTO.SearchVO;
+import com.spring.project.camping.DTO.CampingSearchVO;
 
 public interface CampingService {
 	
@@ -17,13 +17,13 @@ public interface CampingService {
 	
 	public CampingVO[] getXMLData();
 
-	public CampingVO[] getDbSearchData(SearchVO vo);
+	public CampingVO[] getDbSearchData(CampingSearchVO vo);
 	
 	public int initData(CampingVO vo);
 	
 	public int getTotal();
 	
-	public int getDbSearchTotal(SearchVO vo);
+	public int getDbSearchTotal(CampingSearchVO vo);
 	
 	public CampingVO getInfo(String contentId);
 	

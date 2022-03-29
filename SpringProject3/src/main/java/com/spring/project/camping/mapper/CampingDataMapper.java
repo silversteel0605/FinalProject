@@ -5,15 +5,15 @@ import java.util.List;
 
 import com.spring.project.camping.DTO.CampingReviewDTO;
 import com.spring.project.camping.DTO.CampingVO;
-import com.spring.project.camping.DTO.SearchVO;
+import com.spring.project.camping.DTO.CampingSearchVO;
 
 public interface CampingDataMapper {
 	
 	public int initData(CampingVO vo);
 	
-	public CampingVO[] getSearchData(SearchVO vo);
+	public CampingVO[] getSearchData(CampingSearchVO vo);
 
-	public int getSearchTotal(SearchVO vo);
+	public int getSearchTotal(CampingSearchVO vo);
 	
 	public CampingVO getInfo(String contentId);
 	

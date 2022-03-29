@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 import com.spring.project.camping.DTO.CampingReviewDTO;
 import com.spring.project.camping.DTO.CampingVO;
-import com.spring.project.camping.DTO.SearchVO;
+import com.spring.project.camping.DTO.CampingSearchVO;
 import com.spring.project.camping.mapper.CampingDataMapper;
 
 import lombok.extern.log4j.Log4j;
@@ -236,7 +236,7 @@ public class CampingServiceImpl implements CampingService{
 	}
 	
 	@Override
-	public CampingVO[] getDbSearchData(SearchVO vo) {
+	public CampingVO[] getDbSearchData(CampingSearchVO vo) {
 		return dataMapper.getSearchData(vo);
 	}
 
@@ -251,7 +251,7 @@ public class CampingServiceImpl implements CampingService{
 	}
 	
 	@Override
-	public int getDbSearchTotal(SearchVO vo) {
+	public int getDbSearchTotal(CampingSearchVO vo) {
 		return dataMapper.getSearchTotal(vo);
 	}
 

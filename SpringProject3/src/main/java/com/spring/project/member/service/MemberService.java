@@ -2,6 +2,7 @@ package com.spring.project.member.service;
 
 import java.util.HashMap;
 
+import com.spring.project.member.DTO.MemberSearchVO;
 import com.spring.project.member.DTO.MemberVO;
 
 public interface MemberService {
@@ -19,5 +20,9 @@ public interface MemberService {
 	public String findid(MemberVO vo);
 	
 	public int findpw(MemberVO vo);
+	
+	public MemberVO[] getMembers(MemberSearchVO vo);
+	
+	public int MemberCnt();
 	
 }

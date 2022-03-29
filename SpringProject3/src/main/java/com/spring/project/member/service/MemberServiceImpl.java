@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.spring.project.member.DTO.MemberSearchVO;
 import com.spring.project.member.DTO.MemberVO;
 import com.spring.project.member.mapper.MemberDataMapper;
 
@@ -63,7 +64,7 @@ public class MemberServiceImpl implements MemberService{
 			sb.append("grant_type=authorization_code");
             
 			sb.append("&client_id=ab2dbc463528e52eff1939322fb6704c"); //본인이 발급받은 key
-			sb.append("&redirect_uri=http://localhost:8090/project/kakaologin"); // 본인이 설정한 주소
+			sb.append("&redirect_uri=http://localhost:8090/project/kakao/login"); // 본인이 설정한 주소
             
 			sb.append("&code=" + authorize_code);
 			log.info(sb);
@@ -136,7 +137,6 @@ public class MemberServiceImpl implements MemberService{
 
 			String nickname = properties.getAsJsonObject().get("nickname").getAsString();
 			String email = kakao_account.getAsJsonObject().get("email").getAsString();
-
 			userInfo.put("nickname", nickname);
 			userInfo.put("email", email);
 
@@ -154,6 +154,16 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public int findpw(MemberVO vo) {
 		return dataMapper.findpw(vo);
+	}
+
+	@Override
+	public MemberVO[] getMembers(MemberSearchVO vo) {
+		return dataMapper.getMembers(vo);
+	}
+
+	@Override
+	public int MemberCnt() {
+		return dataMapper.MemberCnt();
 	}
 	
 	

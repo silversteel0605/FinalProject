@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.project.camping.DTO.CampingVO;
-import com.spring.project.camping.DTO.SearchVO;
+import com.spring.project.camping.DTO.CampingSearchVO;
 import com.spring.project.camping.service.CampingService;
 import com.spring.project.member.DTO.MemberVO;
 
@@ -28,8 +28,8 @@ public class RestCampingController {
 	@Autowired
 	CampingService service;
 	
-	@GetMapping(value="/data", produces = "application/json; charset=UTF-8")
-	public CampingVO[] search(SearchVO vo, @RequestParam(value="nowPage", required=false)String nowPage) {
+	@GetMapping(value="/manager/camp", produces = "application/json; charset=UTF-8")
+	public CampingVO[] search(CampingSearchVO vo, @RequestParam(value="nowPage", required=false)String nowPage) {
 		vo.calcStartEnd(Integer.parseInt(nowPage), 10);
 		CampingVO[] ar = service.getDbSearchData(vo); 
 		if(ar.length > 0) {
@@ -40,22 +40,21 @@ public class RestCampingController {
 	
 	
 	
-	@PostMapping(value="/data")
+	@PostMapping(value="/manager/camp")
 	public CampingVO insert(CampingVO vo) {
 		service.addData(vo);
 		return vo;
 	}
 	
-	@PutMapping(value="/data")
+	@PutMapping(value="/manager/camp")
 	public CampingVO update(@RequestBody CampingVO vo) {
 		service.updateData(vo);
 		return vo;
 	}
 	
-	@DeleteMapping(value="/data")
+	@DeleteMapping(value="/manager/camp")
 	public int delete(@RequestBody String contentId){
-		service.deleteData(contentId);
-		return 1;
+		return service.deleteData(contentId);
 	}
 	
 	@PostMapping(value="/init")

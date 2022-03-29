@@ -3,7 +3,7 @@ package com.spring.project.camping.DTO;
 import lombok.Data;
 
 @Data
-public class SearchVO {
+public class CampingSearchVO {
 	private String searchTy;
 	private String keyword;
 	private String sido;

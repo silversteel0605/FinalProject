@@ -25,6 +25,8 @@
 	</bean>
 	
 	<!-- mybatis-spring:scan -->
-	<mybatis-spring:scan base-package="com.spring.project.camping.mapper, com.spring.project.post.mapper, com.spring.project.member.mapper"/>
+	<mybatis-spring:scan base-package=
+	"com.spring.project.camping.mapper, com.spring.project.post.mapper, com.spring.project.member.mapper,
+	com.spring.project.comment.mapper, com.spring.project.message.mapper"/>
 		
 </beans>
