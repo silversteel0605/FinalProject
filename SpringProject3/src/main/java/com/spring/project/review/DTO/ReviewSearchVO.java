@@ -1,4 +1,4 @@
-package com.spring.project.camping.DTO;
+package com.spring.project.review.DTO;
 
 import lombok.Data;
 

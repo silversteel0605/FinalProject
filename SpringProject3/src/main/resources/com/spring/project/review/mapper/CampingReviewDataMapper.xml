@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.project.review.mapper.CampingReviewDataMapper">
+
+    <select id="getReviewAllInfoList"  resultType="com.spring.project.review.DTO.CampingReviewDTO">
+    	SELECT * from review where contentId=#{contentId}
+    </select>
+    
+    <select id="getReviewInfo"  resultType="com.spring.project.review.DTO.CampingReviewDTO">
+    	SELECT * from review where reviewId=#{reviewId}
+    </select>
+    
+    <insert id="initReviewData" parameterType="com.spring.project.review.DTO.CampingReviewDTO">
+    	insert INTO review VALUES (REVIEW_SEQ.nextval, 0, #{contentId}, #{title}, SYSDATE, #{contentValue}, null, #{starRanking}, 0)
+    </insert>
+    
+    <delete id="deleteReviewData" parameterType="_int">
+    	DELETE FROM review WHERE reviewId = #{reviewId}
+    </delete>
+    
+    <update id="reviewClickNumUp" parameterType="com.spring.project.review.DTO.CampingReviewDTO">
+    	UPDATE review set views=views+1 WHERE reviewId = #{reviewId}
+    </update>
+    
+    <update id="reviewUpdate" parameterType="com.spring.project.review.DTO.CampingReviewDTO">
+    	UPDATE review SET title=#{title}, review=#{contentValue}, starRanking=#{starRanking} WHERE reviewId = #{reviewId}
+    </update>
+    
+    <select id="getSortReviewDatas" parameterType="map" resultType="com.spring.project.review.DTO.CampingReviewDTO">
+    	select * from review where contentid=#{contentId} order by
+    	<if test="value != null and value.equals('createDate')">
+    		reg_date DESC
+    	</if>
+    	<if test="value != null and value.equals('starRanking')">
+    		starRanking DESC
+    	</if>
+    </select>
+    
+    <select id="getReviewAllPageCnt" resultType="_int">
+    	select count(*) from review
+    </select>
+    
+    <select id="getReviewSearchData" resultType="com.spring.project.review.DTO.CampingReviewDTO" parameterType="Map">
+    	SELECT * FROM ( SELECT ROWNUM RN, A.* FROM ( select * from review where contentId = #{contentId} ) A ) WHERE RN BETWEEN #{start} AND #{end} order by
+    	<if test="value != null and value.equals('createDate')">
+    		reg_date DESC
+    	</if>
+    	<if test="value != null and value.equals('starRanking')">
+    		starRanking DESC
+    	</if>
+    </select>
+    
+    <select id="getReviewCreateReviewID" resultType="_int">
+    	select last_number from seq where sequence_name = 'REVIEW_SEQ';
+    </select>
+
+</mapper>

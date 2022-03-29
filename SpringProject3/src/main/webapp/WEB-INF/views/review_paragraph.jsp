@@ -1,4 +1,4 @@
-<%@page import="com.spring.project.camping.DTO.CampingReviewDTO"%>
+<%@page import="com.spring.project.review.DTO.CampingReviewDTO"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -24,10 +24,13 @@
   <!-- JangEc 개인 CSS/Script -->
   <link rel="stylesheet" href="<c:url value="/resources/css/jangec.css"/>"/>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  
+  <script src="<c:url value="/resources/js/review.js"/>" ></script>
 </head>
 <body>
-	<% CampingReviewDTO info = (CampingReviewDTO)request.getAttribute("c_dto"); %>
+	<% CampingReviewDTO info = (CampingReviewDTO)request.getAttribute("r_dto"); %>
 	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
    <div class="container">
      <a class="navbar-brand" href="index.html">Pacific<span>Travel Agency</span></a>
@@ -68,8 +71,8 @@
 		<div class="contents">
 			<p class="fs-3"><%= info.getTitle() %></p>
 			<div class="paragraph_header d-flex justify-content-between">
-				<span id="id" data-bs-toggle="modal" data-bs-target="#memberDescription"><%= info.getLoginId() %></span>
-				<span><%= info.getCreateDate() %></span>
+				<span id="id" data-bs-toggle="modal" data-bs-target="#memberDescription"><%= info.getMemberId() %></span>
+				<span><%= info.getRegDate() %></span>
 			</div> <hr/>
 			<div class="paragraph_body">
 				<p>
@@ -119,9 +122,9 @@
 				<div class="comments_footer"></div>
 			</div> <hr />
 			<div class="paragraph_footer d-flex justify-content-end">
-				<button class="btn">수정</button>
-				<button id="paragraphDeleteBtn" class="btn">삭제</button>
-				<button class="btn">목록</button>
+				<button class="btn"><a href="/project/review?type=1&reviewId=<%= info.getReviewId() %>&contentId=<%=info.getContentId() %>">수정</a></button>
+				<button id="reivewDelete" class="btn" onclick="showPopUp('<%= info.getReviewId() %>','<%=info.getContentId() %>')">삭제</button>
+				<button class="btn" onclick="back()">목록</button>
 			</div>
 		</div>		
 		<!-- /컨텐츠 -->

@@ -1,7 +1,9 @@
 package com.spring.project.camping.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.jdom2.JDOMException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.spring.project.camping.DTO.CampingReviewDTO;
+import com.spring.project.camping.DTO.CampingImgVO;
 import com.spring.project.camping.DTO.CampingVO;
 import com.spring.project.camping.DTO.SearchVO;
 import com.spring.project.camping.service.CampingService;
+import com.spring.project.review.DTO.CampingReviewDTO;
+import com.spring.project.review.service.CampingReviewService;
 import com.spring.project.utill.PagingVO;
 
 import lombok.extern.log4j.Log4j;
@@ -26,6 +30,10 @@ public class CampingController {
 	@Autowired
 	CampingService service;
 	
+	/*
+	@Autowired
+	CampingReviewService reviewService = null;
+	*/
 	private static int cntPerPage = 9;
 	
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
@@ -46,55 +54,36 @@ public class CampingController {
 	}
 	
 	@RequestMapping(value = "/TempCampInfo", method = RequestMethod.GET)
-	public String info(Model m, @RequestParam(value="contentId") String contentId) throws IOException, JDOMException {
+	public String info(
+			Model m, 
+			@RequestParam(value="contentId") String contentId, 
+			@RequestParam(value="nowPage", required=false)String nowPage, 
+			SearchVO vo, 
+			@RequestParam(value="type", required=false)String type, 
+			@RequestParam(value="value", required=false)String value
+		) throws IOException, JDOMException {
+		
+		log.info("value : " + value);
+		
+		List<CampingImgVO> img_vo = service.getCampingImgXML(contentId);
+		
+		log.info("img_vo : " + img_vo);
+		
 		service.addViews(contentId);
 		CampingVO info = service.getInfo(contentId);
+
+		type = type != null ? type :"1";
 		
-		List<CampingReviewDTO> reviewInfoList = service.getReviewAllInfoList(contentId);
+		log.info(type);
 		
 		m.addAttribute("info", info);
-		m.addAttribute("reviewInfoList", reviewInfoList);
+		m.addAttribute("type", type);
+		m.addAttribute("img_vo", img_vo);
 		
-		System.out.println(reviewInfoList);
-		System.out.println(info);
+		//reviewControlling(m, nowPage, contentId, vo, value);
 		
 		return "camping_index";
 	}
-
-	@RequestMapping(value = "/review_write", method = RequestMethod.GET)
-	public String review(Model m, @RequestParam(value="contentId") String contentId) {
-		
-		log.info(contentId);
-		
-		m.addAttribute("contentId", contentId);
-		
-		return "review_write";
-	}
-	
-	@RequestMapping(value = "/reviewSave", method = RequestMethod.GET)
-	public String reviewSave(Model m, CampingReviewDTO c_dto) {
-		
-		log.info(c_dto);
-		
-		service.initReviewData(c_dto);
-		log.info("정상수행");
-		
-		return "search";
-	}
-	@RequestMapping(value = "/reviewViewer", method = RequestMethod.GET)
-	public String reviewViewer(Model m, String reviewId) {
-		
-		int r_id = Integer.parseInt(reviewId);
-		
-		service.reviewClickNumUp(r_id);
-		CampingReviewDTO c_dto = service.getReviewInfo(r_id);
-		
-		log.info(c_dto);
-		m.addAttribute("c_dto", c_dto);
-		
-		return "/review_paragraph";
-	}
-	
 	
 	@RequestMapping(value = "/map", method = RequestMethod.GET)
 	public String map(Model m, @RequestParam(value="nowPage", required=false)String nowPage, SearchVO vo) {
@@ -115,7 +104,6 @@ public class CampingController {
 		
 		nowPage = nowPage != null ? nowPage :"1";
 		
-		
 		searchTy = vo.getSearchTy();
 		total = service.getDbSearchTotal(vo);
 		pvo = new PagingVO(total, Integer.parseInt(nowPage), cntPerPage);
@@ -130,6 +118,7 @@ public class CampingController {
 				vo.setTagUri();
 			}
 		}
+		
 		vo.setOrderUri();
 		log.info(vo.getUri());
 		ar = service.getDbSearchData(vo);
@@ -138,5 +127,7 @@ public class CampingController {
 		m.addAttribute("paging", pvo);
 		m.addAttribute("lists", ar);
 	}
+	
+	
 	
 }

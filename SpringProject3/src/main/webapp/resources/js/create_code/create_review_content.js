@@ -1,24 +1,41 @@
 
-
 //전체
-function create_review_save_content(contentId){
+function create_review_save_content(type, r_dto){
 	
-	var testMainForm = document.getElementById("form");
-	/*
-	const newMainForm = document.createElement("form");
-	newMainForm.setAttribute("id", "form");
-	newMainForm.setAttribute("name", "form");
-	newMainForm.setAttribute("method", "get");
-	newMainForm.setAttribute("action", "./reviewSave");
-	*/
+	console.log(r_dto.contentId, type, r_dto);
+	var content = document.getElementById("contentBox");
+	var testMainForm = create_review_form(type);
 	
-	var testTextNode = document.createTextNode(contentId);
-	
+	var req_reviewId = document.createElement("input");
+	var req_loginId = document.createElement("input");
 	var req_campingId = document.createElement("input");
-	req_campingId.setAttribute("type", "text");
+	var req_createDate = document.createElement("input");
+	var req_imgUrl = document.createElement("input");
+	var req_clickNum = document.createElement("input");
+	
 	req_campingId.setAttribute("name", "contentId");
-	req_campingId.setAttribute("value", contentId);
+	req_campingId.setAttribute("value", r_dto.contentId);
 	req_campingId.style.display = "none";
+	
+	req_reviewId.setAttribute("name", "reviewId");
+	req_reviewId.setAttribute("value", r_dto.reviewId);
+	req_reviewId.style.display = "none";
+	
+	req_loginId.setAttribute("name", "loginId");
+	req_loginId.setAttribute("value", r_dto.loginId);
+	req_loginId.style.display = "none";
+	
+	req_createDate.setAttribute("name", "createDate");
+	req_createDate.setAttribute("value", getYmd10(r_dto.createDate));
+	req_createDate.style.display = "none";
+	
+	req_imgUrl.setAttribute("name", "imgUrl");
+	req_imgUrl.setAttribute("value", r_dto.imgUrl);
+	req_imgUrl.style.display = "none";
+	
+	req_clickNum.setAttribute("name", "clickNum");
+	req_clickNum.setAttribute("value", r_dto.clickNum);
+	req_clickNum.style.display = "none";
 	
 	//newMainForm.appendChild(campingId);
 	
@@ -35,26 +52,49 @@ function create_review_save_content(contentId){
 	previous.setAttribute("onclick", "back()");
 	previous.appendChild(previousTxt);
 	
-	testMainForm.appendChild(testTextNode);
 	testMainForm.appendChild(req_campingId);
-	testMainForm.appendChild(create_review_star_rank("캠핑장", 5));
-	testMainForm.appendChild(create_review_save_user_title());
-	testMainForm.appendChild(create_review_save_user_content());
+	testMainForm.appendChild(req_reviewId);
+	testMainForm.appendChild(req_loginId);
+	testMainForm.appendChild(req_createDate);
+	testMainForm.appendChild(req_imgUrl);
+	testMainForm.appendChild(req_clickNum);
+	testMainForm.appendChild(create_review_star_rank(type));
+	testMainForm.appendChild(create_review_user_title(type, r_dto.title));
+	testMainForm.appendChild(create_review_user_content(type));
 	testMainForm.appendChild(submit);
 	testMainForm.appendChild(previous);
+	
+	content.appendChild(testMainForm);
 }
 
-//별 평점
-function create_review_star_rank(text, starNum){
+function create_review_form(type){
+	
+	const newMainForm = document.createElement("form");
+	
+	newMainForm.setAttribute("id", "form");
+	newMainForm.setAttribute("name", "form");
+	newMainForm.setAttribute("method", "get");
+	
+	console.log(type);
+	
+	if(type == 1){
+		newMainForm.setAttribute("action", "./reviewUpdata");
+	}else{
+		newMainForm.setAttribute("action", "./reviewSave");	
+	}
+	
+	return newMainForm;
+}
+
+//제목
+function create_review_star_rank(type){
 	
 	//box
 	var wrap = document.createElement("div");
-	var starText = document.createTextNode("이 "+text+" 추천하시겠습니까?");
+	var starText = document.createTextNode("이 캠핑장을 추천하시겠습니까?");
 	var container = document.createElement("div");
 	var content = document.createElement("div"); 
 	var starIcon = document.createElement("div");
-	
-	console.log(starText);
 	
 	wrap.setAttribute("class", "text-center");
 	container.setAttribute("class", "item-center");
@@ -64,7 +104,7 @@ function create_review_star_rank(text, starNum){
 	//data
 	let radio = [];
 	let starLabel = [];
-	for(index = 0; index < starNum; index++){
+	for(index = 0; index < 5; index++){
 		
 		radio.push(document.createElement("input"));
 		radio[index].setAttribute("type", "radio");
@@ -89,9 +129,10 @@ function create_review_star_rank(text, starNum){
 	return wrap;
 }
 
+
 //유저 데이터
-function create_review_save_user_title(){
-	
+function create_review_user_title(type, title){
+	var str =  str_replace(title);
 	var content = document.createElement("div");
 	content.setAttribute("class", "mb-3");
 	
@@ -106,7 +147,16 @@ function create_review_save_user_title(){
 	titleTxt.setAttribute("class","form-control");
 	titleTxt.setAttribute("name", "title");
 	titleTxt.setAttribute("id","title");
-	titleTxt.setAttribute("placeholder", "제목을 입력해 주세요");
+	
+	console.log(type);
+	
+	if(type == 1){
+		titleTxt.setAttribute("placeholder", str);
+		titleTxt.setAttribute("value", str);
+	}else{
+		titleTxt.setAttribute("placeholder", "제목을 입력해주세요");
+	}
+	
 	
 	content.appendChild(titleLabel);
 	content.appendChild(titleTxt);
@@ -114,7 +164,9 @@ function create_review_save_user_title(){
 	return content;
 }
 
-function create_review_save_user_content(){
+function create_review_user_content(){
+	
+	
 	
 	var content = document.createElement("div");
 	content.setAttribute("class", "mb-3");
@@ -133,7 +185,6 @@ function create_review_save_user_content(){
 	contentTextarea.setAttribute("rows", "5");
 	contentTextarea.setAttribute("name", "contentValue");
 	contentTextarea.setAttribute("id", "content");
-	contentTextarea.setAttribute("placeholder", "내용을 입력해 주세요");
 	
 	contentScript.setAttribute("type", "text/javascript");
 	contentScript.appendChild(contentScriptTxt);
@@ -146,8 +197,25 @@ function create_review_save_user_content(){
 	return content;
 }
 
+function str_replace(str){
+	
+	str = str.replaceAll("&#32", " ");
+	str = str.replaceAll("&#09", "	");
+	str = str.replaceAll("&#10", "<br>");
+	str = str.replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", "");
+	
+	return str;
+}
 
-
+function getYmd10(d) {
+    //yyyy-mm-dd 포맷 날짜 생성
+    if(d == 'Invalid Date'){
+		d = new Date();
+	}
+	
+	return d.getFullYear() + "-" + ((d.getMonth() + 1) > 9 ? (d.getMonth() + 1).toString() : "0" + (d.getMonth() + 1)) + "-" + (d.getDate() > 9 ? d.getDate().toString() : "0" + d.getDate().toString());
+    
+}
 
 
 

@@ -1,4 +1,4 @@
-package com.spring.project.camping.DTO;
+package com.spring.project.review.DTO;
 
 import java.sql.Date;
 
@@ -11,10 +11,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CampingReviewDTO {
 	private int reviewId;
-	private int loginId;
+	private int memberId;
 	private int contentId;
 	private String title;
-	private Date createDate;
+	private Date regDate;
+	private Date upDate;
 	private String contentValue;
 	private String imgUrl;
 	private int starRanking;

@@ -1,4 +1,4 @@
-<%@page import="com.spring.project.camping.DTO.CampingReviewDTO"%>
+<%@page import="com.spring.project.review.DTO.CampingReviewDTO"%>
 <%@page import="com.spring.project.camping.DTO.CampingVO"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>

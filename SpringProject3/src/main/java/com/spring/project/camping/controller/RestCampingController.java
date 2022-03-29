@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.spring.project.camping.DTO.CampingImgVO;
 import com.spring.project.camping.DTO.CampingVO;
 import com.spring.project.camping.DTO.SearchVO;
 import com.spring.project.camping.service.CampingService;
@@ -37,8 +38,6 @@ public class RestCampingController {
 		}
 		return ar;
 	}
-	
-	
 	
 	@PostMapping(value="/data")
 	public CampingVO insert(CampingVO vo) {
@@ -69,5 +68,4 @@ public class RestCampingController {
 			
 		}
 	}
-
 }
