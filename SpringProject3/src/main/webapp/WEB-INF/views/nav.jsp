@@ -29,7 +29,7 @@
 					 <!-- 추가 및 변경 끝 부분-->
 					<li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
 				</ul>
-				<label id="darkmodecheck">
+				<label id="darkmodecheck" class="cbbgc">
 					<input type="checkbox" id="checkBoxId" checked>
 					<span id="moonsun">
 						<ion-icon name='sunny-outline'></ion-icon>
