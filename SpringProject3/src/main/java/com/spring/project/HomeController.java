@@ -38,7 +38,7 @@ public class HomeController {
 		return "about";
 	}
 	
-<<<<<<< HEAD
+
 	@RequestMapping(value = "/manager", method = RequestMethod.GET)
 	public String manager() {
 		
@@ -53,18 +53,18 @@ public class HomeController {
 	}
 
 	
-}
-=======
+
+
 	@RequestMapping(value = "/camping_index", method = RequestMethod.GET )
 	public String camping_index() {
-		logger.info("Connect camping_index");
+		log.info("Connect camping_index");
 		return "camping_index";
 	}
 	
 	@RequestMapping(value = "/test", method = RequestMethod.GET )
 	public String test() {
-		logger.info("Connect test");
+		log.info("Connect test");
 		return "freeBoard2";
 	}
 }
->>>>>>> refs/heads/jang
+
