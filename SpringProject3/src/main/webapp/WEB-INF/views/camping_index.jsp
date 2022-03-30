@@ -202,7 +202,7 @@
 					      						</div>
 					      						
 					      						<h3 class="heading"><a href="/project/reviewViewer?reviewId=${review.reviewId}">${review.title}</a></h3>
-					      						<p>${review.contentValue}</p>
+					      						<p>${review.review}</p>
 					    					</div>
 					  					</div>
 									</div>

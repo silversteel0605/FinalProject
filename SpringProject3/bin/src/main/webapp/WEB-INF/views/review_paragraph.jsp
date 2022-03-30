@@ -68,12 +68,12 @@
 		<div class="contents">
 			<p class="fs-3"><%= info.getTitle() %></p>
 			<div class="paragraph_header d-flex justify-content-between">
-				<span id="id" data-bs-toggle="modal" data-bs-target="#memberDescription"><%= info.getMemberId() %></span>
-				<span><%= info.getRegDate() %></span>
+				<span id="id" data-bs-toggle="modal" data-bs-target="#memberDescription"><%= info.getMember_id() %></span>
+				<span><%= info.getReg_date() %></span>
 			</div> <hr/>
 			<div class="paragraph_body">
 				<p>
-					<%= info.getContentValue() %>
+					<%= info.getReview() %>
 				</p>
 			</div>
 			<div class="paragraph_comments">

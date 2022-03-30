@@ -18,6 +18,7 @@ import com.spring.project.camping.DTO.CampingVO;
 import com.spring.project.camping.DTO.SearchVO;
 import com.spring.project.camping.service.CampingService;
 import com.spring.project.review.DTO.CampingReviewDTO;
+import com.spring.project.review.controller.CampingReviewController;
 import com.spring.project.review.service.CampingReviewService;
 import com.spring.project.utill.PagingVO;
 
@@ -32,6 +33,8 @@ public class CampingController {
 	
 	@Autowired
 	CampingReviewService reviewService = null;
+	
+	CampingReviewController crc = null;
 
 	private static int cntPerPage = 9;
 	
@@ -79,8 +82,7 @@ public class CampingController {
 		m.addAttribute("type", type);
 		m.addAttribute("img_vo", img_vo);
 		
-		
-		//reviewControlling(m, nowPage, contentId, vo, value);
+		reviewControlling(m, nowPage, contentId, vo, value);
 		
 		return "camping_index";
 	}
@@ -128,6 +130,65 @@ public class CampingController {
 		m.addAttribute("lists", ar);
 	}
 	
-	
-	
+	public void reviewControlling(
+			Model m, 
+			@RequestParam(value="nowPage", required=false)String nowPage, 
+			@RequestParam(value="contentId") String contentId, 
+			SearchVO vo,
+			String value
+		) {
+		
+		int reviewTotal;
+		List<CampingReviewDTO> reviews;
+		PagingVO pvo;
+		Map<String, Object> reviewMap = new HashMap();
+		
+		reviewTotal = reviewService.getReviewAllPageCnt();
+		
+		String searchTy;
+		
+		nowPage = nowPage != null ? nowPage :"1";
+		
+		searchTy = vo.getSearchTy();
+		
+		pvo = new PagingVO(reviewTotal, Integer.parseInt(nowPage), cntPerPage);
+		vo.calcStartEnd(Integer.parseInt(nowPage), pvo.getCntPerPage());
+		log.info("vo.getStart() " + vo.getStart());
+		log.info("vo.getEnd() " +vo.getEnd());
+		
+		if (searchTy != null) {
+			if (searchTy.equals("condition")) {
+				vo.setConditionUri();
+			} else {
+				vo.setTagUri();
+			}
+		}
+		vo.setOrderUri();
+		
+		log.info("vo.getUri() " + vo.getUri());
+		
+		reviewMap.put("contentId", Integer.parseInt(contentId));
+		reviewMap.put("start", vo.getStart());
+		reviewMap.put("end", vo.getEnd());
+		
+		if(value == null) {
+			reviewMap.put("value", "upDate");
+		}else {
+			reviewMap.put("value", value);
+		}
+		
+		log.info("value : " + value);
+		
+		reviews = reviewService.getReviewSearchData(reviewMap);
+		
+		log.info(nowPage);
+		log.info("reviewTotal " + reviewTotal);
+		log.info("reviews " + reviews);
+		
+		m.addAttribute("search", vo);
+		m.addAttribute("paging", pvo);
+		m.addAttribute("lists", reviews);
+		
+	}
+
 }

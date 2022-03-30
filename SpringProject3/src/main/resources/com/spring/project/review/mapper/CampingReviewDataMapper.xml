@@ -35,8 +35,8 @@
     
     <select id="getSortReviewDatas" parameterType="map" resultType="com.spring.project.review.DTO.CampingReviewDTO">
     	select * from review where contentid=#{contentId} order by
-    	<if test="value != null and value.equals('createDate')">
-    		reg_date DESC
+    	<if test="value != null and value.equals('upDate')">
+    		up_date DESC
     	</if>
     	<if test="value != null and value.equals('starRanking')">
     		starRanking DESC
@@ -49,8 +49,8 @@
     
     <select id="getReviewSearchData" resultType="com.spring.project.review.DTO.CampingReviewDTO" parameterType="Map">
     	SELECT * FROM ( SELECT ROWNUM RN, A.* FROM ( select * from review where contentId = #{contentId} ) A ) WHERE RN BETWEEN #{start} AND #{end} order by
-    	<if test="value != null and value.equals('createDate')">
-    		reg_date DESC
+    	<if test="value != null and value.equals('upDate')">
+    		up_date DESC
     	</if>
     	<if test="value != null and value.equals('starRanking')">
     		starRanking DESC
