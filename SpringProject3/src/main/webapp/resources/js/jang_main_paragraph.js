@@ -90,24 +90,22 @@ document.addEventListener('click', (e) => {
 	const targetPostId = document.getElementById('comment_postId').value; // post_id
 	const targetOrdernum = document.getElementById('comment_ordernum').value; // ordernum
 	const targetCategoryId = document.getElementById('comment_categoryId').value; //category_id
-	const coinsideName = 'co_comment_newBtn';
+	const compare_co_comment_newBtn = 'co_comment_newBtn';
 	const beforeInput = document.getElementById('co_commentInput'); // 이전 생성된 대댓글 input
 	
 	
 	console.log('타켁id: ', targetCommentId);
 	console.log('targetInput: ', targetInput)
 	console.log('클릭클래스이름: ', targetClass);
-	console.log('일치대상문자열: ', coinsideName);
+	console.log('일치대상문자열: ', compare_co_comment_newBtn);
 	console.log('클릭아이디: ', targetCommentId);
 	console.log('post+id: ', targetPostId);	
 	console.log('ordernum: ', targetOrdernum);
 	console.log('categoryId: ', targetCategoryId);
 	
-	if (targetClass == coinsideName) {
+	if (targetClass == compare_co_comment_newBtn) {
 		
 		if (beforeInput) {
-			//const beforeInput_commentId = document.querySelector('#co_commentInput > input');
-			//console.log('beforeInput_commentId: ', beforeInput_commentId.value);
 			console.info('null 들어옴');
 			beforeInput.remove();
 		}
@@ -142,8 +140,6 @@ document.addEventListener('click', (e) => {
 			xhttpComments.setRequestHeader('content-type', 'application/json;charset=utf-8');
 			xhttpComments.send(JSON.stringify(newCoCommentData));
 			
-			// coCommentContents = null;
-			
 			//코코멘트 출력
 			const targetCommentDiv = document.getElementById(tempTargetCommentId);
 			console.log('tempTargetCommentId: ', tempTargetCommentId);
@@ -167,7 +163,7 @@ function mkComment(member_id, comments, comment_id, post_id, ordernum, category_
 				<div class="d-flex justify-content-start">
 					<p>${comments}</p>
 					<i class="bi bi-x-circle comment_icon"></i>
-					<i id="co_comment_editBtn" class="bi bi-pen comment_icon"></i>
+					<i id="comment_editBtn_${comment_id}" class="bi bi-pen comment_icon comment_editBtn"></i>
 					<i id="co_comment_newBtn_${comment_id}" class="bi bi-chat-dots comment_icon co_comment_newBtn"></i>
 					<input id="comment_commentId_${comment_id }" type="hidden" value="${comment_id }" />
 					<input id="comment_postId" type="hidden" value="${post_id }" />
@@ -220,15 +216,6 @@ function mkCoCommentInput(comment_id) {
 function textNode(str) {
 	return document.createTextNode(str);
 }
-
-// 글 수정
-const contentsEdit = document.getElementById('contentsEdit');
-
-contentsEdit.addEventListener('click', (e) => {
-	console.log(document.querySelector('#post_id').value);
-	console.log('버튼눌림');
-	location.href = `./write?post_id=${document.querySelector('#post_id').value}&board_class=${document.querySelector('#board_class').value}`;
-});
 
 
 

@@ -14,6 +14,7 @@ writeSavBtn.addEventListener('click', (e) => {
 	const title = document.getElementById('title').value;
 	const writeCategory = document.getElementById('writeCategory').value;
 	const board_class = document.getElementById('board_class').value;
+	const edit = document.getElementById('edit');
 	var contents = CKEDITOR.instances.writeEditor.getData();
 	
 	console.log(title);
@@ -22,6 +23,12 @@ writeSavBtn.addEventListener('click', (e) => {
 	console.dir(contents);
 	
 	var writeContents = [title, contents, board_class, writeCategory];
+	
+	if (edit) {
+		console.log(edit);
+		writeContents.push(edit);
+		console.log(writeContents);
+	}
 	
 	writeSend('./write', {'contents': writeContents});
 	

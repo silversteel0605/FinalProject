@@ -270,10 +270,9 @@ public class PostController {
 	
 	//글작성하기
 	@GetMapping("/write")
-	public String write(HttpServletRequest request, Model model, String board_class, Integer post_id) {
+	public String write(HttpServletRequest request, Model model, String board_class, Integer post_id, boolean edit) {
 		HttpSession session = request.getSession();
-		
-		if (post_id != null) {
+		if (edit) {
 			model.addAttribute("contents", postService.getContents(post_id));
 		}
 		

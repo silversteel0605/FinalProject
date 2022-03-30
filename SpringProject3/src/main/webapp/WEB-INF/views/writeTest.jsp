@@ -99,7 +99,10 @@
 	       			<div class="mb-3">
 						<label for="writeEditor">내용</label>
 						<textarea class="form-control" rows="5" name="contents" id="writeEditor" placeholder="내용을 입력해 주세요" >
-							
+							<c:if test="${contents.contents != null }">
+								${contents.contents }
+								<input type="hidden" id="edit" value="true" />
+							</c:if>
 						</textarea>
 					</div>	
 					<input type="hidden" id="board_class" value="${board_class }" />
