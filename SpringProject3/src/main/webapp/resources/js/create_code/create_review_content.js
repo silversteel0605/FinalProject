@@ -1,5 +1,5 @@
 
-//ÀüÃ¼
+//all
 function create_review_save_content(type, r_dto){
 	
 	console.log(r_dto.contentId, type, r_dto);
@@ -17,16 +17,20 @@ function create_review_save_content(type, r_dto){
 	req_campingId.setAttribute("value", r_dto.contentId);
 	req_campingId.style.display = "none";
 	
-	req_reviewId.setAttribute("name", "reviewId");
+	req_reviewId.setAttribute("name", "review_id");
 	req_reviewId.setAttribute("value", r_dto.reviewId);
 	req_reviewId.style.display = "none";
 	
-	req_loginId.setAttribute("name", "loginId");
-	req_loginId.setAttribute("value", r_dto.loginId);
+	req_loginId.setAttribute("name", "member_id");
+	req_loginId.setAttribute("value", r_dto.memberId);
 	req_loginId.style.display = "none";
 	
-	req_createDate.setAttribute("name", "createDate");
-	req_createDate.setAttribute("value", getYmd10(r_dto.createDate));
+	req_createDate.setAttribute("name", "reg_date");
+	req_createDate.setAttribute("value", getYmd10(r_dto.regDate));
+	req_createDate.style.display = "none";
+	
+	req_createDate.setAttribute("name", "up_date");
+	req_createDate.setAttribute("value", getYmd10(r_dto.upDate));
 	req_createDate.style.display = "none";
 	
 	req_imgUrl.setAttribute("name", "imgUrl");
@@ -37,11 +41,15 @@ function create_review_save_content(type, r_dto){
 	req_clickNum.setAttribute("value", r_dto.clickNum);
 	req_clickNum.style.display = "none";
 	
+	req_clickNum.setAttribute("name", "declNum");
+	req_clickNum.setAttribute("value", r_dto.declkNum);
+	req_clickNum.style.display = "none";
+	
 	//newMainForm.appendChild(campingId);
 	
 	let submit = document.createElement("input");
 	let previous = document.createElement("button");
-	let previousTxt = document.createTextNode("¸ñ·Ï");
+	let previousTxt = document.createTextNode("ì´ì „");
 	
 	submit.setAttribute("type", "submit");
 	submit.setAttribute("class", "btn btn-sm btn-primary");
@@ -86,12 +94,12 @@ function create_review_form(type){
 	return newMainForm;
 }
 
-//Á¦¸ñ
+//Star Ranking
 function create_review_star_rank(type){
 	
 	//box
 	var wrap = document.createElement("div");
-	var starText = document.createTextNode("ÀÌ Ä·ÇÎÀåÀ» ÃßÃµÇÏ½Ã°Ú½À´Ï±î?");
+	var starText = document.createTextNode("ì´ ìº í•‘ìž¥ ì¶”ì²œí•˜ì‹¤ ê²ë‹ˆê¹Œ?");
 	var container = document.createElement("div");
 	var content = document.createElement("div"); 
 	var starIcon = document.createElement("div");
@@ -111,6 +119,9 @@ function create_review_star_rank(type){
 		radio[index].setAttribute("name", "starRanking");
 		radio[index].setAttribute("id", "rating"+(index+1));
 		radio[index].setAttribute("value", index+1);
+		if(index == 4){
+			radio[index].setAttribute("checked", "checked");	
+		}
 		
 		starLabel.push(document.createElement("label"));
 		starLabel[index].setAttribute("for", "rating"+(index+1));
@@ -130,14 +141,14 @@ function create_review_star_rank(type){
 }
 
 
-//À¯Àú µ¥ÀÌÅÍ
+//Title
 function create_review_user_title(type, title){
 	var str =  str_replace(title);
 	var content = document.createElement("div");
 	content.setAttribute("class", "mb-3");
 	
 	let titleLabel = document.createElement("label");
-	let titleLabelTxt = document.createTextNode("Á¦¸ñ");
+	let titleLabelTxt = document.createTextNode("ì œëª©");
 	let titleTxt = document.createElement("input");
 	
 	titleLabel.setAttribute("for", "title");
@@ -154,7 +165,7 @@ function create_review_user_title(type, title){
 		titleTxt.setAttribute("placeholder", str);
 		titleTxt.setAttribute("value", str);
 	}else{
-		titleTxt.setAttribute("placeholder", "Á¦¸ñÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä");
+		titleTxt.setAttribute("placeholder", "ì œëª©ì„ ìž…ë ¥í•´ì£¼ì„¸ìš”");
 	}
 	
 	
@@ -164,6 +175,7 @@ function create_review_user_title(type, title){
 	return content;
 }
 
+//Content Value
 function create_review_user_content(){
 	
 	
@@ -173,17 +185,17 @@ function create_review_user_content(){
 	
 	// start content
 	let contentLabel = document.createElement("label");
-	let contentLabelTxt = document.createTextNode("³»¿ë");
+	let contentLabelTxt = document.createTextNode("ë‚´ìš©ì„ ìž…ë ¥í•´ì£¼ì„¸ìš”");
 	let contentTextarea = document.createElement("textarea");
 	let contentScript = document.createElement("script");
 	let contentScriptTxt = document.createTextNode("CKEDITOR.replace('content', { filebrowserUploadUrl:'/food/imageUpload.do' });");
 	
-	contentLabel.setAttribute("for", "contentValue");
+	contentLabel.setAttribute("for", "review");
 	contentLabel.appendChild(contentLabelTxt);
 	
 	contentTextarea.setAttribute("class", "form-control");
 	contentTextarea.setAttribute("rows", "5");
-	contentTextarea.setAttribute("name", "contentValue");
+	contentTextarea.setAttribute("name", "review");
 	contentTextarea.setAttribute("id", "content");
 	
 	contentScript.setAttribute("type", "text/javascript");
@@ -208,10 +220,12 @@ function str_replace(str){
 }
 
 function getYmd10(d) {
-    //yyyy-mm-dd Æ÷¸Ë ³¯Â¥ »ý¼º
+    //yyyy-mm-dd
     if(d == 'Invalid Date'){
 		d = new Date();
 	}
+	
+	console.log(d);
 	
 	return d.getFullYear() + "-" + ((d.getMonth() + 1) > 9 ? (d.getMonth() + 1).toString() : "0" + (d.getMonth() + 1)) + "-" + (d.getDate() > 9 ? d.getDate().toString() : "0" + d.getDate().toString());
     

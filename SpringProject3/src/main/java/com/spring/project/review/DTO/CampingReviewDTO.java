@@ -10,14 +10,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CampingReviewDTO {
-	private int reviewId;
-	private int memberId;
+	private int review_id;
+	private String member_id;
 	private int contentId;
 	private String title;
-	private Date regDate;
-	private Date upDate;
-	private String contentValue;
+	private Date reg_date;
+	private Date up_date;
+	private String review;
 	private String imgUrl;
 	private int starRanking;
-	private int clickNum;
+	private int views;
+	private int decl;
 }

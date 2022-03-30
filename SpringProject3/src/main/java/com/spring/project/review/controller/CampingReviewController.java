@@ -1,5 +1,9 @@
 package com.spring.project.review.controller;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.spring.project.camping.DTO.SearchVO;
 import com.spring.project.review.DTO.CampingReviewDTO;
 import com.spring.project.review.service.CampingReviewService;
+import com.spring.project.utill.PagingVO;
 import com.spring.project.utill.WordChange;
 
 import lombok.extern.log4j.Log4j;
@@ -46,12 +52,12 @@ public class CampingReviewController {
 			WordChange wc = new WordChange();
 			
 			log.info(wc.javaScriptSpace(r_dto.getTitle()));
-			log.info(wc.javaScriptSpace(r_dto.getContentValue()));
+			log.info(wc.javaScriptSpace(r_dto.getReview()));
 			
 			r_dto.setTitle(wc.javaScriptSpace(r_dto.getTitle()));
-			r_dto.setContentValue(wc.javaScriptSpace(r_dto.getContentValue()));
+			r_dto.setReview(wc.javaScriptSpace(r_dto.getReview()));
 			
-			m.addAttribute("reviewId", r_id);
+			m.addAttribute("review_id", r_id);
 			
 			log.info("수정페이지");
 		} catch (Exception e) {
@@ -72,9 +78,12 @@ public class CampingReviewController {
 	
 	@RequestMapping(value = "/reviewUpdata", method = RequestMethod.GET)
 	public String reviewUpdata(Model m, @RequestParam(value="reviewId", required=false) String reviewId, CampingReviewDTO r_dto) {
-
+		
 		service.reviewUpdate(r_dto);
-		m.addAttribute("reviewId",r_dto.getReviewId());
+		
+		log.info("updata : " + r_dto);
+		
+		m.addAttribute("reviewId", r_dto.getReview_id());
 		
 		return "redirect:reviewViewer";
 	}
@@ -128,6 +137,4 @@ public class CampingReviewController {
 		
 		return "review_paragraph";
 	}
-	
-	
 }

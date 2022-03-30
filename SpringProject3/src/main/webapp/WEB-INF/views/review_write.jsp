@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
@@ -57,8 +57,8 @@
 	  <div class="container">
 	    <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
 	      <div class="col-md-9 ftco-animate pb-5 text-center">
-	       <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="fa fa-chevron-right"></i></a></span> <span>Blog <i class="fa fa-chevron-right"></i></span></p>
-	       <h1 class="mb-0 bread">Blog</h1>
+	       <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="fa fa-chevron-right"></i></a></span> <span>Review Write <i class="fa fa-chevron-right"></i></span></p>
+	       <h1 class="mb-0 bread">Review Write</h1>
 	     </div>
 	   </div>
 	 </div>
@@ -68,20 +68,22 @@
 	  	<div class="container" id ="contentBox">
 	  	
 	  		<!-- create review JSP JavaScript -->
-			<script type="text/javascript" charset="EUC-KR" src="./resources/js/create_code/create_review_content.js"></script >
+			<script type="text/javascript" charset="utf-8" src="./resources/js/create_code/create_review_content.js"></script >
 			
 			<script>
 			
 					var r_dto = {
-							reviewId : ${r_dto.reviewId},
-							loginId : ${r_dto.loginId},
+							reviewId : ${r_dto.review_id},
+							memberId : '${r_dto.member_id}',
 							contentId : ${contentId},
 							title : '${r_dto.title}',
-							createDate : new Date('${r_dto.createDate}'),
-							contentValue : '${r_dto.contentValue}',
+							regDate : new Date('${r_dto.reg_date}'),
+							upDate : new Date('${r_dto.up_date}'),
+							review : '${r_dto.review}',
 							imgUrl : '${r_dto.imgUrl}',
 							starRanking : ${r_dto.starRanking},
-							clickNum : ${r_dto.clickNum}
+							clickNum : ${r_dto.views},
+							declkNum : ${r_dto.decl}
 					}
 
 					create_review_save_content(${type}, r_dto);
