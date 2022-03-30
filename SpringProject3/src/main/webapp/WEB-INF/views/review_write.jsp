@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
@@ -68,21 +68,21 @@
 	  	<div class="container" id ="contentBox">
 	  	
 	  		<!-- create review JSP JavaScript -->
-			<script type="text/javascript" charset="EUC-KR" src="./resources/js/create_code/create_review_content.js"></script >
+			<script type="text/javascript" charset="utf-8" src="./resources/js/create_code/create_review_content.js"></script >
 			
 			<script>
 			
 					var r_dto = {
-							reviewId : ${r_dto.reviewId},
-							memberId : ${r_dto.memberId},
+							reviewId : ${r_dto.review_id},
+							memberId : '${r_dto.member_id}',
 							contentId : ${contentId},
 							title : '${r_dto.title}',
-							regDate : new Date('${r_dto.regDate}'),
-							upDate : new Date('${r_dto.upDate}'),
+							regDate : new Date('${r_dto.reg_date}'),
+							upDate : new Date('${r_dto.up_date}'),
 							review : '${r_dto.review}',
 							imgUrl : '${r_dto.imgUrl}',
 							starRanking : ${r_dto.starRanking},
-							clickNum : ${r_dto.clickNum},
+							clickNum : ${r_dto.views},
 							declkNum : ${r_dto.decl}
 					}
 

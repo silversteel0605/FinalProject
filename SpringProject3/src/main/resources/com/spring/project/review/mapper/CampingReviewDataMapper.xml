@@ -10,7 +10,7 @@
     </select>
     
     <select id="getReviewInfo"  resultType="com.spring.project.review.DTO.CampingReviewDTO">
-    	SELECT * from review where reviewId=#{reviewId}
+    	SELECT * from review where review_id=#{reviewId}
     </select>
     
     <insert id="initReviewData" parameterType="com.spring.project.review.DTO.CampingReviewDTO">
@@ -18,19 +18,19 @@
     </insert>
     
     <delete id="deleteReviewData" parameterType="_int">
-    	DELETE FROM review WHERE reviewId = #{reviewId}
+    	DELETE FROM review WHERE review_id = #{reviewId}
     </delete>
     
     <update id="reviewClickNumUp" parameterType="com.spring.project.review.DTO.CampingReviewDTO">
-    	UPDATE review set views=views+1 WHERE reviewId = #{reviewId}
+    	UPDATE review set views=views+1 WHERE review_id = #{reviewId}
     </update>
     
     <update id="reviewDcelClickNumUp" parameterType="com.spring.project.review.DTO.CampingReviewDTO">
-    	UPDATE review set dcel=dcel+1 WHERE reviewId = #{reviewId}
+    	UPDATE review set dcel=dcel+1 WHERE review_id = #{reviewId}
     </update>
     
     <update id="reviewUpdate" parameterType="com.spring.project.review.DTO.CampingReviewDTO">
-    	UPDATE review SET title=#{title}, review=#{contentValue}, starRanking=#{starRanking} WHERE reviewId = #{reviewId}
+    	UPDATE review SET title=#{title}, review=#{review}, starRanking=#{starRanking} WHERE review_id = #{review_id}
     </update>
     
     <select id="getSortReviewDatas" parameterType="map" resultType="com.spring.project.review.DTO.CampingReviewDTO">

@@ -1,6 +1,6 @@
 <%@page import="com.spring.project.review.DTO.CampingReviewDTO"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+    pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
@@ -21,13 +21,13 @@
   <link rel="stylesheet" href="<c:url value="/resources/css/jquery.timepicker.css"/>"/>
   <link rel="stylesheet" href="<c:url value="/resources/css/flaticon.css"/>" />
   <link rel="stylesheet" href="<c:url value="/resources/css/style.css"/>"/>
-  <!-- JangEc °³ÀÎ CSS/Script -->
+  <!-- JangEc ê°œì¸ CSS/Script -->
   <link rel="stylesheet" href="<c:url value="/resources/css/jangec.css"/>"/>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   
-  <script src="<c:url value="/resources/js/review.js"/>" ></script>
+  <script src="<c:url value="/resources/js/review.js"/>" charset="UTF-8"></script>
 </head>
 <body>
 	<% CampingReviewDTO info = (CampingReviewDTO)request.getAttribute("r_dto"); %>
@@ -64,15 +64,15 @@
  </div>
 </section>
 
-<!-- ¼öÁ¤ -->
+<!-- ìˆ˜ì • -->
 <section class="ftco-section">
 	<div class="container">
-		<!-- ÄÁÅÙÃ÷ -->
+		<!-- ì»¨í…ì¸  -->
 		<div class="contents">
 			<p class="fs-3"><%= info.getTitle() %></p>
 			<div class="paragraph_header d-flex justify-content-between">
-				<span id="id" data-bs-toggle="modal" data-bs-target="#memberDescription"><%= info.getMemberId() %></span>
-				<span><%= info.getUpDate() %></span>
+				<span id="id" data-bs-toggle="modal" data-bs-target="#memberDescription"><%= info.getMember_id() %></span>
+				<span><%= info.getUp_date() %></span>
 			</div> <hr/>
 			<div class="paragraph_body">
 				<p>
@@ -83,14 +83,14 @@
 				<div class="comments_header d-flex justify-content-between">
 					<p>COMMENTS</p>
 					<div>
-						<span data-bs-toggle="modal" data-bs-target="#memberDescription">Á¶È¸¼ö : <%= info.getClickNum() %></span>
-						<span>ÆòÁ¡ : <%= info.getStarRanking() %></span>
+						<span data-bs-toggle="modal" data-bs-target="#memberDescription">ì¡°íšŒìˆ˜ : <%=info.getViews()  %></span>
+						<span>í‰ì  : <%= info.getStarRanking() %></span>
 					</div>
 				</div> <hr />
 				<div class="comments_body">
-					<p>Ææ¼Ç »çÀå´Ô</p>
+					<p>íŽœì…˜ ì‚¬ìž¥ë‹˜</p>
 					<div class="d-flex justify-content-start">
-						<p>±×°Ô ³Ê¾ß</p>
+						<p>ê·¸ê²Œ ë„ˆì•¼</p>
 						<i class="bi bi-x-circle comment_icon"></i>
 						<i id="co_comment_addBtn" class="bi bi-pen comment_icon"></i>
 						<i id="co_comment_newBtn" class="bi bi-chat-dots comment_icon"></i>
@@ -98,23 +98,12 @@
 					<div id="co_comment">
 						<form action="">
 							<div class="form-floating">
-							  <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea">Test Text</textarea>
-							  <label for="floatingTextarea">Comments</label>
-							</div>
-							<div class="d-flex justify-content-end">
-								<button id="co_comment_saveBtn" class="btn btn-outline-success" type="submit">ÀúÀå</button>
-								<button id="co_comment_cancelBtn" class="btn btn-outline-success" type="button">Ãë¼Ò</button>
-							</div>
-						</form>
-					</div>
-					<div id="comment">
-						<form action="">
-							<div class="form-floating">
 							  <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
 							  <label for="floatingTextarea">Comments</label>
 							</div>
 							<div class="d-flex justify-content-end">
-								<button id="comment_saveBtn" class="btn btn-outline-success" type="submit">ÀúÀå</button>
+								<button id="co_comment_saveBtn" class="btn btn-outline-success" type="submit">ì €ìž¥</button>
+								<button id="co_comment_cancelBtn" class="btn btn-outline-success" type="button">ì·¨ì†Œ</button>
 							</div>
 						</form>
 					</div>
@@ -122,24 +111,16 @@
 				<div class="comments_footer"></div>
 			</div> <hr />
 			<div class="paragraph_footer d-flex justify-content-end">
-				<button class="btn"><a href="/project/review?type=1&reviewId=<%= info.getReviewId() %>&contentId=<%=info.getContentId() %>">¼öÁ¤</a></button>
-				<button id="reivewDelete" class="btn" onclick="showPopUp('<%= info.getReviewId() %>','<%=info.getContentId() %>')">»èÁ¦</button>
-				<button class="btn" onclick="back()">¸ñ·Ï</button>
+				<button class="btn"><a href="/project/review?type=1&reviewId=<%= info.getReview_id() %>&contentId=<%=info.getContentId() %>">ìˆ˜ì •</a></button>
+				<button id="reivewDelete" class="btn" onclick="showPopUp('<%= info.getReview_id() %>','<%=info.getContentId() %>')">ì‚­ì œ</button>
+				<button class="btn" onclick="back()">ëª©ë¡</button>
 			</div>
 		</div>		
-		<!-- /ÄÁÅÙÃ÷ -->
+		<!-- /ì»¨í…ì¸  -->
 	</div>
 </section>
-
-<!-- Modal -->
-<template id="deleteModal">
-	<swal-title>»èÁ¦ÇÏ½Ã°Ú½À´Ï±î?</swal-title>
-	<swal-button type="confirm">È®ÀÎ</swal-button>
-	<swal-button type="cancel">Ãë¼Ò</swal-button>
-</template>
-<!-- /Modal -->
 	
-<!-- /¼öÁ¤ -->
+<!-- /ìˆ˜ì • -->
 
 <section class="ftco-intro ftco-section ftco-no-pt">
  <div class="container">
@@ -239,7 +220,6 @@
 <script src="<c:url value="/resources/js/bootstrap-datepicker.js"/>"></script>
 <script src="<c:url value="/resources/js/scrollax.min.js"/>"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-<script src="<c:url value="/resources/js/google-map.js"/>"></script>
 <script src="<c:url value="/resources/js/main.js"/>"></script>
 <script src="<c:url value="/resources/js/jangec.js"/>"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>

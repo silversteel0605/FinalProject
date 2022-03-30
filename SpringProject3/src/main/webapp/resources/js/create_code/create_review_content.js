@@ -17,19 +17,19 @@ function create_review_save_content(type, r_dto){
 	req_campingId.setAttribute("value", r_dto.contentId);
 	req_campingId.style.display = "none";
 	
-	req_reviewId.setAttribute("name", "reviewId");
+	req_reviewId.setAttribute("name", "review_id");
 	req_reviewId.setAttribute("value", r_dto.reviewId);
 	req_reviewId.style.display = "none";
 	
-	req_loginId.setAttribute("name", "memberId");
+	req_loginId.setAttribute("name", "member_id");
 	req_loginId.setAttribute("value", r_dto.memberId);
 	req_loginId.style.display = "none";
 	
-	req_createDate.setAttribute("name", "regDate");
+	req_createDate.setAttribute("name", "reg_date");
 	req_createDate.setAttribute("value", getYmd10(r_dto.regDate));
 	req_createDate.style.display = "none";
 	
-	req_createDate.setAttribute("name", "upDate");
+	req_createDate.setAttribute("name", "up_date");
 	req_createDate.setAttribute("value", getYmd10(r_dto.upDate));
 	req_createDate.style.display = "none";
 	
@@ -49,7 +49,7 @@ function create_review_save_content(type, r_dto){
 	
 	let submit = document.createElement("input");
 	let previous = document.createElement("button");
-	let previousTxt = document.createTextNode("¸ñ·Ï");
+	let previousTxt = document.createTextNode("ì´ì „");
 	
 	submit.setAttribute("type", "submit");
 	submit.setAttribute("class", "btn btn-sm btn-primary");
@@ -99,7 +99,7 @@ function create_review_star_rank(type){
 	
 	//box
 	var wrap = document.createElement("div");
-	var starText = document.createTextNode("ÀÌ Ä·ÇÎÀåÀ» ÃßÃµÇÏ½Ã°Ú½À´Ï±î?");
+	var starText = document.createTextNode("ì´ ìº í•‘ì¥ ì¶”ì²œí•˜ì‹¤ ê²ë‹ˆê¹Œ?");
 	var container = document.createElement("div");
 	var content = document.createElement("div"); 
 	var starIcon = document.createElement("div");
@@ -145,7 +145,7 @@ function create_review_user_title(type, title){
 	content.setAttribute("class", "mb-3");
 	
 	let titleLabel = document.createElement("label");
-	let titleLabelTxt = document.createTextNode("Á¦¸ñ");
+	let titleLabelTxt = document.createTextNode("ì œëª©");
 	let titleTxt = document.createElement("input");
 	
 	titleLabel.setAttribute("for", "title");
@@ -162,7 +162,7 @@ function create_review_user_title(type, title){
 		titleTxt.setAttribute("placeholder", str);
 		titleTxt.setAttribute("value", str);
 	}else{
-		titleTxt.setAttribute("placeholder", "Á¦¸ñÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä");
+		titleTxt.setAttribute("placeholder", "ì œëª©ì„ ì…ë ¥í•´ì£¼ì„¸ìš”");
 	}
 	
 	
@@ -182,7 +182,7 @@ function create_review_user_content(){
 	
 	// start content
 	let contentLabel = document.createElement("label");
-	let contentLabelTxt = document.createTextNode("³»¿ëÀ» ÀÛ¼ºÇØÁÖ¼¼¿ä");
+	let contentLabelTxt = document.createTextNode("ë‚´ìš©ì„ ì…ë ¥í•´ì£¼ì„¸ìš”");
 	let contentTextarea = document.createElement("textarea");
 	let contentScript = document.createElement("script");
 	let contentScriptTxt = document.createTextNode("CKEDITOR.replace('content', { filebrowserUploadUrl:'/food/imageUpload.do' });");

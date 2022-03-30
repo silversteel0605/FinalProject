@@ -197,11 +197,11 @@
 					        						</div>
 					        						<div class="two">
 														<span class="yr">2020</span>
-														<span class="mos">${review.upDate}</span>
+														<span class="mos">${review.up_date}</span>
 					        						</div>
 					      						</div>
 					      						
-					      						<h3 class="heading"><a href="/project/reviewViewer?reviewId=${review.reviewId}">${review.title}</a></h3>
+					      						<h3 class="heading"><a href="/project/reviewViewer?reviewId=${review.review_id}">${review.title}</a></h3>
 					      						<p>${review.review}</p>
 					    					</div>
 					  					</div>

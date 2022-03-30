@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CampingReviewDTO {
 	private int review_id;
-	private int member_id;
+	private String member_id;
 	private int contentId;
 	private String title;
 	private Date reg_date;
@@ -19,6 +19,6 @@ public class CampingReviewDTO {
 	private String review;
 	private String imgUrl;
 	private int starRanking;
-	private int clickNum;
+	private int views;
 	private int decl;
 }

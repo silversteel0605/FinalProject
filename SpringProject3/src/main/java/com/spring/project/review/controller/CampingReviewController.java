@@ -57,7 +57,7 @@ public class CampingReviewController {
 			r_dto.setTitle(wc.javaScriptSpace(r_dto.getTitle()));
 			r_dto.setReview(wc.javaScriptSpace(r_dto.getReview()));
 			
-			m.addAttribute("reviewId", r_id);
+			m.addAttribute("review_id", r_id);
 			
 			log.info("수정페이지");
 		} catch (Exception e) {
@@ -78,9 +78,12 @@ public class CampingReviewController {
 	
 	@RequestMapping(value = "/reviewUpdata", method = RequestMethod.GET)
 	public String reviewUpdata(Model m, @RequestParam(value="reviewId", required=false) String reviewId, CampingReviewDTO r_dto) {
-
+		
 		service.reviewUpdate(r_dto);
-		m.addAttribute("reviewId",r_dto.getReview_id());
+		
+		log.info("updata : " + r_dto);
+		
+		m.addAttribute("reviewId", r_dto.getReview_id());
 		
 		return "redirect:reviewViewer";
 	}
