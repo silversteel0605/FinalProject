@@ -1,3 +1,6 @@
+const post_id = document.getElementById('post_id').value;
+const board_class = document.getElementById('board_class').value;
+
 function goBoard(board_class) {
 	if (board_class == 0) {
 		location.href = `/project/board`	
@@ -78,83 +81,87 @@ xhttpComments.addEventListener('readystatechange', (e) => {
 });
 
 // 코코멘트
-// https://hianna.tistory.com/484 참고해서 다시 만들기
 
 /* 코코멘트 input 생성 */
 const co_comment_input = document.getElementById('co_comment_input');
 
 document.addEventListener('click', (e) => {
-	const targetClass = e.target.className.substring('bi bi-chat-dots comment_icon '.length);
-	const targetCommentId = e.target.id.substring('co_comment_newBtn_'.length); // comment_id
-	const targetInput = document.getElementById(targetCommentId); //대댓글 div
-	const targetPostId = document.getElementById('comment_postId').value; // post_id
-	const targetOrdernum = document.getElementById('comment_ordernum').value; // ordernum
-	const targetCategoryId = document.getElementById('comment_categoryId').value; //category_id
-	const compare_co_comment_newBtn = 'co_comment_newBtn';
-	const beforeInput = document.getElementById('co_commentInput'); // 이전 생성된 대댓글 input
 	
-	
-	console.log('타켁id: ', targetCommentId);
-	console.log('targetInput: ', targetInput)
-	console.log('클릭클래스이름: ', targetClass);
-	console.log('일치대상문자열: ', compare_co_comment_newBtn);
-	console.log('클릭아이디: ', targetCommentId);
-	console.log('post+id: ', targetPostId);	
-	console.log('ordernum: ', targetOrdernum);
-	console.log('categoryId: ', targetCategoryId);
-	
-	if (targetClass == compare_co_comment_newBtn) {
+	if (document.querySelector('#commentsEA').value > 0) {
+		const targetClass = e.target.className.substring('bi bi-chat-dots comment_icon '.length);
+		const targetCommentId = e.target.id.substring('co_comment_newBtn_'.length); // comment_id
+		const targetInput = document.getElementById(targetCommentId); //대댓글 div
+		const targetPostId = document.getElementById('post_id').value; // post_id
+		const targetOrdernum = document.getElementById('comment_ordernum').value; // ordernum
+		const targetCategoryId = document.getElementById('comment_categoryId').value; //category_id
+		const compare_co_comment_newBtn = 'co_comment_newBtn';
+		const beforeInput = document.getElementById('co_commentInput'); // 이전 생성된 대댓글 input
 		
-		if (beforeInput) {
-			console.info('null 들어옴');
-			beforeInput.remove();
-		}
 		
-		targetInput.appendChild(mkCoCommentInput(targetCommentId));
-		/* /코코멘트 input 생성 */
+		console.log('타켁id: ', targetCommentId);
+		console.log('targetInput: ', targetInput)
+		console.log('클릭클래스이름: ', targetClass);
+		console.log('일치대상문자열: ', compare_co_comment_newBtn);
+		console.log('클릭아이디: ', targetCommentId);
+		console.log('post+id: ', targetPostId);	
+		console.log('ordernum: ', targetOrdernum);
+		console.log('categoryId: ', targetCategoryId);
 		
-		/* 코코멘트 저장 */
-		div2_savBtn.addEventListener('click', (e) => {
+		if (targetClass == compare_co_comment_newBtn) {
 			
-			const coCommentContents = document.getElementById('coCommentTextarea').value;
-			
-			console.log('종속된 post_id: ', targetPostId);
-			console.log('종속된 comment_id', targetCommentId);
-			console.log('대댓글 내용: ', coCommentContents);
-			console.log('classnum: ', 1);
-			console.log('ordernum: ', parseInt(targetOrdernum) + 1);
-			console.log('groupnum: ', targetCommentId);
-			console.log('categoryId: ', targetCategoryId);
-			const tempTargetCommentId = targetCommentId;
-			const newCoCommentData = {
-				comment_id: targetCommentId,
-				post_id: targetPostId,
-				category_id: targetCategoryId,
-				comments: coCommentContents,
-				classnum: 1,
-				ordernum: parseInt(targetOrdernum) + 1,
-				groupnum: targetCommentId
+			if (beforeInput) {
+				console.info('null 들어옴');
+				beforeInput.remove();
 			}
 			
-			xhttpComments.open('POST', '/project/main_paragraph', true);
-			xhttpComments.setRequestHeader('content-type', 'application/json;charset=utf-8');
-			xhttpComments.send(JSON.stringify(newCoCommentData));
+			targetInput.appendChild(mkCoCommentInput(targetCommentId));
+			/* /코코멘트 input 생성 */
 			
-			//코코멘트 출력
-			const targetCommentDiv = document.getElementById(tempTargetCommentId);
-			console.log('tempTargetCommentId: ', tempTargetCommentId);
-			xhttpComments.addEventListener('readystatechange', (e) => {
-				const readyState = e.target.readyState;
-				const status = e.target.status;
-				if (readyState == 4 && status == 200)  {
-					const comment = JSON.parse(e.target.responseText);
-					console.log(comment);
-					targetCommentDiv.innerHTML += mkComment(comment.member_id, comment.comments, comment.comment_id);
+			/* 코코멘트 저장 */
+			div2_savBtn.addEventListener('click', (e) => {
+				
+				const coCommentContents = document.getElementById('coCommentTextarea').value;
+				
+				console.log('종속된 post_id: ', targetPostId);
+				console.log('종속된 comment_id', targetCommentId);
+				console.log('대댓글 내용: ', coCommentContents);
+				console.log('classnum: ', 1);
+				console.log('ordernum: ', parseInt(targetOrdernum) + 1);
+				console.log('groupnum: ', targetCommentId);
+				console.log('categoryId: ', targetCategoryId);
+				const tempTargetCommentId = targetCommentId;
+				const newCoCommentData = {
+					comment_id: targetCommentId,
+					post_id: targetPostId,
+					category_id: targetCategoryId,
+					comments: coCommentContents,
+					classnum: 1,
+					ordernum: parseInt(targetOrdernum) + 1,
+					groupnum: targetCommentId
 				}
+				
+				xhttpComments.open('POST', '/project/main_paragraph', true);
+				xhttpComments.setRequestHeader('content-type', 'application/json;charset=utf-8');
+				xhttpComments.send(JSON.stringify(newCoCommentData));
+				
+				//코코멘트 출력
+				const targetCommentDiv = document.getElementById(tempTargetCommentId);
+				console.log('tempTargetCommentId: ', tempTargetCommentId);
+				xhttpComments.addEventListener('readystatechange', (e) => {
+					const readyState = e.target.readyState;
+					const status = e.target.status;
+					if (readyState == 4 && status == 200)  {
+						const comment = JSON.parse(e.target.responseText);
+						console.log(comment);
+						targetCommentDiv.innerHTML += mkComment(comment.member_id, comment.comments, comment.comment_id);
+					}
+				});
+				beforeInput.style.display = 'none';
 			});
-			beforeInput.style.display = 'none';
-		});
+		}
+		
 	}
+	
 });
 
 function mkComment(member_id, comments, comment_id, post_id, ordernum, category_id) {
@@ -217,6 +224,12 @@ function textNode(str) {
 	return document.createTextNode(str);
 }
 
+// 게시글 수정
+const contentsEdit = document.getElementById('contentsEdit');
+contentsEdit.addEventListener('click', (e) => {
+	console.log('나 클릭됐어');
+	location.href = `./write?post_id=${post_id}&edit=true&board_class=${board_class}`;
+});
 
 
 

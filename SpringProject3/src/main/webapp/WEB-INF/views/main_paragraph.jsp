@@ -125,6 +125,7 @@
 <!-- º¯¼ö -->
 <input type="hidden" id="board_class" value="${contents.board_class }" />
 <input type="hidden" id="post_id" value="${contents.post_id }" />
+<input type="hidden" id="commentsEA" value="${commentsEA }" />
 
 <!-- Modal -->
 <div id="popUpMenu" style="display:none;">

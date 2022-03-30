@@ -132,6 +132,9 @@
 	<select id="getComments" resultType="com.spring.project.post.dto.CommentVO">
 		SELECT * FROM comments WHERE post_id = #{post_id} AND category_id = #{board_class}
 	</select>
+	<select id="getCommentsEA" resultType="_integer">
+		SELECT count(*) FROM comments WHERE post_id = #{post_id}
+	</select>
 	
 	<!-- addPost -->
 	<insert id="addPost">

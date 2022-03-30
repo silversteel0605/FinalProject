@@ -24,6 +24,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -236,6 +237,10 @@ public class PostController {
 			model.addAttribute("editAuth", true);
 		}
 		
+		// 코멘트 개수
+		log.info("코맨트개수: " + postService.getCommentsEA(post_id));
+		model.addAttribute("commentsEA", postService.getCommentsEA(post_id));
+		
 		log.info("post: " + post);
 		log.info("나가는 세션: " + session.getAttribute("search"));
 		
@@ -288,14 +293,16 @@ public class PostController {
 	public String write(HttpServletRequest request, Integer post_id) throws UnsupportedEncodingException {
 		HttpSession session = request.getSession();
 		request.setCharacterEncoding("EUC-KR");
+		log.info("post글쓰기 들어옴");
 		
 		String data = request.getParameter("contents");
-		log.info(data);
 		PostVO post = new PostVO();
-		log.info(post);
+		log.info("post post_id: " + post_id);
+		log.info("post data: " + data);
+		log.info("post post: " + post);
 		
 		String[] dataArr = data.split(","); for(String item : dataArr) {
-			log.info(item); }
+			log.info("dataArr: " + item); }
 		
 		post.setMember_id((String)session.getAttribute("currentUser"));
 		post.setTitle(dataArr[0]); post.setContents(dataArr[1]);

@@ -67,6 +67,10 @@ public class PostServiceImpl implements PostService {
 		return postMapper.getComments(post);
 	}
 	
+	public Integer getCommentsEA(Integer post_id) {
+		return postMapper.getCommentsEA(post_id);
+	};
+	
 	@Override
 	public void addPost(PostVO post) {
 		postMapper.addPost(post);

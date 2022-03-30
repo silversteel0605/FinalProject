@@ -15,13 +15,13 @@ document.addEventListener('click', (e) => {
 		popUpMenu.style.display = 'none';
 	}
 	
-	const memberInfo = document.getElementById('memberInfo');
+	//const memberInfo = document.getElementById('memberInfo');
 	const memberPost = document.getElementById('memberPost');
 	
-	memberInfo.addEventListener('click', (e) => {
+/*	memberInfo.addEventListener('click', (e) => {
 		console.log(targetId);
 		location.href = `/project/tempIndividualInfo?id=${targetId}`;
-	});
+	});*/
 	
 	memberPost.addEventListener('click', (e) => {
 		console.log(targetId);

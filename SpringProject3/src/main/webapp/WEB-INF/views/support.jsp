@@ -179,9 +179,7 @@
 <!-- Modal & PopUp Menu -->
 <div id="popUpMenu" style="display:none;">
 	<ul class="list-group list-group-flush">
-		<li id="memberInfo" class="indiPopUp list-group-item list-group-item-primary opacity-75" style="cursor:pointer">회원정보 보기</li>
 		<li id="memberPost" class="indiPopUp list-group-item list-group-item-primary opacity-75" style="cursor:pointer">작성글 보기</li>
-		
 	</ul>
 </div>
 
