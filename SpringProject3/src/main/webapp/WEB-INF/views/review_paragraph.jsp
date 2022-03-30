@@ -57,8 +57,8 @@
   <div class="container">
     <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
       <div class="col-md-9 ftco-animate pb-5 text-center">
-       <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="fa fa-chevron-right"></i></a></span> <span>Blog <i class="fa fa-chevron-right"></i></span></p>
-       <h1 class="mb-0 bread">Blog</h1>
+       <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="fa fa-chevron-right"></i></a></span> <span>Review <i class="fa fa-chevron-right"></i></span></p>
+       <h1 class="mb-0 bread">Review</h1>
      </div>
    </div>
  </div>
@@ -72,11 +72,11 @@
 			<p class="fs-3"><%= info.getTitle() %></p>
 			<div class="paragraph_header d-flex justify-content-between">
 				<span id="id" data-bs-toggle="modal" data-bs-target="#memberDescription"><%= info.getMemberId() %></span>
-				<span><%= info.getRegDate() %></span>
+				<span><%= info.getUpDate() %></span>
 			</div> <hr/>
 			<div class="paragraph_body">
 				<p>
-					<%= info.getContentValue() %>
+					<%= info.getReview() %>
 				</p>
 			</div>
 			<div class="paragraph_comments">

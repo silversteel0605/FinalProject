@@ -46,10 +46,10 @@ public class CampingReviewController {
 			WordChange wc = new WordChange();
 			
 			log.info(wc.javaScriptSpace(r_dto.getTitle()));
-			log.info(wc.javaScriptSpace(r_dto.getContentValue()));
+			log.info(wc.javaScriptSpace(r_dto.getReview()));
 			
 			r_dto.setTitle(wc.javaScriptSpace(r_dto.getTitle()));
-			r_dto.setContentValue(wc.javaScriptSpace(r_dto.getContentValue()));
+			r_dto.setReview(wc.javaScriptSpace(r_dto.getReview()));
 			
 			m.addAttribute("reviewId", r_id);
 			

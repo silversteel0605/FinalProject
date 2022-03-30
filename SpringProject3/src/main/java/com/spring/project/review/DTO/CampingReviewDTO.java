@@ -16,8 +16,9 @@ public class CampingReviewDTO {
 	private String title;
 	private Date regDate;
 	private Date upDate;
-	private String contentValue;
+	private String review;
 	private String imgUrl;
 	private int starRanking;
 	private int clickNum;
+	private int decl;
 }

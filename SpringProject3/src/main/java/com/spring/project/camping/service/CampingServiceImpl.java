@@ -85,6 +85,7 @@ public class CampingServiceImpl implements CampingService{
 		
 	}
 	
+	//img
 	@Override
 	public List<CampingImgVO> getCampingImgXML(String contentId) throws IOException, JDOMException {
 		// TODO Auto-generated method stub
@@ -129,6 +130,8 @@ public class CampingServiceImpl implements CampingService{
 		
 		return vos;
 	}
+	
+	
 
 	@Override
 	public CampingVO[] getXMLData() {

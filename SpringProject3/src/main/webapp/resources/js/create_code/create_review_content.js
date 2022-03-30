@@ -1,5 +1,5 @@
 
-//전체
+//all
 function create_review_save_content(type, r_dto){
 	
 	console.log(r_dto.contentId, type, r_dto);
@@ -21,12 +21,16 @@ function create_review_save_content(type, r_dto){
 	req_reviewId.setAttribute("value", r_dto.reviewId);
 	req_reviewId.style.display = "none";
 	
-	req_loginId.setAttribute("name", "loginId");
-	req_loginId.setAttribute("value", r_dto.loginId);
+	req_loginId.setAttribute("name", "memberId");
+	req_loginId.setAttribute("value", r_dto.memberId);
 	req_loginId.style.display = "none";
 	
-	req_createDate.setAttribute("name", "createDate");
-	req_createDate.setAttribute("value", getYmd10(r_dto.createDate));
+	req_createDate.setAttribute("name", "regDate");
+	req_createDate.setAttribute("value", getYmd10(r_dto.regDate));
+	req_createDate.style.display = "none";
+	
+	req_createDate.setAttribute("name", "upDate");
+	req_createDate.setAttribute("value", getYmd10(r_dto.upDate));
 	req_createDate.style.display = "none";
 	
 	req_imgUrl.setAttribute("name", "imgUrl");
@@ -35,6 +39,10 @@ function create_review_save_content(type, r_dto){
 	
 	req_clickNum.setAttribute("name", "clickNum");
 	req_clickNum.setAttribute("value", r_dto.clickNum);
+	req_clickNum.style.display = "none";
+	
+	req_clickNum.setAttribute("name", "declNum");
+	req_clickNum.setAttribute("value", r_dto.declkNum);
 	req_clickNum.style.display = "none";
 	
 	//newMainForm.appendChild(campingId);
@@ -86,7 +94,7 @@ function create_review_form(type){
 	return newMainForm;
 }
 
-//제목
+//Star Ranking
 function create_review_star_rank(type){
 	
 	//box
@@ -130,7 +138,7 @@ function create_review_star_rank(type){
 }
 
 
-//유저 데이터
+//Title
 function create_review_user_title(type, title){
 	var str =  str_replace(title);
 	var content = document.createElement("div");
@@ -164,6 +172,7 @@ function create_review_user_title(type, title){
 	return content;
 }
 
+//Content Value
 function create_review_user_content(){
 	
 	
@@ -173,17 +182,17 @@ function create_review_user_content(){
 	
 	// start content
 	let contentLabel = document.createElement("label");
-	let contentLabelTxt = document.createTextNode("내용");
+	let contentLabelTxt = document.createTextNode("내용을 작성해주세요");
 	let contentTextarea = document.createElement("textarea");
 	let contentScript = document.createElement("script");
 	let contentScriptTxt = document.createTextNode("CKEDITOR.replace('content', { filebrowserUploadUrl:'/food/imageUpload.do' });");
 	
-	contentLabel.setAttribute("for", "contentValue");
+	contentLabel.setAttribute("for", "review");
 	contentLabel.appendChild(contentLabelTxt);
 	
 	contentTextarea.setAttribute("class", "form-control");
 	contentTextarea.setAttribute("rows", "5");
-	contentTextarea.setAttribute("name", "contentValue");
+	contentTextarea.setAttribute("name", "review");
 	contentTextarea.setAttribute("id", "content");
 	
 	contentScript.setAttribute("type", "text/javascript");
@@ -208,10 +217,12 @@ function str_replace(str){
 }
 
 function getYmd10(d) {
-    //yyyy-mm-dd 포맷 날짜 생성
+    //yyyy-mm-dd
     if(d == 'Invalid Date'){
 		d = new Date();
 	}
+	
+	console.log(d);
 	
 	return d.getFullYear() + "-" + ((d.getMonth() + 1) > 9 ? (d.getMonth() + 1).toString() : "0" + (d.getMonth() + 1)) + "-" + (d.getDate() > 9 ? d.getDate().toString() : "0" + d.getDate().toString());
     

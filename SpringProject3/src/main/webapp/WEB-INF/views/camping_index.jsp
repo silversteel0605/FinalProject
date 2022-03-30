@@ -197,7 +197,7 @@
 					        						</div>
 					        						<div class="two">
 														<span class="yr">2020</span>
-														<span class="mos">${review.createDate}</span>
+														<span class="mos">${review.upDate}</span>
 					        						</div>
 					      						</div>
 					      						

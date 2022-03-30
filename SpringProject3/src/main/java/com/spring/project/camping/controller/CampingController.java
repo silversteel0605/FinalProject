@@ -79,6 +79,7 @@ public class CampingController {
 		m.addAttribute("type", type);
 		m.addAttribute("img_vo", img_vo);
 		
+		
 		//reviewControlling(m, nowPage, contentId, vo, value);
 		
 		return "camping_index";
