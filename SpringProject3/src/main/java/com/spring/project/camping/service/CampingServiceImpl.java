@@ -141,7 +141,6 @@ public class CampingServiceImpl implements CampingService{
 		int i = 0;
 		for(Element item:item_list) {
 			
-
 			CampingVO vo = new CampingVO();
 			vo.setContentId(item.getChildText("contentId"));
 			vo.setFacltNm(item.getChildText("facltNm"));
@@ -159,6 +158,10 @@ public class CampingServiceImpl implements CampingService{
 			vo.setSbrsCl(item.getChildText("sbrsCl")); 
 			vo.setMapX(item.getChildText("mapX"));
 			vo.setMapY(item.getChildText("mapY"));
+			vo.setIntro(item.getChildText("intro"));
+			vo.setTel(item.getChildText("tel"));
+			vo.setHomepage(item.getChildText("homepage"));
+			vo.setOperDeCl(item.getChildText("operDeCl"));
 
 			ar[i++] = vo;
 		}
