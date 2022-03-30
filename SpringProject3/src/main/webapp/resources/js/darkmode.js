@@ -35,10 +35,13 @@ $(window).scroll(function () {
 function log(h){
 	if(h > 300){
 		$('#darkmodecheck').addClass('cbbgc');
-
+		$('#dropmenu').addClass('dropdownd');
+		$('.dropdown-item').addClass('dropdownd');
 	}
 	if(h < 300){
 		$('#darkmodecheck').removeClass('cbbgc');
 		$('#darkmodecheck').removeClass('cbbgcn');
+		$('#dropmenu').removeClass('dropdownd');
+		$('.dropdown-item').removeClass('dropdownd');
 	}
 }

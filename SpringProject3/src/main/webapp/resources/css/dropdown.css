@@ -57,3 +57,17 @@
 #dropdownS>a:hover{
     color: black;
 }
+.ftco-navbar-light .navbar-nav > .nav-item .dropdown-menu{
+	background: rgba(255,255,255,0);	
+}
+.dropdown-item{
+	color:#fff;
+}
+.dropdownd{
+	background: #fff !important;
+	color:black !important;
+}
+.dropdownn{
+	background:rgb(55, 49, 89) !important;
+	color:#fff !important;
+}
