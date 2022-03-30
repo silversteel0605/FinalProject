@@ -1,198 +1,197 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page isErrorPage="true" %>
+<% response.setStatus(500); %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset="EUC-KR">
 <title>Insert title here</title>
-<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Arizonia&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="<c:url value="resources/css/animate.css"/>"/>
-  <link rel="stylesheet" href="<c:url value="resources/css/owl.carousel.min.css"/>"/>
-  <link rel="stylesheet" href="<c:url value="resources/css/owl.theme.default.min.css"/>"/>
-  <link rel="stylesheet" href="<c:url value="resources/css/magnific-popup.css"/>"/>
-  <link rel="stylesheet" href="<c:url value="resources/css/bootstrap-datepicker.css"/>"/>
-  <link rel="stylesheet" href="<c:url value="resources/css/jquery.timepicker.css"/>"/>
-  <link rel="stylesheet" href="<c:url value="resources/css/flaticon.css"/>"/>
-  <link rel="stylesheet" href="<c:url value="resources/css/style.css"/>"/>
-
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Arizonia&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="<c:url value="/resources/css/animate.css"/>"/>
+	<link rel="stylesheet" href="<c:url value="/resources/css/owl.carousel.min.css"/>"/>
+	<link rel="stylesheet" href="<c:url value="/resources/css/owl.theme.default.min.css"/>"/>
+	<link rel="stylesheet" href="<c:url value="/resources/css/magnific-popup.css"/>"/>
+	<link rel="stylesheet" href="<c:url value="/resources/css/bootstrap-datepicker.css"/>"/>
+	<link rel="stylesheet" href="<c:url value="/resources/css/jquery.timepicker.css"/>"/>
+	<link rel="stylesheet" href="<c:url value="/resources/css/flaticon.css"/>"/>
+	<link rel="stylesheet" href="<c:url value="/resources/css/style.css"/>"/>
+	<link rel="stylesheet" href="<c:url value="/resources/css/home.css"/>"/>
+	<!-- ƒ≥∑Øºø -->
+	<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+	<!-- dropdown -->
+	<link rel="stylesheet" href="<c:url value="/resources/css/dropdown.css"/>"/>
+    <!--¥Ÿ≈©∏µÂ ∞¸∑√ css-->
+    <link rel="stylesheet" href="<c:url value="/resources/css/darkmode.css"/>"/>
+    <link rel="stylesheet" href="<c:url value="/resources/css/nav.css"/>"/>
+	<link rel="stylesheet" href="<c:url value="/resources/css/reservation.css"/>"/>
 </head>
-<body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<body style="overflow-x: hidden">
 	
-<body>
-	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-   <div class="container">
-     <a class="navbar-brand" href="index.html">Pacific<span>Travel Agency</span></a>
-     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-       <span class="oi oi-menu"></span> Menu
-     </button>
-
-     <div class="collapse navbar-collapse" id="ftco-nav">
-       <ul class="navbar-nav ml-auto">
-         <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-         <li class="nav-item active"><a href="about.html" class="nav-link">About</a></li>
-         <li class="nav-item"><a href="destination.html" class="nav-link">Destination</a></li>
-         <li class="nav-item"><a href="hotel.html" class="nav-link">Hotel</a></li>
-         <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-         <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-       </ul>
-     </div>
-   </div>
- </nav>
- <!-- END nav -->
- <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('resources/images/bg_1.jpg');">
-  <div class="overlay"></div>
-  <div class="container">
-    <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center">
-      <div class="container" role="main">
-			
-		
-	</div>	
-     </div>
-   </div>
-</section>
-
- 	
- 
- 	<section class="ftco-section">
-				 <div class="project-wrap">
-				     <a href="#" class="img" style="background-image: url(resources/images/destination-8.jpg);">
-				        <span class="price">ÏòàÏïΩ Í∞ÄÎä•</span>
-				    </a>
-				    <div class="text p-4">
-				        <span class="days">2Ïùº ÏàôÎ∞ï</span>
-				        <h3><a href="#">Ïñ¥ÎäêÍ≥≥</a></h3>
-				        <p class="location"><span class="fa fa-map-marker"></span> ÏúÑÏπòÏ†ïÎ≥¥</p>
-				        <ul>
-				           <li>ÏÇ¨Ïù¥Îìú Ï£ºÏ∞®</li>
-				          <li>Ï†ÑÍ∏∞ÏÇ¨Ïö© Í∞ÄÎä•</li>
-				          <li>ÏûêÎ¶¨ ÏßÄÏ†ï</li>
-				       </ul>
-				   </div>
-				</div>
-	</section>			
+	<!-- header »£√‚ -->
+	<jsp:include page='nav.jsp'/>
 	
-	<section class="ftco-section ftco-no-pb">
-	   	<div class="container">
-	      <div class="row">
-	       <div class="col-md-12">
-	          <div class="search-wrap-1 ftco-animate">
-	             <form action="#" class="search-property-1">
-	                <div class="row no-gutters">
-				           <div class="col-lg d-flex">
-				               <div class="form-group p-4">
-				               <label for="#">Ï≤¥ÌÅ¨Ïù∏</label>
-				                 <div class="form-field">
-				                   <div class="icon"><span class="fa fa-calendar"></span></div>
-				                       <input type="text" class="form-control checkin_date" placeholder="Check In Date">
-				                   </div>
-				               </div>
-				           </div>
-				           <div class="col-lg d-flex">
-				              	<div class="form-group p-4">
-				                <label for="#">Ï≤¥ÌÅ¨ÏïÑÏõÉ</label>
-				                 	<div class="form-field">
-				                   		<div class="icon"><span class="fa fa-calendar"></span></div>
-				                   		<input type="text" class="form-control checkout_date" placeholder="Check Out Date">
-				               		</div>
-				           		</div>
-				       		</div>
-       						
-						</div>
-					</form>
-				</div>
-			</div>
+	<section id="mainimg" class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('resources/images/bg_1.jpg');">
+	  <div class="overlay"></div>
+	  <div class="container">
+	    <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
+	      <div class="col-md-9 ftco-animate pb-5 text-center">
+	       <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="fa fa-chevron-right"></i></a></span> <span>Blog <i class="fa fa-chevron-right"></i></span></p>
+	       <h1 class="mb-0 bread">Blog</h1>
+	     </div>
+	   </div>
+	 </div>
+	</section>
+	
+	<!-- Ω«≥ªøÎ ±‚¿‘∂ı -->
+	<section id="maincon">
+		<div id="carousel">
+			<div class="swiper mySwiper">
+		      <div class="swiper-wrapper">
+		        <div class="swiper-slide"><img src="resources/images/hotel-resto-1.jpg"></div>
+		        <div class="swiper-slide"><img src="resources/images/hotel-resto-2.jpg"></div>
+		        <div class="swiper-slide"><img src="resources/images/hotel-resto-3.jpg"></div>
+		        <div class="swiper-slide"><img src="resources/images/hotel-resto-4.jpg"></div>
+		        <div class="swiper-slide"><img src="resources/images/hotel-resto-5.jpg"></div>
+		        <div class="swiper-slide"><img src="resources/images/hotel-resto-6.jpg"></div>
+		        <div class="swiper-slide"><img src="resources/images/hotel-resto-7.jpg"></div>
+		        <div class="swiper-slide"><img src="resources/images/hotel-resto-8.jpg"></div>
+		        <div class="swiper-slide"><img src="resources/images/hotel-resto-9.jpg"></div>
+		      </div>
+		      <div class="swiper-button-next"></div>
+		      <div class="swiper-button-prev"></div>
+		    </div>
+		    <div>
+		    	<h2>ƒ∑«Œ¿Â ¿Ã∏ß</h2>
+		    	<div>
+		    		<p><span class="material-icons">grade</span>4.8/5 &nbsp; <a href="#" id="blue">»ƒ±‚ 0∞≥</a></p>    		
+		    	</div>
+		    </div>
+		    <div class="tab-content" id="v-pills-tabContent">
+               <div class="tab-pane fade show active" id="v-pills-1" role="tabpanel" aria-labelledby="v-pills-nextgen-tab">
+                   <form action="#" class="search-property-1">
+                       <div class="row no-gutters">
+                           <div class="col-md d-flex">
+                               <div class="form-group p-4">
+                                   <label for="#">√º≈©¿Œ Ω√∞£</label>
+                                   <div class="form-field">
+                                       <div class="icon"><span class="fa fa-calendar"></span></div>
+                                       <input autocomplete="off" name ="check_in_time" type="text" class="form-control checkin_date" placeholder="Check In Date">
+                                   </div>
+                               </div>
+                           </div>
+                           <div class="col-md d-flex">
+                               <div class="form-group p-4">
+                                   <label for="#">√º≈©æ∆øÙ Ω√∞£</label>
+                                   <div class="form-field">
+                                       <div class="icon"><span class="fa fa-calendar"></span></div>
+                                       <input autocomplete="off" name ="check_out_time" type="text" class="form-control checkout_date" placeholder="Check Out Date">
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                   </form>
+               </div>
+            </div>
+            <div id="all_area">
+            	<a href="#" class ="area">
+            		<img src="resources/images/place-1.jpg">
+            		<div class="infor">
+            			<div class="infor_1">
+            				<div>±∏ø™A</div>
+            				<div>80,000 ø¯</div>
+            			</div>
+            			<div class="infor_2">ªÁ¿ÃµÂ ¡÷¬˜/¿¸±‚ªÁøÎ∞°¥…/¿⁄∏Æ¡ˆ¡§/ø¿≈‰ƒ∑«Œ</div>
+            			<div class="infor_3">
+            				<div>øπæ‡ ∞°¥…«— ¿⁄∏Æ</div>
+            				<div>3 ¿⁄∏Æ</div>
+            			</div>
+            		</div>
+            	</a>
+            	<a href="#" class ="area">
+            		<img src="resources/images/place-2.jpg">
+            		<div class="infor">
+            			<div class="infor_1">
+            				<div>±∏ø™B</div>
+            				<div>90,000 ø¯</div>
+            			</div>
+            			<div class="infor_2">ªÁ¿ÃµÂ ¡÷¬˜/¿¸±‚ªÁøÎ∞°¥…/¿⁄∏Æ¡ˆ¡§/ø¿≈‰ƒ∑«Œ</div>
+            			<div class="infor_3">
+            				<div>øπæ‡ ∞°¥…«— ¿⁄∏Æ</div>
+            				<div>2 ¿⁄∏Æ</div>
+            			</div>
+            		</div>
+            	</a>
+            	<a href="#" class ="area">
+            		<img src="resources/images/place-3.jpg">
+            		<div class="infor">
+            			<div class="infor_1">
+            				<div>±∏ø™C</div>
+            				<div>40,000 ø¯</div>
+            			</div>
+            			<div class="infor_2">ªÁ¿ÃµÂ ¡÷¬˜/ø¿≈‰ƒ∑«Œ</div>
+            			<div class="infor_3">
+            				<div>øπæ‡ ∞°¥…«— ¿⁄∏Æ</div>
+            				<div>1 ¿⁄∏Æ</div>
+            			</div>
+            		</div>
+            	</a>
+            </div>
+
 		</div>
-	</div>
-</section>
+	</section>
 	
-	<section class="ftco-section">
-			<div class="container">
-				<div class="row justify-content-center pb-4">
-					<div class="col-md-12 heading-section text-center ftco-animate">
-						<span class="subheading">Information</span>
-						<h2 class="mb-4">Ï∫†ÌïëÏû• Ï†ïÎ≥¥</h2>
-					</div>
-				</div>
-				
-					<div class=" ftco-animate">
-						<div class="project-wrap">
-							<a href="#" class="img" style="background-image: url(resources/images/destination-1.jpg);">
-								<span class="price">ÏòàÏïΩ Í∞ÄÎä•</span>
-							</a>
-							<div class="text p-4">
-								<span class="days">ÏµúÎåÄ 3Ïùº</span>
-								<h3><a href="#">Ïñ¥ÎîòÍ∞Ä ÏÇ¨ÏßÑ  80000Ïõê</a></h3>
-								<p class="location"><span class="fa fa-map-marker"></span> ÏúÑÏπò Ï†ïÎ≥¥</p>
-								<ul>
-									<li><span class="flaticon-shower"></span>2</li>
-									<li><span class="flaticon-king-size"></span>3</li>
-									<li><span class="flaticon-mountains"></span>Near Mountain</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-			
-					
-					<div class=" ftco-animate">
-						<div class="project-wrap">
-							<a href="#" class="img" style="background-image: url(resources/images/destination-2.jpg);">
-								<span class="price">$550/person</span>
-							</a>
-							<div class="text p-4">
-								<span class="days">10 Days Tour</span>
-								<h3><a href="#">Banaue Rice Terraces</a></h3>
-								<p class="location"><span class="fa fa-map-marker"></span> Banaue, Ifugao, Philippines</p>
-								<ul>
-									<li><span class="flaticon-shower"></span>2</li>
-									<li><span class="flaticon-king-size"></span>3</li>
-									<li><span class="flaticon-sun-umbrella"></span>Near Beach</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>	
-		</section>
-		
-		<section class="ftco-section ftco-about img"style="background-image: url(resources/images/bg_4.jpg);">
-			<div class="overlay"></div>
-			<div class="container py-md-5">
-				<div class="row py-md-5">
-					<div class="col-md d-flex align-items-center justify-content-center">
-						<a href="https://vimeo.com/45830194" class="icon-video popup-vimeo d-flex align-items-center justify-content-center mb-4">
-							<span class="fa fa-play"></span>
-						</a>
-					</div>
-				</div>
-			</div>
-		</section>
- 	
+	
+	
+
+    
+	<!-- footer »£√‚ -->
+    <jsp:include page='footer.jsp'/>
+
+    <!-- loader -->
+    <div id="ftco-loader" class="show fullscreen">
+    	<svg class="circular" width="48px" height="48px">
+            <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
+            <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" />
+        </svg>
+    </div>
 
 
-		
+    <script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
+	<script src="<c:url value="/resources/js/jquery-migrate-3.0.1.min.js"/>"></script>
+	<script src="<c:url value="/resources/js/popper.min.js"/>"></script>
+	<script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
+	<script src="<c:url value="/resources/js/jquery.easing.1.3.js"/>"></script>
+	<script src="<c:url value="/resources/js/jquery.waypoints.min.js"/>"></script>
+	<script src="<c:url value="/resources/js/jquery.stellar.min.js"/>"></script>
+	<script src="<c:url value="/resources/js/owl.carousel.min.js"/>"></script>
+	<script src="<c:url value="/resources/js/jquery.magnific-popup.min.js"/>"></script>
+	<script src="<c:url value="/resources/js/jquery.animateNumber.min.js"/>"></script>
+	<script src="<c:url value="/resources/js/bootstrap-datepicker.js"/>"></script>
+	<script src="<c:url value="/resources/js/scrollax.min.js"/>"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+	<script src="<c:url value="/resources/js/google-map.js"/>"></script>
+	<script src="<c:url value="/resources/js/main.js"/>"></script>
 
-
-
-
-
-<script src="resources/js/jquery.min.js"></script>
-<script src="resources/js/jquery-migrate-3.0.1.min.js"></script>
-<script src="resources/js/popper.min.js"></script>
-<script src="resources/js/bootstrap.min.js"></script>
-<script src="resources/js/jquery.easing.1.3.js"></script>
-<script src="resources/js/jquery.waypoints.min.js"></script>
-<script src="resources/js/jquery.stellar.min.js"></script>
-<script src="resources/js/owl.carousel.min.js"></script>
-<script src="resources/js/jquery.magnific-popup.min.js"></script>
-<script src="resources/js/jquery.animateNumber.min.js"></script>
-<script src="resources/js/bootstrap-datepicker.js"></script>
-<script src="resources/js/scrollax.min.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-<script src="resources/js/google-map.js"></script>
-<script src="resources/js/main.js"></script>
-
+    <!-- ¥Ÿ≈©∏µÂ js-->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="<c:url value="/resources/js/darkmode.js"/>"></script>
+    
+    <!-- ƒ≥∑Øºø -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+      var swiper = new Swiper(".mySwiper", {
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+      });
+    </script>
 </body>
+
 </html>

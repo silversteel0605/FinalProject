@@ -37,6 +37,25 @@ public class HomeController {
 	public String main() {
 		return "about";
 	}
+	@RequestMapping(value = "/test1", method = RequestMethod.GET)
+	public String reservation() {
+		return "reservation";
+	}
+	@RequestMapping(value = "/sampletest", method = RequestMethod.GET)
+	public String reservation2() {
+		return "sample";
+	}
+	@RequestMapping(value = "/test3", method = RequestMethod.GET)
+	public String reservation3() {
+		return "reservation3";
+	}
+	
+	@RequestMapping(value = "/sample", method = RequestMethod.GET)
+	public String sample() {
+		
+		
+		return "sample";
+	}
 	
 
 	@RequestMapping(value = "/manager", method = RequestMethod.GET)

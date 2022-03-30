@@ -2,11 +2,14 @@
 
 /* °øÅë */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 .comment_icon {
 	cursor: pointer;
 }
 >>>>>>> refs/heads/jang
+=======
+>>>>>>> refs/heads/sub
 
 p, div {
 	margin: 0px;
@@ -14,12 +17,18 @@ p, div {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 .userId, .contentsTitle {
 =======
 /* #id {
 >>>>>>> refs/heads/jang
+=======
+.userId, .contentsTitle {
+>>>>>>> refs/heads/sub
 	cursor: pointer;
 } */
+
+/* Free Board */
 
 /* Free Board */
 
@@ -27,6 +36,7 @@ p, div {
 	min-height: 300px;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 
@@ -36,6 +46,8 @@ p, div {
 }
 
 >>>>>>> refs/heads/jang
+=======
+>>>>>>> refs/heads/sub
 .card-body, .card-footer {
 	padding: 0px;
 }
@@ -50,8 +62,11 @@ p, div {
 
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 
 /* Support Page */
 >>>>>>> refs/heads/jang
+=======
+>>>>>>> refs/heads/sub
