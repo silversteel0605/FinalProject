@@ -14,7 +14,7 @@
     </select>
     
     <insert id="initReviewData" parameterType="com.spring.project.review.DTO.CampingReviewDTO">
-    	insert INTO review VALUES (REVIEW_SEQ.nextval, 'cccc', #{contentId}, #{title}, SYSDATE, SYSDATE, #{review}, null, #{starRanking}, 0, 0)
+    	insert INTO review(review_id, member_id, contentId, title, reg_date, up_date, review, imgurl) VALUES (REVIEW_SEQ.nextval, 'cccc', #{contentId}, #{title}, SYSDATE, SYSDATE, #{review}, null, #{starRanking}, 0, 0)
     </insert>
     
     <delete id="deleteReviewData" parameterType="_int">

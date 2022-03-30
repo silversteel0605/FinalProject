@@ -67,6 +67,8 @@ public class CampingController {
 		
 		log.info("value : " + value);
 		
+		//service.getTest();
+		
 		List<CampingImgVO> img_vo = service.getCampingImgXML(contentId);
 		
 		log.info("img_vo : " + img_vo);

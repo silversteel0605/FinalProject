@@ -33,6 +33,7 @@
 .obj_row_center{
     display: flex;
     align-items: center;
+    flex-wrap: nowrap;
 }
 
 .obj_row_bottom{
@@ -160,6 +161,10 @@
 
 .carousel_size{
 	width: 80%;
+}
+
+.carousel_location{
+	
 }
 
 .carousel-inner .carousel-item.active,

@@ -68,48 +68,48 @@
 	
 	<section id="main_content" class="wrap ftco-section services-section text-center">
 	
-		<div class = "container tab_warp row obj_row_center">
-		         		<div class = "bgc_color_box col-md-4 min-vh-70"></div>
-		         		<div class="bgc_box col-md-4 ftco-section align-items-center min-vh-70">
-		           			<div>
-		             			<h2 class="h2_size"><%= info.getFacltNm() %></h2>
-		             			
-		             			<hr>
-		             			<div>
-									<a class="carousel-control-prev2 bg-dark w-auto" href="#recipeCarousel" role="button" data-slide="prev">
-					                	<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-					                 	<span class="sr-only">Previous</span>
-					               	</a>
-					               	<a class="carousel-control-next2 bg-dark w-auto" href="#recipeCarousel" role="button" data-slide="next">
-					                   	<span class="carousel-control-next-icon" aria-hidden="true"></span>
-					                   	<span class="sr-only">Next</span>
-					               	</a>
-								</div>
-								
-								<div><a href="">사이트 상세정보</a></div>
-								<div><a href="">예약하기</a></div>
-							</div>
-						</div>
-						
-						<div class="carousel_size text-center my-3">
-						    <div class="row mx-auto my-auto">
-						        <div id="recipeCarousel" class="carousel slide w-100" data-ride="carousel">
-						            <div class="carousel-inner w-100" role="listbox">
-						               	<div class="carousel-item active">
-						                    <img class="card-img d-block col-3" src="<%= info.getFirstImageUrl() %>">
-						                </div>
-						                
-						               	<c:forEach var="item" items="${img_vo}">
-						               		<div class="carousel-item">
-						                    	<img class="card-img d-block col-3" src="${ item.imgURL }">
-						                	</div>
-						               	</c:forEach>
-						               	
-						            </div>
-						        </div>
-						    </div>
-						</div>
+		<div class = "tab_warp row obj_row_center">
+        		<div class = "bgc_color_box col-md-4 min-vh-70"></div>
+        		<div class="bgc_box col-md-4 ftco-section align-items-center min-vh-70">
+          			<div>
+            			<h2 class="h2_size"><%= info.getFacltNm() %></h2>
+            			
+            			<hr>
+            			<div>
+						<a class="carousel-control-prev2 bg-dark w-auto" href="#recipeCarousel" role="button" data-slide="prev">
+		                	<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+		                 	<span class="sr-only">Previous</span>
+		               	</a>
+		               	<a class="carousel-control-next2 bg-dark w-auto" href="#recipeCarousel" role="button" data-slide="next">
+		                   	<span class="carousel-control-next-icon" aria-hidden="true"></span>
+		                   	<span class="sr-only">Next</span>
+		               	</a>
 					</div>
+					
+					<div><a href="">사이트 상세정보</a></div>
+					<div><a href="">예약하기</a></div>
+				</div>
+			</div>
+			
+			<div class="carousel_size text-center my-3">
+			    <div class="row mx-auto my-auto">
+			        <div id="recipeCarousel" class="carousel slide w-100" data-ride="carousel">
+			            <div class="carousel-inner w-100" role="listbox">
+			               	<div class="carousel-item active">
+			                    <img class="card-img d-block col-3" src="<%= info.getFirstImageUrl() %>">
+			                </div>
+			                
+			               	<c:forEach var="item" items="${img_vo}">
+			               		<div class="carousel-item">
+			                    	<img class="card-img d-block col-3" src="${ item.imgURL }">
+			                	</div>
+			               	</c:forEach>
+			               	
+			            </div>
+			        </div>
+			    </div>
+			</div>
+		</div>
 	
 		<div class="container">
 			<div class="tab" id="tab">
