@@ -6,14 +6,15 @@ function pagination(total, nowPage, cntPerPage, cntPage) {
 	this.nowPage = nowPage;
 	this.cntPerPage = cntPerPage;
 	this.cntPage = cntPage;
-	calcLastPage(total);
+	calcLastPage(this.total);
 	setCntPage();
 	calcStartEndPage(nowPage);
 	calcStartEnd(nowPage);
 }
 
 function calcLastPage(total) {
-	lastPage = Math.ceil(parseInt(total) / parseInt(cntPerPage));
+	console.log('pg/' + total);
+	lastPage = Math.ceil(parseInt(total) / parseInt(this.cntPerPage));
 }
 
 

@@ -5,15 +5,57 @@
 
 <mapper namespace="com.spring.project.member.mapper.MemberDataMapper">
 	<select id="idChk" resultType="int">
-		select count(*) from camper where member_id = #{id}
+		select count(*) from camper where member_id = #{member_id}
 	</select>
 	
 	<select id="join" resultType="_int">
-		select count(*) from camper where member_id = #{id} and member_pwd = #{pwd}
+		select count(*) from camper where member_id = #{member_id} and member_pwd = #{member_pwd} and member_type = #{member_type}
+	</select>
+	
+	<select id="isPermit" resultType="int">
+		select count(*) from camper where member_id = #{member_id} and permit = 1
 	</select>
 	
 	<insert id="signin">
-		insert into camper (member_id, member_pwd, member_type, member_name, email, birthday, post, addr1, addr2) 
-		values (#{id}, #{pwd}, #{member_type}, #{name}, #{email}, #{birthday}, #{post}, #{addr1}, #{addr2})
+		insert into camper 
+		<choose>
+			<when test="member_type == 0">
+				(member_id, member_pwd, member_type, member_name, email, birthday, post, addr1, addr2, tel) 
+				values (#{member_id}, #{member_pwd}, #{member_type}, #{member_name}, #{email}, #{birthday}, #{post}, #{addr1}, #{addr2}, #{tel})	
+			</when>
+			<otherwise>1
+			   (member_id, member_pwd, member_name, camp, email, member_type, permit)
+			   values (#{member_id}, #{member_pwd}, #{member_name}, #{camp}, #{email}, #{member_type}, #{permit})
+			</otherwise>
+		</choose>
+		
 	</insert>
+	
+	<select id="findid" resultType="String">
+		select member_id from camper where member_name = #{member_name} and tel = #{tel}	
+	</select>
+	
+	<select id="findpw" resultType="int">
+		select count(*) from camper where member_id = #{member_id} and email = #{email}	
+	</select>
+	
+	<select id="getMembers" resultType="com.spring.project.member.DTO.MemberVO">
+		SELECT * 
+		FROM (
+			SELECT ROWNUM RN, A.* 
+				FROM (
+				    select * from camper
+				    	where member_type = #{member_type}
+				    ) A
+				)
+		WHERE RN BETWEEN #{start} AND #{end}
+	</select>
+	
+	<select id="MemberCnt" resultType="int">
+		select count(*) from camper where member_type = #{member_type}
+	</select>
+	
+	<update id="permitting">
+		update camper set permit = 1 where member_id = #{member_id} and permit = 0
+	</update>
 </mapper>

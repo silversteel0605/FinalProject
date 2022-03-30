@@ -43,17 +43,7 @@ public class CampingController {
 		controlling(m, nowPage, vo);
 		return "search";
 	}
-	
-	//rest로 태그 검색하기  ※지금 안씀
-	@RequestMapping(value = "/search2", method = RequestMethod.GET)
-	public String search2(Model m, SearchVO vo, @RequestParam(value="nowPage", required=false)String nowPage)  throws  IOException, JDOMException {
-		log.info(vo);
-		nowPage = nowPage != null ? nowPage :"1";
-		vo.setTagUri();
-		m.addAttribute("tags", vo);
-		m.addAttribute("nowPage", nowPage);
-		return "rest_search";
-	}
+
 	
 	@RequestMapping(value = "/TempCampInfo", method = RequestMethod.GET)
 	public String info(

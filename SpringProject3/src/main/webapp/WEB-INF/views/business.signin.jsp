@@ -21,6 +21,12 @@
     <form name="joinFrm" id="joinFrm">
     <table class="table">
      <tr>
+       <th class="text-right danger" width="15%">캠핑장 이름</th>
+       <td width=85%>
+         <input type=data name=camp class="input-sm" size=25 id="camp">
+       </td>
+     </tr>
+     <tr>
        <th class="text-right danger" width="15%">아이디</th>
        <td width=85%>
          <input type=text name=id class="input-sm" size=15 readonly id="id">
@@ -47,39 +53,9 @@
        </td>
      </tr>
      <tr>
-       <th class="text-right danger" width="15%">생년월일</th>
+       <th class="text-right danger" width="15%">사업자 등록증</th>
        <td width=85%>
-         <input type=data name=birthday class="input-sm" size=25 id="birthday">
-       </td>
-     </tr>
-     <tr>
-       <th class="text-right danger" width="15%">우편번호</th>
-       <td width=85%>
-         <input type=text name=post class="input-sm" size=7 readonly id="post">
-         <input type=button value="우편번호" class="btn btn-sm btn-primary" onclick="findAdr()">
-       </td>
-     </tr>
-     <tr>
-       <th class="text-right danger" width="15%">주소</th>
-       <td width=85%>
-         <input type=text name=addr1 class="input-sm" size=45 readonly id="addr1">
-       </td>
-     </tr>
-     <tr>
-       <th class="text-right danger" width="15%">상세주소</th>
-       <td width=85%>
-         <input type=text name=addr2 class="input-sm" size=45 id="addr2">
-       </td>
-     </tr>
-     <tr>
-       <th class="text-right danger" width="15%">전화번호</th>
-       <td width=85%>
-         <select name=tel1 id="tel1">
-           <option>010</option>
-           <option>011</option>
-           <option>017</option>
-         </select>
-         <input type=number name=tel2 class="input-sm" size=15 id="tel2">
+         <input type="file" name="file" id="imageFileOpenInput" accept="image/*">
        </td>
      </tr>
      <tr>
@@ -112,7 +88,6 @@ $(function(){
 			return;
 		}
 		
-		// 비밀번호
 		let pwd=$('#pwd').val();
 		if(pwd.trim()=="")
 		{
@@ -149,40 +124,14 @@ $(function(){
 			return;
 		}
 		
-		let birthday=$('#birthday').val();
-		if(birthday.trim()=="")
+		let camp=$('#camp').val();
+		if(camp.trim()=="")
 		{
-			$('#birthday').focus();
+			$('#camp').focus();
 			return;
 		}
 		
-		let post=$('#post').val();
-		if(post.trim()=="")
-		{
-			$('#post').focus();
-			return;
-		}
-		
-		let addr1=$('#addr1').val();
-		if(addr1.trim()=="")
-		{
-			$('#addr1').focus();
-			return;
-		}
-		
-		let addr2=$('#addr2').val();
-		if(addr2.trim()=="")
-		{
-			$('#addr2').focus();
-			return;
-		}
-		if(tel2=="")
-		{
-			$('#tel2').focus();
-			return;
-		}
-		
-		const tel = $('#tel1 option:selected').val() + $('#tel2').val();
+	
 		$.ajax({
 		   url : '/project/rest/signin',
 		   type: "POST",
@@ -191,17 +140,14 @@ $(function(){
 			   "member_id" : id,
 			   "member_pwd" : pwd,
 			   "member_name" : name,
-			   "birthday" : birthday,
-			   "post" : post,
-			   "addr1" : addr1,
-			   "addr2" : addr2,
+			   "camp" : camp,
 			   "email" : email,
-			   "tel" : tel,
-			   "member_type" : 0
+			   "member_type" : 1,
+			   "permit" : 0
 		   },
 		   success : function(result) {
-			  alert("회원가입에 성공했습니다. 로그인 해주십시오");
-			  location.href = '/project/login';
+			  alert("회원가입 신청을 완료했습니다");
+			  location.href = '/project/about';
             
 		   },
 		   error : function(request, status, error) {

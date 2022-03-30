@@ -50,20 +50,6 @@ public class HomeController {
 		m.addAttribute("info", vo);
 		return "updateWindow";
 	}
-	
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String login() {
-		return "login";
-	}
-	
-	@RequestMapping(value = "/signin", method = RequestMethod.GET)
-	public String signin() {
-		return "signin";
-	}
-	
-	@RequestMapping(value = "/ivc", method = RequestMethod.GET)
-	public String ivc() {
-		return "id.check";
-	}
+
 	
 }

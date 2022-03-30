@@ -29,7 +29,7 @@ public class RestCampingController {
 	@Autowired
 	CampingService service;
 	
-	@GetMapping(value="/data", produces = "application/json; charset=UTF-8")
+	@GetMapping(value="/manager/camp", produces = "application/json; charset=UTF-8")
 	public CampingVO[] search(SearchVO vo, @RequestParam(value="nowPage", required=false)String nowPage) {
 		vo.calcStartEnd(Integer.parseInt(nowPage), 10);
 		CampingVO[] ar = service.getDbSearchData(vo); 
@@ -39,22 +39,20 @@ public class RestCampingController {
 		return ar;
 	}
 	
-	@PostMapping(value="/data")
-	public CampingVO insert(CampingVO vo) {
-		service.addData(vo);
-		return vo;
+	
+	@PostMapping(value="/manager/camp")
+	public int insert(CampingVO vo) {
+		return service.addData(vo);
 	}
 	
-	@PutMapping(value="/data")
-	public CampingVO update(@RequestBody CampingVO vo) {
-		service.updateData(vo);
-		return vo;
+	@PutMapping(value="/manager/camp")
+	public int update(@RequestBody CampingVO vo) {
+		return service.updateData(vo);
 	}
 	
-	@DeleteMapping(value="/data")
+	@DeleteMapping(value="/manager/camp")
 	public int delete(@RequestBody String contentId){
-		service.deleteData(contentId);
-		return 1;
+		return service.deleteData(contentId);
 	}
 	
 	@PostMapping(value="/init")

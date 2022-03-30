@@ -15,7 +15,7 @@ function updateCampingInfo() {
 	})
 	console.log(data);
 	$.ajax({
-	  url: `${Url}/data`,
+	  url: `${Url}/manager/camp`,
 	  type: "put",
 	  dataType: "json",
 	  data : data,

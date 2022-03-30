@@ -159,8 +159,8 @@
     <update id="addViews">
     	update camping_list set views = views + 1 where contentId = #{contentId}
     </update>
-
-    <update id="updateData">
+    
+    <update id="updateData" >
     	update camping_list set facltNm = #{facltNm}, doNm = #{doNm}, sigunguNm = #{sigunguNm}, addr1 = #{addr1}, lineIntro = #{lineIntro} 
     	where contentId = #{contentId}
     </update>

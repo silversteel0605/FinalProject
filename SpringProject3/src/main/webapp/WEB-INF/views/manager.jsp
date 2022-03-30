@@ -2,7 +2,7 @@
     pageEncoding="EUC-KR"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
-String se = (String)session.getAttribute("auth");
+String member_id = (String)session.getAttribute("member_id");
 %>
 <!DOCTYPE html>
 <html>
@@ -12,9 +12,11 @@ String se = (String)session.getAttribute("auth");
 <!-- Bootstrap CSS -->
 <title>Insert title here</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<!--  
 <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Arizonia&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  -->
   <link rel="stylesheet" href="<c:url value="/resources/css/animate.css"/>"/>
   <link rel="stylesheet" href="<c:url value="/resources/css/owl.carousel.min.css"/>"/>
   <link rel="stylesheet" href="<c:url value="/resources/css/owl.theme.default.min.css"/>"/>
@@ -28,10 +30,10 @@ String se = (String)session.getAttribute("auth");
 </head>
 <body>
 	<script>
-		if(<%=se%> == null) {
+		<c:if test="${empty member_id}">
 			alert("권한이 없습니다");
-			history.back();			
-		}
+			history.back();
+		</c:if>
 	</script>
 	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
    <div class="container">
@@ -73,8 +75,13 @@ String se = (String)session.getAttribute("auth");
 		<!-- 네비게이션 -->
 		<ul class="nav nav-tabs navTabs mb-5">
 	      <li class="nav-item">
-	        <a class="nav-link active" data-toggle="tab" href="#memberManagement">회원관리</a>
+	        <a class="nav-link active" data-toggle="tab" href="#memberManagement" id="member">회원관리</a>
 	      </li>
+	      
+	      <li class="nav-item">
+	        <a class="nav-link" data-toggle="tab" href="#BmemberManagement" id="Bmember">사업자관리</a>
+	      </li>
+	      
 	      <li class="nav-item">
 	        <a class="nav-link" data-toggle="tab" href="#reservationManagement">예약관리</a>
 	      </li>
@@ -82,7 +89,16 @@ String se = (String)session.getAttribute("auth");
 	        <a class="nav-link" data-toggle="tab" href="#siteManagement" id="camp">캠핑장관리</a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" data-toggle="tab" href="#supportManagement">고객센터</a>
+	        <a class="nav-link" data-toggle="tab" href="#supportManagement" id="sup">고객센터</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" data-toggle="tab" href="#board-tab" id="board">자유게시판</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" data-toggle="tab" href="#comment-tab" id="comment">댓글</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" data-toggle="tab" href="#review-tab" id="review">리뷰</a>
 	      </li>
 	    </ul>
 	    <!-- /네비게이션 -->
@@ -115,28 +131,56 @@ String se = (String)session.getAttribute("auth");
 								<th>#</th>
 								<th>이름</th>
 								<th>ID</th>
-								<th>가입일</th>
-								<th>특이사항</th>
+								<th>주소</th>
+								<th>가입상태</th>
 								<th></th>
 							</tr>
 						</thead>
-						<tbody >
-							<tr>
-								<td>1</td>
-								<td>김덕팔</td>
-								<td>abcde</td>
-								<td>2022/01/01</td>
-								<td>요주의 인물</td>
-								<td>
-									<button type="button" class="btn btn-link">수정</button>
-									<button type="button" class="btn btn-link">삭제</button>
-								</td>
-							</tr>
+						<tbody id="member_body" type="0">
+							
 						</tbody>
 					</table>
 				</div>
 			</div>
 	      	<!-- /회원관리 -->
+	      	 <div class="tab-pane fade" id="BmemberManagement">
+		    	<div class="row">
+		    		<div class="col">
+		    			<p>회원가입</p>
+		    		</div>
+					<div class="form-check form-switch col justify-content-start">
+						<div class="row">
+							<span class="col-6" id="joinProhibitSentence"></span>
+							<input class="form-check-input col-6" type="checkbox" role="checkbox" id="joinProhibitSwitch">
+						</div>
+					</div>
+				</div>
+				<hr />
+				<div class="searchMember">
+					<div class="d-flex justify-content-between mb-3">
+						<p class="">회원검색</p>
+						<form class="d-flex flex-row">
+							<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+							<button class="btn btn-outline-success" type="submit">Search</button>
+						</form>
+					</div>
+					<table class="table">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>이름</th>
+								<th>ID</th>
+								<th>캠핑장</th>
+								<th>가입상태</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody id="Bmember_body" type="1">
+							
+						</tbody>
+					</table>
+				</div>
+			</div>
 	      	<!-- 예약관리 -->
 	      	<div class="tab-pane fade" id="reservationManagement">
 		      	<div class="reservationManagement">
@@ -272,28 +316,96 @@ String se = (String)session.getAttribute("auth");
 								<th>이름</th>
 								<th>ID</th>
 								<th>등록일</th>
-								<th>특이사항</th>
 								<th></th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>1</td>
-								<td><a id="support_ajax" href="#" data-bs-toggle="modal" data-bs-target="#staticBackdrop">일좀 똑바로해</a></td>
-								<td>김덕팔</td>
-								<td>abcde</td>
-								<td>2022/01/01</td>
-								<td>요주의 인물</td>
-								<td>
-									<button type="button" class="btn btn-link">완료</button>
-									<button type="button" class="btn btn-link">삭제</button>
-								</td>
-							</tr>
 						</tbody>
 					</table>
 				</div>
 	      	</div>
 	      	<!-- /고객지원 -->
+	      	<!-- 자유 게시판 -->
+	      	<div class="tab-pane fade" id="board-tab">
+		      	<div class="board row">
+					<div class="d-flex justify-content-between mb-3">
+						<p class="">자유게시판</p>
+						<form class="d-flex flex-row">
+							<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+							<button class="btn btn-outline-success" type="submit">Search</button>
+						</form>
+					</div>
+					<table class="table">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>제목</th>
+								<th>이름</th>
+								<th>ID</th>
+								<th>등록일</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody id="board_body">
+						</tbody>
+					</table>
+				</div>
+	      	</div>
+	      	<!-- /자유 게시판 -->
+	      	<!-- 댓글 -->
+	      	<div class="tab-pane fade" id="comment-tab">
+		      	<div class="comment row">
+					<div class="d-flex justify-content-between mb-3">
+						<p class="">댓글</p>
+						<form class="d-flex flex-row">
+							<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+							<button class="btn btn-outline-success" type="submit">Search</button>
+						</form>
+					</div>
+					<table class="table">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>등록자ID</th>
+								<th>ID</th>
+								<th>게시글ID</th>
+								<th>게시글 카테고리 ID</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody id="comment_body">
+						</tbody>
+					</table>
+				</div>
+	      	</div>
+	      	<!-- /댓글 -->
+	      	<!-- 리뷰 -->
+	      	<div class="tab-pane fade" id="review-tab">
+		      	<div class="review row">
+					<div class="d-flex justify-content-between mb-3">
+						<p class="">리뷰</p>
+						<form class="d-flex flex-row">
+							<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+							<button class="btn btn-outline-success" type="submit">Search</button>
+						</form>
+					</div>
+					<table class="table">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>제목</th>
+								<th>이름</th>
+								<th>ID</th>
+								<th>등록일</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody id="review_body">
+						</tbody>
+					</table>
+				</div>
+	      	</div>
+	      	<!-- /리뷰 -->
 	    </div>
 	<!-- /컨텐츠 -->
 </div>
