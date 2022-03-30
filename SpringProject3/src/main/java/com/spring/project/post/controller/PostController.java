@@ -298,7 +298,7 @@ public class PostController {
 		String[] dataArr = data.split(","); for(String item : dataArr) {
 			log.info(item); }
 		
-		post.setMember_id((String)session.getAttribute("currentUser"));
+		post.setMember_id((String)session.getAttribute("member_id"));
 		post.setTitle(dataArr[0]); post.setContents(dataArr[1]);
 		post.setBoard_class(boardClassMap.get(dataArr[2]));
 		post.setContents_category(categoryNameMap.get(dataArr[3]));
