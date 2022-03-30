@@ -14,7 +14,7 @@ $("#checkBoxId").change(function(){
         $(mainimg).removeClass("maindarkimg");     
         $(navbar).removeClass("darkmode");    
         $(sky).attr('class','skybird');
-        $(chkbox).removeClass("cbbgcn");
+
 
         
 
@@ -24,7 +24,7 @@ $("#checkBoxId").change(function(){
         $(navbar).addClass("darkmode");
         $(mainimg).addClass("maindarkimg");
         $(sky).attr('class','nightsky');
-        $(chkbox).addClass("cbbgcn");
+
         
     }
 });
@@ -44,25 +44,32 @@ function log(h){
 				$('.dropdown-item').addClass('dropdownd');
 				$('#dropmenu').removeClass('dropdownn');
 				$('.dropdown-item').removeClass('dropdownn');
+				$(chkbox).removeClass('cbbgcn');
+				$(chkbox).addClass('cbbgcd');
 
 		    }else if(!($("#checkBoxId").is(":checked"))){
 				$('#dropmenu').removeClass('dropdownd');
 				$('.dropdown-item').removeClass('dropdownd');
 				$('#dropmenu').addClass('dropdownn');
 				$('.dropdown-item').addClass('dropdownn');
+				$(chkbox).removeClass('cbbgcd');
+				$(chkbox).addClass('cbbgcn');
 		    }
 	    $("#checkBoxId").change(function(){
 		    if($("#checkBoxId").is(":checked")){
 		        $('#dropmenu').addClass('dropdownd');
 				$('.dropdown-item').addClass('dropdownd');
 				$('#dropmenu').removeClass('dropdownn');
-				$('.dropdown-item').removeClass('dropdownn');		
+				$('.dropdown-item').removeClass('dropdownn');
+				$(chkbox).removeClass('cbbgcn');
+				$(chkbox).addClass('cbbgcd');	
 		    }else if(!($("#checkBoxId").is(":checked"))){
 		       $('#dropmenu').removeClass('dropdownd');
 				$('.dropdown-item').removeClass('dropdownd');
 				$('#dropmenu').addClass('dropdownn');
 				$('.dropdown-item').addClass('dropdownn');
-		        
+		        $(chkbox).removeClass('cbbgcd');
+				$(chkbox).addClass('cbbgcn');
 		    }
 		});
 
