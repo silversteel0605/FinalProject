@@ -22,15 +22,8 @@
   <link rel="stylesheet" href="<c:url value="/resources/css/style.css"/>"/>
   <!-- 페이지 css/js -->
   <link rel="stylesheet" href="<c:url value="/resources/css/jangec.css"/>"/>
-  <script src="resources/js/ckeditor/ckeditor.js"></script>
-  <script>
-	var ckeditor_config = {
-  			resize_enaleb: false,
-  			enterMode: CKEDITOR.RNTER_BR,
-  			filebrowserUploadMethod: "form",
-  			filebrowserUploadUrl: "./upload/image"
-  	}
-  </script>
+  <script src="<c:url value="/resources/ckeditor/ckeditor.js"/>"></script>
+  <!-- <script src="https://cdn.ckeditor.com/4.18.0/standard/ckeditor.js"></script> -->
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
@@ -78,23 +71,25 @@
 				<c:otherwise>고객센터</c:otherwise>
 				</c:choose>
 				</div>
-			    <form id="writeForm" enctype="multipart/form-data">
+			    <form id="writeForm">
 			    	<c:choose>
 					<c:when test="${board_class eq 'freeBoard' }">
  					<div class="input-group mb-3">
-						<select id="writeCategory" class="form-select col-md-3" name="searchByWhat">
+						<select id="writeCategory" class="form-select col-md-3" name="contents_category">
 							<option selected value="daily">자유</option>
 							<option value="showoff">자랑</option>
 							<option value="buy">삽니다</option>
 							<option value="sell">팝니다</option>
 						</select>
-						<input type="text" class="form-control" aria-label="Text input with dropdown button" name="title" id="title" placeholder="제목을 입력해 주세요" value="writeTestTitle">
+						<input type="text" class="form-control" aria-label="Text input with dropdown button" name="title" id="title" placeholder="제목을 입력해 주세요">
 					</div>
 					</c:when>
 					<c:otherwise>
  					<div class="input-group mb-3">
-						<select id="writeCategory" class="form-select col-md-3" name="searchByWhat">
-							<option selected value="notice">공지사항</option>
+						<select id="writeCategory" class="form-select col-md-3" name="contents_category">
+							<c:if test="${manager eq 'admin' }">
+								<option selected value="notice">공지사항</option>
+							</c:if>
 							<option value="askEdit">건의사항</option>
 						</select>
 						<input type="text" class="form-control" aria-label="Text input with dropdown button" name="title" id="title" placeholder="제목을 입력해 주세요" value="writeTestTitle">
@@ -103,13 +98,12 @@
 			    </c:choose>
 	       			<div class="mb-3">
 						<label for="writeEditor">내용</label>
-						<textarea class="form-control" rows="5" name="content" id="writeEditor" placeholder="내용을 입력해 주세요" ></textarea>
+						<textarea class="form-control" rows="5" name="contents" id="writeEditor" placeholder="내용을 입력해 주세요" >
+							
+						</textarea>
 					</div>	
 					<input type="hidden" id="board_class" value="${board_class }" />
 			    </form>
-			    <script>
-			    	editor = CKEDITOR.replace('writeEditor', ckeditor_config);
-			    </script>
 				<button id="writeSavBtn" class="btn">저장</button>
 			</div>
 		<!-- /컨텐츠 -->	
@@ -223,7 +217,7 @@
 <script src="<c:url value="/resources/js/main.js"/>"></script>
 <!-- 페이지 js -->
 <script src="<c:url value="/resources/js/jangec.js"/>"></script>
-<script src="<c:url value="/resources/js/jangWrite.js"/>"></script>
+<script src="<c:url value="/resources/js/jangWriteTest.js"/>"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
 </body>

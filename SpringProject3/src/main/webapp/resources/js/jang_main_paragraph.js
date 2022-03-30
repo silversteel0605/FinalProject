@@ -221,7 +221,14 @@ function textNode(str) {
 	return document.createTextNode(str);
 }
 
+// 글 수정
+const contentsEdit = document.getElementById('contentsEdit');
 
+contentsEdit.addEventListener('click', (e) => {
+	console.log(document.querySelector('#post_id').value);
+	console.log('버튼눌림');
+	location.href = `./write?post_id=${document.querySelector('#post_id').value}&board_class=${document.querySelector('#board_class').value}`;
+});
 
 
 

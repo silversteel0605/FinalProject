@@ -112,7 +112,7 @@
 			</div> <hr/>
 			<div class="paragraph_footer d-flex justify-content-end">
 				<c:if test="${editAuth eq true }">
-					<button class="btn">수정</button>
+					<button id="contentsEdit" class="btn">수정</button>
 					<button id="contentsDelete" class="btn">삭제</button>
 				</c:if>
 				<input id="editAuth" type="hidden" value="${editAuth }" />
@@ -124,6 +124,7 @@
 </section>
 <!-- 변수 -->
 <input type="hidden" id="board_class" value="${contents.board_class }" />
+<input type="hidden" id="post_id" value="${contents.post_id }" />
 
 <!-- Modal -->
 <div id="popUpMenu" style="display:none;">

@@ -1,6 +1,8 @@
 package com.spring.project.post.controller;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -12,17 +14,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import javax.annotation.Resource;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -68,7 +71,7 @@ public class PostController {
 		HttpSession session = request.getSession();
 		
 		// 임시 ID 세션 저장
-		session.setAttribute("currentUser", "testAuth1");
+		session.setAttribute("member_id", "admin");
 		
 		log.info("들어오는 세션: " + session.getAttribute("search"));
 		// 초기 세션 생성
@@ -142,7 +145,7 @@ public class PostController {
 		HttpSession session = request.getSession();
 		
 		// 임시 ID 세션 저장
-		session.setAttribute("currentUser", "testAuth1");
+		session.setAttribute("member_id", "admin");
 		
 		log.info("들어오는 세션: " + session.getAttribute("search"));
 		
@@ -217,14 +220,14 @@ public class PostController {
 		log.info("들어오는 세션: " + session.getAttribute("search"));
 		
 		// 임시 ID 세션 저장
-		session.setAttribute("currentUser", "testAuth1");
+		session.setAttribute("member_id", "testAuth1");
 		
 		session.setAttribute("tempPostId", post_id);
 		PostVO post = postService.getContents(post_id);
 		model.addAttribute("contents", post);
 		
 		// 수정권한 부여
-		String member_id = (String) session.getAttribute("currentUser");
+		String member_id = (String) session.getAttribute("member_id");
 		log.info("세션아이디: " + member_id);
 		log.info("가져온 아이디: " + post.getMember_id());
 		
@@ -241,42 +244,6 @@ public class PostController {
 		model.addAttribute("commentsList", commentsList);
 		
 		return "main_paragraph";
-	}
-	
-	//글작성하기
-	@GetMapping("/write")
-	public String write(Model model, String board_class) {
-		log.info("board_class: " + board_class);
-		model.addAttribute("board_class", board_class);
-		model.addAttribute("boardString", board_class.equals("freeBoard") ? "board" : "support");
-		return "writeTest";
-	}
-	
-	@PostMapping("/write")
-	public String write(HttpServletRequest request) throws UnsupportedEncodingException {
-		HttpSession session = request.getSession();
-		request.setCharacterEncoding("EUC-KR");
-		String data = request.getParameter("contents");
-		
-		PostVO post = new PostVO();
-		String[] dataArr = data.split(",");
-		for(String item : dataArr) {
-			log.info(item);
-		}
-		
-		post.setMember_id((String)session.getAttribute("currentUser"));
-		post.setTitle(dataArr[0]);
-		post.setContents(dataArr[1]);
-		post.setBoard_class(boardClassMap.get(dataArr[2]));
-		post.setContents_category(categoryNameMap.get(dataArr[3]));
-		
-		if (boardClassMap.get(dataArr[2]) == 1) {
-			post.setProcess(1);
-		}
-		
-		postService.addPost(post);
-		
-		return "redirect:" + mkUri(dataArr[2]);
 	}
 	
 	// 기타
@@ -301,96 +268,147 @@ public class PostController {
 	}
 	
 	
-	@Resource(name="uploadPath") private String uploadPath;
+	//글작성하기
+	@GetMapping("/write")
+	public String write(HttpServletRequest request, Model model, String board_class, Integer post_id) {
+		HttpSession session = request.getSession();
+		
+		if (post_id != null) {
+			model.addAttribute("contents", postService.getContents(post_id));
+		}
+		
+		log.info("board_class: " + board_class);
+		log.info("session 아이디: " + session.getAttribute("member_id"));
+		model.addAttribute("manager", session.getAttribute("member_id"));
+		model.addAttribute("board_class", board_class);
+		model.addAttribute("boardString", board_class.equals("freeBoard") ? "board" : "support");
+		return "writeTest";
+	}
 	
-	/*
-	 * 
-	 * @RequestMapping(value = "/upload/image", method = RequestMethod.POST) public
-	 * void uploadImage(HttpServletRequest request, HttpServletResponse response,
-	 * Model model, @RequestParam MultipartFile upload) throws Exception {
-	 * log.info("이미지 업로드 들어옴");
-	 * 
-	 * // 랜덤 문자 생성 UUID uid = UUID.randomUUID(); log.info("uid: " + uid);
-	 * 
-	 * OutputStream out = null; PrintWriter printWriter = null;
-	 * response.setCharacterEncoding("EUC-KR");
-	 * response.setContentType("text/html;charset=EUC-KR");
-	 * 
-	 * 
-	 * String fileName = upload.getOriginalFilename(); log.info("fileName: " +
-	 * fileName); byte[] bytes = upload.getBytes(); log.info("bytes: " + bytes);
-	 * 
-	 * // 업로드 경로 String ckUploadPath = uploadPath + File.separator + uid + "_" +
-	 * fileName; log.info("ckUploadPath: " + ckUploadPath);
-	 * 
-	 * out = new FileOutputStream(new File(ckUploadPath)); out.write(bytes);
-	 * out.flush(); // out에 저장된 데이터를 전송하고 초기화
-	 * 
-	 * String callback = request.getParameter("CKEditorFuncNum");
-	 * log.info("callback: " + callback); printWriter = response.getWriter(); String
-	 * fileUrl = "D:\\JAVA_Ethan\\upload\\" + uid + "_" + fileName; //작성화면
-	 * log.info("fileUrl: " + fileUrl);
-	 * 
-	 * printWriter.println("<script type='text/javascript'>" +
-	 * "window.parent.CKEDITOR.tools.callFunction(" + callback+",'"+
-	 * fileUrl+"','이미지를 업로드하였습니다.')" + "</script>");
-	 * 
-	 * printWriter.flush(); }
-	 */
+	@PostMapping("/write")
+	public String write(HttpServletRequest request, Integer post_id) throws UnsupportedEncodingException {
+		HttpSession session = request.getSession();
+		request.setCharacterEncoding("EUC-KR");
+		
+		String data = request.getParameter("contents");
+		log.info(data);
+		PostVO post = new PostVO();
+		log.info(post);
+		
+		String[] dataArr = data.split(","); for(String item : dataArr) {
+			log.info(item); }
+		
+		post.setMember_id((String)session.getAttribute("currentUser"));
+		post.setTitle(dataArr[0]); post.setContents(dataArr[1]);
+		post.setBoard_class(boardClassMap.get(dataArr[2]));
+		post.setContents_category(categoryNameMap.get(dataArr[3]));
+		
+		if (boardClassMap.get(dataArr[2]) == 1) { post.setProcess(1); }
+		
+		postService.addPost(post);
+		
+		return "redirect:" + mkUri(dataArr[2]);
+		
+	}
 	
 	@PostMapping("/upload/image")
-	    public void postImage(MultipartHttpServletRequest multiFile, HttpServletResponse resp, HttpServletRequest req) throws IOException{
+	public void postImage(MultipartHttpServletRequest multiFile, HttpServletRequest req, HttpServletResponse resp) {
+		log.info("image 업로드 들어옴");
 		
-			JsonObject json = new JsonObject();
-			PrintWriter printWriter = null;
-	        OutputStream out = null;
-	        MultipartFile file = multiFile.getFile("upload");	
-	        
-	        if (file != null) {
-	        	if (file.getSize() > 0) {
-	        		if (file.getContentType().toLowerCase().startsWith("image/")) {
-	        			try {
-	        				String fileName = file.getName();
-	        				byte[] bytes = file.getBytes();
-	        				String uploadPath = req.getServletContext().getRealPath("/img");
-	        				File uploadFile = new File(uploadPath);
-	        				if (!uploadFile.exists()) {
-	        					uploadFile.mkdirs();
-	        				}
-	        				fileName = UUID.randomUUID().toString();
-	        				uploadPath = uploadPath + "/" + fileName;
-	        				out = new FileOutputStream(new File(uploadPath));
-	        				out.write(bytes);
-	        				
-	        				printWriter = resp.getWriter();
-	        				resp.setContentType("text/html");
-	        				String fileUrl = req.getContextPath() + "/img/" + fileName;
-	        				
-	        				// json 데이터로 등록
-	        				// {"uploaded" : 1, "fileName : "test.jpg", "url" : "/img/test.jpg"}
-	        				// 이런 형태로 리턴이 되어야 함
-	        				json.addProperty("uploaded", 1);
-	        				json.addProperty("fileName", fileName);
-	        				json.addProperty("url", fileUrl);
-	        				
-	        				printWriter.println(json);
-	        				
-	        			} catch (IOException e) {
-	        				e.printStackTrace();
-	        			} finally {
-	        				if (out != null) {
-	        					out.close();
-	        				}
-	        				
-	        				if (printWriter != null) {
-	        					printWriter.close();
-	        				}
-	        			}
-	        		}
-	        	}
-	        }
-	    }
+		JsonObject json = new JsonObject();
+		OutputStream out = null;
+        PrintWriter printWriter = null;
+        MultipartFile file = multiFile.getFile("upload");
+        String uploadPath = "D:\\JavaWeb_Ethan\\project-workspace\\LastProject\\SpringProject3\\src\\main\\webapp\\resources\\images\\";
+        
+        
+        if (file != null) {
+        	try {
+        		UUID uuid = UUID.randomUUID();
+        		String fileName = file.getOriginalFilename();
+        		log.info("fileName: " + fileName);
+        		byte[] bytes = file.getBytes();
+        		
+        		String imgUploadPath = uploadPath + File.separator + uuid + "_" + fileName;
+        		log.info(imgUploadPath);
+        		
+        		out = new FileOutputStream(imgUploadPath);
+        		out.write(bytes);
+        		out.flush();
+        		
+        		printWriter = resp.getWriter();
+        		resp.setContentType("application/json");
+        		String callback = req.getParameter("CKEditorFuncNum");
+        		log.info(callback);
+        		String fileUrl = "/project/ckUpload?uuid=" + uuid + "&fileName=" + fileName;
+        		log.info("fileUrl: " + fileUrl);
+        		
+        		json.addProperty("filename", fileName);
+        		json.addProperty("uploaded", 1);
+        		json.addProperty("url", fileUrl);
+        		printWriter.println(json);
+        		
+        		printWriter.flush();
+        		
+        	} catch (IOException e) {
+        		e.printStackTrace();
+        	} finally {
+        		try {
+        			if(out != null) { out.close(); }
+        			if(printWriter != null) { printWriter.close(); }
+        		} catch(IOException e) { e.printStackTrace(); }
+        	}
+        }
+	}
 	
+	@RequestMapping(value="/ckUpload")
+	public void chUpload(@RequestParam(value="uuid") String uuid
+    		, @RequestParam(value="fileName") String fileName
+    		, HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		log.info("ckUpload 들어옴");
+		log.info("uuid: "  + uuid);
+		log.info("ckUpload FileName: " + fileName);
+		
+		String path = "D:\\JavaWeb_Ethan\\project-workspace\\LastProject\\SpringProject3\\src\\main\\webapp\\resources\\images\\";	// 저장된 이미지 경로
+    	System.out.println("path:"+path);
+    	String sDirPath = path + uuid + "_" + fileName;
+    	log.info(sDirPath);
+    	
+    	File imgFile = new File(sDirPath);
+    	
+    	if(imgFile.isFile()){
+    		byte[] buf = new byte[1024];
+    		int readByte = 0;
+    		int length = 0;
+    		byte[] imgBuf = null;
+    		
+    		FileInputStream fileInputStream = null;
+    		ByteArrayOutputStream outputStream = null;
+    		ServletOutputStream out = null;
+    		
+    		try{
+    			fileInputStream = new FileInputStream(imgFile);
+    			outputStream = new ByteArrayOutputStream();
+    			out = resp.getOutputStream();
+    			
+    			while((readByte = fileInputStream.read(buf)) != -1){
+    				outputStream.write(buf, 0, readByte); 
+    			}
+    			
+    			imgBuf = outputStream.toByteArray();
+    			length = imgBuf.length;
+    			out.write(imgBuf, 0, length);
+    			out.flush();
+    			
+    		} catch(IOException e) {
+    			e.printStackTrace();
+    		} finally {
+				outputStream.close();
+				fileInputStream.close();
+				out.close();
+			}
+		}
+	}
 }
 
 
