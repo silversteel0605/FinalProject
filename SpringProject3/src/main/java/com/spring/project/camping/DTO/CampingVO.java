@@ -5,6 +5,7 @@ import lombok.Data;
 
 @Data
 public class CampingVO {
+
 	private String contentId;
 	private String facltNm;
 	private String lineIntro;
@@ -24,4 +25,8 @@ public class CampingVO {
 	private String tagId;
 	private int views;
 	private int rn;
+	private String intro;
+	private String tel;
+	private String homepage;
+	private String operDeCl;
 }
