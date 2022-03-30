@@ -25,6 +25,10 @@
 	</bean>
 	
 	<!-- mybatis-spring:scan -->
+<<<<<<< HEAD
 	<mybatis-spring:scan base-package="com.spring.project.camping.mapper, com.spring.project.post.mapper, com.spring.project.review.mapper"/>
+=======
+	<mybatis-spring:scan base-package="com.spring.project.camping.mapper, com.spring.project.post.mapper"/>
+>>>>>>> refs/heads/jang
 		
 </beans>

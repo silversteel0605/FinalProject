@@ -1,1 +1,7 @@
 @charset "EUC-KR";
+<<<<<<< HEAD
+=======
+.userId, .contentsTitle {
+	cursor: pointer;
+}
+>>>>>>> refs/heads/jang

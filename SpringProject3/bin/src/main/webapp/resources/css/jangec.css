@@ -1,15 +1,25 @@
 @charset "EUC-KR";
 
 /* °øÅë */
+<<<<<<< HEAD
+=======
+.comment_icon {
+	cursor: pointer;
+}
+>>>>>>> refs/heads/jang
 
 p, div {
 	margin: 0px;
 	padding: 0px;
 }
 
+<<<<<<< HEAD
 .userId, .contentsTitle {
+=======
+/* #id {
+>>>>>>> refs/heads/jang
 	cursor: pointer;
-}
+} */
 
 /* Free Board */
 
@@ -17,6 +27,15 @@ p, div {
 	min-height: 300px;
 }
 
+<<<<<<< HEAD
+=======
+
+
+#co_comment {
+	display: none;
+}
+
+>>>>>>> refs/heads/jang
 .card-body, .card-footer {
 	padding: 0px;
 }
@@ -30,3 +49,9 @@ p, div {
   	-webkit-box-orient: vertical;
 
 }
+<<<<<<< HEAD
+=======
+
+
+/* Support Page */
+>>>>>>> refs/heads/jang

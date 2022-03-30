@@ -114,9 +114,15 @@
 				<div class="comments_footer"></div>
 			</div> <hr />
 			<div class="paragraph_footer d-flex justify-content-end">
+<<<<<<< HEAD
 					<button class="btn">수정</button>
 					<button id="contentsDelete" class="btn">삭제</button>
 					<button id="goBoard" class="btn">목록</button>
+=======
+				<button class="btn">수정</button>
+				<button id="contentsDelete" class="btn">삭제</button>
+				<button id="goBoard" class="btn">목록</button>
+>>>>>>> refs/heads/jang
 			</div>
 			<form action="./support" method="POST" id="deleteForm">
 				<input type="hidden" name="delete" value="true" />
