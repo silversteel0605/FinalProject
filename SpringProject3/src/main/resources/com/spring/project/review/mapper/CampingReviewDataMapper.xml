@@ -6,59 +6,61 @@
 <mapper namespace="com.spring.project.review.mapper.CampingReviewDataMapper">
 
     <select id="getReviewAllInfoList"  resultType="com.spring.project.review.DTO.CampingReviewDTO">
-    	SELECT * from review where contentId=#{contentId}
+        SELECT * from review where contentId=#{contentId}
     </select>
     
     <select id="getReviewInfo"  resultType="com.spring.project.review.DTO.CampingReviewDTO">
-    	SELECT * from review where reviewId=#{reviewId}
+        SELECT * from review where review_id=#{reviewId}
     </select>
     
     <insert id="initReviewData" parameterType="com.spring.project.review.DTO.CampingReviewDTO">
-    	insert INTO review VALUES (REVIEW_SEQ.nextval, 0, #{contentId}, #{title}, SYSDATE, null, #{contentValue}, null, #{starRanking}, 0, 0)
+        insert INTO review
+        (review_id, member_id, contentId, title, reg_date, up_date, review, imgUrl, starRanking, views, decl)
+        VALUES (REVIEW_SEQ.nextval, 'cccc', #{contentId}, #{title}, SYSDATE, SYSDATE, #{review}, null, #{starRanking}, 0, 0)
     </insert>
     
     <delete id="deleteReviewData" parameterType="_int">
-    	DELETE FROM review WHERE reviewId = #{reviewId}
+        DELETE FROM review WHERE review_id = #{reviewId}
     </delete>
     
     <update id="reviewClickNumUp" parameterType="com.spring.project.review.DTO.CampingReviewDTO">
-    	UPDATE review set views=views+1 WHERE reviewId = #{reviewId}
+        UPDATE review set views=views+1 WHERE review_id = #{reviewId}
     </update>
     
-    <update id="reviewDeclClickNumUp" parameterType="com.spring.project.review.DTO.CampingReviewDTO">
-    	UPDATE review set decl=decl+1 WHERE reviewId = #{reviewId}
+    <update id="reviewDcelClickNumUp" parameterType="com.spring.project.review.DTO.CampingReviewDTO">
+        UPDATE review set dcel=dcel+1 WHERE review_id = #{reviewId}
     </update>
     
     <update id="reviewUpdate" parameterType="com.spring.project.review.DTO.CampingReviewDTO">
-    	UPDATE review SET title=#{title}, review=#{contentValue}, starRanking=#{starRanking} WHERE reviewId = #{reviewId}
+        UPDATE review SET title=#{title}, review=#{review}, starRanking=#{starRanking} WHERE review_id = #{review_id}
     </update>
     
     <select id="getSortReviewDatas" parameterType="map" resultType="com.spring.project.review.DTO.CampingReviewDTO">
-    	select * from review where contentid=#{contentId} order by
-    	<if test="value != null and value.equals('createDate')">
-    		reg_date DESC
-    	</if>
-    	<if test="value != null and value.equals('starRanking')">
-    		starRanking DESC
-    	</if>
+        select * from review where contentid=#{contentId} order by
+        <if test="value != null and value.equals('upDate')">
+            up_date DESC
+        </if>
+        <if test="value != null and value.equals('starRanking')">
+            starRanking DESC
+        </if>
     </select>
     
     <select id="getReviewAllPageCnt" resultType="_int">
-    	select count(*) from review
+        select count(*) from review
     </select>
     
     <select id="getReviewSearchData" resultType="com.spring.project.review.DTO.CampingReviewDTO" parameterType="Map">
-    	SELECT * FROM ( SELECT ROWNUM RN, A.* FROM ( select * from review where contentId = #{contentId} ) A ) WHERE RN BETWEEN #{start} AND #{end} order by
-    	<if test="value != null and value.equals('createDate')">
-    		reg_date DESC
-    	</if>
-    	<if test="value != null and value.equals('starRanking')">
-    		starRanking DESC
-    	</if>
+        SELECT * FROM ( SELECT ROWNUM RN, A.* FROM ( select * from review where contentId = #{contentId} ) A ) WHERE RN BETWEEN #{start} AND #{end} order by
+        <if test="value != null and value.equals('upDate')">
+            up_date DESC
+        </if>
+        <if test="value != null and value.equals('starRanking')">
+            starRanking DESC
+        </if>
     </select>
     
     <select id="getReviewCreateReviewID" resultType="_int">
-    	select last_number from seq where sequence_name = 'REVIEW_SEQ';
+        select last_number from seq where sequence_name = 'REVIEW_SEQ';
     </select>
 
 </mapper>
