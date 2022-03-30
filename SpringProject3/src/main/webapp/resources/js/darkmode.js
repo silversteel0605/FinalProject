@@ -81,12 +81,16 @@ function log(h){
 		$('.dropdown-item').removeClass('dropdownd');
 		$('#dropmenu').removeClass('dropdownn');
 		$('.dropdown-item').removeClass('dropdownn');
+		$(chkbox).removeClass('cbbgcd');
+		$(chkbox).removeClass('cbbgcn');
 		
 		$("#checkBoxId").change(function(){
 			$('#dropmenu').removeClass('dropdownd');
 			$('.dropdown-item').removeClass('dropdownd');
 			$('#dropmenu').removeClass('dropdownn');
 			$('.dropdown-item').removeClass('dropdownn');
+			$(chkbox).removeClass('cbbgcd');
+			$(chkbox).removeClass('cbbgcn');
 		});
 	}
 }
