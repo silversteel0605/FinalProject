@@ -7,6 +7,13 @@
     background-color: rgba(255, 255, 255, 0.05);
     border-radius: 10px;
 }
+.cbbgcd{
+	border: 1px solid red;
+}
+.cbbgcn{
+	border: 1px solid rgb(55, 49, 89);
+}
+
 #darkmodecheck input{
     appearance: none;
 }
@@ -25,6 +32,7 @@
     justify-content: center;
     align-items: center;
 }
+
 #darkmodecheck input:checked ~span
 {
     left: 50px;
@@ -35,8 +43,9 @@
     font-size: 2em;
     transition: 0.5s;
 }
+
 #darkmodecheck input:checked ~ span ion-icon{
-    color: rgba(255, 255, 255,1);
+    color: rgba(241, 93, 48);
     filter: drop-shadow(0 0 5px #fff);
 }
 
@@ -130,13 +139,7 @@
     animation-delay: 1s;
     animation-duration: 3s;
 }
-.nightsky>span:nth-child(7){
-    top:100vw;
-    right: 23vw;
-    left: initial;
-    animation-delay: 1.2s;
-    animation-duration: 1.75s;
-}
+
 .nightsky>span:nth-child(8){
     top:0px;
     right: 70vw;

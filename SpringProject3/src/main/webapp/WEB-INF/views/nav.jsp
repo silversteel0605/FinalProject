@@ -20,7 +20,7 @@
 					<li class="nav-item"><a href="hotel.html" class="nav-link">Hotel</a></li>
 					<!-- 추가 및 변경 시작 부분-->
 					<li class="nav-item dropdown show"><a href="free_board.html" class="nav-link">Community</a>
-						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+						<div id="dropmenu"class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 						  <a class="dropdown-item" href="free_board.html">자유 게시판</a>
 						  <a class="dropdown-item" href="review.html">후기</a>
 						  <a class="dropdown-item" href="#">blog#3</a>
@@ -29,7 +29,7 @@
 					 <!-- 추가 및 변경 끝 부분-->
 					<li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
 				</ul>
-				<label id="darkmodecheck">
+				<label id="darkmodecheck" >
 					<input type="checkbox" id="checkBoxId" checked>
 					<span id="moonsun">
 						<ion-icon name='sunny-outline'></ion-icon>

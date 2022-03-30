@@ -10,6 +10,7 @@
 <title>Insert title here</title>
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Arizonia&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="<c:url value="/resources/css/animate.css"/>"/>
 	<link rel="stylesheet" href="<c:url value="/resources/css/owl.carousel.min.css"/>"/>
@@ -66,7 +67,81 @@
 		    </div>
 		    <div>
 		    	<h2>캠핑장 이름</h2>
+		    	<div>
+		    		<p><span class="material-icons">grade</span>4.8/5 &nbsp; <a href="#" id="blue">후기 0개</a></p>    		
+		    	</div>
 		    </div>
+		    <div class="tab-content" id="v-pills-tabContent">
+               <div class="tab-pane fade show active" id="v-pills-1" role="tabpanel" aria-labelledby="v-pills-nextgen-tab">
+                   <form action="#" class="search-property-1">
+                       <div class="row no-gutters">
+                           <div class="col-md d-flex">
+                               <div class="form-group p-4">
+                                   <label for="#">체크인 시간</label>
+                                   <div class="form-field">
+                                       <div class="icon"><span class="fa fa-calendar"></span></div>
+                                       <input autocomplete="off" name ="check_in_time" type="text" class="form-control checkin_date" placeholder="Check In Date">
+                                   </div>
+                               </div>
+                           </div>
+                           <div class="col-md d-flex">
+                               <div class="form-group p-4">
+                                   <label for="#">체크아웃 시간</label>
+                                   <div class="form-field">
+                                       <div class="icon"><span class="fa fa-calendar"></span></div>
+                                       <input autocomplete="off" name ="check_out_time" type="text" class="form-control checkout_date" placeholder="Check Out Date">
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                   </form>
+               </div>
+            </div>
+            <div id="all_area">
+            	<a href="#" class ="area">
+            		<img src="resources/images/place-1.jpg">
+            		<div class="infor">
+            			<div class="infor_1">
+            				<div>구역A</div>
+            				<div>80,000 원</div>
+            			</div>
+            			<div class="infor_2">사이드 주차/전기사용가능/자리지정/오토캠핑</div>
+            			<div class="infor_3">
+            				<div>예약 가능한 자리</div>
+            				<div>3 자리</div>
+            			</div>
+            		</div>
+            	</a>
+            	<a href="#" class ="area">
+            		<img src="resources/images/place-2.jpg">
+            		<div class="infor">
+            			<div class="infor_1">
+            				<div>구역B</div>
+            				<div>90,000 원</div>
+            			</div>
+            			<div class="infor_2">사이드 주차/전기사용가능/자리지정/오토캠핑</div>
+            			<div class="infor_3">
+            				<div>예약 가능한 자리</div>
+            				<div>2 자리</div>
+            			</div>
+            		</div>
+            	</a>
+            	<a href="#" class ="area">
+            		<img src="resources/images/place-3.jpg">
+            		<div class="infor">
+            			<div class="infor_1">
+            				<div>구역C</div>
+            				<div>40,000 원</div>
+            			</div>
+            			<div class="infor_2">사이드 주차/오토캠핑</div>
+            			<div class="infor_3">
+            				<div>예약 가능한 자리</div>
+            				<div>1 자리</div>
+            			</div>
+            		</div>
+            	</a>
+            </div>
+
 		</div>
 	</section>
 	
