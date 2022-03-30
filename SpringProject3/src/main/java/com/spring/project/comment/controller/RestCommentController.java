@@ -38,9 +38,9 @@ public class RestCommentController {
 	public int blind(@RequestBody CommentVO vo) {
 		int rs;
 		vo.blinding();
-		log.info(vo);
+
 		if ((rs = service.blind(vo)) != 0) {
-			rs *= mService.blindMsg(vo);
+			rs += mService.blindMsg(vo);
 		}
 		return rs ;
 	}

@@ -14,9 +14,80 @@ $('#member').click(function() {
 		getMemberList(1);
 })
 
+$('#Bmember').click(function() {
+	getBMemberList(1);
+})
+
 $('#comment').click(function() {
 	getCommentList(1);
 })
+
+camp_sub.addEventListener('click', () => {
+	uri = `searchTy=condition&${camp_selc.value}=${camp_srch.value}`
+	getCampingList(1);
+})
+
+camp.addEventListener('click', () => {
+	getCampingList(1);
+})
+
+camp_add.addEventListener('click', () => {
+	setData();
+	insertCampingInfo();
+})
+
+
+//utils
+
+
+function campingBtn(btn) {
+	var tr = $(btn).parent().parent();
+	var td = tr.children();
+	var contentId = td.eq(2).text();
+	if (btn.innerText === '수정') {
+		makeUpdateWindow(contentId);
+	} else {
+		deleteCamping(contentId);
+	}
+}
+ 
+function makeUpdateWindow(contentId) {
+	var popupWidth = 1000;
+	var popupHeight = 800;
+	var popupX = (window.screen.width / 2) - (popupWidth / 2);
+	var popupY= (window.screen.height / 2) - (popupHeight / 2);
+	
+	window.open(`updateWindow?contentId=${contentId}`, 'update', 'status=no, height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY);
+}
+
+
+//ajax
+
+function permitting(btn) {
+	var tr = $(btn).parent().parent();
+	var td = tr.children();
+	var member_id = td.eq(1).text();
+	const data = JSON.stringify({
+		"member_id" : member_id
+		});
+	$.ajax({
+	   url: `${Url}/manager/member`,
+		  type: "put",
+		  dataType: "json",
+		  data : data,
+		  contentType : 'application/json',
+		  success : function(result) {
+			if(result == 1) {
+				alert("가입허용을 완료했습니다")
+			} else {
+				alert("가입허용 중 오류 발생");
+			}
+	    },
+	    error: function(request, status, error) {
+	        console.log(request + "/" + status + "/" + error);
+	    }
+	});	
+}
 
 function getCommentList(nowPage) {
 	$("#comment_body").empty();
@@ -44,7 +115,7 @@ function getCommentList(nowPage) {
 		}
 		console.log(total)
 		pagination(total, nowPage, 10, 10);
-		drawPage('member');
+		drawPage('comment');
 	});	
 }
 
@@ -67,7 +138,7 @@ function blind(btn) {
 		  data : data,
 		  contentType : 'application/json',
 		  success : function(result) {
-			if(result == 1) {
+			if(result == 2) {
 		      	alert("블라인드 처리를 완료했습니다");				
 			} else {
 				alert("이미 블라인드 처리된 글이거나 블라인드 처리를 하지 못했습니다");
@@ -82,9 +153,8 @@ function blind(btn) {
 
 function getMemberList(nowPage) {
 	$("#member_body").empty();
-
 	$.ajax({
-	  url: `${Url}/manager/member?nowPage=${nowPage}`,
+	  url: `${Url}/manager/member?nowPage=${nowPage}&member_type=0`,
 	  dataType: "json",
 	  type: "GET"
   	}).done(res => {
@@ -109,41 +179,35 @@ function getMemberList(nowPage) {
 	});	
 }
 
+function getBMemberList(nowPage) {
+	$("#Bmember_body").empty();
+	$.ajax({
+	  url: `${Url}/manager/member?nowPage=${nowPage}&member_type=1`,
+	  dataType: "json",
+	  type: "GET"
+  	}).done(res => {
+  		res.forEach(member => {
+			$('#Bmember_body').append('<tr>' 
+			+ '<td>' + member.rn + '</td>' 
+			+ '<td>' + member.member_id + '</td>' 
+			+ '<td>' + member.camp + '</td>' 
+			+ '<td>' + (member.permit == 1 ?
+			 '완료</td>' :
+			 '신청</td>'
+		 	+ '<td><button type="button" class="btn btn-link" onclick="permitting(this)">가입 허용</button></td>')
+			+ '</tr>');				
+		})
+		if (res.length > 0) {			
+			total = res[0].total
+		} else {
+			total = 0;
+		}
 
-camp_sub.addEventListener('click', () => {
-	uri = `searchTy=condition&${camp_selc.value}=${camp_srch.value}`
-	getCampingList(1);
-})
-
-camp.addEventListener('click', () => {
-	getCampingList(1);
-})
-
-camp_add.addEventListener('click', () => {
-	setData();
-	insertCampingInfo();
-})
-
-
-function campingBtn(btn) {
-	var tr = $(btn).parent().parent();
-	var td = tr.children();
-	var contentId = td.eq(2).text();
-	if (btn.innerText === '수정') {
-		makeUpdateWindow(contentId);
-	} else {
-		deleteCamping(contentId);
-	}
+		pagination(total, nowPage, 10, 10);
+		drawPage('Bmember');
+	});	
 }
- 
-function makeUpdateWindow(contentId) {
-	var popupWidth = 1000;
-	var popupHeight = 800;
-	var popupX = (window.screen.width / 2) - (popupWidth / 2);
-	var popupY= (window.screen.height / 2) - (popupHeight / 2);
-	
-	window.open(`updateWindow?contentId=${contentId}`, 'update', 'status=no, height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY);
-}
+
 
 function deleteCamping(contentId) {
 	console.log(contentId);
@@ -154,6 +218,7 @@ function deleteCamping(contentId) {
 	  data : contentId,
 	  success : function(result) {
       	alert("캠핑장 정보 삭제했습니다");
+      	window.location.reload(true);			
     },
     error: function(request, status, error) {
         console.log(request + "/" + status + "/" + error);
@@ -219,7 +284,7 @@ function getCampingList(nowPage) {
 
 
 
-
+// paging
 function drawPage(tab) {
 	$("#paging").empty();
 	$('#paging').append('<li onclick="paging(this)"><a>&lt;&lt;</a></li>')
@@ -234,30 +299,40 @@ function drawPage(tab) {
 	}
 	$('#paging').append('<li onclick="paging(this)"><a>&gt;</a></li>')
 	$('#paging').append('<li onclick="paging(this)"><a>&gt;&gt;</a></li>')
+	$('#paging').removeClass();
 	$('#paging').addClass(tab);
 }
 
 
 function paging(li) {
-	if($('#paging').attr('class') === 'camping') {
-		if(li.innerText === '<<'){
-			getCampingList(1);
-		} else if (li.innerText === '<') {
-			if(startPage != 1) {
-				getCampingList(startPage - 1);
-			} else {
-				getCampingList(startPage);
-			}
-		} else if (li.innerText === '>>') {		
-			getCampingList(lastPage);
-		} else if (li.innerText === '>') {
-			if(endPage != lastPage) {
-				getCampingList(endPage + 1);
-			} else {
-				getCampingList(endPage);
-			}
+	var page = $('#paging').attr('class');
+	if(li.innerText === '<<'){
+			selectPage(page, 1);
+	} else if (li.innerText === '<') {
+		if(startPage != 1) {
+			selectPage(page, startPage - 1);
 		} else {
-			getCampingList(li.innerText);
+			selectPage(page, startPage);
 		}
+	} else if (li.innerText === '>>') {		
+		selectPage(page, lastPage);
+	} else if (li.innerText === '>') {
+		if(endPage != lastPage) {
+			selectPage(page, endPage + 1);
+		} else {
+			selectPage(page, endPage);
+		}
+	} else {
+		selectPage(page, li.innerText);
+	}
+}
+
+function selectPage(pgNm, nowPage) {
+	if(pgNm === 'camping') {
+		getCampingList(nowPage)
+	} else if (pgNm === 'member') {
+		getMemberList(nowPage)
+	} else if (pgNm === 'comment') {
+		getCommentList(nowPage)
 	}
 }

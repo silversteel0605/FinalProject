@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.spring.project.member.DTO.MemberSearchVO;
 import com.spring.project.member.DTO.MemberVO;
 import com.spring.project.member.mapper.MemberDataMapper;
 
@@ -157,13 +156,23 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public MemberVO[] getMembers(MemberSearchVO vo) {
+	public MemberVO[] getMembers(MemberVO vo) {
 		return dataMapper.getMembers(vo);
 	}
 
 	@Override
-	public int MemberCnt() {
-		return dataMapper.MemberCnt();
+	public int MemberCnt(MemberVO vo) {
+		return dataMapper.MemberCnt(vo);
+	}
+
+	@Override
+	public int isPermit(MemberVO vo) {
+		return dataMapper.isPermit(vo);
+	}
+
+	@Override
+	public int permitting(MemberVO vo) {
+		return dataMapper.permitting(vo);
 	}
 	
 	

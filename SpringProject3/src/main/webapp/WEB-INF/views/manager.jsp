@@ -2,7 +2,7 @@
     pageEncoding="EUC-KR"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
-String auth = (String)session.getAttribute("auth");
+String member_id = (String)session.getAttribute("member_id");
 %>
 <!DOCTYPE html>
 <html>
@@ -30,7 +30,7 @@ String auth = (String)session.getAttribute("auth");
 </head>
 <body>
 	<script>
-		<c:if test="${empty auth}">
+		<c:if test="${empty member_id}">
 			alert("권한이 없습니다");
 			history.back();
 		</c:if>
@@ -77,6 +77,11 @@ String auth = (String)session.getAttribute("auth");
 	      <li class="nav-item">
 	        <a class="nav-link active" data-toggle="tab" href="#memberManagement" id="member">회원관리</a>
 	      </li>
+	      
+	      <li class="nav-item">
+	        <a class="nav-link" data-toggle="tab" href="#BmemberManagement" id="Bmember">사업자관리</a>
+	      </li>
+	      
 	      <li class="nav-item">
 	        <a class="nav-link" data-toggle="tab" href="#reservationManagement">예약관리</a>
 	      </li>
@@ -127,17 +132,55 @@ String auth = (String)session.getAttribute("auth");
 								<th>이름</th>
 								<th>ID</th>
 								<th>주소</th>
-								<th>이메일</th>
+								<th>가입상태</th>
 								<th></th>
 							</tr>
 						</thead>
-						<tbody id="member_body">
+						<tbody id="member_body" type="0">
 							
 						</tbody>
 					</table>
 				</div>
 			</div>
 	      	<!-- /회원관리 -->
+	      	 <div class="tab-pane fade" id="BmemberManagement">
+		    	<div class="row">
+		    		<div class="col">
+		    			<p>회원가입</p>
+		    		</div>
+					<div class="form-check form-switch col justify-content-start">
+						<div class="row">
+							<span class="col-6" id="joinProhibitSentence"></span>
+							<input class="form-check-input col-6" type="checkbox" role="checkbox" id="joinProhibitSwitch">
+						</div>
+					</div>
+				</div>
+				<hr />
+				<div class="searchMember">
+					<div class="d-flex justify-content-between mb-3">
+						<p class="">회원검색</p>
+						<form class="d-flex flex-row">
+							<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+							<button class="btn btn-outline-success" type="submit">Search</button>
+						</form>
+					</div>
+					<table class="table">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>이름</th>
+								<th>ID</th>
+								<th>캠핑장</th>
+								<th>가입상태</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody id="Bmember_body" type="1">
+							
+						</tbody>
+					</table>
+				</div>
+			</div>
 	      	<!-- 예약관리 -->
 	      	<div class="tab-pane fade" id="reservationManagement">
 		      	<div class="reservationManagement">

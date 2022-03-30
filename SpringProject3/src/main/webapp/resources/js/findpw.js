@@ -16,7 +16,7 @@ function pw_search() {
 		   type: "POST",
 		   dataType : "json",
 		   data : {
-			"id" : id,
+			"member_id" : id,
 			"email" : email
 			},
 		   success : function(result) {
@@ -26,7 +26,7 @@ function pw_search() {
                }
                else
                {
-                   $('#check_result').html("<font color=red>ì¡´ì¬í•˜ì§€ ì•ŠëŠ” ID ë˜ëŠ” ì´ë©”ì¼ì…ë‹ˆë‹¤.</font>");
+                   $('#check_result').html("<font color=red>¾ÆÀÌµğ ¶Ç´Â ÀÌ¸ŞÀÏÀÌ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù</font>");
                }
 		   },
 		   error : function(request, status, error) {

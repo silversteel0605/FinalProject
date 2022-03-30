@@ -46,7 +46,7 @@
 		   url : '/project/rest/signin',
 		   type: "GET",
 		   dataType : "json",
-		   data : {"id" : id},
+		   data : {"member_id" : id},
 		   success : function(result) {
 			   let count=result;
                if(count==0)

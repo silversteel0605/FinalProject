@@ -18,22 +18,39 @@ import com.spring.project.member.service.MemberService;
 
 import lombok.extern.log4j.Log4j;
 
+	
+
 @Log4j
 @Controller
 public class MemberController {
+
+	private static final HashMap<Integer, String> M_TYPE = new HashMap<>();
+	
+	static {
+		M_TYPE.put(0, "normal");
+		M_TYPE.put(1, "business");
+	}
 	
 	@Autowired
 	MemberService service;
 	
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String login() {
-		return "login";
+	public String login(MemberVO vo) {
+		if(vo.getMember_type() == 1) {			
+			return "business.login";
+		} else {
+			return "login";
+		}
 	}
 	
 	@RequestMapping(value = "/signin", method = RequestMethod.GET)
-	public String signin() {
-		return "signin";
+	public String signin(MemberVO vo) {
+		if(vo.getMember_type() == 1) {			
+			return "business.signin";
+		} else {
+			return "signin";
+		}
 	}
 	
 	@RequestMapping(value = "/ivc", method = RequestMethod.GET)
@@ -44,7 +61,8 @@ public class MemberController {
 	@RequestMapping(value = "/member/login")
 	public String login(HttpSession session, MemberVO vo) {
 		String id = vo.getMember_id();
-		session.setAttribute("auth", "member");
+		int type = vo.getMember_type();
+		session.setAttribute("auth", M_TYPE.get(type));
 		session.setAttribute("member_id", id);		
 		return "redirect:/about";
 	}
@@ -55,13 +73,13 @@ public class MemberController {
 		return "redirect:/about";
 	}
 	
-	@RequestMapping(value="kakao/login")
+	@RequestMapping(value="/kakao/login")
 	public String kakaoin(@RequestParam(value = "code", required = false) String code, HttpSession session) throws Exception {
 		String access_Token = service.getAccessToken(code);
 		
 		HashMap<String, Object> userInfo = service.getUserInfo(access_Token);
 		if(access_Token != null) {
-			session.setAttribute("kakao_token", access_Token);
+			session.setAttribute("member_id", access_Token);
 			session.setAttribute("auth", "kakao");			
 		} else {			
 			session.setAttribute("auth", "failed");			
@@ -70,7 +88,7 @@ public class MemberController {
 		return "redirect:/about";
 	}
 	
-	@RequestMapping(value="kakao/logout")
+	@RequestMapping(value="/kakao/logout")
 	public String kakaoout(HttpSession session) {
 		session.setAttribute("kakao_token", null);
 		session.setAttribute("auth", null);

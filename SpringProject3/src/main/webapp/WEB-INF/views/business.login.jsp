@@ -101,7 +101,7 @@ ul {
 </head>
 <body>
   <section class="login">
-      <h2>로그인</h2>
+      <h2>캠핑장 운영자 로그인</h2>
       <ul>
         <form id="login">
           <li>
@@ -130,19 +130,16 @@ ul {
             >
           </li>
           <li><input type="submit" value="로그인" id="join"/></li>
-          <input type="hidden" value="0" id="member_type"/>
+          <input type="hidden" value="1" id="member_type"/>
         </form>
       </ul>
       <div>
         <ul>
-          <li><a href="./signin">회원가입</a></li>
+          <li><a href="./signin?member_type=1">회원가입</a></li>
           <li><a href="./findid">아이디 찾기</a></li>
           <li><a href="./findpw">비밀번호 찾기</a></li>
         </ul>
       </div>
-      <a href="https://kauth.kakao.com/oauth/authorize?client_id=ab2dbc463528e52eff1939322fb6704c&redirect_uri=http://localhost:8090/project/kakao/login&response_type=code">
-      	<img src="<c:url value="/resources/images/kakaologin.png"/>" alt="카카오 로그인" />
-      </a>
     </section>
 <script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
 <script src="<c:url value="/resources/js/login.js"/>"></script>

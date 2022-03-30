@@ -366,7 +366,7 @@ String auth = (String)session.getAttribute("auth");
 		if(auth === 'kakao') {
 			location.href = 'https://kauth.kakao.com/oauth/logout?client_id=ab2dbc463528e52eff1939322fb6704c&logout_redirect_uri=http://localhost:8090/project/kakao/logout&state=state';
 		} else {
-			location.href = './' + auth + '/logout';
+			location.href = './member/logout';
 		}
 	}
 </script>

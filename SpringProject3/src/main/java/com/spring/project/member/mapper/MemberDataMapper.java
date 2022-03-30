@@ -16,7 +16,11 @@ public interface MemberDataMapper {
 	
 	public int findpw(MemberVO vo);
 	
-	public int MemberCnt();
+	public int MemberCnt(MemberVO vo);
 	
-	public MemberVO[] getMembers(MemberSearchVO vo);
+	public MemberVO[] getMembers(MemberVO vo);
+	
+	public int isPermit(MemberVO vo);
+	
+	public int permitting(MemberVO vo);
 }

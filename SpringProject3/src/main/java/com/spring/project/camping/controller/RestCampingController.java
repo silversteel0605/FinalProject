@@ -41,15 +41,13 @@ public class RestCampingController {
 	
 	
 	@PostMapping(value="/manager/camp")
-	public CampingVO insert(CampingVO vo) {
-		service.addData(vo);
-		return vo;
+	public int insert(CampingVO vo) {
+		return service.addData(vo);
 	}
 	
 	@PutMapping(value="/manager/camp")
-	public CampingVO update(@RequestBody CampingVO vo) {
-		service.updateData(vo);
-		return vo;
+	public int update(@RequestBody CampingVO vo) {
+		return service.updateData(vo);
 	}
 	
 	@DeleteMapping(value="/manager/camp")
