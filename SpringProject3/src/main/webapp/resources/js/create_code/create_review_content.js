@@ -119,6 +119,9 @@ function create_review_star_rank(type){
 		radio[index].setAttribute("name", "starRanking");
 		radio[index].setAttribute("id", "rating"+(index+1));
 		radio[index].setAttribute("value", index+1);
+		if(index == 4){
+			radio[index].setAttribute("checked", "checked");	
+		}
 		
 		starLabel.push(document.createElement("label"));
 		starLabel[index].setAttribute("for", "rating"+(index+1));
