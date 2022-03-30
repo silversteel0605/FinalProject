@@ -6,26 +6,29 @@ var navbar = document.getElementById("ftco-navbar");
 var darkmodebg = document.getElementById("darkmodebg");
 
 $(document).ready(function(){
-    $("#checkBoxId").change(function(){
-        if($("#checkBoxId").is(":checked")){
-            darkmodeIcon.innerHTML="<ion-icon name='sunny-outline'></ion-icon>"
-            $(bodytag).removeClass("darkmode");
-            $(mainimg).removeClass("maindarkimg");     
-            $(navbar).removeClass("darkmode");    
-            $(sky).attr('class','skybird');
-            $(chkbox).removeClass("cbbgcn");
-        }else{
-            darkmodeIcon.innerHTML="<ion-icon name='moon-outline'></ion-icon>"
-            $(bodytag).addClass("darkmode");
-            $(navbar).addClass("darkmode");
-            $(mainimg).addClass("maindarkimg");
-            $(sky).attr('class','nightsky');
-            $(chkbox).addClass("cbbgcn");
-
-            
-        }
-    });
 });
+$("#checkBoxId").change(function(){
+    if($("#checkBoxId").is(":checked")){
+        darkmodeIcon.innerHTML="<ion-icon name='sunny-outline'></ion-icon>"
+        $(bodytag).removeClass("darkmode");
+        $(mainimg).removeClass("maindarkimg");     
+        $(navbar).removeClass("darkmode");    
+        $(sky).attr('class','skybird');
+        $(chkbox).removeClass("cbbgcn");
+
+        
+
+    }else{
+        darkmodeIcon.innerHTML="<ion-icon name='moon-outline'></ion-icon>"
+        $(bodytag).addClass("darkmode");
+        $(navbar).addClass("darkmode");
+        $(mainimg).addClass("maindarkimg");
+        $(sky).attr('class','nightsky');
+        $(chkbox).addClass("cbbgcn");
+        
+    }
+});
+
 $(window).scroll(function () {
 			var height = $(document).scrollTop();
 			log(height);
@@ -35,13 +38,48 @@ $(window).scroll(function () {
 function log(h){
 	if(h > 300){
 		$('#darkmodecheck').addClass('cbbgc');
-		$('#dropmenu').addClass('dropdownd');
-		$('.dropdown-item').addClass('dropdownd');
+				 
+    		if($("#checkBoxId").is(":checked")){
+				$('#dropmenu').addClass('dropdownd');
+				$('.dropdown-item').addClass('dropdownd');
+				$('#dropmenu').removeClass('dropdownn');
+				$('.dropdown-item').removeClass('dropdownn');
+
+		    }else if(!($("#checkBoxId").is(":checked"))){
+				$('#dropmenu').removeClass('dropdownd');
+				$('.dropdown-item').removeClass('dropdownd');
+				$('#dropmenu').addClass('dropdownn');
+				$('.dropdown-item').addClass('dropdownn');
+		    }
+	    $("#checkBoxId").change(function(){
+		    if($("#checkBoxId").is(":checked")){
+		        $('#dropmenu').addClass('dropdownd');
+				$('.dropdown-item').addClass('dropdownd');
+				$('#dropmenu').removeClass('dropdownn');
+				$('.dropdown-item').removeClass('dropdownn');		
+		    }else if(!($("#checkBoxId").is(":checked"))){
+		       $('#dropmenu').removeClass('dropdownd');
+				$('.dropdown-item').removeClass('dropdownd');
+				$('#dropmenu').addClass('dropdownn');
+				$('.dropdown-item').addClass('dropdownn');
+		        
+		    }
+		});
+
 	}
 	if(h < 300){
 		$('#darkmodecheck').removeClass('cbbgc');
 		$('#darkmodecheck').removeClass('cbbgcn');
 		$('#dropmenu').removeClass('dropdownd');
 		$('.dropdown-item').removeClass('dropdownd');
+		$('#dropmenu').removeClass('dropdownn');
+		$('.dropdown-item').removeClass('dropdownn');
+		
+		$("#checkBoxId").change(function(){
+			$('#dropmenu').removeClass('dropdownd');
+			$('.dropdown-item').removeClass('dropdownd');
+			$('#dropmenu').removeClass('dropdownn');
+			$('.dropdown-item').removeClass('dropdownn');
+		});
 	}
 }
