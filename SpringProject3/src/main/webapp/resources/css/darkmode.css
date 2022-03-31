@@ -13,6 +13,10 @@
 .cbbgcn{
 	border: 1px solid rgb(55, 49, 89);
 }
+.navbd{
+	background : #fff !important;
+	color : #000000 !important;
+}
 
 #darkmodecheck input{
     appearance: none;
@@ -51,6 +55,7 @@
 
 .darkmode{
     background: #1a1a40 !important;
+    color : #fff !important;
 }
 .maindarkimg{
     background-image: url('../images/dark_6000.jpg') !important;

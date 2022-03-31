@@ -12,7 +12,7 @@ $("#checkBoxId").change(function(){
         darkmodeIcon.innerHTML="<ion-icon name='sunny-outline'></ion-icon>"
         $(bodytag).removeClass("darkmode");
         $(mainimg).removeClass("maindarkimg");     
-        $(navbar).removeClass("darkmode");    
+           
         $(sky).attr('class','skybird');
 
 
@@ -21,7 +21,6 @@ $("#checkBoxId").change(function(){
     }else{
         darkmodeIcon.innerHTML="<ion-icon name='moon-outline'></ion-icon>"
         $(bodytag).addClass("darkmode");
-        $(navbar).addClass("darkmode");
         $(mainimg).addClass("maindarkimg");
         $(sky).attr('class','nightsky');
 
@@ -45,7 +44,10 @@ function log(h){
 				$('#dropmenu').removeClass('dropdownn');
 				$('.dropdown-item').removeClass('dropdownn');
 				$(chkbox).removeClass('cbbgcn');
+				$(navbar).removeClass('darkmode'); 
 				$(chkbox).addClass('cbbgcd');
+				$(navbar).addClass("navbd");
+				
 
 		    }else if(!($("#checkBoxId").is(":checked"))){
 				$('#dropmenu').removeClass('dropdownd');
@@ -53,8 +55,11 @@ function log(h){
 				$('#dropmenu').addClass('dropdownn');
 				$('.dropdown-item').addClass('dropdownn');
 				$(chkbox).removeClass('cbbgcd');
+				$(navbar).removeClass("navbd");
 				$(chkbox).addClass('cbbgcn');
+				$(navbar).addClass('darkmode');	
 		    }
+		    
 	    $("#checkBoxId").change(function(){
 		    if($("#checkBoxId").is(":checked")){
 		        $('#dropmenu').addClass('dropdownd');
@@ -62,14 +67,18 @@ function log(h){
 				$('#dropmenu').removeClass('dropdownn');
 				$('.dropdown-item').removeClass('dropdownn');
 				$(chkbox).removeClass('cbbgcn');
-				$(chkbox).addClass('cbbgcd');	
+				$(navbar).removeClass("darkmode"); 
+				$(chkbox).addClass('cbbgcd');
+				$(navbar).addClass("navbd");	
 		    }else if(!($("#checkBoxId").is(":checked"))){
 		       $('#dropmenu').removeClass('dropdownd');
 				$('.dropdown-item').removeClass('dropdownd');
 				$('#dropmenu').addClass('dropdownn');
 				$('.dropdown-item').addClass('dropdownn');
 		        $(chkbox).removeClass('cbbgcd');
+				$(navbar).removeClass("navbd");
 				$(chkbox).addClass('cbbgcn');
+				$(navbar).addClass("darkmode");
 		    }
 		});
 
@@ -83,6 +92,8 @@ function log(h){
 		$('.dropdown-item').removeClass('dropdownn');
 		$(chkbox).removeClass('cbbgcd');
 		$(chkbox).removeClass('cbbgcn');
+		$(navbar).removeClass("darkmode"); 
+		$(navbar).removeClass("navbd");
 		
 		$("#checkBoxId").change(function(){
 			$('#dropmenu').removeClass('dropdownd');
@@ -91,6 +102,8 @@ function log(h){
 			$('.dropdown-item').removeClass('dropdownn');
 			$(chkbox).removeClass('cbbgcd');
 			$(chkbox).removeClass('cbbgcn');
+			$(navbar).removeClass("darkmode"); 
+			$(navbar).removeClass("navbd");
 		});
 	}
 }
