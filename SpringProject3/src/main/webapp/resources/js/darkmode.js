@@ -39,46 +39,54 @@ function log(h){
 		$('#darkmodecheck').addClass('cbbgc');
 				 
     		if($("#checkBoxId").is(":checked")){
-				$('#dropmenu').addClass('dropdownd');
-				$('.dropdown-item').addClass('dropdownd');
 				$('#dropmenu').removeClass('dropdownn');
 				$('.dropdown-item').removeClass('dropdownn');
 				$(chkbox).removeClass('cbbgcn');
 				$(navbar).removeClass('darkmode'); 
+				$('#dropmenu').addClass('dropdownd');
+				$('.dropdown-item').addClass('dropdownd');
 				$(chkbox).addClass('cbbgcd');
 				$(navbar).addClass("navbd");
+				$('.nav-link').addClass("color-black");
 				
 
 		    }else if(!($("#checkBoxId").is(":checked"))){
 				$('#dropmenu').removeClass('dropdownd');
 				$('.dropdown-item').removeClass('dropdownd');
-				$('#dropmenu').addClass('dropdownn');
-				$('.dropdown-item').addClass('dropdownn');
 				$(chkbox).removeClass('cbbgcd');
 				$(navbar).removeClass("navbd");
+				$('.nav-link').removeClass("color-black");
+				$('.navbar-brand').removeClass('color-white');
+				$('#dropmenu').addClass('dropdownn');
+				$('.dropdown-item').addClass('dropdownn');
 				$(chkbox).addClass('cbbgcn');
-				$(navbar).addClass('darkmode');	
+				$(navbar).addClass('darkmode');
+				$('.navbar-brand').addClass('color-white');
 		    }
 		    
 	    $("#checkBoxId").change(function(){
 		    if($("#checkBoxId").is(":checked")){
-		        $('#dropmenu').addClass('dropdownd');
-				$('.dropdown-item').addClass('dropdownd');
 				$('#dropmenu').removeClass('dropdownn');
 				$('.dropdown-item').removeClass('dropdownn');
 				$(chkbox).removeClass('cbbgcn');
-				$(navbar).removeClass("darkmode"); 
+				$(navbar).removeClass("darkmode");
+				$('.navbar-brand').removeClass('color-white'); 
+		        $('#dropmenu').addClass('dropdownd');
+				$('.dropdown-item').addClass('dropdownd');
 				$(chkbox).addClass('cbbgcd');
-				$(navbar).addClass("navbd");	
+				$(navbar).addClass("navbd");
+				$('.nav-link').addClass("color-black");	
 		    }else if(!($("#checkBoxId").is(":checked"))){
 		       $('#dropmenu').removeClass('dropdownd');
 				$('.dropdown-item').removeClass('dropdownd');
-				$('#dropmenu').addClass('dropdownn');
-				$('.dropdown-item').addClass('dropdownn');
+				$('.nav-link').removeClass("color-black");
 		        $(chkbox).removeClass('cbbgcd');
 				$(navbar).removeClass("navbd");
+				$('#dropmenu').addClass('dropdownn');
+				$('.dropdown-item').addClass('dropdownn');
 				$(chkbox).addClass('cbbgcn');
 				$(navbar).addClass("darkmode");
+				$('.navbar-brand').addClass('color-white');
 		    }
 		});
 
@@ -90,6 +98,8 @@ function log(h){
 		$('.dropdown-item').removeClass('dropdownd');
 		$('#dropmenu').removeClass('dropdownn');
 		$('.dropdown-item').removeClass('dropdownn');
+		$('.nav-link').removeClass("color-black");
+		$('.navbar-brand').removeClass('color-white');
 		$(chkbox).removeClass('cbbgcd');
 		$(chkbox).removeClass('cbbgcn');
 		$(navbar).removeClass("darkmode"); 
@@ -100,6 +110,8 @@ function log(h){
 			$('.dropdown-item').removeClass('dropdownd');
 			$('#dropmenu').removeClass('dropdownn');
 			$('.dropdown-item').removeClass('dropdownn');
+			$('.nav-link').removeClass("color-black");
+			$('.navbar-brand').removeClass('color-white');
 			$(chkbox).removeClass('cbbgcd');
 			$(chkbox).removeClass('cbbgcn');
 			$(navbar).removeClass("darkmode"); 

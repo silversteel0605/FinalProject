@@ -17,7 +17,16 @@
 	background : #fff !important;
 	color : #000000 !important;
 }
-
+.color-black{
+	color : #000000 !important;
+}
+.darkmode{
+    background: #1a1a40 !important;
+    color : #fff !important;
+}
+.color-white{
+	color : #fff !important;
+}
 #darkmodecheck input{
     appearance: none;
 }
@@ -53,10 +62,7 @@
     filter: drop-shadow(0 0 5px #fff);
 }
 
-.darkmode{
-    background: #1a1a40 !important;
-    color : #fff !important;
-}
+
 .maindarkimg{
     background-image: url('../images/dark_6000.jpg') !important;
 }
