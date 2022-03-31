@@ -26,5 +26,7 @@ public interface CampingReviewDataMapper {
 	public void deleteReviewData(int reviewId);								//Review Data Delete
 	
 	public List<CampingReviewDTO> getSortReviewDatas(Map<String, Object> reviewMap); //Review Sort Data
+	
+	public CampingReviewDTO[] getAllReviews(CampingReviewDTO dto);
 
 }

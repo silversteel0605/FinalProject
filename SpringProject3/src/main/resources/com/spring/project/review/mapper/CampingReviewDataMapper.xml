@@ -62,5 +62,11 @@
     <select id="getReviewCreateReviewID" resultType="_int">
         select last_number from seq where sequence_name = 'REVIEW_SEQ';
     </select>
-
+	
+	<select id="getAllReviews" resultType="com.spring.project.review.DTO.CampingReviewDTO">
+		SELECT * FROM ( SELECT ROWNUM RN, A.* FROM ( select review_id, title, review, to_date(reg_date,'yy/mm/dd') as reg_date from review ) A ) WHERE RN BETWEEN #{start} AND #{end} 
+		<if test='order != null &amp;&amp; !order.equals("")'>
+			order by ${order} desc
+		</if>
+	</select>
 </mapper>

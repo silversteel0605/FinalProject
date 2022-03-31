@@ -14,6 +14,9 @@
 				    ) A
 				)
 		WHERE RN BETWEEN #{start} AND #{end}
+		<if test='order != null &amp;&amp; !order.equals("")'>
+			order by ${order} desc
+		</if>
 	</select>
 	
 	<select id="CommentCnt" resultType="int">

@@ -22,6 +22,11 @@
   <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=77mbzylhqr"></script>
 </head>
 <body>
+	<script>
+		const sido = '${search.sido}';
+		const gugun = '${search.gugun}';
+		const them = '${search.locThem}';
+	</script>
 	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
    <div class="container">
      <a class="navbar-brand" href="index.html">Pacific<span>Travel Agency</span></a>
@@ -187,14 +192,44 @@
 	  	 		    zoom: 5
 	  	 		});
 	  	 		
+	  	 		let markers = new Array();
+	  	 		let infos = new Array()
+	  	 		
 	  	 		<c:forEach var="list" items="${lists }">
-  	 				 new naver.maps.Marker({
+  	 				var marker = new naver.maps.Marker({
   		  	 		    position: new naver.maps.LatLng(${list.mapY }, ${list.mapX }),
   		  	 		    map: map
   		  	 		});
+  	 				
+				 	var info = new naver.maps.InfoWindow({
+	  	 		        content: 
+	  	 		          '<div style="width:200px;text-align:center;padding:10px;">'
+	  	 		        + '<a href="./TempCampInfo?contentId=${list.contentId }"><b>${list.facltNm }</b></a>' 
+	  	 		        + '<br>${list.addr1 }</div>'
+		 			});
+				 	
+  	 				markers.push(marker);
+  	 				infos.push(info);
   	 			</c:forEach>
 	  	 		
-	  	 		
+  	 			
+  	 		    function getClickHandler(seq) {
+  	 				
+  	 	            return function(e) {  // 마커를 클릭하는 부분
+  	 	                var marker = markers[seq], // 클릭한 마커의 시퀀스로 찾는다.
+  	 	                    info = infos[seq]; // 클릭한 마커의 시퀀스로 찾는다
+
+  	 	                if (info.getMap()) {
+  	 	                    info.close();
+  	 	                } else {
+  	 	                    info.open(map, marker); // 표출
+  	 	                }
+  	 	    		}
+  	 	    	}
+  	 	    
+  	 	    for (var i=0, ii=markers.length; i<ii; i++) {
+  	 	        naver.maps.Event.addListener(markers[i], 'click', getClickHandler(i)); // 클릭한 마커 핸들러  	
+  	 	    }
 	  	 	</script>
 	  	 	
 	  	 </div>  
@@ -322,5 +357,31 @@
 <script src="<c:url value="/resources/js/main.js"/>"></script>
 <script src="<c:url value="/resources/js/chain.select.js?after"/>"></script>
 <script src="<c:url value="/resources/js/search.event.listener.js?after"/>"></script>
+<script>
+	function keepCondition() {
+		$('input[name=keyword]').val('${search.keyword}');
+		$('#locThem').val('${search.locThem}').prop('selected', true);
+		const facltDivNm = new Array();
+		<c:forEach var="i" items="${search.facltDivNm}">
+			$('input[value=${i }]').prop('checked', true);
+		</c:forEach>
+		<c:forEach var="i" items="${search.themaEnvrnCl}">
+			$('input[value=${i }]').prop('checked', true);
+		</c:forEach>
+		<c:forEach var="i" items="${search.sbrsCl}">
+			$('input[value=${i }]').prop('checked', true);
+		</c:forEach>
+		<c:forEach var="i" items="${search.induty}">
+			$('input[value=${i }]').prop('checked', true);
+		</c:forEach>
+		<c:forEach var="i" items="${search.tagId}">
+			$('#${i}').css('background-color', '#343a40');
+			$('#${i}').css('color', '#ffffff');
+			$('#${i}').addClass('active');
+		</c:forEach>
+		
+	}
+	keepCondition();
+</script>
 </body>
 </html>

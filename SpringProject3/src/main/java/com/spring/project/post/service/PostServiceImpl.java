@@ -71,6 +71,15 @@ public class PostServiceImpl implements PostService {
 	public void addPost(PostVO post) {
 		postMapper.addPost(post);
 	}
+	
+	public PostVO[] getAllPost(PostVO vo) {
+		return postMapper.getAllPost(vo);
+	}
+
+	@Override
+	public int getAllCounts() {
+		return postMapper.getAllCounts();
+	}
 }
 
 

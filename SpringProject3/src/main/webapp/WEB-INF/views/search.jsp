@@ -23,6 +23,11 @@
   <link rel="stylesheet" href="<c:url value="/resources/css/john.css?after"/>"/>
 </head>
 <body>
+	<script>
+		const sido = '${search.sido}';
+		const gugun = '${search.gugun}';
+		const them = '${search.locThem}';
+	</script>
 	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
    <div class="container">
      <a class="navbar-brand" href="index.html">Pacific<span>Travel Agency</span></a>
@@ -346,5 +351,31 @@
 <script src="<c:url value="/resources/js/main.js"/>"></script>
 <script src="<c:url value="/resources/js/chain.select.js?after"/>"></script>
 <script src="<c:url value="/resources/js/search.event.listener.js"/>"></script>
+<script>
+	function keepCondition() {
+		$('input[name=keyword]').val('${search.keyword}');
+		$('#locThem').val('${search.locThem}').prop('selected', true);
+		const facltDivNm = new Array();
+		<c:forEach var="i" items="${search.facltDivNm}">
+			$('input[value=${i }]').prop('checked', true);
+		</c:forEach>
+		<c:forEach var="i" items="${search.themaEnvrnCl}">
+			$('input[value=${i }]').prop('checked', true);
+		</c:forEach>
+		<c:forEach var="i" items="${search.sbrsCl}">
+			$('input[value=${i }]').prop('checked', true);
+		</c:forEach>
+		<c:forEach var="i" items="${search.induty}">
+			$('input[value=${i }]').prop('checked', true);
+		</c:forEach>
+		<c:forEach var="i" items="${search.tagId}">
+			$('#${i}').css('background-color', '#343a40');
+			$('#${i}').css('color', '#ffffff');
+			$('#${i}').addClass('active');
+		</c:forEach>
+		
+	}
+	keepCondition();
+</script>
 </body>
 </html>
