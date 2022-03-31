@@ -8,6 +8,7 @@ import org.jdom2.JDOMException;
 import com.spring.project.camping.DTO.CampingImgVO;
 import com.spring.project.camping.DTO.CampingVO;
 import com.spring.project.camping.DTO.SearchVO;
+import com.spring.project.camping.DTO.TourismVO;
 
 public interface CampingService {
 	
@@ -38,6 +39,8 @@ public interface CampingService {
 	//Img Data
 
 	public void addViews(String contentId);
+
+	void tourXML(TourismVO vo) throws IOException, JDOMException;
 
 	
 }

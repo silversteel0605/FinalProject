@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import com.spring.project.camping.DTO.CampingImgVO;
 import com.spring.project.camping.DTO.CampingVO;
 import com.spring.project.camping.DTO.SearchVO;
+import com.spring.project.camping.DTO.TourismVO;
 import com.spring.project.camping.mapper.CampingDataMapper;
 import com.spring.project.review.DTO.CampingReviewDTO;
 import com.spring.project.utill.PagingVO;
@@ -82,6 +83,14 @@ public class CampingServiceImpl implements CampingService{
 		
 		Element root = document.getRootElement();
 		body = root.getChild("body");
+		
+	}
+	
+	@Override
+	public void tourXML(TourismVO vo) throws  IOException, JDOMException {
+		StringBuffer sb = new StringBuffer("http://api.visitkorea.or.kr/openapi/service/rest/EngService/areaBasedList");
+		
+		sb.append("ServiceKey=BSB%2BAVJtGeeYeTI1z0QkTWviASTC4BHieJzLrJls7C%2F0tpX9h75z347M%2FqQwTZsuya4Z2fMERT5YYljGpkDwog%3D%3D");
 		
 	}
 	

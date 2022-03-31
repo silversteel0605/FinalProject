@@ -40,6 +40,12 @@ public class CampingController {
 		controlling(m, nowPage, vo);
 		return "search";
 	}
+	@RequestMapping(value = "/profile", method = RequestMethod.GET)
+	public String profile() {
+		return "profile";
+	}
+	
+	
 	
 	//rest로 태그 검색하기  ※지금 안씀
 	@RequestMapping(value = "/search2", method = RequestMethod.GET)
