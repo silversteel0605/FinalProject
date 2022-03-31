@@ -18,5 +18,6 @@ public class PostVO {
 	private Integer contents_category;
 	private Integer process;
 	private String imgURL;
+	private Integer views;
 	
 }

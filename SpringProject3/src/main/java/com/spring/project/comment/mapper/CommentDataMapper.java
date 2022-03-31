@@ -10,4 +10,6 @@ public interface CommentDataMapper {
 	public int CommentCnt();
 	
 	public int blind(CommentVO vo);
+	
+	public void addComment(CommentVO comment);
 }

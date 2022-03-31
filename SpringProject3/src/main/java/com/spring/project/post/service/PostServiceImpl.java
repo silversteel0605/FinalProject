@@ -58,9 +58,13 @@ public class PostServiceImpl implements PostService {
 	}
 	
 	@Override
-	public void addComment(CommentVO comment) {
-		postMapper.addComment(comment);
-	};
+	public Integer increaseViews(PostVO post) {
+		log.info("증가 전 조회수: " + post.getViews());
+		post.setViews(post.getViews() + 1);
+		log.info("증가 후 조회수: " + post.getViews());
+		postMapper.increaseViews(post);
+		return post.getViews();
+	}
 	
 	@Override
 	public List<PostVO> getComments(PostVO post) {

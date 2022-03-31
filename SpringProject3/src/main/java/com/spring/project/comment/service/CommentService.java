@@ -10,4 +10,6 @@ public interface CommentService {
 	public int CommentCnt();
 	
 	public int blind(CommentVO vo);
+	
+	public void addComment(CommentVO comment);
 }

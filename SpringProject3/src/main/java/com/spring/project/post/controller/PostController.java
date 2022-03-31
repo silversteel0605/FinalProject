@@ -224,6 +224,10 @@ public class PostController {
 		
 		session.setAttribute("tempPostId", post_id);
 		PostVO post = postService.getContents(post_id);
+		Integer views = postService.increaseViews(post);
+		log.info("증가된 조회수: " + views);
+		post.setViews(views);
+		log.info("모델에 실리는 조회수: " + views);
 		model.addAttribute("contents", post);
 		
 		// 수정권한 부여
@@ -287,6 +291,7 @@ public class PostController {
 		model.addAttribute("board_class", board_class);
 		model.addAttribute("boardString", board_class.equals("freeBoard") ? "board" : "support");
 		model.addAttribute("post_id", post_id);
+		log.info("컨트롤러 포스트아이디: " + post_id);
 		return "writeTest";
 	}
 	
@@ -298,10 +303,7 @@ public class PostController {
 		
 		String data = request.getParameter("contents");
 		PostVO post = new PostVO();
-		log.info("post post_id: " + post_id);
-		log.info("post data: " + data);
-		log.info("post post: " + post);
-		
+		log.info("data: " + data);
 		String[] dataArr = data.split(","); 
 		
 		for (int i = 0; i < dataArr.length; ++i) {
@@ -315,12 +317,16 @@ public class PostController {
 		post.setTitle(dataArr[0]); post.setContents(dataArr[1]);
 		post.setBoard_class(boardClassMap.get(dataArr[2]));
 		post.setContents_category(categoryNameMap.get(dataArr[3]));
-		post.setPost_id(Integer.parseInt(dataArr[4]));
 		if (boardClassMap.get(dataArr[2]) == 1) { post.setProcess(1); }
 		
-		if (Boolean.parseBoolean(dataArr[5])) {
-			log.info("edit boolean true 들어옴");
-			postService.editPost(post);
+		if (dataArr.length > 4) {
+			
+			if (Boolean.parseBoolean(dataArr[5])) {
+				post.setPost_id(Integer.parseInt(dataArr[4]));
+				log.info("edit boolean true 들어옴");
+				postService.editPost(post);
+			}
+			
 		} else {
 			postService.addPost(post);
 		}

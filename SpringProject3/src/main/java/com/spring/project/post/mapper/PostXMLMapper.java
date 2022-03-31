@@ -18,8 +18,8 @@ public interface PostXMLMapper {
 	
 	public PostVO getContents(Integer post_id);
 	public void deletePost(Integer post_id);
+	public Integer increaseViews(@Param("post") PostVO post);
 	
-	public void addComment(CommentVO comment);
 	public List<PostVO> getComments(PostVO post);
 	public Integer getCommentsEA(Integer post_id);
 	

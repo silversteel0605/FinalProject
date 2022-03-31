@@ -17,13 +17,7 @@ document.addEventListener('click', (e) => {
 		popUpMenu.style.display = 'none';
 	}
 	
-	//const memberInfo = document.getElementById('memberInfo');
 	const memberPost = document.getElementById('memberPost');
-	
-/*	memberInfo.addEventListener('click', (e) => {
-		console.log(targetId);
-		location.href = `/project/tempIndividualInfo?id=${targetId}`;
-	});*/
 	
 	memberPost.addEventListener('click', (e) => {
 		console.log(targetId);
@@ -35,4 +29,5 @@ document.addEventListener('click', (e) => {
 // 게시글보기
 function mainContents(post_id) {
 	location.href = `/project/main_paragraph?post_id=${post_id}`
+	
 };

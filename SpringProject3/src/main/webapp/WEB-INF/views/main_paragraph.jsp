@@ -69,6 +69,7 @@
 			<div class="paragraph_header d-flex justify-content-between">
 				<span id="${contents.member_id }" class="userId pointer">${contents.member_id }</span>
 				<span>${contents.reg_date }</span>
+				<span>조회수&nbsp;&nbsp;&nbsp;${contents.views }</span>
 			</div> <hr/>
 			<div class="paragraph_body">
 				<p>${contents.contents }</p>
@@ -85,7 +86,7 @@
 							<div class="d-flex justify-content-start">
 								<p>${comment.comments}</p>
 								<i class="bi bi-x-circle comment_icon"></i>
-								<i id="co_comment_editBtn" class="bi bi-pen comment_icon"></i>
+								<i id="comment_editBtn" class="bi bi-pen comment_icon"></i>
 								<i id="co_comment_newBtn_${comment.comment_id}" class="bi bi-chat-dots comment_icon co_comment_newBtn"></i>
 								<input id="comment_commentId_${comment.comment_id }" type="hidden" value="${comment.comment_id }" />
 								<input id="comment_postId" type="hidden" value="${comment.post_id }" />
@@ -105,7 +106,7 @@
 					  <label for="commentTextarea">Comments</label>
 					</div>
 					<div class="d-flex justify-content-end">
-						<button id="comment_saveBtn" class="btn btn-outline-success">저장</button>
+						<button id="comment_saveBtn" class="btn btn-outline-success" type="button">저장</button>
 					</div>
 				</div>
 				<!-- /comments 입력 -->

@@ -11,6 +11,7 @@ p, div {
 	cursor: pointer;
 }
 
+
 /* Free Board */
 
 .paragraph_body {
@@ -36,5 +37,5 @@ p, div {
 }
 
 .ck-editor__editable {
-    min-height: 300px;
+    min-height: 500px;
 }

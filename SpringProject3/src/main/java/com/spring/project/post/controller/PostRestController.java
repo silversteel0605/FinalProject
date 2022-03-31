@@ -25,19 +25,6 @@ public class PostRestController {
 	@Autowired
 	PostService postService;
 
-	@PostMapping(value = "/main_paragraph", produces = MediaType.APPLICATION_JSON_VALUE)
-	public CommentVO comments(HttpServletRequest request, @RequestBody CommentVO comment) throws UnsupportedEncodingException {
-		HttpSession session = request.getSession();
-		log.info("수정 전: " + comment);
-		comment.setMember_id((String)session.getAttribute("member_id"));
-		
-		// Integer groupNum = postService.getGroupnum();
-		
-		log.info("수정 후: " + comment);
-		postService.addComment(comment);
-		
-		return comment;
-	}
 	
 }
 

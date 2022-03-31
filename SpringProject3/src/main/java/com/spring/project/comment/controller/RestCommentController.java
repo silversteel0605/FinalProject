@@ -1,10 +1,18 @@
 package com.spring.project.comment.controller;
 
+import java.io.UnsupportedEncodingException;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.project.comment.DTO.CommentSearchVO;
@@ -43,5 +51,13 @@ public class RestCommentController {
 			rs += mService.blindMsg(vo);
 		}
 		return rs ;
+	}
+	
+	@PostMapping(value = "/main_paragraph", produces = MediaType.APPLICATION_JSON_VALUE)
+	public CommentVO comments(HttpServletRequest request, @RequestBody CommentVO comment) throws UnsupportedEncodingException {
+		HttpSession session = request.getSession();
+		comment.setMember_id((String)session.getAttribute("member_id"));
+		service.addComment(comment);
+		return comment;
 	}
 }

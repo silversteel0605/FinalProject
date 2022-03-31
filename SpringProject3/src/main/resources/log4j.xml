@@ -18,18 +18,9 @@
 	<logger name="jdbc.sqlonly">
 		<level value="info"/>
 	</logger>
-<<<<<<< HEAD
-<!-- 	<logger name="jdbc.resultsettable">
-=======
-	
 	<logger name="jdbc.resultsettable">
->>>>>>> refs/heads/master
 		<level value="info"/>
-<<<<<<< HEAD
 	</logger> -->
-=======
-	</logger> 
->>>>>>> refs/heads/master
 	
 	<logger name="com.spring.project">
 		<level value="info" />

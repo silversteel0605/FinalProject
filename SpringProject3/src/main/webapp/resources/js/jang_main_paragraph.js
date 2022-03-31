@@ -53,7 +53,7 @@ comment_saveBtn.addEventListener('click', (e) => {
 		classnum: 0,
 		ordernum: 0
 	}
-	xhttpComments.open('POST', '/project/main_paragraph', true);
+	xhttpComments.open('POST', '/project/rest/main_paragraph', true);
 	xhttpComments.setRequestHeader('content-type', 'application/json;charset=EUC-KR');
 	xhttpComments.send(JSON.stringify(newCommentData));
 	
@@ -64,9 +64,19 @@ comment_saveBtn.addEventListener('click', (e) => {
 const comments_body = document.getElementById('comments_body');
 
 xhttpComments.addEventListener('readystatechange', (e) => {
+	console.log('확인');
 	const readyState = e.target.readyState;
 	const status = e.target.status;
-	if (readyState == 4 && status == 200)  {
+	console.log('readyState: ', readyState);
+	console.log('status: ', status);
+	
+  	if (readyState == 1) {
+		console.log('비동기 연결을 서버로 전송함 (수립)');	
+	} else if (readyState == 2) {
+		console.log('서버가 내 요청을 받았음');
+	} else if (readyState == 3) {
+		console.log('서버가 내 요청에 대한 처리를 시작함');
+	}	else if (readyState == 4 && status == 200)  {
 		const comment = JSON.parse(e.target.responseText);
 		
 		if (comment.classnum == 0) {
@@ -86,8 +96,9 @@ xhttpComments.addEventListener('readystatechange', (e) => {
 const co_comment_input = document.getElementById('co_comment_input');
 
 document.addEventListener('click', (e) => {
-	
-	if (document.querySelector('#commentsEA').value > 0) {
+	const commentsEA = document.querySelector('#commentsEA').value;
+	console.log(commentsEA)
+	if (commentsEA > 0) {
 		const targetClass = e.target.className.substring('bi bi-chat-dots comment_icon '.length);
 		const targetCommentId = e.target.id.substring('co_comment_newBtn_'.length); // comment_id
 		const targetInput = document.getElementById(targetCommentId); //대댓글 div
@@ -140,7 +151,7 @@ document.addEventListener('click', (e) => {
 					groupnum: targetCommentId
 				}
 				
-				xhttpComments.open('POST', '/project/main_paragraph', true);
+				xhttpComments.open('POST', '/project/rest/main_paragraph', true);
 				xhttpComments.setRequestHeader('content-type', 'application/json;charset=utf-8');
 				xhttpComments.send(JSON.stringify(newCoCommentData));
 				
