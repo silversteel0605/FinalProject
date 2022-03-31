@@ -81,14 +81,19 @@ function create_review_form(type){
 	
 	newMainForm.setAttribute("id", "form");
 	newMainForm.setAttribute("name", "form");
-	newMainForm.setAttribute("method", "get");
-	
-	console.log(type);
+	newMainForm.setAttribute("action", "./rest/review");
+	//newMainForm.setAttribute("method", "get");
 	
 	if(type == 1){
-		newMainForm.setAttribute("action", "./reviewUpdata");
+		//newMainForm.setAttribute("action", "./reviewUpdata");
+		
+		newMainForm.setAttribute("method", "put");	
+		
 	}else{
-		newMainForm.setAttribute("action", "./reviewSave");	
+		
+		newMainForm.setAttribute("method", "post");
+		
+		//newMainForm.setAttribute("action", "./reviewSave");	
 	}
 	
 	return newMainForm;
