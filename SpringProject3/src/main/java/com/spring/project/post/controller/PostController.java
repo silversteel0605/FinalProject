@@ -220,7 +220,7 @@ public class PostController {
 		log.info("들어오는 세션: " + session.getAttribute("search"));
 		
 		// 임시 ID 세션 저장
-		session.setAttribute("member_id", "testAuth1");
+		session.setAttribute("member_id", "admin");
 		
 		session.setAttribute("tempPostId", post_id);
 		PostVO post = postService.getContents(post_id);
@@ -235,7 +235,7 @@ public class PostController {
 		log.info("세션아이디: " + member_id);
 		log.info("가져온 아이디: " + post.getMember_id());
 		
-		if (post.getMember_id().equals(member_id)) {
+		if (post.getMember_id().equals(member_id) || member_id.equals("admin")) {
 			log.info("수정권한 인증됨");
 			model.addAttribute("editAuth", true);
 		}

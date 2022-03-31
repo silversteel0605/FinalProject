@@ -51,7 +51,7 @@
     <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
       <div class="col-md-9 ftco-animate pb-5 text-center">
        <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="fa fa-chevron-right"></i></a></span> <span>Blog <i class="fa fa-chevron-right"></i></span></p>
-       <h1 class="mb-0 bread">Blog</h1>
+       <h1 class="mb-0 bread">게시판</h1>
      </div>
    </div>
  </div>
@@ -61,41 +61,37 @@
 <section class="ftco-section">
 	<div class="container">
 		<!-- Board Nav -->
-		<nav class="navbar navbar-expand-lg navbar-light p-0">
-		  <div class="container-fluid p-0">
-		    <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
-			      <form class="d-flex" action="./board" method="POST" accept-charset="EUC-KR">
-					<div class="input-group mb-3">
-						<select id="inputState" class="form-select col-md-3" name="searchByWhat">
-							<option selected value="all">전체</option>
-							<option value="title">제목</option>
-							<option value="contents">내용</option>
-						</select>
-						<input type="text" class="form-control" aria-label="Text input with dropdown button" name="searchKeyword">
-						<button class="btn btn-outline-success" type="submit">Search</button>
+		<div class="container p-0">
+			<div class="row">
+				<div class="col-md-5">
+					<form class="d-flex" action="./board" method="POST" accept-charset="EUC-KR">
+						<div class="input-group input-group-sm mb-3">
+							<select id="inputState" class="form-select form-select-sm col-md-3" name="searchByWhat">
+								<option selected value="all">전체</option>
+								<option value="title">제목</option>
+								<option value="contents">내용</option>
+							</select>
+							<input type="text" class="form-control-sm border-light" aria-label="Text input with dropdown button" name="searchKeyword">
+							<button class="btn btn-outline-secondary btn-sm" type="submit">Search</button>
+						</div>
+					</form>
+				</div>
+				<div class="col-md-5 offset-md-2">
+					<div class="row">
+						<div class="col-9">
+					        <a class="ml-3" href="./board?categoryName=boardAll">전체</a>
+					        <a class="ml-3" href="./board?categoryName=daily">자유</a>
+					        <a class="ml-3" href="./board?categoryName=showoff">자랑</a>
+					        <a class="ml-3" href="./board?categoryName=buy">삽니다</a>
+					        <a class="ml-3" href="./board?categoryName=sell">팝니다</a>
+						</div>
+						<div class="col-3">
+						 	<a class="" href="./write?board_class=freeBoard">글쓰기</a>
+						</div>
 					</div>
-			      </form>
-		      <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
-		        <li class="nav-item">
-		          <a class="nav-link active" aria-current="page" href="./board?categoryName=boardAll">전체</a>
-		        </li>
-		        <li class="nav-item">
-		          <a class="nav-link" href="./board?categoryName=daily">자유</a>
-		        </li>
-		        <li class="nav-item">
-		          <a class="nav-link" href="./board?categoryName=showoff">자랑</a>
-		        </li>
-		        <li class="nav-item">
-		          <a class="nav-link" href="./board?categoryName=buy">삽니다</a>
-		        </li>
-		        <li class="nav-item">
-		          <a class="nav-link" href="./board?categoryName=sell">팝니다</a>
-		        </li>
-		      </ul>
-		    </div>
-		   	<a class="btn" href="./write?board_class=freeBoard">글쓰기</a>
-		  </div>
-		</nav>
+				</div>
+			</div>
+		</div>
 		<hr />
 		<!-- /Board Nav -->
 		<!-- 컨텐츠 -->
