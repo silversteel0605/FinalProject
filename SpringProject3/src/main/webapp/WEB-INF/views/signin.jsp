@@ -229,9 +229,17 @@ $(function(){
 			return;
 		}
 		
+		const tel2Rule = ^\\d{7,8}$;
 		if(tel2=="")
 		{
 			alert("전화번호를 입력하세요.");
+			$('#tel2').focus();
+			return;
+		}
+		
+		if(!tel2Rule.test(tel2))
+		{
+			alert("전화번호 양식에서 벗어납니다.");
 			$('#tel2').focus();
 			return;
 		}
