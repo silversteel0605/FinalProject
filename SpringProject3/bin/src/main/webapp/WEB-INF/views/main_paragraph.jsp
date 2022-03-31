@@ -22,6 +22,7 @@
   <link rel="stylesheet" href="<c:url value="/resources/css/style.css"/>"/>
   <!-- 페이지 CSS-->
   <link rel="stylesheet" href="<c:url value="/resources/css/jangec.css"/>"/>
+  <link rel="stylesheet" href="<c:url value="/resources/css/jang_main_paragraph.css"/>"/>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
@@ -113,10 +114,13 @@
 				<div class="comments_footer"></div>
 			</div> <hr />
 			<div class="paragraph_footer d-flex justify-content-end">
-				<button class="btn">수정</button>
-				<button id="contentsDelete" class="btn">삭제</button>
-				<button id="goBoard" class="btn">목록</button>
+					<button class="btn">수정</button>
+					<button id="contentsDelete" class="btn">삭제</button>
+					<button id="goBoard" class="btn">목록</button>
 			</div>
+			<form action="./support" method="POST" id="deleteForm">
+				<input type="hidden" name="delete" value="true" />
+			</form>
 		</div>		
 		<!-- /컨텐츠 -->
 	</div>

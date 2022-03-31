@@ -1,4 +1,4 @@
-<%@page import="com.spring.project.camping.DTO.CampingReviewDTO"%>
+<%@page import="com.spring.project.review.DTO.CampingReviewDTO"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -68,12 +68,12 @@
 		<div class="contents">
 			<p class="fs-3"><%= info.getTitle() %></p>
 			<div class="paragraph_header d-flex justify-content-between">
-				<span id="id" data-bs-toggle="modal" data-bs-target="#memberDescription"><%= info.getLoginId() %></span>
-				<span><%= info.getCreateDate() %></span>
+				<span id="id" data-bs-toggle="modal" data-bs-target="#memberDescription"><%= info.getMember_id() %></span>
+				<span><%= info.getReg_date() %></span>
 			</div> <hr/>
 			<div class="paragraph_body">
 				<p>
-					<%= info.getContentValue() %>
+					<%= info.getReview() %>
 				</p>
 			</div>
 			<div class="paragraph_comments">

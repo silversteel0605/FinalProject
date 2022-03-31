@@ -1,4 +1,4 @@
-<%@page import="com.spring.project.camping.DTO.CampingReviewDTO"%>
+<%@page import="com.spring.project.review.DTO.CampingReviewDTO"%>
 <%@page import="com.spring.project.camping.DTO.CampingVO"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
@@ -24,6 +24,10 @@
   <link rel="stylesheet" href="<c:url value="./resources/css/width.css"/>" />
   <!-- naver map -->
   <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=rlwhiqh9cv"></script>
+  
+  <!-- review -->
+  <script type="text/javascript" src="./resources/js/page_tab.js"></script>
+  
   <link rel="stylesheet" href="./resources/css/camping_index_style.css">
 </head>
 <body>
@@ -55,48 +59,60 @@
 	  <div class="container">
 	    <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
 	      <div class="col-md-9 ftco-animate pb-5 text-center">
-	       <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="fa fa-chevron-right"></i></a></span> <span>Blog <i class="fa fa-chevron-right"></i></span></p>
-	       <h1 class="mb-0 bread">Blog</h1>
+	       <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="fa fa-chevron-right"></i></a></span> <span><%= info.getFacltNm() %> <i class="fa fa-chevron-right"></i></span></p>
+	       <h1 class="mb-0 bread"><%= info.getFacltNm() %></h1>
 	     </div>
 	   </div>
 	 </div>
 	</section>
- 	
- 	<!-- 
-	<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('./resources/images/bg_1.jpg');">
-		<div class="overlay"></div>
-		<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-			<ol class="carousel-indicators">
-				<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-				<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-				<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-			</ol>
-			<div class="carousel-inner">
-				<div class="carousel-item active">
-					<img src="./resources/images/dark_6000.jpg" class="d-block w-100" alt="1">
-				</div>
-				<div class="carousel-item">
-					<img src="./resources/images/dark_6000.jpg" class="d-block w-100" alt="2">
-				</div>
-				<div class="carousel-item">
-					<img src="./resources/images/dark_6000.jpg" class="d-block w-100" alt="3">
-				</div>
-			</div>
-			<button class="carousel-control-prev" type="button" data-target="#carouselExampleIndicators" data-slide="prev">
-				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-				<span class="sr-only">Previous</span>
-			</button>
-			<button class="carousel-control-next" type="button" data-target="#carouselExampleIndicators" data-slide="next">
-				<span class="carousel-control-next-icon" aria-hidden="true"></span>
-				<span class="sr-only">Next</span>
-			</button>
-		</div>
-	</section>
-	-->
 	
 	<section id="main_content" class="wrap ftco-section services-section text-center">
+	
+		<div class = "tab_warp row obj_row_center">
+        		<div class = "bgc_color_box col-md-4 min-vh-70"></div>
+        		<div class="bgc_box col-md-4 ftco-section align-items-center min-vh-70">
+          			<div>
+            			<h2 class="h2_size"><%= info.getFacltNm() %></h2>
+            			
+            			<hr>
+            			<div>
+						<a class="carousel-control-prev2 bg-dark w-auto" href="#recipeCarousel" role="button" data-slide="prev">
+		                	<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+		                 	<span class="sr-only">Previous</span>
+		               	</a>
+		               	<a class="carousel-control-next2 bg-dark w-auto" href="#recipeCarousel" role="button" data-slide="next">
+		                   	<span class="carousel-control-next-icon" aria-hidden="true"></span>
+		                   	<span class="sr-only">Next</span>
+		               	</a>
+					</div>
+					
+					<div><a href="">사이트 상세정보</a></div>
+					<div><a href="">예약하기</a></div>
+				</div>
+			</div>
+			
+			<div class="carousel_size text-center my-3">
+			    <div class="row mx-auto my-auto">
+			        <div id="recipeCarousel" class="carousel slide w-100" data-ride="carousel">
+			            <div class="carousel-inner w-100" role="listbox">
+			               	<div class="carousel-item active">
+			                    <img class="card-img d-block col-3" src="<%= info.getFirstImageUrl() %>">
+			                </div>
+			                
+			               	<c:forEach var="item" items="${img_vo}">
+			               		<div class="carousel-item">
+			                    	<img class="card-img d-block col-3" src="${ item.imgURL }">
+			                	</div>
+			               	</c:forEach>
+			               	
+			            </div>
+			        </div>
+			    </div>
+			</div>
+		</div>
+	
 		<div class="container">
-			<div class="tab">
+			<div class="tab" id="tab">
 				<ul class="nav nav-tabs nav-justified">
 				  <li class="nav-item">
 				    <a class="nav-link active" data-toggle="tab"  href="#tab01">상세정보</a>
@@ -110,73 +126,13 @@
 				</ul>
 			</div>
 			
+
 			<div class="tab-content">
 		     	<div class="tab-pane fade show active min-vh-80" id="tab01">
-		       		<div class = "tab_warp row obj_row_center">
-		         		<div class = "bgc_color_box col-md-4 min-vh-70"></div>
-		         		<div class="bgc_box col-md-4 ftco-section align-items-center min-vh-70">
-		         		
-		         			
-		           			<div>
-		             			<h2 class="h2_size"><%= info.getFacltNm() %></h2>
-		             			<hr>
-		             			<div>
-									<a class="carousel-control-prev2 bg-dark w-auto" href="#recipeCarousel" role="button" data-slide="prev">
-					                	<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-					                 	<span class="sr-only">Previous</span>
-					               	</a>
-					               	<a class="carousel-control-next2 bg-dark w-auto" href="#recipeCarousel" role="button" data-slide="next">
-					                   	<span class="carousel-control-next-icon" aria-hidden="true"></span>
-					                   	<span class="sr-only">Next</span>
-					               	</a>
-								</div>
-								
-								<div><a href="">사이트 상세정보</a></div>
-								<div><a href="">예약하기</a></div>
-							</div>
-						</div>
-						
-						<div class="container text-center my-3 img_boxs">
-				    		<div id="recipeCarousel" class="carousel slide w-100" data-ride="carousel">
-				        		<div class="carousel-inner w-100" role="listbox">
-						            <div class="carousel-item row no-gutters active boders">
-						                <div class="col-3 float-left">
-						                	<img class="img-fluid" src="<%=info.getFirstImageUrl()%>">
-						                	<div class="carosuel-title">사이트</div>
-						                </div>
-						                <div class="col-3 float-left">
-						                	<img class="img-fluid" src="./resources/images/bg_1.jpg">
-						                	<div class="carosuel-title">test</div>
-						                </div>
-						                <div class="col-3 float-left">
-						                	<img class="img-fluid" src="./resources/images/bg_1.jpg">
-						                	<div class="carosuel-title">test</div>
-						                </div>
-						                
-						            </div>
-						            <div class="carousel-item row no-gutters boders">
-						                <div class="col-3 float-left">
-						                	<img class="img-fluid" src="./resources/images/bg_1.jpg">
-						                	<div class="carosuel-title">test</div>
-						                </div>
-						                <div class="col-3 float-left">
-						                	<img class="img-fluid" src="./resources/images/bg_1.jpg">
-						                	<div class="carosuel-title">test</div>
-						                </div>
-						                <div class="col-3 float-left">
-						                	<img class="img-fluid" src="./resources/images/bg_1.jpg">
-						                	<div class="carosuel-title">test</div>
-						                </div>
-						                
-						            </div>
-						        </div>
-						    </div>
-						</div>
-					</div>
 					
 					<div>
 						<div class = "camping_text">
-	
+							
 							<p><%=info.getLineIntro() %></p>
 							
 						</div>
@@ -199,11 +155,12 @@
 					<div class = "map_warp">
 					
 						<div class="map_text">
-							<p><%= info.getAddr1() %>/p>
+							<p><%= info.getAddr1() %></p>
 						</div>
 						
 						<div id = "map" style="width:500px;height:500px;">
 							<script type="text/javascript" src="./resources/js/naver_map.js"></script>
+							<script> createMap(<%=info.getMapY()%>, <%=info.getMapX()%>) </script>
 						</div>
 					
 					</div>
@@ -211,30 +168,25 @@
 		
 		     	<div class="tab-pane fade min-vh-80" id="tab03">
 		
-					<section class="ftco-section">
+					<section id="reivew" class="ftco-section">
 						<div class="container">
 							<!-- 최신순 / 추천순 / 평점순  -->
 							<div id="top_box" class="flex_1">
 								<div class="left-sort">
-									<select name="review_search_select_box">
-										<option value="최신순">최신순</option>
-										<option value="추천순">추천순</option>
-										<option value="평점순">평점순</option>
+									<select name="review_search_select_box" onchange="select_click_event(this.options[this.selectedIndex].value,<%=info.getContentId() %>)">
+										<option value="reviewId">최신순</option>
+										<option value="starRanking">평점순</option>
 									</select>
-									
-									<input class="text" type="text" placeholder="검색어를 입력해주세요">
-								
-									<button id = "select_keyword">검색</button>
 								</div>
 								
 								<div id="write_btn_box" class="right-sort">
 									<button id="write_btn" class="write_button">
-										<a href="/project/review_write?contentId=<%=info.getContentId() %>">글쓰기</a>
+										<a href="/project/review?type=0&contentId=<%=info.getContentId() %>">글쓰기</a>
 									</button>
 								</div>
 							</div>
 							<div class="row d-flex">
-								<c:forEach var="review" items="${reviewInfoList}">
+								<c:forEach var="review" items="${lists}">
 					             	<div class="col-md-4 d-flex ftco-animate flex_1">
 					              		<div class="blog-entry justify-content-end w100p">
 					               			<a href="blog-single.html" class="block-20" style="background-image: url('./resources/images/image_1.jpg');"></a>
@@ -245,16 +197,59 @@
 					        						</div>
 					        						<div class="two">
 														<span class="yr">2020</span>
-														<span class="mos">${review.createDate}</span>
+														<span class="mos">${review.up_date}</span>
 					        						</div>
 					      						</div>
 					      						
-					      						<h3 class="heading"><a href="/project/reviewViewer?reviewId=${review.reviewId}">${review.title}</a></h3>
-					      						<p>${review.contentValue}</p>
+					      						<h3 class="heading"><a href="/project/reviewViewer?reviewId=${review.review_id}">${review.title}</a></h3>
+					      						<p>${review.review}</p>
 					    					</div>
 					  					</div>
 									</div>
 								</c:forEach>
+								
+								
+								<div class="row mt-5">
+								  <div class="col text-center">
+								    <div class="block-27">
+								      <ul> 	
+										<li>
+											<a data-toggle="tab" href="./TempCampInfo?contentId=<%= info.getContentId() %>&nowPage=1&cntPerPage=${paging.cntPerPage}${search.uri}&type=3#tab03">&lt;&lt;</a>
+										</li>
+										
+										<c:choose>
+											<c:when test="${paging.startPage != 1}">
+												<li><a href="./TempCampInfo?contentId=<%= info.getContentId() %>&nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}${search.uri}&type=3#tab03">&lt;</a></li>
+											</c:when>
+											<c:otherwise>
+												<li><a href="./TempCampInfo?contentId=<%= info.getContentId() %>&nowPage=${paging.startPage }&cntPerPage=${paging.cntPerPage}${search.uri}&type=3#tab03">&lt;</a></li>
+											</c:otherwise>
+										</c:choose>
+										      
+										<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
+											<c:choose>
+												<c:when test="${p == paging.nowPage }">
+													<li class="active"><a href="./TempCampInfo?contentId=<%= info.getContentId() %>&nowPage=${p }&cntPerPage=${paging.cntPerPage}${search.uri}&type=3#tab03">${p }</a></li>
+												</c:when>
+												<c:when test="${p != paging.nowPage }">
+													<li><a href="./TempCampInfo?contentId=<%= info.getContentId() %>&nowPage=${p }&cntPerPage=${paging.cntPerPage}${search.uri}&type=3#tab03">${p }</a></li>
+												</c:when>
+											</c:choose>
+										</c:forEach>
+										
+										<c:choose>
+											<c:when test="${paging.endPage != paging.lastPage}">
+												<li><a href="./TempCampInfo?contentId=<%= info.getContentId() %>&nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}${search.uri}&type=3#tab03">&gt;</a></li>
+											</c:when>
+											<c:otherwise>
+												<li><a href="./TempCampInfo?contentId=<%= info.getContentId() %>&nowPage=${paging.endPage }&cntPerPage=${paging.cntPerPage}${search.uri}&type=3#tab03">&gt;</a></li>
+											</c:otherwise>
+										</c:choose>
+										<li><a href="./TempCampInfo?contentId=<%= info.getContentId() %>&nowPage=${paging.lastPage }&cntPerPage=${paging.cntPerPage}${search.uri}&type=3#tab03">&gt;&gt;</a></li>
+								      </ul>
+								</div>
+								</div>
+								</div>
 							</div>
 						</div>
 					</section>	
@@ -279,7 +274,8 @@
 		</div>
 	</section>
 	
-	<footer class="ftco-footer bg-bottom ftco-no-pt" style="background-image: url(images/bg_3.jpg);">
+	
+	<footer id="footer" class="ftco-footer bg-bottom ftco-no-pt" style="background-image: url(images/bg_3.jpg);">
 		 <div class="container">
 		   <div class="row mb-5">
 		     <div class="col-md pt-5">
@@ -358,8 +354,13 @@
 <script src="./resources/js/scrollax.min.js"></script>
 <script src="./resources/js/comping_index_carousel_js.js"></script>
 <script src="./resources/js/main.js"></script>
-
-
 <script src="./resources/js/camping_index.js"></script>
+
+<c:if test="${type == 3}">
+	<script>
+		review();
+	</script>
+</c:if> 
+
 </body>
 </html>

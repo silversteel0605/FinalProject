@@ -24,7 +24,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -312,6 +311,8 @@ public class PostController {
 		post.setMember_id((String)session.getAttribute("member_id"));
 		post.setTitle(dataArr[0]); 
 		post.setContents(dataArr[1]);
+		post.setMember_id((String)session.getAttribute("member_id"));
+		post.setTitle(dataArr[0]); post.setContents(dataArr[1]);
 		post.setBoard_class(boardClassMap.get(dataArr[2]));
 		post.setContents_category(categoryNameMap.get(dataArr[3]));
 		post.setPost_id(Integer.parseInt(dataArr[4]));

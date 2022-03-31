@@ -10,7 +10,15 @@ contentsDelete.addEventListener('click', (e) => {
 	}).then((result) => {
 		if (result.isConfirmed) {
 			Swal.fire(
+<<<<<<< HEAD
+<<<<<<< HEAD
+				document.getElementById('deleteForm').submit()
+=======
 				'DELETED!!'
+>>>>>>> refs/heads/jang
+=======
+				document.getElementById('deleteForm').submit()
+>>>>>>> refs/heads/sub
 			)
 		}
 	})

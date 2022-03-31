@@ -1,29 +1,53 @@
 @charset "EUC-KR";
 
 /* °øÅë */
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
 .comment_icon {
 	cursor: pointer;
 }
+>>>>>>> refs/heads/jang
+=======
+>>>>>>> refs/heads/sub
 
 p, div {
 	margin: 0px;
 	padding: 0px;
 }
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+.userId, .contentsTitle {
+=======
 /* #id {
+>>>>>>> refs/heads/jang
+=======
+.userId, .contentsTitle {
+>>>>>>> refs/heads/sub
 	cursor: pointer;
 } */
+
+/* Free Board */
+
+/* Free Board */
 
 .paragraph_body {
 	min-height: 300px;
 }
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
 
 
 #co_comment {
 	display: none;
 }
 
+>>>>>>> refs/heads/jang
+=======
+>>>>>>> refs/heads/sub
 .card-body, .card-footer {
 	padding: 0px;
 }
@@ -37,6 +61,12 @@ p, div {
   	-webkit-box-orient: vertical;
 
 }
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
 
 
 /* Support Page */
+>>>>>>> refs/heads/jang
+=======
+>>>>>>> refs/heads/sub

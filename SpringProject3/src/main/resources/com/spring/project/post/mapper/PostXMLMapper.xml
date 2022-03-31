@@ -143,6 +143,7 @@
 		</selectKey>
 			INSERT INTO 
 				post 
+			(post_id, member_id, title, contents, reg_date, board_class, contents_category, process, imgurl)
 			VALUES (
 				#{post_id}, #{member_id}, #{title}, #{contents}, sysdate, 
 				#{board_class}, #{contents_category}, #{process}, null
