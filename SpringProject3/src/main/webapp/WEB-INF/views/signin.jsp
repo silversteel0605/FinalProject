@@ -201,6 +201,7 @@ $(function(){
 		if(!birthdayRule1.test(birthday) && !birthdayRule2.test(birthday))
 		{
 			alert("ex) '2000-01-01' 또는 '20000101' 로 사용해야 합니다.");
+	
 			$('#birthday').focus();
 			return;
 		}
