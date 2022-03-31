@@ -279,6 +279,7 @@ public class PostController {
 		HttpSession session = request.getSession();
 		if (edit) {
 			model.addAttribute("contents", postService.getContents(post_id));
+			log.info("¸ðµ¨¿¡ ¼öÁ¤¿ë ÄÁÅÙÃ÷°¡ ½Ç¸²");
 		}
 		
 		log.info("board_class: " + board_class);
@@ -286,6 +287,7 @@ public class PostController {
 		model.addAttribute("manager", session.getAttribute("member_id"));
 		model.addAttribute("board_class", board_class);
 		model.addAttribute("boardString", board_class.equals("freeBoard") ? "board" : "support");
+		model.addAttribute("post_id", post_id);
 		return "writeTest";
 	}
 	
@@ -301,20 +303,28 @@ public class PostController {
 		log.info("post data: " + data);
 		log.info("post post: " + post);
 		
-		String[] dataArr = data.split(","); for(String item : dataArr) {
-			log.info("dataArr: " + item); }
+		String[] dataArr = data.split(","); 
 		
-		post.setMember_id((String)session.getAttribute("currentUser"));
-		post.setTitle(dataArr[0]); post.setContents(dataArr[1]);
+		for (int i = 0; i < dataArr.length; ++i) {
+			log.info("dataArr[" + i + "]: " + dataArr[i]); 
+		}
+		
+		post.setMember_id((String)session.getAttribute("member_id"));
+		post.setTitle(dataArr[0]); 
+		post.setContents(dataArr[1]);
 		post.setBoard_class(boardClassMap.get(dataArr[2]));
 		post.setContents_category(categoryNameMap.get(dataArr[3]));
-		
+		post.setPost_id(Integer.parseInt(dataArr[4]));
 		if (boardClassMap.get(dataArr[2]) == 1) { post.setProcess(1); }
 		
-		postService.addPost(post);
+		if (Boolean.parseBoolean(dataArr[5])) {
+			log.info("edit boolean true µé¾î¿È");
+			postService.editPost(post);
+		} else {
+			postService.addPost(post);
+		}
 		
 		return "redirect:" + mkUri(dataArr[2]);
-		
 	}
 	
 	@PostMapping("/upload/image")

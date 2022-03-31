@@ -13,26 +13,29 @@ writeSavBtn.addEventListener('click', (e) => {
 	
 	const title = document.getElementById('title').value;
 	const writeCategory = document.getElementById('writeCategory').value;
-	const board_class = document.getElementById('board_class').value;
+	const board_classNum = document.getElementById('board_class').value;
+	const board_class = board_classNum == 0 ? 'freeBoard' : 'supportBoard';
 	const edit = document.getElementById('edit').value;
+	const post_id = document.getElementById('post_id').value;
 	var contents = CKEDITOR.instances.writeEditor.getData();
 	
-	console.log(title);
-	console.log(writeCategory);
-	console.log(board_class);
-	console.dir(contents);
-	console.log(edit);
+	console.log("클릭시 제목: ", title);
+	console.log("클릭시 카테고리: ", writeCategory);
+	console.log("클릭시 게시판종류: ", board_class);
+	console.dir("클릭시 본문: ",  contents);
+	console.log("클릭시 수정여부: ", edit);
+	console.log("클릭시 게시글번호: ", post_id);
 	
-	var writeContents = [title, contents, board_class, writeCategory];
+	var writeContents = [title, contents, board_class, writeCategory, post_id];
 	
 	if (edit) {
-		console.log(edit);
+		console.log("수정이 트루임: " , edit);
 		writeContents.push(edit);
-		console.log(writeContents);
+		console.log("수정을 추가한 배열: ", writeContents);
 	}
 	
 	console.log("post보내기 직전");
-	//writeSend('./write', {'contents': writeContents});
+	writeSend('./write', {'contents': writeContents});
 	
 });
 

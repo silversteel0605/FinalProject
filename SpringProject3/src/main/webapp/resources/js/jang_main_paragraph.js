@@ -54,7 +54,7 @@ comment_saveBtn.addEventListener('click', (e) => {
 		ordernum: 0
 	}
 	xhttpComments.open('POST', '/project/main_paragraph', true);
-	xhttpComments.setRequestHeader('content-type', 'application/json;charset=utf-8');
+	xhttpComments.setRequestHeader('content-type', 'application/json;charset=EUC-KR');
 	xhttpComments.send(JSON.stringify(newCommentData));
 	
 	comments[2].value = null;
@@ -228,7 +228,7 @@ function textNode(str) {
 const contentsEdit = document.getElementById('contentsEdit');
 contentsEdit.addEventListener('click', (e) => {
 	console.log('³ª Å¬¸¯µÆ¾î');
-	location.href = `./write?post_id=${post_id}&edit=true&board_class=${board_class}`;
+	location.href = `./write?post_id=${post_id}&edit=true&board_class=${board_class}&edit=true`;
 });
 
 

@@ -75,6 +75,11 @@ public class PostServiceImpl implements PostService {
 	public void addPost(PostVO post) {
 		postMapper.addPost(post);
 	}
+	
+	@Override
+	public void editPost(PostVO post) {
+		postMapper.editPost(post);
+	}
 }
 
 

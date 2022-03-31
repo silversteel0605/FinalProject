@@ -24,4 +24,5 @@ public interface PostXMLMapper {
 	public Integer getCommentsEA(Integer post_id);
 	
 	public void addPost(PostVO post);
+	public void editPost(PostVO post);
 }

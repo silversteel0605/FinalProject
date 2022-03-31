@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.project.post.dto.CommentVO;
+import com.spring.project.post.dto.PostVO;
 import com.spring.project.post.service.PostService;
 
 import lombok.extern.log4j.Log4j;
@@ -37,12 +38,6 @@ public class PostRestController {
 		
 		return comment;
 	}
-	
-	@PutMapping("/write")
-	public void editContents() {
-		
-	}
-
 	
 }
 
