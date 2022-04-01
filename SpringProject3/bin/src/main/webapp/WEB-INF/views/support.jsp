@@ -20,23 +20,8 @@
   <link rel="stylesheet" href="<c:url value="/resources/css/flaticon.css"/>" />
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <link rel="stylesheet" href="<c:url value="/resources/css/style.css"/>"/>
-<<<<<<< HEAD
-<<<<<<< HEAD
   <!-- 페이지 css -->
-=======
-  <!-- 공통 css -->
->>>>>>> refs/heads/jang
-=======
-  <!-- 페이지 css -->
->>>>>>> refs/heads/sub
   <link rel="stylesheet" href="<c:url value="/resources/css/jangec.css"/>"/>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-  <!-- 페이지 css -->
->>>>>>> refs/heads/jang
-=======
->>>>>>> refs/heads/sub
   <link rel="stylesheet" href="<c:url value="/resources/css/jangSupport.css"/>"/>
   
 </head>
@@ -68,7 +53,7 @@
     <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
       <div class="col-md-9 ftco-animate pb-5 text-center">
        <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="fa fa-chevron-right"></i></a></span> <span>Blog <i class="fa fa-chevron-right"></i></span></p>
-       <h1 class="mb-0 bread">Blog</h1>
+       <h1 class="mb-0 bread">고객센터</h1>
      </div>
    </div>
  </div>
@@ -79,38 +64,41 @@
 	<div class="container">
 		<!-- 컨텐츠 -->
 		<div class="contents container">
-			<h1>고객의 소리에 주목합니다</h1>
-			
 			<!-- Support Board Nav -->
-			<nav class="navbar navbar-expand-lg navbar-light">
-			  <div class="container-fluid">
-			    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-			      <form class="d-flex" action="./support" method="POST" accept-charset="EUC-KR">
-					<div class="input-group mb-3">
-						<select id="inputState" class="form-select col-md-3" name="searchByWhat">
-							<option selected value="all">전체</option>
-							<option value="title">제목</option>
-							<option value="contents">내용</option>
-						</select>
-						<input type="text" class="form-control" aria-label="Text input with dropdown button" name="searchKeyword">
-						<button class="btn btn-outline-success" type="submit">Search</button>
-					</div>
-			      </form>
-			      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-			        <li class="nav-item">
-			          <a class="nav-link categoryClass active" aria-current="page" href="./support?categoryName=supportAll" onClick="sessionDelete()">전체</a>
-			        </li>
-			        <li class="nav-item">
-			          <a class="nav-link categoryClass " href="./support?categoryName=notice" onClick="sessionDelete()">공지사항</a>
-			        </li>
-			        <li class="nav-item">
-			          <a class="nav-link categoryClass " href="./support?categoryName=askEdit" onClick="sessionDelete()">수정요청</a>
-			        </li>
-			      </ul>
-			    </div>
-			   	<button class="btn" href="#">글쓰기</button>
+			  <div class="container">
+			  	<div class="row mb-5">
+					<h1 class="text-start">고객의 소리에 주목합니다</h1>
+			  	</div>
+			  	<div class="row">
+				    <div class="col-md-5">
+				      <form class="d-flex" action="./support" method="POST" accept-charset="EUC-KR">
+						<div class="input-group input-group-sm mb-3">
+							<select id="inputState" class="form-select form-select-sm col-md-3" name="searchByWhat">
+								<option selected value="all">전체</option>
+								<option value="title">제목</option>
+								<option value="contents">내용</option>
+							</select>
+							<input type="text" class="form-control-sm border-light shadow-none" aria-label="Text input with dropdown button" name="searchKeyword">
+							<button class="btn btn-outline-secondary btn-sm" type="submit">Search</button>
+						</div>
+				      </form>
+				    </div>
+				    <div class="col-md-5 offset-md-2">
+				    	<div class="row">
+						    <div class="col-9">
+							    <div class="d-flex flex-row">
+								    <a class="categoryClass ml-3 align-bottom" href="./support?categoryName=supportAll">전체</a>
+								    <a class="categoryClass ml-3" href="./support?categoryName=notice">공지사항</a>
+								    <a class="categoryClass ml-3" href="./support?categoryName=askEdit">수정요청</a>
+							    </div>
+						    </div>
+						    <div class="col-3">
+							   	<a class="" href="./write?board_class=supportBoard">글쓰기</a>
+						    </div>
+				    	</div>
+				    </div>
+				  </div>
 			  </div>
-			</nav>
 			<!-- /Support Board Nav -->
 			<!-- Table -->
 			<table class="table table-hover">
@@ -122,6 +110,7 @@
 			      <th scope="col">작성자</th>
 			      <th scope="col">작성일</th>
 			      <th scope="col">처리여부</th>
+			      <th scope="col">조회수</th>
 			    </tr>
 			  </thead>
 			  <tbody>
@@ -130,12 +119,12 @@
 			    		<td>${supportContents.post_id }</td>
 			    		<td>
 			    			<c:choose>
-			    				<c:when test="${supportContents.contents_category eq 6}">공지사항</c:when>
+			    				<c:when test="${supportContents.contents_category eq 6 }">공지사항</c:when>
 			    				<c:otherwise>수정요청</c:otherwise>
 			    			</c:choose>
 			    		</td>
-			    		<td id="${supportContents.post_id }" class="contentsTitle" onClick="mainContents(${supportContents.post_id})">${supportContents.title }</td>
-			    		<td class="userId" id="${supportContents.member_id }">${supportContents.member_id }</td>
+			    		<td id="${supportContents.post_id }" class="pointer" onClick="mainContents(${supportContents.post_id})">${supportContents.title }</td>
+			    		<td class="userId pointer" id="${supportContents.member_id }">${supportContents.member_id }</td>
 			    		<td>${supportContents.reg_date }</td>
 			    		<td>
 		    			<c:choose>
@@ -144,6 +133,7 @@
 		    				<c:otherwise>-</c:otherwise>
 		    			</c:choose>
 		    			</td>
+		    			<td>${supportContents.views }</td>
 			    	</tr>
 			    </c:forEach>
 			  </tbody>
@@ -186,26 +176,15 @@
 					</ul>
 				</div>
 			</div>
-		</div>	
+		</div>
+		<!-- /paging -->	
 	</div>
-	
 </section>
-<!-- <script>
-	const member_ids = document.getElementsByClassName('member_id');
-	
-	for (var id of member_ids) {
-		id.addEventListner('click', (e) => {
-			console.log(e.target.id);						
-		});
-	}
-</script> -->
 
 <!-- Modal & PopUp Menu -->
 <div id="popUpMenu" style="display:none;">
 	<ul class="list-group list-group-flush">
-		<li id="memberInfo" class="indiPopUp list-group-item list-group-item-primary opacity-75" style="cursor:pointer">회원정보 보기</li>
 		<li id="memberPost" class="indiPopUp list-group-item list-group-item-primary opacity-75" style="cursor:pointer">작성글 보기</li>
-		
 	</ul>
 </div>
 
@@ -311,7 +290,7 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 <script src="<c:url value="/resources/js/google-map.js"/>"></script>
 <script src="<c:url value="/resources/js/main.js"/>"></script>
-<!-- 개인 JS -->
+<!-- 페이지 js -->
 <script src="<c:url value="/resources/js/jangSupport.js"/>"></script>
 <script src="<c:url value="/resources/js/jangec.js"/>"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>

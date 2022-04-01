@@ -9,7 +9,7 @@
 			count(*) FROM post 
 		WHERE 
 			board_class = #{board_class}
-		<if test='category eq 6 or category eq 7'>
+		<if test='category gt 1'>
 		AND
 			contents_category = #{category}
 		</if>
@@ -27,43 +27,41 @@
 		</if>
 	</select>
 	
-	<select id="getSupportPostList" resultType="com.spring.project.post.dto.PostVO">
+	<select id="getPostList" resultType="com.spring.project.post.dto.PostVO">
 		SELECT 
-			post.rownumber, post.post_id,  member.member_id, post.comment_id, post.title, post.contents,to_char(post.reg_date, 'yyyy. MM. dd.'), 
-			to_char(post.edit_date, 'yyyy. MM. dd.'), post.board_class, post.contents_category, post.process 
+			post.rownumber, post.post_id,  post.member_id, post.title, post.contents, to_char(post.reg_date, 'yyyy. MM. dd.'), 
+			post.board_class, post.contents_category, post.process, post.imgurl, post.views
 		FROM 
 			(
 				SELECT 
-					rownum as rownumber, post_id, member_id, comment_id, title, contents, reg_date, 
-					edit_date, board_class, contents_category, process 
+					rownum as rownumber, post_id, member_id, title, contents, reg_date, 
+					board_class, contents_category, process, imgurl, views
 				FROM 
 					post
 				WHERE
 					board_class = #{search.board_class}
-				<if test='search.category eq 6 or search.category eq 7'>
+				<if test='search.category gt 1'>
 				AND
 					contents_category = #{search.category}
 				</if>
 			) 
-			post, member
+			post
 		WHERE
-			post.member_id = member.member_num_id 
-		<!-- Paging -->
-		AND
+			<!-- Paging -->
 			post.rownumber BETWEEN #{pvo.start} AND #{pvo.end}
 		ORDER 
 			BY post.rownumber DESC
 	</select>
 	
-	<select id="getSupportSearch" resultType="com.spring.project.post.dto.PostVO" parameterType="com.spring.project.post.dto.SearchVO">
+	<select id="getPostSearch" resultType="com.spring.project.post.dto.PostVO" parameterType="com.spring.project.post.dto.SearchVO">
 		SELECT 
-			post.rownumber, post.post_id,  member.member_id, post.comment_id, post.title, post.contents,to_char(post.reg_date, 'yyyy. MM. dd.'), 
-			to_char(post.edit_date, 'yyyy. MM. dd.'), post.board_class, post.contents_category, post.process 
+			post.rownumber, post.post_id,  post.member_id, post.title, post.contents,to_char(post.reg_date, 'yyyy. MM. dd.'), 
+			post.board_class, post.contents_category, post.process, post.imgurl, post.views
 		FROM 
 			(
 				SELECT 
-					rownum as rownumber, post_id, member_id, comment_id, title, contents, reg_date, 
-					edit_date, board_class, contents_category, process 
+					rownum as rownumber, post_id, member_id, title, contents, reg_date, 
+					board_class, contents_category, process, imgurl, views
 				FROM 
 					post
 				WHERE
@@ -78,37 +76,85 @@
 					${search.searchByWhat} LIKE '%'||#{search.searchKeyword}||'%'
 				</when>
 				</choose>
-				<if test='search.category eq 6 or search.category eq 7'>
+				<if test='search.category gt 1'>
 				AND
 					contents_category = #{search.category}
 				</if>
 			) 
-			post, member
+			post
 		WHERE
-			post.member_id = member.member_num_id
-		<!-- Paging -->
-		AND
+			<!-- Paging -->
 			post.rownumber BETWEEN #{pvo.start} AND #{pvo.end}
 		ORDER BY 
 			post.rownumber DESC
 	</select>
 	
+	<!-- mainContents -->
 	<select id="getContents" resultType="com.spring.project.post.dto.PostVO">
 		SELECT 
-			post.rownumber, post.post_id,  member.member_id, post.comment_id, post.title, post.contents,to_char(post.reg_date, 'yyyy. MM. dd.'), 
-			to_char(post.edit_date, 'yyyy. MM. dd.'), post.board_class, post.contents_category, post.process 
+			post.rownumber, post.post_id,  post.member_id, post.title, post.contents,to_char(post.reg_date, 'yyyy. MM. dd.'), 
+			post.board_class, post.contents_category, post.process, post.imgurl, post.views
 		FROM 
 			(
 				SELECT 
-					rownum as rownumber, post_id, member_id, comment_id, title, contents, reg_date, 
-					edit_date, board_class, contents_category, process 
+					rownum as rownumber, post_id, member_id, title, contents, reg_date, 
+					board_class, contents_category, process, imgurl, views
 				FROM 
 					post
 			) 
-			post, member
+			post
 		WHERE
-			post.member_id = member.member_num_id 
-		AND 
 			post.post_id = #{post_id}
 	</select>
+	<delete id="deletePost">
+		DELETE FROM post WHERE post_id = #{post_id}
+	</delete>
+	
+	<update id="increaseViews">
+		UPDATE post SET views = #{post.views} WHERE post_id = #{post.post_id} 
+	</update>
+	
+	<!-- Comments -->
+	<select id="getComments" resultType="com.spring.project.post.dto.CommentVO">
+		SELECT * FROM comments WHERE post_id = #{post_id} AND category_id = #{board_class}
+	</select>
+	<select id="getCommentsEA" resultType="_integer">
+		SELECT count(*) FROM comments WHERE post_id = #{post_id}
+	</select>
+	
+	<!-- addPost -->
+	<insert id="addPost">
+		<selectKey keyProperty="post_id" resultType="_integer" order="BEFORE">
+    		SELECT post_id_seq.nextval FROM dual
+		</selectKey>
+			INSERT INTO 
+				post 
+			(post_id, member_id, title, contents, reg_date, board_class, contents_category, process, imgurl, views)
+			VALUES (
+				#{post_id}, #{member_id}, #{title}, #{contents}, sysdate, 
+				#{board_class}, #{contents_category}, #{process}, null, 0
+			)
+	</insert>
+	<update id="editPost">
+		UPDATE post
+		SET
+			title = #{title},
+			contents = #{contents}
+		WHERE
+			post_id = #{post_id}
+	</update>
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

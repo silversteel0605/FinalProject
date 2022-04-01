@@ -2,11 +2,22 @@
 
 /* °øÅë */
 
-p, div {
+p, div, a {
 	margin: 0px;
 	padding: 0px;
 }
 
+a {
+	text-decoration: none;
+}
+
+li, ul {
+	list-style: none;
+}
+
+tr, th, td {
+	text-align: center;
+}
 .pointer {
 	cursor: pointer;
 }
