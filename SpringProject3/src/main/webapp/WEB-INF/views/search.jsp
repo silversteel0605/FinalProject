@@ -7,6 +7,7 @@
 <head>
 <meta charset="EUC-KR">
 <title>Insert title here</title>
+<!--  
   <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Arizonia&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -17,10 +18,11 @@
   <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap-datepicker.css"/>"/>
   <link rel="stylesheet" href="<c:url value="/resources/css/jquery.timepicker.css"/>"/>
   <link rel="stylesheet" href="<c:url value="/resources/css/flaticon.css"/>" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="<c:url value="/resources/css/style.css"/>"/>
   <link rel="stylesheet" href="<c:url value="/resources/css/width.css"/>"/>
   <link rel="stylesheet" href="<c:url value="/resources/css/john.css?after"/>"/>
+  -->
+
 </head>
 <body>
 	<script>
@@ -28,6 +30,7 @@
 		const gugun = '${search.gugun}';
 		const them = '${search.locThem}';
 	</script>
+	<!--  
 	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
    <div class="container">
      <a class="navbar-brand" href="index.html">Pacific<span>Travel Agency</span></a>
@@ -47,7 +50,7 @@
  </div>
 </div>
 </nav>
-<!-- END nav -->
+
 
 <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('resources/images/bg_1.jpg');">
   <div class="overlay"></div>
@@ -173,83 +176,11 @@
 		</div>
 	</div>
 </section>
-
-
-	
-<section class="ftco-section ftco-no-pt">
-   <div class="container">
-    <div class="cnt"> 총 개의 캠핑장이 있습니다.</div>
-    <div class="order_list">
-    	<select name="" id="order">
-    		<option value="default">기본순으로 보기</option>
-    		<option value="review">리뷰순으로 보기</option>
-    		<option value="views">조회순으로 보기</option>
-    		<option value="recomm">추천순으로 보기</option>
-    	</select>
-    </div>
-    <div class="row">
-     <c:forEach var="list" items="${lists }">
-		<div class="col-md-4 ftco-animate">
-		  <div class="project-wrap">
-		     <a href="#" class="img" style="background-image: url(${list.firstImageUrl });">
-		        <span class="price">$550/person</span>
-		    </a>
-		    <div class="text p-4">
-		        <span class="days">8 Days Tour</span>
-		        <h3><a href="./TempCampInfo?contentId=${list.contentId }">${list.facltNm }</a></h3>
-		        <p class="location"><span class="fa fa-map-marker"></span> ${list.addr1 }</p>
-		        <ul>
-		           <li><span>조회수</span>${list.views }</li>
-		           <li><span class="flaticon-king-size"></span>3</li>
-		           <li><span class="flaticon-sun-umbrella"></span>Near Beach</li>
-		       </ul>
-		   	</div>
-		  </div>
-		</div>
-	</c:forEach>  
-</div>
-</div>
-<div class="row mt-5">
-  <div class="col text-center">
-    <div class="block-27">
-      <ul> 	
-		<li><a href="./search?nowPage=1&cntPerPage=${paging.cntPerPage}${search.uri}">&lt;&lt;</a></li>
-		<c:choose>
-		<c:when test="${paging.startPage != 1}">
-			<li><a href="./search?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}${search.uri}">&lt;</a></li>
-		</c:when>
-		<c:otherwise>
-			<li><a href="./search?nowPage=${paging.startPage }&cntPerPage=${paging.cntPerPage}${search.uri}">&lt;</a></li>
-		</c:otherwise>
-		</c:choose>      
-		<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
-			<c:choose>
-				<c:when test="${p == paging.nowPage }">
-					<li class="active"><a href="./search?nowPage=${p }&cntPerPage=${paging.cntPerPage}${search.uri}">${p }</a></li>
-				</c:when>
-				<c:when test="${p != paging.nowPage }">
-					<li><a href="./search?nowPage=${p }&cntPerPage=${paging.cntPerPage}${search.uri}">${p }</a></li>
-				</c:when>
-			</c:choose>
-		</c:forEach>
-		<c:choose>
-			<c:when test="${paging.endPage != paging.lastPage}">
-				<li><a href="./search?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}${search.uri}">&gt;</a></li>
-			</c:when>
-			<c:otherwise>
-				<li><a href="./search?nowPage=${paging.endPage }&cntPerPage=${paging.cntPerPage}${search.uri}">&gt;</a></li>
-			</c:otherwise>
-		</c:choose>
-		<li><a href="./search?nowPage=${paging.lastPage }&cntPerPage=${paging.cntPerPage}${search.uri}">&gt;&gt;</a></li>
-      </ul>
-</div>
-</div>
-</div>
-
-</section>
+-->
 
 
 
+<!--  
 <section class="ftco-intro ftco-section ftco-no-pt">
  <div class="container">
     <div class="row justify-content-center">
@@ -321,14 +252,14 @@
 <div class="row">
   <div class="col-md-12 text-center">
 
-    <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+    <p> Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. 
       Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-      <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+       Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. </p>
   </div>
 </div>
 </div>
 </footer>
-
+-->
 
 <!-- loader -->
 <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
