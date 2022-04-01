@@ -36,7 +36,7 @@ public class CampingController {
 	
 	CampingReviewController crc = null;
 
-	private static int cntPerPage = 9;
+	private static int cntPerPage = 10;
 	
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public String search(Model m, @RequestParam(value="nowPage", required=false)String nowPage, SearchVO vo)  throws  IOException, JDOMException {
