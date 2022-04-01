@@ -80,7 +80,7 @@
 				<div class="comments_header d-flex justify-content-between">
 					<p>COMMENTS</p>
 					<div>
-						<span data-bs-toggle="modal" data-bs-target="#memberDescription">조회수 : <%= info.getClickNum() %></span>
+						<span data-bs-toggle="modal" data-bs-target="#memberDescription">조회수 : <%= info.getViews() %></span>
 						<span>평점 : <%= info.getStarRanking() %></span>
 					</div>
 				</div> <hr />
