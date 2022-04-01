@@ -70,7 +70,11 @@ public class HomeController {
 		m.addAttribute("info", vo);
 		return "updateWindow";
 	}
-
+	@RequestMapping(value = "/profile", method = RequestMethod.GET)
+	public String profile() {
+		
+		return "profile";
+	}
 	
 
 
