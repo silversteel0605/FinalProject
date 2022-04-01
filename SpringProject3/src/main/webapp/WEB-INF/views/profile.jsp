@@ -22,6 +22,7 @@
   <link rel="stylesheet" href="<c:url value="/resources/css/width.css"/>"/>
   <link rel="stylesheet" href="<c:url value="/resources/css/john.css"/>"/>
   -->
+  
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
