@@ -68,8 +68,7 @@
 	
 	<section id="main_content" class="wrap ftco-section services-section text-center">
 	
-		<div class = "tab_warp row obj_row_center">
-        		<div class = "bgc_color_box col-md-4 min-vh-70"></div>
+		<div class = "bgc_color_box tab_warp row obj_row_center">
         		<div class="bgc_box col-md-4 ftco-section align-items-center min-vh-70">
           			<div>
             			<h2 class="h2_size"><%= info.getFacltNm() %></h2>
