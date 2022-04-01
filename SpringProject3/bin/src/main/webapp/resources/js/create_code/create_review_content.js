@@ -1,30 +1,55 @@
 
-
-//¿¸√º
-function create_review_save_content(contentId){
+//all
+function create_review_save_content(type, r_dto){
 	
-	var testMainForm = document.getElementById("form");
-	/*
-	const newMainForm = document.createElement("form");
-	newMainForm.setAttribute("id", "form");
-	newMainForm.setAttribute("name", "form");
-	newMainForm.setAttribute("method", "get");
-	newMainForm.setAttribute("action", "./reviewSave");
-	*/
+	console.log(r_dto.contentId, type, r_dto);
+	var content = document.getElementById("contentBox");
+	var testMainForm = create_review_form(type);
 	
-	var testTextNode = document.createTextNode(contentId);
-	
+	var req_reviewId = document.createElement("input");
+	var req_loginId = document.createElement("input");
 	var req_campingId = document.createElement("input");
-	req_campingId.setAttribute("type", "text");
+	var req_createDate = document.createElement("input");
+	var req_imgUrl = document.createElement("input");
+	var req_clickNum = document.createElement("input");
+	
 	req_campingId.setAttribute("name", "contentId");
-	req_campingId.setAttribute("value", contentId);
+	req_campingId.setAttribute("value", r_dto.contentId);
 	req_campingId.style.display = "none";
+	
+	req_reviewId.setAttribute("name", "review_id");
+	req_reviewId.setAttribute("value", r_dto.reviewId);
+	req_reviewId.style.display = "none";
+	
+	req_loginId.setAttribute("name", "member_id");
+	req_loginId.setAttribute("value", r_dto.memberId);
+	req_loginId.style.display = "none";
+	
+	req_createDate.setAttribute("name", "reg_date");
+	req_createDate.setAttribute("value", getYmd10(r_dto.regDate));
+	req_createDate.style.display = "none";
+	
+	req_createDate.setAttribute("name", "up_date");
+	req_createDate.setAttribute("value", getYmd10(r_dto.upDate));
+	req_createDate.style.display = "none";
+	
+	req_imgUrl.setAttribute("name", "imgUrl");
+	req_imgUrl.setAttribute("value", r_dto.imgUrl);
+	req_imgUrl.style.display = "none";
+	
+	req_clickNum.setAttribute("name", "clickNum");
+	req_clickNum.setAttribute("value", r_dto.clickNum);
+	req_clickNum.style.display = "none";
+	
+	req_clickNum.setAttribute("name", "declNum");
+	req_clickNum.setAttribute("value", r_dto.declkNum);
+	req_clickNum.style.display = "none";
 	
 	//newMainForm.appendChild(campingId);
 	
 	let submit = document.createElement("input");
 	let previous = document.createElement("button");
-	let previousTxt = document.createTextNode("∏Ò∑œ");
+	let previousTxt = document.createTextNode("Ïù¥Ï†Ñ");
 	
 	submit.setAttribute("type", "submit");
 	submit.setAttribute("class", "btn btn-sm btn-primary");
@@ -35,26 +60,49 @@ function create_review_save_content(contentId){
 	previous.setAttribute("onclick", "back()");
 	previous.appendChild(previousTxt);
 	
-	testMainForm.appendChild(testTextNode);
 	testMainForm.appendChild(req_campingId);
-	testMainForm.appendChild(create_review_star_rank("ƒ∑«Œ¿Â", 5));
-	testMainForm.appendChild(create_review_save_user_title());
-	testMainForm.appendChild(create_review_save_user_content());
+	testMainForm.appendChild(req_reviewId);
+	testMainForm.appendChild(req_loginId);
+	testMainForm.appendChild(req_createDate);
+	testMainForm.appendChild(req_imgUrl);
+	testMainForm.appendChild(req_clickNum);
+	testMainForm.appendChild(create_review_star_rank(type));
+	testMainForm.appendChild(create_review_user_title(type, r_dto.title));
+	testMainForm.appendChild(create_review_user_content(type));
 	testMainForm.appendChild(submit);
 	testMainForm.appendChild(previous);
+	
+	content.appendChild(testMainForm);
 }
 
-//∫∞ ∆Ú¡°
-function create_review_star_rank(text, starNum){
+function create_review_form(type){
+	
+	const newMainForm = document.createElement("form");
+	
+	newMainForm.setAttribute("id", "form");
+	newMainForm.setAttribute("name", "form");
+	newMainForm.setAttribute("method", "get");
+	
+	console.log(type);
+	
+	if(type == 1){
+		newMainForm.setAttribute("action", "./reviewUpdata");
+	}else{
+		newMainForm.setAttribute("action", "./reviewSave");	
+	}
+	
+	return newMainForm;
+}
+
+//Star Ranking
+function create_review_star_rank(type){
 	
 	//box
 	var wrap = document.createElement("div");
-	var starText = document.createTextNode("¿Ã "+text+" √ﬂ√µ«œΩ√∞⁄Ω¿¥œ±Ó?");
+	var starText = document.createTextNode("Ïù¥ Ï∫†ÌïëÏû• Ï∂îÏ≤úÌïòÏã§ Í≤ÅÎãàÍπå?");
 	var container = document.createElement("div");
 	var content = document.createElement("div"); 
 	var starIcon = document.createElement("div");
-	
-	console.log(starText);
 	
 	wrap.setAttribute("class", "text-center");
 	container.setAttribute("class", "item-center");
@@ -64,13 +112,16 @@ function create_review_star_rank(text, starNum){
 	//data
 	let radio = [];
 	let starLabel = [];
-	for(index = 0; index < starNum; index++){
+	for(index = 0; index < 5; index++){
 		
 		radio.push(document.createElement("input"));
 		radio[index].setAttribute("type", "radio");
 		radio[index].setAttribute("name", "starRanking");
 		radio[index].setAttribute("id", "rating"+(index+1));
 		radio[index].setAttribute("value", index+1);
+		if(index == 4){
+			radio[index].setAttribute("checked", "checked");	
+		}
 		
 		starLabel.push(document.createElement("label"));
 		starLabel[index].setAttribute("for", "rating"+(index+1));
@@ -89,14 +140,15 @@ function create_review_star_rank(text, starNum){
 	return wrap;
 }
 
-//¿Ø¿˙ µ•¿Ã≈Õ
-function create_review_save_user_title(){
-	
+
+//Title
+function create_review_user_title(type, title){
+	var str =  str_replace(title);
 	var content = document.createElement("div");
 	content.setAttribute("class", "mb-3");
 	
 	let titleLabel = document.createElement("label");
-	let titleLabelTxt = document.createTextNode("¡¶∏Ò");
+	let titleLabelTxt = document.createTextNode("Ï†úÎ™©");
 	let titleTxt = document.createElement("input");
 	
 	titleLabel.setAttribute("for", "title");
@@ -106,7 +158,16 @@ function create_review_save_user_title(){
 	titleTxt.setAttribute("class","form-control");
 	titleTxt.setAttribute("name", "title");
 	titleTxt.setAttribute("id","title");
-	titleTxt.setAttribute("placeholder", "¡¶∏Ò¿ª ¿‘∑¬«ÿ ¡÷ººø‰");
+	
+	console.log(type);
+	
+	if(type == 1){
+		titleTxt.setAttribute("placeholder", str);
+		titleTxt.setAttribute("value", str);
+	}else{
+		titleTxt.setAttribute("placeholder", "Ï†úÎ™©ÏùÑ ÏûÖÎ†•Ìï¥Ï£ºÏÑ∏Ïöî");
+	}
+	
 	
 	content.appendChild(titleLabel);
 	content.appendChild(titleTxt);
@@ -114,26 +175,28 @@ function create_review_save_user_title(){
 	return content;
 }
 
-function create_review_save_user_content(){
+//Content Value
+function create_review_user_content(){
+	
+	
 	
 	var content = document.createElement("div");
 	content.setAttribute("class", "mb-3");
 	
 	// start content
 	let contentLabel = document.createElement("label");
-	let contentLabelTxt = document.createTextNode("≥ªøÎ");
+	let contentLabelTxt = document.createTextNode("ÎÇ¥Ïö©ÏùÑ ÏûÖÎ†•Ìï¥Ï£ºÏÑ∏Ïöî");
 	let contentTextarea = document.createElement("textarea");
 	let contentScript = document.createElement("script");
 	let contentScriptTxt = document.createTextNode("CKEDITOR.replace('content', { filebrowserUploadUrl:'/food/imageUpload.do' });");
 	
-	contentLabel.setAttribute("for", "contentValue");
+	contentLabel.setAttribute("for", "review");
 	contentLabel.appendChild(contentLabelTxt);
 	
 	contentTextarea.setAttribute("class", "form-control");
 	contentTextarea.setAttribute("rows", "5");
-	contentTextarea.setAttribute("name", "contentValue");
+	contentTextarea.setAttribute("name", "review");
 	contentTextarea.setAttribute("id", "content");
-	contentTextarea.setAttribute("placeholder", "≥ªøÎ¿ª ¿‘∑¬«ÿ ¡÷ººø‰");
 	
 	contentScript.setAttribute("type", "text/javascript");
 	contentScript.appendChild(contentScriptTxt);
@@ -146,8 +209,27 @@ function create_review_save_user_content(){
 	return content;
 }
 
+function str_replace(str){
+	
+	str = str.replaceAll("&#32", " ");
+	str = str.replaceAll("&#09", "	");
+	str = str.replaceAll("&#10", "<br>");
+	str = str.replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", "");
+	
+	return str;
+}
 
-
+function getYmd10(d) {
+    //yyyy-mm-dd
+    if(d == 'Invalid Date'){
+		d = new Date();
+	}
+	
+	console.log(d);
+	
+	return d.getFullYear() + "-" + ((d.getMonth() + 1) > 9 ? (d.getMonth() + 1).toString() : "0" + (d.getMonth() + 1)) + "-" + (d.getDate() > 9 ? d.getDate().toString() : "0" + d.getDate().toString());
+    
+}
 
 
 

@@ -19,16 +19,26 @@
   <link rel="stylesheet" href="<c:url value="resources/css/style.css"/>"/>
 </head>
 <body>
+<%
+String auth = (String)session.getAttribute("auth");
+%>
 	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
    <div class="container">
-     <a class="navbar-brand" href="index.html">Pacific<span>Travel Agency</span></a>
+     <a class="navbar-brand" href="index.html"><%=  auth%><span>Travel Agency</span></a>
      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
        <span class="oi oi-menu"></span> Menu
      </button>
 
      <div class="collapse navbar-collapse" id="ftco-nav">
        <ul class="navbar-nav ml-auto">
-         <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+       <c:choose>
+	       <c:when test="${empty auth }">
+	         <li class="nav-item"><a  class="nav-link" onclick="location.href='./login'">로그인</a></li>
+	       </c:when>
+	       <c:otherwise>
+	       	<li class="nav-item"><a  class="nav-link" onclick="logout('${auth}')">로그아웃</a></li>
+	       </c:otherwise>
+       </c:choose>
          <li class="nav-item active"><a href="about.html" class="nav-link">About</a></li>
          <li class="nav-item"><a href="destination.html" class="nav-link">Destination</a></li>
          <li class="nav-item"><a href="hotel.html" class="nav-link">Hotel</a></li>
@@ -338,7 +348,7 @@
        </div>
      </div>
    </div>
- </div>
+ </div>   
  <div class="row">
   <div class="col-md-12 text-center">
 
@@ -350,11 +360,21 @@
 </div>
 </footer>
 
+<script>
+	<!-- logout.js -->
+	function logout(auth) {
+		if(auth === 'kakao') {
+			location.href = 'https://kauth.kakao.com/oauth/logout?client_id=ab2dbc463528e52eff1939322fb6704c&logout_redirect_uri=http://localhost:8090/project/kakao/logout&state=state';
+		} else {
+			location.href = './member/logout';
+		}
+	}
+</script>
+
+<script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
 
 
 
-
-<script src="/resources/js/jquery.min.js"></script>
 <script src="/resources/js/jquery-migrate-3.0.1.min.js"></script>
 <script src="/resources/js/popper.min.js"></script>
 <script src="/resources/js/bootstrap.min.js"></script>
