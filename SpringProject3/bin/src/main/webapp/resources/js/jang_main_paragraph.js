@@ -58,6 +58,7 @@ comment_saveBtn.addEventListener('click', (e) => {
 	
 });
 
+<<<<<<< HEAD
 const comments_body = document.getElementById('comments_body');
 
 xhttpComments.addEventListener('readystatechange', (e) => {
@@ -74,11 +75,32 @@ xhttpComments.addEventListener('readystatechange', (e) => {
 					);
 		}
 	}
+=======
+const contentsDelete = document.getElementById('contentsDelete');
+contentsDelete.addEventListener('click', (e) => {
+	Swal.fire({
+		template: '#deleteModal'
+	}).then((result) => {
+		if (result.isConfirmed) {
+			Swal.fire(
+				document.getElementById('deleteForm').submit()
+		)}
+	})
+>>>>>>> branch 'john' of https://github.com/leejohn0038/LastProject.git
 	
 });
 
+<<<<<<< HEAD
 // ÄÚÄÚ¸àÆ®
 // https://hianna.tistory.com/484 Âü°íÇØ¼­ ´Ù½Ã ¸¸µé±â
+=======
+
+// ì½”ë©˜íŠ¸
+const co_comment = document.getElementById('co_comment');
+const co_comment_newBtn = document.getElementById('co_comment_newBtn');
+const co_comment_saveBtn = document.getElementById('co_comment_saveBtn');
+const co_comment_cancelBtn = document.getElementById('co_comment_cancelBtn');
+>>>>>>> branch 'john' of https://github.com/leejohn0038/LastProject.git
 
 /* ÄÚÄÚ¸àÆ® input »ı¼º */
 const co_comment_input = document.getElementById('co_comment_input');

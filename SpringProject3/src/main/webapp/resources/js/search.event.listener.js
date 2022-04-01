@@ -56,3 +56,4 @@ function moreInfoFunc() {
 		pathname = pathname.replace('nowPage=[0-9]+', 'nowPage=1');
 		location.href = pathname + search;
 	})
+	

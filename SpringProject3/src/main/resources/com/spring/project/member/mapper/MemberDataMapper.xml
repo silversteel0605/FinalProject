@@ -9,7 +9,7 @@
 	</select>
 	
 	<select id="join" resultType="_int">
-		select count(*) from camper where member_id = #{member_id} and member_pwd = #{member_pwd} and member_type = #{member_type}
+		select count(*) from camper where member_id = #{member_id} and member_pwd = #{member_pwd} and member_type in (#{member_type} , 2) 
 	</select>
 	
 	<select id="isPermit" resultType="int">
@@ -46,6 +46,16 @@
 				FROM (
 				    select * from camper
 				    	where member_type = #{member_type}
+				    	<if test='member_name != null &amp;&amp; !member_name.equals("")'>
+				    		and member_name like '%${member_name}%'
+				    	</if>
+				    	<if test='member_id != null &amp;&amp; !member_id.equals("")'>
+				    		and member_id like '%${member_id}%'
+				    	</if>
+				    	<if test='permit != null'>
+				    		and permit = #{permit}
+				    	</if>
+				    	
 				    ) A
 				)
 		WHERE RN BETWEEN #{start} AND #{end}
@@ -53,6 +63,15 @@
 	
 	<select id="MemberCnt" resultType="int">
 		select count(*) from camper where member_type = #{member_type}
+		<if test='member_name != null &amp;&amp; !member_name.equals("")'>
+    		and member_name like '%${member_name}%'
+    	</if>
+    	<if test='member_id != null &amp;&amp; !member_id.equals("")'>
+    		and member_id like '%${member_id}%'
+    	</if>
+    	<if test='permit != null'>
+    		and permit = #{permit}
+    	</if>
 	</select>
 	
 	<update id="permitting">

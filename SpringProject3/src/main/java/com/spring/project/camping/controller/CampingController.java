@@ -57,7 +57,7 @@ public class CampingController {
 	}
 
 	
-	@RequestMapping(value = "/TempCampInfo", method = RequestMethod.GET)
+	@RequestMapping(value = "/CampInfo", method = RequestMethod.GET)
 	public String info(
 			Model m, 
 			@RequestParam(value="contentId") String contentId, 
@@ -113,10 +113,7 @@ public class CampingController {
 		searchTy = vo.getSearchTy();
 		total = service.getDbSearchTotal(vo);
 		pvo = new PagingVO(total, Integer.parseInt(nowPage), cntPerPage);
-		log.info(pvo.getCntPerPage());
 		vo.calcStartEnd(Integer.parseInt(nowPage), pvo.getCntPerPage());
-		log.info(vo.getStart());
-		log.info(vo.getEnd());
 		if (searchTy != null) {
 			if (searchTy.equals("condition")) {
 				vo.setConditionUri();
@@ -124,11 +121,10 @@ public class CampingController {
 				vo.setTagUri();
 			}
 		}
-		
 		vo.setOrderUri();
-		log.info(vo.getUri());
 		ar = service.getDbSearchData(vo);
 		
+		log.info(vo);
 		m.addAttribute("search", vo);
 		m.addAttribute("paging", pvo);
 		m.addAttribute("lists", ar);

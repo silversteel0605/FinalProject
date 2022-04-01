@@ -25,17 +25,18 @@
 		</when>
 		</choose>
 		</if>
+		
 	</select>
 	
 	<select id="getPostList" resultType="com.spring.project.post.dto.PostVO">
 		SELECT 
 			post.rownumber, post.post_id,  post.member_id, post.title, post.contents, to_char(post.reg_date, 'yyyy. MM. dd.'), 
-			post.board_class, post.contents_category, post.process, post.imgurl 
+			post.board_class, post.contents_category, post.process, post.imgurl , post.decl
 		FROM 
 			(
 				SELECT 
 					rownum as rownumber, post_id, member_id, title, contents, reg_date, 
-					board_class, contents_category, process, imgurl
+					board_class, contents_category, process, imgurl, decl
 				FROM 
 					post
 				WHERE
@@ -49,8 +50,14 @@
 		WHERE
 			<!-- Paging -->
 			post.rownumber BETWEEN #{pvo.start} AND #{pvo.end}
-		ORDER 
-			BY post.rownumber DESC
+			<choose>
+				<when test='search.order != null &amp;&amp; !search.order.equals("")'>
+					order by post.${search.order} desc
+				</when>
+				<otherwise>
+					order by post.rownumber desc
+				</otherwise>
+			</choose>
 	</select>
 	
 	<select id="getPostSearch" resultType="com.spring.project.post.dto.PostVO" parameterType="com.spring.project.post.dto.SearchVO">

@@ -49,8 +49,11 @@ public class RestMemberController {
 	@GetMapping(value="/manager/member")
 	public MemberVO[] getMembers(MemberVO vo) {
 		vo.calcStartEnd(10);
+		log.info(vo);
 		MemberVO[] vos = service.getMembers(vo);
-		vos[0].setTotal(service.MemberCnt(vo));
+		if (vos.length > 0) {			
+			vos[0].setTotal(service.MemberCnt(vo));
+		}
 		return vos;
 	}
 	

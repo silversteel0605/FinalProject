@@ -22,4 +22,8 @@ public interface PostService {
 	
 	public void addPost(PostVO post);
 	
+	public PostVO[] getAllPost(PostVO vo);
+	
+	public int getAllCounts();
+	
 }

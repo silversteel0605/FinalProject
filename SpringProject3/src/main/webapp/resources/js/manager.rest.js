@@ -7,19 +7,70 @@ const search_tab = document.getElementById('pills-home-tab');
 const add_tab = document.getElementById('pills-profile-tab');
 
 $(document).ready(function(){
-	uri = `searchTy=condition&${camp_selc.value}=${camp_srch.value}`
+	getMemberList(1);
 })
 
 $('#member').click(function() {
+		uri = 'member_type=0';
 		getMemberList(1);
+		
 })
 
 $('#Bmember').click(function() {
+	uri = 'member_type=1';
 	getBMemberList(1);
 })
 
 $('#comment').click(function() {
+	uri = '';
 	getCommentList(1);
+})
+
+$('#review').click(function() {
+	uri = '';
+	getReviewList(1);
+})
+
+$('#sup').click(function() {
+	uri = 'board_class=1';
+	getSupList(1);
+})
+
+$('#board').click(function() {
+	uri = 'board_class=0';
+	getBoardList(1);
+})
+
+$('#member_sub').click(function() {
+	let name = $('#member_search').val();
+	uri = 'member_type=0&'+`member_name=${name}`;
+	getMemberList(1);
+})
+
+$('#Bmember_sub').click(function() {
+	let name = $('#Bmember_search').val();
+	let permit = $('#Bm_selc').val();
+	uri = 'member_type=1&'+`member_id=${name}${permit}`;
+	getBMemberList(1);
+})
+
+$('#Bm_selc').change(function() {
+	let permit = $('#Bm_selc').val();
+	uri =  `member_type=1${permit}`;
+	getBMemberList(1);
+})
+
+$('.decl_selc').change(function(e) {
+	var name = e.target.name;
+	var value = e.target.value;
+	var index = uri.indexOf('&order');
+	if(index > -1) {
+		uri = uri.substr(0, index) + value;
+	} else {
+		uri += value;
+	}
+	console.log(uri);
+	selectPage(name, 1);
 })
 
 camp_sub.addEventListener('click', () => {
@@ -28,12 +79,23 @@ camp_sub.addEventListener('click', () => {
 })
 
 camp.addEventListener('click', () => {
+	uri='';
 	getCampingList(1);
 })
 
 camp_add.addEventListener('click', () => {
 	setData();
 	insertCampingInfo();
+})
+
+$('#pills-home-tab').click(function() {
+	$('#camp_selc').show();
+	$('#paging').show();
+})
+$('#pills-profile-tab').click(function() {
+	console.log('hello')
+	$('#camp_selc').hide();
+	$('#paging').hide();
 })
 
 
@@ -60,8 +122,106 @@ function makeUpdateWindow(contentId) {
 	window.open(`updateWindow?contentId=${contentId}`, 'update', 'status=no, height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY);
 }
 
+function Unix_timestamp(t){
+    var date = new Date(t);
+    var year = date.getFullYear();
+    var month = "0" + (date.getMonth()+1);
+    var day = "0" + date.getDate();
+    var hour = "0" + date.getHours();
+    var minute = "0" + date.getMinutes();
+    var second = "0" + date.getSeconds();
+    return year + "/" + month.substr(-2) + "/" + day.substr(-2);
+}
 
 //ajax
+
+
+function getBoardList(nowPage) {
+	$("#board_body").empty();
+
+	$.ajax({
+	  url: `${Url}/manager/post?nowPage=${nowPage}&${uri}`,
+	  dataType: "json",
+	  type: "GET"
+  	}).done(res => {
+  		res.forEach(support => {
+			$('#board_body').append('<tr class="post">' 
+			+ '<td>' + support.rownumber + '</td>' 
+			+ '<td>' + support.post_id + '</td>' 
+			+ '<td>' + support.member_id + '</td>' 
+			+ '<td>' + support.title + '</td>' 
+			+ '<td>' + support.reg_date + '</td>'
+			+ '<td><button type="button" class="btn btn-link" onclick="goTo(this)">글보기</button></td>'
+			+ '</tr>');
+		})
+		if (res.length > 0) {			
+			total = res[0].total
+		} else {
+			total = 0;
+		}
+		pagination(total, nowPage, 10, 10);
+		drawPage('board');
+	});	
+}
+
+function getSupList(nowPage) {
+	$("#sup_body").empty();
+
+	$.ajax({
+	  url: `${Url}/manager/post?nowPage=${nowPage}&${uri}`,
+	  dataType: "json",
+	  type: "GET"
+  	}).done(res => {
+  		res.forEach(support => {
+			$('#sup_body').append('<tr class="post">' 
+			+ '<td>' + support.rownumber + '</td>' 
+			+ '<td>' + support.post_id + '</td>' 
+			+ '<td>' + support.member_id + '</td>' 
+			+ '<td>' + support.title + '</td>' 
+			+ '<td>' + support.reg_date + '</td>'
+			+ '<td><button type="button" class="btn btn-link" onclick="goTo(this)">글보기</button></td>'
+			+ '</tr>');
+		})
+		if (res.length > 0) {			
+			total = res[0].total
+		} else {
+			total = 0;
+		}
+		pagination(total, nowPage, 10, 10);
+		drawPage('sup');
+	});	
+}
+
+
+function getReviewList(nowPage) {
+	$("#review_body").empty();
+
+	$.ajax({
+	  url: `${Url}/manager/review?nowPage=${nowPage}${uri}`,
+	  dataType: "json",
+	  type: "GET"
+  	}).done(res => {
+  		res.forEach(review => {
+
+			$('#review_body').append('<tr class="review">' 
+			+ '<td>' + review.rn + '</td>' 
+			+ '<td>' + review.review_id + '</td>' 
+			+ '<td>' + review.title + '</td>' 
+			+ '<td>' + review.review + '</td>' 
+			+ '<td>' + Unix_timestamp(review.reg_date) + '</td>'
+			+ '<td><button type="button" class="btn btn-link" onclick="goTo(this)">글보기</button></td>'
+			+ '</tr>');
+			console.log(review.reg_date);
+		})
+		if (res.length > 0) {			
+			total = res[0].total
+		} else {
+			total = 0;
+		}
+		pagination(total, nowPage, 10, 10);
+		drawPage('review');
+	});	
+}
 
 function permitting(btn) {
 	var tr = $(btn).parent().parent();
@@ -78,9 +238,7 @@ function permitting(btn) {
 		  contentType : 'application/json',
 		  success : function(result) {
 			if(result == 1) {
-				alert("가입허용을 완료했습니다")
-			} else {
-				alert("가입허용 중 오류 발생");
+				alert("가입신청을 허용했습니다")
 			}
 	    },
 	    error: function(request, status, error) {
@@ -93,7 +251,7 @@ function getCommentList(nowPage) {
 	$("#comment_body").empty();
 
 	$.ajax({
-	  url: `${Url}/manager/comment?nowPage=${nowPage}`,
+	  url: `${Url}/manager/comment?nowPage=${nowPage}${uri}`,
 	  dataType: "json",
 	  type: "GET"
   	}).done(res => {
@@ -125,7 +283,6 @@ function blind(btn) {
 	var comment_id = td.eq(1).text();
 	var member_id = td.eq(2).text();
 	var comments = td.eq(3).text();
-	console.log(comment_id + '/' + member_id + '/' + comments);
 	const data = JSON.stringify({
 		"comment_id" : comment_id,
 		"member_id" : member_id,
@@ -139,9 +296,9 @@ function blind(btn) {
 		  contentType : 'application/json',
 		  success : function(result) {
 			if(result == 2) {
-		      	alert("블라인드 처리를 완료했습니다");				
+		      	alert("블라인드 처리하였습니다");				
 			} else {
-				alert("이미 블라인드 처리된 글이거나 블라인드 처리를 하지 못했습니다");
+				alert("블라인드 처리하지 못했습니다");
 			}
 	    },
 	    error: function(request, status, error) {
@@ -150,11 +307,24 @@ function blind(btn) {
 	});	
 }
 
+function goTo(btn) {
+	var tr = $(btn).parent().parent();
+	var td = tr.children();
+	var id = td.eq(2).text();
+	var page = tr.attr('class');
+	if(page === 'review') {
+		location.href = `/project/reviewViewer?reviewId=${id}`;
+	} else {
+		location.href = `/project/main_paragraph?post_id=${id}`;
+	}
+	
+	
+}
 
 function getMemberList(nowPage) {
 	$("#member_body").empty();
 	$.ajax({
-	  url: `${Url}/manager/member?nowPage=${nowPage}&member_type=0`,
+	  url: `${Url}/manager/member?nowPage=${nowPage}&${uri}`,
 	  dataType: "json",
 	  type: "GET"
   	}).done(res => {
@@ -162,8 +332,8 @@ function getMemberList(nowPage) {
 
 			$('#member_body').append('<tr class="member_row">' 
 			+ '<td>' + member.rn + '</td>' 
-			+ '<td>' + member.member_name + '</td>' 
 			+ '<td>' + member.member_id + '</td>' 
+			+ '<td>' + member.member_name + '</td>' 
 			+ '<td>' + member.addr1 + '</td>' 
 			+ '<td>' + member.email + '</td>'
 			+ '</tr>');				
@@ -180,9 +350,10 @@ function getMemberList(nowPage) {
 }
 
 function getBMemberList(nowPage) {
+	console.log(uri);
 	$("#Bmember_body").empty();
 	$.ajax({
-	  url: `${Url}/manager/member?nowPage=${nowPage}&member_type=1`,
+	  url: `${Url}/manager/member?nowPage=${nowPage}&${uri}`,
 	  dataType: "json",
 	  type: "GET"
   	}).done(res => {
@@ -190,11 +361,12 @@ function getBMemberList(nowPage) {
 			$('#Bmember_body').append('<tr>' 
 			+ '<td>' + member.rn + '</td>' 
 			+ '<td>' + member.member_id + '</td>' 
+			+ '<td>' + member.member_name + '</td>' 
 			+ '<td>' + member.camp + '</td>' 
 			+ '<td>' + (member.permit == 1 ?
 			 '완료</td>' :
-			 '신청</td>'
-		 	+ '<td><button type="button" class="btn btn-link" onclick="permitting(this)">가입 허용</button></td>')
+			 '가입신청</td>'
+		 	+ '<td><button type="button" class="btn btn-link" onclick="permitting(this)">허용하기</button></td>')
 			+ '</tr>');				
 		})
 		if (res.length > 0) {			
@@ -217,7 +389,7 @@ function deleteCamping(contentId) {
 	  dataType: "text",
 	  data : contentId,
 	  success : function(result) {
-      	alert("캠핑장 정보 삭제했습니다");
+      	alert("캠핑장 정보를 삭제하였습니다");
       	window.location.reload(true);			
     },
     error: function(request, status, error) {
@@ -237,12 +409,12 @@ function insertCampingInfo() {
 	}
 	console.log(`${Url}/manager/camp`);
 	$.ajax({
-	  url: `${Url}/camp`,
+	  url: `${Url}/manager/camp`,
 	  type: "POST",
 	  dataType: "json",
 	  data : data,
 	  success : function(result) {
-      	alert("캠핑장을 추가했습니다");
+      	alert("캠핑장 정보를 추가하였습니다");
       	window.location.reload(true);
     },
     error: function(request, status, error) {
@@ -263,8 +435,8 @@ function getCampingList(nowPage) {
 			
 			$('#camp_body').append('<tr class="camping_row">' 
 			+ '<td>' + camping.rn + '</td>' 
-			+ '<td>' + camping.facltNm + '</td>' 
 			+ '<td>' + camping.contentId + '</td>' 
+			+ '<td>' + camping.facltNm + '</td>' 
 			+ '<td>' + camping.rn + '</td>' 
 			+ '<td>' + camping.rn + '</td>'
 			+ '<td><button type="button" class="btn btn-link" onclick="campingBtn(this)">수정</button>'
@@ -276,7 +448,6 @@ function getCampingList(nowPage) {
 		} else {
 			total = 0;
 		}
-		//총 게시글, 현재 페이지, 페이지당 게시글 수, 페이지 개수
 		pagination(total, nowPage, 10, 10);
 		drawPage('camping');
 	});	
@@ -328,11 +499,21 @@ function paging(li) {
 }
 
 function selectPage(pgNm, nowPage) {
+	console.log(pgNm);
 	if(pgNm === 'camping') {
-		getCampingList(nowPage)
+		getCampingList(nowPage);
 	} else if (pgNm === 'member') {
-		getMemberList(nowPage)
+		getMemberList(nowPage);
 	} else if (pgNm === 'comment') {
-		getCommentList(nowPage)
+		console.log(pgNm);
+		getCommentList(nowPage);
+	} else if (pgNm === 'Bmember') {
+		getBMemberList(nowPage);
+	} else if (pgNm === 'sup') {
+		getSupList(nowPage);
+	} else if (pgNm === 'board') {
+		getBoardList(nowPage);
+	} else if (pgNm === 'review') {
+		getReviewList(nowPage);
 	}
 }

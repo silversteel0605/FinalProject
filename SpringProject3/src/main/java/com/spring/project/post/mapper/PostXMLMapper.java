@@ -23,4 +23,9 @@ public interface PostXMLMapper {
 	public List<PostVO> getComments(PostVO post);
 	
 	public void addPost(PostVO post);
+	
+	// 관리자에서 불러오기
+	public PostVO[] getAllPost(PostVO vo);
+	
+	public int getAllCounts();
 }
