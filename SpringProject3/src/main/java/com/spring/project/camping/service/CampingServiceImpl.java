@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.coyote.http11.filters.VoidOutputFilter;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
@@ -18,6 +19,8 @@ import org.springframework.stereotype.Service;
 import com.spring.project.camping.DTO.CampingImgVO;
 import com.spring.project.camping.DTO.CampingVO;
 import com.spring.project.camping.DTO.SearchVO;
+import com.spring.project.camping.DTO.TourImgVO;
+import com.spring.project.camping.DTO.TourismVO;
 import com.spring.project.camping.mapper.CampingDataMapper;
 import com.spring.project.review.DTO.CampingReviewDTO;
 import com.spring.project.utill.PagingVO;
@@ -87,6 +90,77 @@ public class CampingServiceImpl implements CampingService{
 	
 	//img
 	@Override
+	public void tourXML(TourismVO vo) throws  IOException, JDOMException {
+		StringBuffer sb = new StringBuffer("http://api.visitkorea.or.kr/openapi/service/rest/EngService/areaBasedList");
+		
+		sb.append("ServiceKey=BSB%2BAVJtGeeYeTI1z0QkTWviASTC4BHieJzLrJls7C%2F0tpX9h75z347M%2FqQwTZsuya4Z2fMERT5YYljGpkDwog%3D%3D");
+		sb.append("&numOfRows=10");
+		sb.append("&pageNo=1");
+		sb.append("&MobileOS=ETC");
+		sb.append("&MobileApp=AppTest");
+		
+		URL url = new URL(sb.toString());
+		
+		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+		conn.setRequestProperty("Content-Type","application/xml");
+		
+		conn.connect();
+		SAXBuilder builder = new SAXBuilder();
+		
+		Document document = builder.build(conn.getInputStream());
+		
+		Element root = document.getRootElement();
+		body = root.getChild("body");
+	}
+	
+	@Override
+	public List<TourImgVO> getTourImgXML(String contentId) throws IOException, JDOMException {
+		StringBuffer sb = new StringBuffer("http://api.visitkorea.or.kr/openapi/service/rest/EngService/detailImage");
+		
+		sb.append("ServiceKey=BSB%2BAVJtGeeYeTI1z0QkTWviASTC4BHieJzLrJls7C%2F0tpX9h75z347M%2FqQwTZsuya4Z2fMERT5YYljGpkDwog%3D%3D");
+		sb.append("&numOfRows=10");
+		sb.append("pageNo=1");
+		sb.append("&MobileOS=ETC");
+		sb.append("&MobileApp=AppTest");
+		sb.append("&contentId="+contentId);
+		
+		URL url = new URL(sb.toString());
+
+		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+		conn.setRequestProperty("Content-Type","application/xml");
+		
+		conn.connect();
+		SAXBuilder builder = new SAXBuilder();
+		
+		Document document = builder.build(conn.getInputStream());
+		
+		Element root = document.getRootElement();
+		//루트의 자식!이니까 child를 얻어야한다!
+		body = root.getChild("body");
+		
+		Element items = body.getChild("items");
+		List<Element> item_list = items.getChildren("item");
+		List<TourImgVO> vos = new ArrayList<TourImgVO>();
+		
+		for(Element item:item_list) {
+			
+			TourImgVO vo = new TourImgVO();
+			
+			vo.setContentid(item.getChildText("contentId"));
+			vo.setImgname(item.getChildText("imgname"));
+			vo.setOriginimgurl(item.getChildText("originimgurl"));
+			vo.setSerialnum(item.getChildText("serialnum"));
+			vo.setSmallimageurl(item.getChildText("smallimageurl"));
+			
+			vos.add(vo);
+		}
+		
+		return vos;
+		
+		
+	}
+	
+	@Override
 	public List<CampingImgVO> getCampingImgXML(String contentId) throws IOException, JDOMException {
 		// TODO Auto-generated method stub
 		
@@ -131,6 +205,35 @@ public class CampingServiceImpl implements CampingService{
 		return vos;
 	}
 
+	@Override
+	public TourismVO[] getTourismXML() {
+		Element items = body.getChild("items");
+		//items안에있는 자식들을 가져오자 ! 여러개니까 리스트여야겠지 ? 타입은 엘리먼트 !!
+		List<Element> item_list = items.getChildren("item");
+		TourismVO[] ar = new TourismVO[item_list.size()];
+		
+		int i =0;
+		for(Element item:item_list) {
+			TourismVO vo = new TourismVO();
+			vo.setMobileOS(item.getChildText("MobileOS"));
+			vo.setMobileApp(item.getChildText("MobileApp"));
+			vo.setServiceKey(item.getChildText("ServiceKey"));
+			vo.setArrange(item.getChildText("arrange"));
+			vo.setContentTypeId(item.getChildText("contentTypeId"));
+			vo.setAreaCode(item.getChildText("areaCode"));
+			vo.setSigunguCode(item.getChildText("sigunguCode"));
+			vo.setCat1(item.getChildText("cat1"));
+			vo.setCat2(item.getChildText("cat2"));
+			vo.setCat3(item.getChildText("cat3"));
+			vo.setModifiedtime(item.getChildText("modifiedtime"));
+			
+			ar[i++] = vo;
+		}
+		
+		return ar;
+				
+	}
+	
 	@Override
 	public CampingVO[] getXMLData() {
 		Element items = body.getChild("items");
@@ -326,4 +429,17 @@ public class CampingServiceImpl implements CampingService{
 	public void addViews(String contentId) {
 		dataMapper.addViews(contentId);
 	}
+
+	@Override
+	public void getTourismXML(TourismVO vo) {
+		
+		
+	}
+
+	@Override
+	public TourismVO[] getTourismData() {
+		
+		return null;
+	}
+
 }
