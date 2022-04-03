@@ -12,4 +12,5 @@ public interface CommentDataMapper {
 	public int blind(CommentVO vo);
 	
 	public void addComment(CommentVO comment);
+	public void deleteComment(Integer commentId);
 }

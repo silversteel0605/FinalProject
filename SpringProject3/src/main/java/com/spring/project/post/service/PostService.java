@@ -23,4 +23,9 @@ public interface PostService {
 	
 	public void addPost(PostVO post);
 	public void editPost(PostVO post);
+	
+	public List<PostVO> getIndividual(String id);
+	
+	public void addReport(Integer post_id, Integer report);
+	public Integer getReport(Integer post_id);
 }

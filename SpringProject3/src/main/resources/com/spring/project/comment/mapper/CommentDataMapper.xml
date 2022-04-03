@@ -45,4 +45,7 @@
 			</choose>, 0, 0, #{member_id}, 'false'
 		)
 	</insert>
+	<delete id="deleteComment">
+		DELETE FROM comments WHERE comment_id = #{commentId}
+	</delete>
 </mapper>

@@ -6,19 +6,7 @@
 <head>
 <meta charset="EUC-KR">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Insert title here</title>
-<%-- <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Arizonia&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="<c:url value="/resources/css/animate.css"/>"/>
-  <link rel="stylesheet" href="<c:url value="/resources/css/owl.carousel.min.css"/>"/>
-  <link rel="stylesheet" href="<c:url value="/resources/css/owl.theme.default.min.css"/>"/>
-  <link rel="stylesheet" href="<c:url value="/resources/css/magnific-popup.css"/>"/>
-  <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap-datepicker.css"/>"/>
-  <link rel="stylesheet" href="<c:url value="/resources/css/jquery.timepicker.css"/>"/>
-  <link rel="stylesheet" href="<c:url value="/resources/css/flaticon.css"/>" />
-  <link rel="stylesheet" href="<c:url value="/resources/css/style.css"/>"/>
- --%>
+<title>FreeBoard</title>
 <!-- 페이지 css -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="<c:url value="/resources/css/jangec.css"/>"/>
@@ -61,7 +49,7 @@
 <section class="ftco-section">
 	<div class="container">
 		<!-- Board Nav -->
-		<div class="container p-0">
+		<div class="container">
 			<div class="row">
 				<div class="col-md-5">
 					<form class="d-flex" action="./board" method="POST" accept-charset="EUC-KR">
@@ -71,21 +59,23 @@
 								<option value="title">제목</option>
 								<option value="contents">내용</option>
 							</select>
-							<input type="text" class="form-control-sm border-light" aria-label="Text input with dropdown button" name="searchKeyword">
-							<button class="btn btn-outline-secondary btn-sm" type="submit">Search</button>
+							<input type="text" class="form-control-sm border-light col-md-7" aria-label="Text input with dropdown button" name="searchKeyword">
+							<button class="btn btn-outline-secondary btn-sm col-md-2" type="submit">Search</button>
 						</div>
 					</form>
 				</div>
 				<div class="col-md-5 offset-md-2">
 					<div class="row">
 						<div class="col-9">
-					        <a class="ml-3" href="./board?categoryName=boardAll">전체</a>
-					        <a class="ml-3" href="./board?categoryName=daily">자유</a>
-					        <a class="ml-3" href="./board?categoryName=showoff">자랑</a>
-					        <a class="ml-3" href="./board?categoryName=buy">삽니다</a>
-					        <a class="ml-3" href="./board?categoryName=sell">팝니다</a>
+							<div class="d-flex justify-content-end">
+						        <a class="ms-3" href="./board?categoryName=boardAll">전체</a>
+						        <a class="ms-3" href="./board?categoryName=daily">자유</a>
+						        <a class="ms-3" href="./board?categoryName=showoff">자랑</a>
+						        <a class="ms-3" href="./board?categoryName=buy">삽니다</a>
+						        <a class="ms-3" href="./board?categoryName=sell">팝니다</a>
+							</div>
 						</div>
-						<div class="col-3">
+						<div class="col-3 d-flex justify-content-end">
 						 	<a class="" href="./write?board_class=freeBoard">글쓰기</a>
 						</div>
 					</div>
@@ -101,7 +91,7 @@
 					<c:forEach items="${freeBoardContentsList }" var="boardContents">
 					<div class="col-md-6 mb-5">
 						<div class="card border-top-0 border-start-0 border-end-0">
-							<div class="card-header bg-transparent border-0">
+							<div class="card-header p-0 bg-transparent border-0 d-flex justify-content-between mb-1">
 								<c:choose>
 								<c:when test="${boardContents.contents_category eq 2 }">
 								<small>일상</small>
@@ -116,13 +106,14 @@
 								<small>팝니다</small>
 								</c:when>
 								</c:choose>
+								<small class="text-muted">조회수&nbsp;${boardContents.views }</small>
 							</div>
 							<div class="card-body mb-3 pointer" onClick="mainContents(${boardContents.post_id})">
-								<h5 class="card-title">${boardContents.title }</h5>
+								<h5 class="card-title mb-3">${boardContents.title }</h5>
 								<p>${boardContents.contents }</p>
 							</div>
 							<div class="card-footer mb-1 text-end bg-transparent border-0">
-								<span class="userId pointer">${boardContents.member_id }</span><br/>
+								<span id="${boardContents.member_id }" class="userId pointer">${boardContents.member_id }</span><br/>
 								<small class="text-muted">${boardContents.reg_date }</small>
 							</div>
 						</div>
@@ -137,34 +128,34 @@
 			<div class="col d-flex justify-content-center">
 				<div class="block-27">
 					<ul class="pagination">
-						<li class="page-item"><a class="page-link" href="./support?nowPage=1&cntPerPage=${paging.cntPerPage}">&lt;&lt;</a></li>
+						<li class="page-item"><a class="page-link text-dark" href="./support?nowPage=1&cntPerPage=${paging.cntPerPage}">&lt;&lt;</a></li>
 							<c:choose>
 								<c:when test="${paging.startPage != 1}">
-									<li class="page-item"><a class="page-link" href="./support?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a></li>
+									<li class="page-item"><a class="page-link text-dark" href="./support?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a></li>
 								</c:when>
 								<c:otherwise>
-									<li class="page-item"><a class="page-link" href="./support?nowPage=${paging.startPage }&cntPerPage=${paging.cntPerPage}">&lt;</a></li>
+									<li class="page-item"><a class="page-link text-dark" href="./support?nowPage=${paging.startPage }&cntPerPage=${paging.cntPerPage}">&lt;</a></li>
 								</c:otherwise>
 							</c:choose>      
 							<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
 								<c:choose>
 									<c:when test="${p == paging.nowPage }">
-										<li class="page-item active"><a class="page-link" href="./support?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a></li>
+										<li class="page-item active"><a class="page-link text-dark" href="./support?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a></li>
 									</c:when>
 									<c:when test="${p != paging.nowPage }">
-										<li class="page-item"><a class="page-link" href="./support?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a></li>
+										<li class="page-item"><a class="page-link text-dark" href="./support?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a></li>
 									</c:when>
 								</c:choose>
 							</c:forEach>
 							<c:choose>
 								<c:when test="${paging.endPage != paging.lastPage}">
-									<li class="page-item"><a class="page-link" href="./support?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a></li>
+									<li class="page-item"><a class="page-link text-dark" href="./support?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a></li>
 								</c:when>
 								<c:otherwise>
-									<li class="page-item"><a class="page-link" href="./support?nowPage=${paging.endPage }&cntPerPage=${paging.cntPerPage}">&gt;</a></li>
+									<li class="page-item"><a class="page-link text-dark" href="./support?nowPage=${paging.endPage }&cntPerPage=${paging.cntPerPage}">&gt;</a></li>
 								</c:otherwise>
 							</c:choose>
-						<li class="page-item"><a class="page-link" href="./support?nowPage=${paging.lastPage }&cntPerPage=${paging.cntPerPage}">&gt;&gt;</a></li>
+						<li class="page-item"><a class="page-link text-dark" href="./support?nowPage=${paging.lastPage }&cntPerPage=${paging.cntPerPage}">&gt;&gt;</a></li>
 					</ul>
 				</div>
 			</div>
@@ -179,8 +170,25 @@
 <!-- Modal & PopUp Menu -->
 <div id="popUpMenu" style="display:none;">
 	<ul class="list-group list-group-flush">
-		<li id="memberPost" class="indiPopUp list-group-item list-group-item-primary opacity-75" style="cursor:pointer">작성글 보기</li>
+		<li id="memberPost" class="indiPopUp list-group-item list-group-item-primary opacity-75" style="cursor:pointer"
+		role="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">작성글 보기</li>
 	</ul>
+</div>
+
+<div class="modal fade" id="staticBackdrop" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div id="individual" class="modal-body">
+      </div>
+      <div class="modal-footer">
+        <button id="modalBtn" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
 </div>
 	
 <!-- /수정 -->
@@ -270,22 +278,8 @@
 <%-- <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div> --%>
 
 
-<%-- <script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
-<script src="<c:url value="/resources/js/jquery-migrate-3.0.1.min.js"/>"></script>
-<script src="<c:url value="/resources/js/popper.min.js"/>"></script>
-<script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
-<script src="<c:url value="/resources/js/jquery.easing.1.3.js"/>"></script>
-<script src="<c:url value="/resources/js/jquery.waypoints.min.js"/>"></script>
-<script src="<c:url value="/resources/js/jquery.stellar.min.js"/>"></script>
-<script src="<c:url value="/resources/js/owl.carousel.min.js"/>"></script>
-<script src="<c:url value="/resources/js/jquery.magnific-popup.min.js"/>"></script>
-<script src="<c:url value="/resources/js/jquery.animateNumber.min.js"/>"></script>
-<script src="<c:url value="/resources/js/bootstrap-datepicker.js"/>"></script>
-<script src="<c:url value="/resources/js/scrollax.min.js"/>"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-<script src="<c:url value="/resources/js/google-map.js"/>"></script>
-<script src="<c:url value="/resources/js/main.js"/>"></script> --%>
 <!-- 페이지 js -->
+<script src="<c:url value="/resources/js/jangec.js"/>"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" ></script>
 </body>
 </html>

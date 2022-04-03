@@ -7,12 +7,12 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.project.comment.DTO.CommentSearchVO;
@@ -59,5 +59,11 @@ public class RestCommentController {
 		comment.setMember_id((String)session.getAttribute("member_id"));
 		service.addComment(comment);
 		return comment;
+	}
+	
+	@DeleteMapping(value = "/comments")
+	public void deleteComment(Integer commentId) {
+		log.info(commentId);
+		service.deleteComment(commentId);
 	}
 }

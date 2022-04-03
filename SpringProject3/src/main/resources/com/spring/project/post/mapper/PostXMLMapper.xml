@@ -143,6 +143,22 @@
 		WHERE
 			post_id = #{post_id}
 	</update>
+	
+	<select id="getIndividual" resultType="com.spring.project.post.dto.PostVO">
+		SELECT * FROM post WHERE member_id = #{id}
+	</select>
+	
+	<!-- Report -->
+	<update id="addReport">
+		UPDATE post
+		SET
+			decl = #{report}
+		WHERE
+			post_id = #{post_id}
+	</update>
+	<select id="getReport" resultType="_integer">
+		SELECT decl FROM post WHERE post_id = #{post_id}
+	</select>
 </mapper>
 
 

@@ -64,25 +64,15 @@ comment_saveBtn.addEventListener('click', (e) => {
 const comments_body = document.getElementById('comments_body');
 
 xhttpComments.addEventListener('readystatechange', (e) => {
-	console.log('확인');
 	const readyState = e.target.readyState;
 	const status = e.target.status;
-	console.log('readyState: ', readyState);
-	console.log('status: ', status);
 	
-  	if (readyState == 1) {
-		console.log('비동기 연결을 서버로 전송함 (수립)');	
-	} else if (readyState == 2) {
-		console.log('서버가 내 요청을 받았음');
-	} else if (readyState == 3) {
-		console.log('서버가 내 요청에 대한 처리를 시작함');
-	}	else if (readyState == 4 && status == 200)  {
+	if (readyState == 4 && status == 200)  {
 		const comment = JSON.parse(e.target.responseText);
 		
 		if (comment.classnum == 0) {
 			console.log(comment);
-			comments_body.innerHTML += 
-				mkComment (
+			comments_body.innerHTML += mkComment (
 						comment.member_id, comment.comments, comment.comment_id, comment.post_id, comment.ordernum, comment.category_id
 					);
 		}
@@ -97,7 +87,7 @@ const co_comment_input = document.getElementById('co_comment_input');
 
 document.addEventListener('click', (e) => {
 	const commentsEA = document.querySelector('#commentsEA').value;
-	console.log(commentsEA)
+	
 	if (commentsEA > 0) {
 		const targetClass = e.target.className.substring('bi bi-chat-dots comment_icon '.length);
 		const targetCommentId = e.target.id.substring('co_comment_newBtn_'.length); // comment_id
@@ -108,20 +98,9 @@ document.addEventListener('click', (e) => {
 		const compare_co_comment_newBtn = 'co_comment_newBtn';
 		const beforeInput = document.getElementById('co_commentInput'); // 이전 생성된 대댓글 input
 		
-		
-		console.log('타켁id: ', targetCommentId);
-		console.log('targetInput: ', targetInput)
-		console.log('클릭클래스이름: ', targetClass);
-		console.log('일치대상문자열: ', compare_co_comment_newBtn);
-		console.log('클릭아이디: ', targetCommentId);
-		console.log('post+id: ', targetPostId);	
-		console.log('ordernum: ', targetOrdernum);
-		console.log('categoryId: ', targetCategoryId);
-		
 		if (targetClass == compare_co_comment_newBtn) {
 			
 			if (beforeInput) {
-				console.info('null 들어옴');
 				beforeInput.remove();
 			}
 			
@@ -132,14 +111,6 @@ document.addEventListener('click', (e) => {
 			div2_savBtn.addEventListener('click', (e) => {
 				
 				const coCommentContents = document.getElementById('coCommentTextarea').value;
-				
-				console.log('종속된 post_id: ', targetPostId);
-				console.log('종속된 comment_id', targetCommentId);
-				console.log('대댓글 내용: ', coCommentContents);
-				console.log('classnum: ', 1);
-				console.log('ordernum: ', parseInt(targetOrdernum) + 1);
-				console.log('groupnum: ', targetCommentId);
-				console.log('categoryId: ', targetCategoryId);
 				const tempTargetCommentId = targetCommentId;
 				const newCoCommentData = {
 					comment_id: targetCommentId,
@@ -180,7 +151,7 @@ function mkComment(member_id, comments, comment_id, post_id, ordernum, category_
 				<span class="userId">${member_id}</span><br/>
 				<div class="d-flex justify-content-start">
 					<p>${comments}</p>
-					<i class="bi bi-x-circle comment_icon"></i>
+					<i id="comment_deleteBtn_${comment_id}" class="bi bi-x-circle comment_icon"></i>
 					<i id="comment_editBtn_${comment_id}" class="bi bi-pen comment_icon comment_editBtn"></i>
 					<i id="co_comment_newBtn_${comment_id}" class="bi bi-chat-dots comment_icon co_comment_newBtn"></i>
 					<input id="comment_commentId_${comment_id }" type="hidden" value="${comment_id }" />
@@ -242,8 +213,71 @@ contentsEdit.addEventListener('click', (e) => {
 	location.href = `./write?post_id=${post_id}&edit=true&board_class=${board_class}&edit=true`;
 });
 
+// 게시글 신고
+const reportBtn = document.getElementById('reportBtn');
+const report = document.getElementById('report');
+const xhttpReport = new XMLHttpRequest();
+report.innerHTML = `신고&nbsp${document.getElementById('reportNum').value}|`
 
+reportBtn.addEventListener('click', (e) => {
+		Swal.fire({
+			title: '신고하시겠습니까?',
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Yes'
+		}).then((result) => {
+			if (result.isConfirmed) {
+	  			console.log('report');
+	  			xhttpReport.open('PUT', `/project/rest/main_paragraph?post_id=${post_id}`)
+	  			xhttpReport.send();
+	  		}
+		})
+});
 
+xhttpReport.addEventListener('readystatechange', (e) => {
+	const readyState = e.target.readyState;
+	const status = e.target.status;
+	
+	if (readyState == 4 && status == 200)  {
+		const reportNum = JSON.parse(e.target.responseText);		
+		console.log(reportNum);
+		report.innerHTML = `조회수&nbsp;${reportNum}|`;
+	}
+});
+
+const xhttpDelete = new XMLHttpRequest();
+let deleteObject = null;
+const compareStr = 'comment_deleteBtn_';
+document.addEventListener('click', (e) => {
+	if (e.target.id.substr(0, compareStr.length) === compareStr) {
+		Swal.fire({
+			title: '삭제하시겠습니까?',
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Yes'
+		}).then((result) => {
+			if (result.isConfirmed) {
+				const commentId = e.target.id.substring(compareStr.length);
+				deleteObject = document.getElementById(e.target.id);
+				xhttpDelete.open('DELETE', `/project/rest/comments?commentId=${commentId}`);
+				xhttpDelete.send();
+	  		}
+		})
+	}
+});
+
+xhttpDelete.addEventListener('readystatechange', (e) => {
+	const readyState = e.target.readyState;
+	const status = e.target.status;
+	if (readyState == 4 && status == 200)  {
+		
+		deleteObject.parentNode.parentNode.remove();
+	}
+});
 
 
 

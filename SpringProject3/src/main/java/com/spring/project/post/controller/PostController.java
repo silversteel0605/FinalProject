@@ -92,13 +92,12 @@ public class PostController {
 		
 		// 게시글 삭제
 		if (delete) {
-			log.info("고객센터 삭제됨");
 			postService.deletePost((Integer) session.getAttribute("tempPostId"));
 			session.removeAttribute("tempPostId");
 		}
 		
 		// Paging
-		Integer cntPerPage = 9;
+		Integer cntPerPage = 11;
 		
 		nowPage = nowPage != null ? nowPage :"1";
 		Integer total = postService.getCount((SearchVO) session.getAttribute("search"));
@@ -241,11 +240,8 @@ public class PostController {
 		}
 		
 		// 코멘트 개수
-		log.info("코맨트개수: " + postService.getCommentsEA(post_id));
 		model.addAttribute("commentsEA", postService.getCommentsEA(post_id));
-		
-		log.info("post: " + post);
-		log.info("나가는 세션: " + session.getAttribute("search"));
+		model.addAttribute("reportNum", postService.getReport(post_id));
 		
 		// 댓글 불러오기
 		List<PostVO> commentsList = postService.getComments(post);

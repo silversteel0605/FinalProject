@@ -7,17 +7,6 @@
 <meta charset="EUC-KR">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
-<%-- <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
- <link href="https://fonts.googleapis.com/css2?family=Arizonia&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="<c:url value="/resources/css/animate.css"/>"/>
-  <link rel="stylesheet" href="<c:url value="/resources/css/owl.carousel.min.css"/>"/>
-  <link rel="stylesheet" href="<c:url value="/resources/css/owl.theme.default.min.css"/>"/>
-  <link rel="stylesheet" href="<c:url value="/resources/css/magnific-popup.css"/>"/>
-  <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap-datepicker.css"/>"/>
-  <link rel="stylesheet" href="<c:url value="/resources/css/jquery.timepicker.css"/>"/>
-  <link rel="stylesheet" href="<c:url value="/resources/css/flaticon.css"/>" />
-  <link rel="stylesheet" href="<c:url value="/resources/css/style.css"/>"/> --%>
 <!-- 페이지 css -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="<c:url value="/resources/css/jangec.css"/>"/>
@@ -69,29 +58,29 @@
 					<span class="h1">고객센터</span>
 				</div>
 				<div class="row">
-					<div class="col-md-4">
+					<div class="col-md-5">
 						<form class="d-flex" action="./support" method="POST" accept-charset="EUC-KR">
 							<div class="input-group input-group-sm mb-3">
-								<select id="inputState" class="form-select form-select-sm col-3" name="searchByWhat">
+								<select id="inputState" class="form-select form-select-sm col-md-3" name="searchByWhat">
 									<option selected value="all">전체</option>
 									<option value="title">제목</option>
 									<option value="contents">내용</option>
 								</select>
-								<input type="text" class="form-control-sm border-light col-7" aria-label="Text input with dropdown button" name="searchKeyword">
+								<input type="text" class="form-control-sm border-light col-md-7" aria-label="Text input with dropdown button" name="searchKeyword">
 								<button class="btn btn-outline-secondary btn-sm col-md-2" type="submit">Search</button>
 							</div>
 						</form>
 					</div>
-					<div class="col-5 offset-3">
+					<div class="col-5 offset-2">
 					  	<div class="row">
 						    <div class="col-9">
-							    <div class="">
-								    <a class="categoryClass ml-3" href="./support?categoryName=supportAll">전체</a>
-								    <a class="categoryClass ml-3" href="./support?categoryName=notice">공지사항</a>
-								    <a class="categoryClass ml-3" href="./support?categoryName=askEdit">수정요청</a>
+							    <div class="d-flex justify-content-end">
+								    <a class="categoryClass ms-3" href="./support?categoryName=supportAll">전체</a>
+								    <a class="categoryClass ms-3" href="./support?categoryName=notice">공지사항</a>
+								    <a class="categoryClass ms-3" href="./support?categoryName=askEdit">수정요청</a>
 							    </div>
 						    </div>
-						    <div class="col-3">
+						    <div class="col-3 d-flex justify-content-end">
 							   	<a class="" href="./write?board_class=supportBoard">글쓰기</a>
 						    </div>
 					  	</div>
@@ -146,34 +135,34 @@
 			<div class="col d-flex justify-content-center">
 				<div class="block-27">
 					<ul class="pagination">
-						<li class="page-item"><a class="page-link" href="./support?nowPage=1&cntPerPage=${paging.cntPerPage}">&lt;&lt;</a></li>
+						<li class="page-item"><a class="page-link text-dark" href="./support?nowPage=1&cntPerPage=${paging.cntPerPage}">&lt;&lt;</a></li>
 							<c:choose>
 								<c:when test="${paging.startPage != 1}">
-									<li class="page-item"><a class="page-link" href="./support?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a></li>
+									<li class="page-item"><a class="page-link text-dark" href="./support?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a></li>
 								</c:when>
 								<c:otherwise>
-									<li class="page-item"><a class="page-link" href="./support?nowPage=${paging.startPage }&cntPerPage=${paging.cntPerPage}">&lt;</a></li>
+									<li class="page-item"><a class="page-link text-dark" href="./support?nowPage=${paging.startPage }&cntPerPage=${paging.cntPerPage}">&lt;</a></li>
 								</c:otherwise>
 							</c:choose>      
 							<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
 								<c:choose>
 									<c:when test="${p == paging.nowPage }">
-										<li class="page-item active"><a class="page-link" href="./support?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a></li>
+										<li class="page-item active"><a class="page-link text-dark" href="./support?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a></li>
 									</c:when>
 									<c:when test="${p != paging.nowPage }">
-										<li class="page-item"><a class="page-link" href="./support?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a></li>
+										<li class="page-item"><a class="page-link text-dark" href="./support?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a></li>
 									</c:when>
 								</c:choose>
 							</c:forEach>
 							<c:choose>
 								<c:when test="${paging.endPage != paging.lastPage}">
-									<li class="page-item"><a class="page-link" href="./support?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a></li>
+									<li class="page-item"><a class="page-link text-dark" href="./support?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a></li>
 								</c:when>
 								<c:otherwise>
-									<li class="page-item"><a class="page-link" href="./support?nowPage=${paging.endPage }&cntPerPage=${paging.cntPerPage}">&gt;</a></li>
+									<li class="page-item"><a class="page-link text-dark" href="./support?nowPage=${paging.endPage }&cntPerPage=${paging.cntPerPage}">&gt;</a></li>
 								</c:otherwise>
 							</c:choose>
-						<li class="page-item"><a class="page-link" href="./support?nowPage=${paging.lastPage }&cntPerPage=${paging.cntPerPage}">&gt;&gt;</a></li>
+						<li class="page-item"><a class="page-link text-dark" href="./support?nowPage=${paging.lastPage }&cntPerPage=${paging.cntPerPage}">&gt;&gt;</a></li>
 					</ul>
 				</div>
 			</div>
@@ -185,8 +174,25 @@
 <!-- Modal & PopUp Menu -->
 <div id="popUpMenu" style="display:none;">
 	<ul class="list-group list-group-flush">
-		<li id="memberPost" class="indiPopUp list-group-item list-group-item-primary opacity-75" style="cursor:pointer">작성글 보기</li>
+		<li id="memberPost" class="indiPopUp list-group-item list-group-item-primary opacity-75" style="cursor:pointer"
+		role="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">작성글 보기</li>
 	</ul>
+</div>
+
+<div class="modal fade" id="staticBackdrop" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div id="individual" class="modal-body">
+      </div>
+      <div class="modal-footer">
+        <button id="modalBtn" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- /수정 -->
@@ -276,21 +282,6 @@
 <%-- <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div> --%>
 
 
-<%-- <script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
-<script src="<c:url value="/resources/js/jquery-migrate-3.0.1.min.js"/>"></script>
-<script src="<c:url value="/resources/js/popper.min.js"/>"></script>
-<script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
-<script src="<c:url value="/resources/js/jquery.easing.1.3.js"/>"></script>
-<script src="<c:url value="/resources/js/jquery.waypoints.min.js"/>"></script>
-<script src="<c:url value="/resources/js/jquery.stellar.min.js"/>"></script>
-<script src="<c:url value="/resources/js/owl.carousel.min.js"/>"></script>
-<script src="<c:url value="/resources/js/jquery.magnific-popup.min.js"/>"></script>
-<script src="<c:url value="/resources/js/jquery.animateNumber.min.js"/>"></script>
-<script src="<c:url value="/resources/js/bootstrap-datepicker.js"/>"></script>
-<script src="<c:url value="/resources/js/scrollax.min.js"/>"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-<script src="<c:url value="/resources/js/google-map.js"/>"></script>
-<script src="<c:url value="/resources/js/main.js"/>"></script> --%>
 <!-- 페이지 js -->
 <script src="<c:url value="/resources/js/jangSupport.js"/>"></script>
 <script src="<c:url value="/resources/js/jangec.js"/>"></script>

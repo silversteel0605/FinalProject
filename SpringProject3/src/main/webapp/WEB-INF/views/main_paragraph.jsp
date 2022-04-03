@@ -6,25 +6,13 @@
 <head>
 <meta charset="EUC-KR">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- Bootstrap CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-<title>Insert title here</title>
-<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Arizonia&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="<c:url value="/resources/css/animate.css"/>"/>
-  <link rel="stylesheet" href="<c:url value="/resources/css/owl.carousel.min.css"/>"/>
-  <link rel="stylesheet" href="<c:url value="/resources/css/owl.theme.default.min.css"/>"/>
-  <link rel="stylesheet" href="<c:url value="/resources/css/magnific-popup.css"/>"/>
-  <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap-datepicker.css"/>"/>
-  <link rel="stylesheet" href="<c:url value="/resources/css/jquery.timepicker.css"/>"/>
-  <link rel="stylesheet" href="<c:url value="/resources/css/flaticon.css"/>" />
-  <link rel="stylesheet" href="<c:url value="/resources/css/style.css"/>"/>
-  <!-- 페이지 CSS-->
-  <link rel="stylesheet" href="<c:url value="/resources/css/jangec.css"/>"/>
-  <link rel="stylesheet" href="<c:url value="/resources/css/jang_main_paragraph.css"/>"/>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
-  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<title>Camping</title>
+<!-- 페이지 CSS-->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="<c:url value="/resources/css/jangec.css"/>"/>
+<link rel="stylesheet" href="<c:url value="/resources/css/jang_main_paragraph.css"/>"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
@@ -68,8 +56,11 @@
 			<p class="fs-3">${contents.title }</p>
 			<div class="paragraph_header d-flex justify-content-between">
 				<span id="${contents.member_id }" class="userId pointer">${contents.member_id }</span>
-				<span>${contents.reg_date }</span>
-				<span>조회수&nbsp;&nbsp;&nbsp;${contents.views }</span>
+				<div>
+					<span id="report"></span>
+					<span>${contents.reg_date }|</span>
+					<span>조회수&nbsp;${contents.views }</span>
+				</div>
 			</div> <hr/>
 			<div class="paragraph_body">
 				<p>${contents.contents }</p>
@@ -85,7 +76,7 @@
 							<span class="userId">${comment.member_id}</span><br/>
 							<div class="d-flex justify-content-start">
 								<p>${comment.comments}</p>
-								<i class="bi bi-x-circle comment_icon"></i>
+								<i id="comment_deleteBtn_${comment.comment_id}" class="bi bi-x-circle comment_icon"></i>
 								<i id="comment_editBtn" class="bi bi-pen comment_icon"></i>
 								<i id="co_comment_newBtn_${comment.comment_id}" class="bi bi-chat-dots comment_icon co_comment_newBtn"></i>
 								<input id="comment_commentId_${comment.comment_id }" type="hidden" value="${comment.comment_id }" />
@@ -111,13 +102,18 @@
 				</div>
 				<!-- /comments 입력 -->
 			</div> <hr/>
-			<div class="paragraph_footer d-flex justify-content-end">
-				<c:if test="${editAuth eq true }">
-					<button id="contentsEdit" class="btn">수정</button>
-					<button id="contentsDelete" class="btn">삭제</button>
-				</c:if>
-				<input id="editAuth" type="hidden" value="${editAuth }" />
-				<button id="goBoard" class="btn" onClick="goBoard(${contents.board_class })">목록</button>
+			<div class="paragraph_footer d-flex justify-content-between mb-5">
+				<div>
+					<button id="reportBtn" class="btn">신고</button>
+				</div>
+				<div>
+					<c:if test="${editAuth eq true }">
+						<button id="contentsEdit" class="btn">수정</button>
+						<button id="contentsDelete" class="btn">삭제</button>
+					</c:if>
+					<input id="editAuth" type="hidden" value="${editAuth }" />
+					<button id="goBoard" class="btn" onClick="goBoard(${contents.board_class })">목록</button>
+				</div>
 			</div>
 		</div>		
 		<!-- /컨텐츠 -->
@@ -127,26 +123,31 @@
 <input type="hidden" id="board_class" value="${contents.board_class }" />
 <input type="hidden" id="post_id" value="${contents.post_id }" />
 <input type="hidden" id="commentsEA" value="${commentsEA }" />
+<input type="hidden" id="reportNum" value="${reportNum }"/>
 
 <!-- Modal -->
 <div id="popUpMenu" style="display:none;">
 	<ul class="list-group list-group-flush">
-		<li id="memberInfo" class="indiPopUp list-group-item list-group-item-primary opacity-75" style="cursor:pointer">회원정보 보기</li>
-		<li id="memberPost" class="indiPopUp list-group-item list-group-item-primary opacity-75" style="cursor:pointer">작성글 보기</li>
+		<li id="memberPost" class="indiPopUp list-group-item list-group-item-primary opacity-75" style="cursor:pointer"
+		role="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">작성글 보기</li>
 	</ul>
 </div>
-<!-- 
-<div id="co_commentInput" class="co_commentInput">
-	<div class="form-floating">
-		<textarea class="form-control" placeholder="Leave a Comment" id="coCommentTextarea"></textarea>
-		<label for="coCommentTextarea">Comments</label>
-	</div>
-	<div class="d-flex justify-content-end">
-		<input />
-		<button class="btn btn-outline-success co_comment_saveBtn">저장</button>
-		<button class="btn btn-outline-success co_comment_cancelBtn">취소</button>
-	</div>
-</div> -->
+
+<div class="modal fade" id="staticBackdrop" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div id="individual" class="modal-body">
+      </div>
+      <div class="modal-footer">
+        <button id="modalBtn" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 <!-- /Modal -->
 	
 <!-- /수정 -->

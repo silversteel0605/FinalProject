@@ -25,4 +25,9 @@ public interface PostXMLMapper {
 	
 	public void addPost(PostVO post);
 	public void editPost(PostVO post);
+	
+	public List<PostVO> getIndividual(String id);
+	
+	public void addReport(@Param("post_id") Integer post_id, @Param("report") Integer report);
+	public Integer getReport(Integer post_id);
 }

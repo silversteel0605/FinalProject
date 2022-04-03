@@ -84,6 +84,23 @@ public class PostServiceImpl implements PostService {
 	public void editPost(PostVO post) {
 		postMapper.editPost(post);
 	}
+	
+	@Override
+	public List<PostVO> getIndividual(String id) {
+		return postMapper.getIndividual(id);
+	}
+	
+	@Override
+	public void addReport(Integer post_id, Integer report) {
+		Integer updateNum = report + 1;
+		
+		postMapper.addReport(post_id, updateNum);
+	}
+	
+	@Override
+	public Integer getReport(Integer post_id) {
+		return postMapper.getReport(post_id);
+	}
 }
 
 

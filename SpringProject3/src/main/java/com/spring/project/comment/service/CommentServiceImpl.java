@@ -37,5 +37,10 @@ public class CommentServiceImpl implements CommentService{
 	public void addComment(CommentVO comment) {
 		dataMapper.addComment(comment);
 	};
+	
+	@Override
+	public void deleteComment(Integer commentId) {
+		dataMapper.deleteComment(commentId);
+	}
 
 }
