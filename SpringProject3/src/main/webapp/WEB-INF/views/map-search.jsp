@@ -86,8 +86,8 @@
 														<label>Áö¿ª</label>
 														<div class="form-field">
 															<div class="icon"><span class="fa fa-map-marker"></span></div>
-																<select name="sido" id="sido1"></select>
-																<select name="gugun" id="gugun1"></select>
+															<select name="sido" id="sido1"></select>
+															<select name="gugun" id="gugun1"></select>
 														</div>
 													</div>
 												</div>

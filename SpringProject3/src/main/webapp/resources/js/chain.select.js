@@ -21,6 +21,7 @@ $('document').ready(function() {
 
 
 	$selsido = $("select[name^=sido]");
+	$selgugun = $('select[name^=gugun]');
 	  $.each(eval(area0), function() {
 		if (this == '시/도 선택') {			
 		   $selsido.append('<option value="">' +this+ '</option>');
@@ -31,13 +32,13 @@ $('document').ready(function() {
 		   $selsido.append("<option value='"+this+"'>"+this+"</option>");
 		}
   	});
-	  $selsido.next().append('<option value="">구/군 선택</option>');
+	  $selgugun.append('<option value="">구/군 선택</option>');
 	  
 	  
 
 	 function matchGugun() {
 		var area = "area"+$("option",$selsido).index($("option:selected",$selsido)); 
-		  var $gugun = $selsido.next();
+		  var $gugun = $selgugun;
 		  $("option",$gugun).remove();
 			
 		  if(area == "area0")

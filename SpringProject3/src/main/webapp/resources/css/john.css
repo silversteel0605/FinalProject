@@ -1,114 +1,123 @@
 @charset "EUC-KR";
 
-ul {
-	padding: 0;
-	margin-bottom: 0;
+
+a, a:hover {
+	color: black !important;
+	text-decoration: none !important;
 }
-.ftco-section .nav-item .active {
-	color: var(--orange) !important;
+
+li {
+	list-style: none !important;
 }
-.ftco-section .nav-link {
+
+/* bootstrap css 수정 */
+.container-lg {
+	padding: 0 0 30px 0 !important;
+}
+
+.pagination {
+	justify-content: center !important;
+	padding-top: 50px !important;
+}
+
+.page-link {
+	border: none !important;
+	color: #dee2e6 !important;
+}
+
+.page-item.active .page-link, .page-link:hover {
+	color: black !important;
+	background: #ffffff  !important;
+}
+
+.nav-link, .nav-link:hover {
 	color: black !important;
 }
 
- 
- .row {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-  width: 100%;
-  margin: 0;
- }
- 
-.col-md-12, .col-md-6 {
-   padding: 0;  
-   position: relative;
-   width: 100%;
+.form-select:disabled {
+	background: #ffffff !important;
+}
+/* custom 클래스 css */
+
+.wrap {
+	padding: 0 10px !important;
 }
 
-.pb-6,
-.py-6 {
-  padding-bottom: 10rem !important; }
-
-.map-list {
-	height: 700px;
-	
+.arrow {
+	color: black !important;
 }
 
-#map {
-	width: 70%;	
+.more-row{
+	position: relative !important;
 }
 
-.camplist {
-	width: 30%;
+.more-col {
+	position: absolute !important;
+	visibility: hidden !important;
+	opacity : 0 !important;
+	z-index: 10 !important;	
+	left: 0 !important;
+	top: 10px !important;
 }
 
-#list {
-  margin-bottom: 0;
-  height: 650px; 
-  overflow: scroll;
-  overflow-x: hidden; 
+.moreThem {
+	background: #ffffff !important;
+	border: 1px solid #dee2e6 !important;
+	text-overflow: clip !important;
 }
 
-.camplist li {
-  list-style: none;
-  padding: 20px 10px;
-  color: black;
-  border-bottom: 1px solid #dddddd;
+#tag {
+	padding: 1px !important;
 }
 
-
-.camplist li:last-child {
-
-  border-bottom: none;
+#tags {
+	display: flex !important;
+	flex-wrap: wrap !important;
 }
 
-.paging {
-  border: 1px solid #dddddd;
+#tags button {
+	margin-top: 0 !important!important;
+	margin-right: 10px !important;
+	margin-bottom: 10px !important;
 }
 
-.camplist .paging li {
-  height: 50px;
-  border: none;
-  padding: 0 10px;
-  line-height: 50px;
+.bb {		
+	border-bottom: 3px solid black !important;
 }
 
-.camplist .paging li a {
-  display: inline-block;
-  height: 100%;
+.lbb {
+	border-bottom: 1px solid #dee2e6 !important;
 }
 
-.camplist .paging li:nth-child(1) {
-  border-right: 1px solid #dddddd;
-}
-.camplist .paging li:nth-child(3) {
-  border-left: 1px solid #dddddd;
+.sub_title {
+	text-align: center !important;
+	padding-top: 150px !important;
 }
 
-@media (max-width: 992px) {
-    .map-list{
-      flex-direction: column; } 
-    #map {
-    	height: 450px
-    } 
-    .camplist {
-    	width:100%;
-    	height: 250px;
-    }
-    #list{
-    	height: 200px
-    }
-    .paging {
-    	height: 50px
+.tit {
+	font-size: 18px !important;
+    letter-spacing: 14px !important;
+    font-family: Lato-Bold !important;
+    color: #000 !important;
+}
 
-    }
- }
- 
-#mores {
-	display: none;
+.submitBtn {
+	text-align: center !important;
+}
+
+.more-close {
+	text-align: right !important;
+}
+
+.more-sub {
+	text-align: center !important;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1200px) { 
+	.container-lg {
+		width: 1140px !important;
+  		max-width: none !important;
+	} 
 }
      
       

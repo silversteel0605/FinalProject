@@ -8,59 +8,38 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta charset="EUC-KR">
 <title>Insert title here</title>
-	<link href="<c:url value="/resources/css/john.css?after"/>" rel="stylesheet" />
+	<script src="<c:url value="/resources/css/john.css?after"/>"></script>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 	<link src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=77mbzylhqr"></link>
 	<style>
-		
-		
-		.camp_index {	
-			width: 100%;
+		.map-list {
 			display: flex;
-			position: relative;
-		}
-		.image-box {
-			width: 60%;
-			height: 80%;
-			overflow: hidden;
-			maring: 0 auto;
-			position: absolute;
-			right: 0;
-			bottom: 0;
-		}
-		.text {
-			width: 40%;
-			height: 100%;
-			padding-right: 30px;
-			
 		}
 		
-		.text > h3 {
-			  white-space: nowrap;
-		}
-		.image-thumbnail {
-			width: 100%;
+		#map {
 			height: 100%;
-			object-fit: cover;
+			width: 70%;
+		}		
+		.camp-list {
+			width: 30%;
 		}
 		
-		@media screen and (max-width: 767px){ 
-			.camp_index {
-				flex-direction: column;
-			} 
-			.image-box {
-				width: 100%;
-				overflow: hidden;
-				maring: 0 auto;
-				position: relative;
+		.camp-list {
+			height: 100%;
+			overflow: scroll;
+			overflow-x: hidden;
+		}
+
+		@media screen and (max-width: 767px){ 		
+			.map-list {
+				flex-direction:column;
 			}
-			.text {
+			
+			#map, .camp-list {
 				width: 100%;
 			}
 			
-			.text > * {
-				margin: 0;
-			}
+			
 		}
 	</style>
 </head>
@@ -260,62 +239,107 @@
 			  <div class="submitBtn mb-5">			  
 				  <button type="button" class="btn btn-dark mt-5 mb-5">검색하기</button>
 			  </div>
-			</div>
+		</div>
 </div>
 
-<div class="container-lg lbb">
-    <div class="row">
-     <c:forEach var="list" items="${lists }">
-		<div class="col-md-6">
-		  <div class="camp_index">
-		  	
-		    <div class="text">
-		        <h3><a href="./CampInfo?contentId=${list.contentId }">${list.facltNm }</a></h3>
-		        <p>${list.lineIntro }</p>
-		        <p class="location"><span class="fa fa-map-marker"></span> ${list.addr1 }</p>
-		      
-		   	</div>
-		   	<div class="image-box">
-				<img  class="image-thumbnail" src="${list.firstImageUrl }">
-			</div> 
-		  </div>
-		</div>
-	</c:forEach>  
-</div>
+	<div class="container-lg lbb">
+  			<div class="map-list pt-5 pb-5">
+			  	 <div id="map">
+				  	 	<script>
+				  	 		
+				  	 		var mapDiv = document.getElementById('map');
+				  	 		var map = new naver.maps.Map(mapDiv, {
+				  	 		    zoom: 5
+				  	 		});
+				  	 		
+				  	 		let markers = new Array();
+				  	 		let infos = new Array()
+				  	 		
+				  	 		<c:forEach var="list" items="${lists }">
+			  	 				var marker = new naver.maps.Marker({
+			  		  	 		    position: new naver.maps.LatLng(${list.mapY }, ${list.mapX }),
+			  		  	 		    map: map
+			  		  	 		});
+			  	 				
+							 	var info = new naver.maps.InfoWindow({
+				  	 		        content: 
+				  	 		          '<div style="width:200px;text-align:center;padding:10px;">'
+				  	 		        + '<a href="./TempCampInfo?contentId=${list.contentId }"><b>${list.facltNm }</b></a>' 
+				  	 		        + '<br>${list.addr1 }</div>'
+					 			});
+							 	
+			  	 				markers.push(marker);
+			  	 				infos.push(info);
+			  	 			</c:forEach>
+				  	 		
+			  	 			
+			  	 		    function getClickHandler(seq) {
+			  	 				
+			  	 	            return function(e) {  // 마커를 클릭하는 부분
+			  	 	                var marker = markers[seq], // 클릭한 마커의 시퀀스로 찾는다.
+			  	 	                    info = infos[seq]; // 클릭한 마커의 시퀀스로 찾는다
+			
+			  	 	                if (info.getMap()) {
+			  	 	                    info.close();
+			  	 	                } else {
+			  	 	                    info.open(map, marker); // 표출
+			  	 	                }
+			  	 	    		}
+			  	 	    	}
+			  	 	    
+			  	 	    for (var i=0, ii=markers.length; i<ii; i++) {
+			  	 	        naver.maps.Event.addListener(markers[i], 'click', getClickHandler(i)); // 클릭한 마커 핸들러  	
+			  	 	    }
+				  	 	</script>
+			  	 </div>
+			  	 <div class="camp-list">
+				      <ul>
+				      	<c:forEach var="list" items="${lists }">
+				      		<li style="list-style: none;">
+						          ${list.facltNm } <br>
+						          ${list.addr1 }<br>
+						          ${list.lineIntro }<br>
+				        	</li>
+				      	</c:forEach>
+			
+				      </ul>
+		    	</div>
+  	  		</div>
+  		</div>	
 
 </div>
 <div class="container-lg">
 	<div class="row">
   <div class="col-12">
       <ul class="pagination"> 	
-		<li class="page-item"><a class="page-link  arrow" href="./search?nowPage=1&cntPerPage=${paging.cntPerPage}${search.uri}" class="page-link">&lt;&lt;</a></li>
+		<li class="page-item "><a class="page-link arrow" href="./map?nowPage=1&cntPerPage=${paging.cntPerPage}${search.uri}" class="page-link">&lt;&lt;</a></li>
 		<c:choose>
 		<c:when test="${paging.startPage != 1}">
-			<li class="page-item" ><a class="page-link  arrow" href="./search?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}${search.uri}">&lt;</a></li>
+			<li class="page-item" ><a class="page-link arrow" href="./map?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}${search.uri}">&lt;</a></li>
 		</c:when>
 		<c:otherwise>
-			<li class="page-item"><a class="page-link arrow" href="./search?nowPage=${paging.startPage }&cntPerPage=${paging.cntPerPage}${search.uri}">&lt;</a></li>
+			<li class="page-item"><a class="page-link arrow" href="./map?nowPage=${paging.startPage }&cntPerPage=${paging.cntPerPage}${search.uri}">&lt;</a></li>
 		</c:otherwise>
 		</c:choose>      
 		<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
 			<c:choose>
 				<c:when test="${p == paging.nowPage }">
-					<li class="page-item active"><a class="page-link" href="./search?nowPage=${p }&cntPerPage=${paging.cntPerPage}${search.uri}">${p }</a></li>
+					<li class="page-item active"><a class="page-link" href="./map?nowPage=${p }&cntPerPage=${paging.cntPerPage}${search.uri}">${p }</a></li>
 				</c:when>
 				<c:when test="${p != paging.nowPage }">
-					<li class="page-item"><a class="page-link" href="./search?nowPage=${p }&cntPerPage=${paging.cntPerPage}${search.uri}">${p }</a></li>
+					<li class="page-item"><a class="page-link" href="./map?nowPage=${p }&cntPerPage=${paging.cntPerPage}${search.uri}">${p }</a></li>
 				</c:when>
 			</c:choose>
 		</c:forEach>
 		<c:choose>
 			<c:when test="${paging.endPage != paging.lastPage}">
-				<li class="page-item"><a class="page-link  arrow" href="./search?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}${search.uri}">&gt;</a></li>
+				<li class="page-item"><a class="page-link arrow" href="./map?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}${search.uri}">&gt;</a></li>
 			</c:when>
 			<c:otherwise>
-				<li class="page-item"><a class="page-link arrow" href="./search?nowPage=${paging.endPage }&cntPerPage=${paging.cntPerPage}${search.uri}">&gt;</a></li>
+				<li class="page-item"><a class="page-link arrow" href="./map?nowPage=${paging.endPage }&cntPerPage=${paging.cntPerPage}${search.uri}">&gt;</a></li>
 			</c:otherwise>
 		</c:choose>
-		<li class="page-item "><a class="page-link arrow" href="./search?nowPage=${paging.lastPage }&cntPerPage=${paging.cntPerPage}${search.uri}">&gt;&gt;</a></li>
+		<li class="page-item"><a class="page-link arrow" href="./map?nowPage=${paging.lastPage }&cntPerPage=${paging.cntPerPage}${search.uri}">&gt;&gt;</a></li>
       </ul>
 	</div>
 </div>
@@ -374,9 +398,11 @@
 
 <script src="//code.jquery.com/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
 <script>
-	$(function() {
+	$(document).ready(function() {
 		setHeight();
+		window.dispatchEvent(new Event('resize'));
 		$(window).resize(function() {
 			if($('div.more-col').css('visibility') === 'visible') {				
 				showMoreThem();
@@ -389,20 +415,26 @@
 		
 	})
 	
+	
+	
 	function setHeight() {
-		const width = $('div.camp_index').width();
-		if($(window).width() < 751) {	
-			$('div.camp_index').css('height', '');			
-			$('div.image-box').css('height', Math.ceil(width * 0.5));	
+		if($(window).width() < 751) {						
 			$('div.col-md-6').removeClass('p-5');
 			$('div.col-md-6').addClass('p-3');
 			$('#tag').css('height', '');
-		} else {
-			$('div.camp_index').css('height', Math.ceil(width * 0.5));			
-			$('div.image-box').css('height', '80%');	
+			
+			$('div.map-list').css('height', '');
+			$('#map').css('height', $('div.map-list').parent().width());
+			$('div.camp-list').css('height', Math.ceil($('div.map-list').parent().width() / 2));
+		} else {			
 			$('div.col-md-6').removeClass('p-3');
-			$('div.col-md-6').addClass('p-5');				
+			$('div.col-md-6').addClass('p-5');
 			$('#tag').css('height', $('#condition').height())
+			
+			
+			$('div.map-list').css('height', Math.ceil($('div.map-list').parent().width() * 0.7));
+			$('#map').css('height', '100%');
+			$('div.camp-list').css('height', '100%');
 		}
 	}
 	
@@ -423,6 +455,7 @@
 		$('div.more-col').css('left', left - minusLeft);
 	}
 </script>
+
 <script src="<c:url value="/resources/js/chain.select.js?after"/>"></script>
 <!--  
 <script src="<c:url value="/resources/js/search.event.listener.js"/>"></script>
