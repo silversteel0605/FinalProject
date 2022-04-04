@@ -4,14 +4,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Insert title here</title>
-<!-- 페이지 css -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="<c:url value="/resources/css/jangec.css"/>"/>
-<link rel="stylesheet" href="<c:url value="/resources/css/jangSupport.css"/>"/>
-  
+	<meta charset="EUC-KR">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Insert title here</title>
+	<!-- 페이지 css -->
+	<link rel="stylesheet" href="<c:url value="/resources/css/template.css"/>"/>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="<c:url value="/resources/css/jangec.css"/>"/>
+	<link rel="stylesheet" href="<c:url value="/resources/css/jangSupport.css"/>"/>
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
@@ -48,89 +48,94 @@
 </section>
 
 <!-- 수정 -->
-<section class="ftco-section">
-	<div class="container-lg">
-		<!-- 컨텐츠 -->
-		<div class="contents container-lg">
-			<!-- Support Board Nav -->
-			<div class="container">
-				<div class="mt-5 mb-5 d-flex justify-content-center">
-					<span class="h1">고객센터</span>
-				</div>
+<!-- Contents -->
+<section class="section">
+	<!-- Support Board Nav -->
+	<div class="container-lg pb-0">
+		<div class="d-flex justify-content-center">
+			<div class="mt-5 mb-5 d-flex flex-column">
+				<p class="h1 text-center">C&nbsp;O&nbsp;N&nbsp;T&nbsp;A&nbsp;C&nbsp;T</p>
+				<p class="text-center">고객의&nbsp;소리에&nbsp;귀&nbsp;기울입니다</p>
+			</div>
+		</div>
+		<div class="border-top mb-3 border-dark border-3"></div>
+		<div class="row">
+			<div class="col-md-5">
 				<div class="row">
-					<div class="col-md-5">
-						<form class="d-flex" action="./support" method="POST" accept-charset="EUC-KR">
-							<div class="input-group input-group-sm mb-3">
-								<select id="inputState" class="form-select form-select-sm col-md-3" name="searchByWhat">
-									<option selected value="all">전체</option>
-									<option value="title">제목</option>
-									<option value="contents">내용</option>
-								</select>
-								<input type="text" class="form-control-sm border-light col-md-7" aria-label="Text input with dropdown button" name="searchKeyword">
-								<button class="btn btn-outline-secondary btn-sm col-md-2" type="submit">Search</button>
-							</div>
-						</form>
-					</div>
-					<div class="col-5 offset-2">
-					  	<div class="row">
-						    <div class="col-9">
-							    <div class="d-flex justify-content-end">
-								    <a class="categoryClass ms-3" href="./support?categoryName=supportAll">전체</a>
-								    <a class="categoryClass ms-3" href="./support?categoryName=notice">공지사항</a>
-								    <a class="categoryClass ms-3" href="./support?categoryName=askEdit">수정요청</a>
-							    </div>
-						    </div>
-						    <div class="col-3 d-flex justify-content-end">
-							   	<a class="" href="./write?board_class=supportBoard">글쓰기</a>
-						    </div>
-					  	</div>
-					</div>
+					<form action="./support" method="POST" accept-charset="EUC-KR">
+						<div class="input-group input-group-sm mb-3">
+							<select id="inputState" class="form-select form-select-sm col-md-3" name="searchByWhat">
+								<option selected value="all">전체</option>
+								<option value="title">제목</option>
+								<option value="contents">내용</option>
+							</select>
+							<input type="text" class="form-control-sm border-light col-md-7" aria-label="Text input with dropdown button" name="searchKeyword">
+							<button class="btn btn-outline-secondary btn-sm col-md-2" type="submit">Search</button>
+						</div>
+					</form>
 				</div>
 			</div>
-			<!-- /Support Board Nav -->
-			<!-- Table -->
-			<div class="table-responsive-lg">
-				<table class="table table-hover">
-				  <thead>
-				    <tr>
-				      <th class="col-1" scope="col">#</th>
-				      <th class="col-1" scope="col">분류</th>
-				      <th class="col-6 text-start" scope="col">제목</th>
-				      <th class="col-1" scope="col">작성자</th>
-				      <th class="col-1" scope="col">작성일</th>
-				      <th class="col-1" scope="col">처리여부</th>
-				      <th class="col-1" scope="col">조회수</th>
-				    </tr>
-				  </thead>
-				  <tbody>
-				    <c:forEach items="${supportContentsList }" var="supportContents">
-				    	<tr>
-				    		<td>${supportContents.post_id }</td>
-				    		<td>
-				    			<c:choose>
-				    				<c:when test="${supportContents.contents_category eq 6 }">공지사항</c:when>
-				    				<c:otherwise>건의사항</c:otherwise>
-				    			</c:choose>
-				    		</td>
-				    		<td id="${supportContents.post_id }" class="pointer text-start" onClick="mainContents(${supportContents.post_id})">${supportContents.title }</td>
-				    		<td class="userId pointer" id="${supportContents.member_id }">${supportContents.member_id }</td>
-				    		<td>${supportContents.reg_date }</td>
-				    		<td>
-			    			<c:choose>
-			    				<c:when test="${supportContents.process eq 1}">미결</c:when>
-			    				<c:when test="${supportContents.process eq 2}">해결</c:when>
-			    				<c:otherwise>-</c:otherwise>
-			    			</c:choose>
-			    			</td>
-			    			<td>${supportContents.views }</td>
-				    	</tr>
-				    </c:forEach>
-				  </tbody>
-				</table>
+			<div class="col-md-5 offset-md-2 d-flex align-items-end navCategory">
+			  	<div class="row flex-fill">
+				    <div class="col-md-9">
+					    <div class="d-flex justify-content-end align-self-end">
+						    <a class="categoryClass ms-3" href="./support?categoryName=supportAll">전체</a>
+						    <a class="categoryClass ms-3" href="./support?categoryName=notice">공지사항</a>
+						    <a class="categoryClass ms-3" href="./support?categoryName=askEdit">수정요청</a>
+					    </div>
+				    </div>
+				    <div class="col-md-3 d-flex justify-content-end">
+					   	<a class="" href="./write?board_class=supportBoard">글쓰기</a>
+				    </div>
+			  	</div>
 			</div>
-			<!-- /Table -->
-		</div>	
-		<!-- Paging -->
+		</div>
+	</div>
+	<!-- /Support Board Nav -->
+	<!-- Table -->
+	<div class="container-lg">
+		<hr />
+		<div class="table-responsive">
+			<table class="table table-hover">
+			  <thead>
+			    <tr>
+			      <th class="col-md-1" scope="col">#</th>
+			      <th class="col-md-1" scope="col">분류</th>
+			      <th class="col-md-6 text-start" scope="col">제목</th>
+			      <th class="col-md-1" scope="col">작성자</th>
+			      <th class="col-md-1" scope="col">처리여부</th>
+			      <th class="col-md-1" scope="col">조회수</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			    <c:forEach items="${supportContentsList }" var="supportContents">
+			    	<tr>
+			    		<td>${supportContents.post_id }</td>
+			    		<td>
+			    			<c:choose>
+			    				<c:when test="${supportContents.contents_category eq 6 }">공지사항</c:when>
+			    				<c:otherwise>건의사항</c:otherwise>
+			    			</c:choose>
+			    		</td>
+			    		<td id="${supportContents.post_id }" class="pointer text-start" onClick="mainContents(${supportContents.post_id})">${supportContents.title }</td>
+			    		<td class="userId pointer" id="${supportContents.member_id }">${supportContents.member_id }</td>
+			    		<td>
+		    			<c:choose>
+		    				<c:when test="${supportContents.process eq 1}">미결</c:when>
+		    				<c:when test="${supportContents.process eq 2}">해결</c:when>
+		    				<c:otherwise>-</c:otherwise>
+		    			</c:choose>
+		    			</td>
+		    			<td>${supportContents.views }</td>
+			    	</tr>
+			    </c:forEach>
+			  </tbody>
+			</table>
+		</div>
+	</div>
+	<!-- /Table -->
+	<!-- Paging -->
+	<div class="container-lg">
 		<div class="row mt-5">
 			<div class="col d-flex justify-content-center">
 				<div class="block-27">
@@ -167,10 +172,10 @@
 				</div>
 			</div>
 		</div>
-		<!-- /paging -->	
 	</div>
+	<!-- /paging -->	
 </section>
-
+<!-- /Contents -->
 <!-- Modal & PopUp Menu -->
 <div id="popUpMenu" style="display:none;">
 	<ul class="list-group list-group-flush">

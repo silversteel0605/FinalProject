@@ -48,4 +48,11 @@
 	<delete id="deleteComment">
 		DELETE FROM comments WHERE comment_id = #{commentId}
 	</delete>
+	
+	<update id="commentReport">
+		UPDATE comments SET decl = #{reportNum} WHERE comment_id = #{commentId}
+	</update>
+	<select id="getCommentReport" resultType="_integer">
+		SELECT decl FROM comments WHERE comment_id = #{commentId}
+	</select>
 </mapper>

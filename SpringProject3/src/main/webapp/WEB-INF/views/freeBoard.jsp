@@ -4,12 +4,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>FreeBoard</title>
-<!-- 페이지 css -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="<c:url value="/resources/css/jangec.css"/>"/>
+	<meta charset="EUC-KR">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>FreeBoard</title>
+	<!-- 페이지 css -->
+	<link rel="stylesheet" href="<c:url value="/resources/css/template.css"/>"/>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="<c:url value="/resources/css/jangec.css"/>"/>
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
@@ -46,84 +47,90 @@
 </section>
 
 <!-- 수정 -->
-<section class="ftco-section">
-	<div class="container">
-		<!-- Board Nav -->
-		<div class="container">
-			<div class="row">
-				<div class="col-md-5">
-					<form class="d-flex" action="./board" method="POST" accept-charset="EUC-KR">
-						<div class="input-group input-group-sm mb-3">
-							<select id="inputState" class="form-select form-select-sm col-md-3" name="searchByWhat">
-								<option selected value="all">전체</option>
-								<option value="title">제목</option>
-								<option value="contents">내용</option>
-							</select>
-							<input type="text" class="form-control-sm border-light col-md-7" aria-label="Text input with dropdown button" name="searchKeyword">
-							<button class="btn btn-outline-secondary btn-sm col-md-2" type="submit">Search</button>
+<!-- Contents -->
+<section class="section">
+	<!-- Board Nav -->
+	<div class="container-lg">
+		<div class="d-flex justify-content-center navTop">
+			<div class="mt-5 mb-5 d-flex flex-column">
+				<p class="h1 text-center">B&nbsp;O&nbsp;A&nbsp;R&nbsp;D</p>
+				<p class="text-center">마음껏&nbsp;즐기다</p>
+			</div>
+		</div>
+		<div class="border-top mb-3 border-dark border-3"></div>
+		<div class="row navMiddle">
+			<div class="col-md-5 d-flex align-items-end">
+				<form class="d-flex flex-fill" action="./board" method="POST" accept-charset="EUC-KR">
+					<div class="input-group input-group-sm mb-3">
+						<select id="inputState" class="form-select form-select-sm col-md-3" name="searchByWhat">
+							<option selected value="all">전체</option>
+							<option value="title">제목</option>
+							<option value="contents">내용</option>
+						</select>
+						<input type="text" class="form-control-sm border-light col-md-7" aria-label="Text input with dropdown button" name="searchKeyword">
+						<button class="btn btn-outline-secondary btn-sm col-md-2" type="submit">Search</button>
+					</div>
+				</form>
+			</div>
+			<div class="col-md-5 offset-md-2 d-flex align-items-end navCategory">
+				<div class="row flex-fill">
+					<div class="col-md-9">
+						<div class="d-flex justify-content-end">
+					        <a class="ms-3 align-self-bottom" href="./board?categoryName=boardAll">전체</a>
+					        <a class="ms-3" href="./board?categoryName=daily">자유</a>
+					        <a class="ms-3" href="./board?categoryName=showoff">자랑</a>
+					        <a class="ms-3" href="./board?categoryName=buy">삽니다</a>
+					        <a class="ms-3" href="./board?categoryName=sell">팝니다</a>
 						</div>
-					</form>
-				</div>
-				<div class="col-md-5 offset-md-2">
-					<div class="row">
-						<div class="col-9">
-							<div class="d-flex justify-content-end">
-						        <a class="ms-3" href="./board?categoryName=boardAll">전체</a>
-						        <a class="ms-3" href="./board?categoryName=daily">자유</a>
-						        <a class="ms-3" href="./board?categoryName=showoff">자랑</a>
-						        <a class="ms-3" href="./board?categoryName=buy">삽니다</a>
-						        <a class="ms-3" href="./board?categoryName=sell">팝니다</a>
-							</div>
-						</div>
-						<div class="col-3 d-flex justify-content-end">
-						 	<a class="" href="./write?board_class=freeBoard">글쓰기</a>
-						</div>
+					</div>
+					<div class="col-md-3 d-flex justify-content-end">
+					 	<a class="" href="./write?board_class=freeBoard">글쓰기</a>
 					</div>
 				</div>
 			</div>
 		</div>
-		<hr />
-		<!-- /Board Nav -->
-		<!-- 컨텐츠 -->
-		<div class="contents">
-			<div class="container">
-				<div class="row">
-					<c:forEach items="${freeBoardContentsList }" var="boardContents">
-					<div class="col-md-6 mb-5">
-						<div class="card border-top-0 border-start-0 border-end-0">
-							<div class="card-header p-0 bg-transparent border-0 d-flex justify-content-between mb-1">
-								<c:choose>
-								<c:when test="${boardContents.contents_category eq 2 }">
-								<small>일상</small>
-								</c:when>
-								<c:when test="${boardContents.contents_category eq 3 }">
-								<small>자랑</small>
-								</c:when>
-								<c:when test="${boardContents.contents_category eq 4 }">
-								<small>삽니다</small>
-								</c:when>
-								<c:when test="${boardContents.contents_category eq 5 }">
-								<small>팝니다</small>
-								</c:when>
-								</c:choose>
-								<small class="text-muted">조회수&nbsp;${boardContents.views }</small>
-							</div>
-							<div class="card-body mb-3 pointer" onClick="mainContents(${boardContents.post_id})">
-								<h5 class="card-title mb-3">${boardContents.title }</h5>
-								<p>${boardContents.contents }</p>
-							</div>
-							<div class="card-footer mb-1 text-end bg-transparent border-0">
-								<span id="${boardContents.member_id }" class="userId pointer">${boardContents.member_id }</span><br/>
-								<small class="text-muted">${boardContents.reg_date }</small>
-							</div>
-						</div>
+	<hr />
+	</div>
+	<!-- /Board Nav -->
+	<!-- Table -->
+	<div class="container-lg">
+		<div class="row">
+			<c:forEach items="${freeBoardContentsList }" var="boardContents">
+			<div class="col-md-6 mb-5">
+				<div class="card border-top-0 border-start-0 border-end-0">
+					<div class="card-header p-0 bg-transparent border-0 d-flex justify-content-between mb-1">
+						<c:choose>
+						<c:when test="${boardContents.contents_category eq 2 }">
+						<small>일상</small>
+						</c:when>
+						<c:when test="${boardContents.contents_category eq 3 }">
+						<small>자랑</small>
+						</c:when>
+						<c:when test="${boardContents.contents_category eq 4 }">
+						<small>삽니다</small>
+						</c:when>
+						<c:when test="${boardContents.contents_category eq 5 }">
+						<small>팝니다</small>
+						</c:when>
+						</c:choose>
+						<small class="text-muted">조회수&nbsp;${boardContents.views }</small>
 					</div>
-					</c:forEach>
+					<div class="card-body mb-3 pointer" onClick="mainContents(${boardContents.post_id})">
+						<h5 class="card-title mb-3">${boardContents.title }</h5>
+						<p>${boardContents.contents }</p>
+					</div>
+					<div class="card-footer mb-1 text-end bg-transparent border-0">
+						<span id="${boardContents.member_id }" class="userId pointer">${boardContents.member_id }</span><br/>
+						<small class="text-muted">${boardContents.reg_date }</small>
+					</div>
 				</div>
 			</div>
-		</div>		
-		<!-- /컨텐츠 -->
-		<!-- Paging -->
+			</c:forEach>
+		</div>
+	</div>
+	<!-- /Table -->
+	<!-- Paging -->
+	<div class="container-lg">
 		<div class="row mt-5">
 			<div class="col d-flex justify-content-center">
 				<div class="block-27">
@@ -160,15 +167,12 @@
 				</div>
 			</div>
 		</div>
-		<!-- /paging -->	
-		<!-- /페이지 번호 -->
 	</div>
+	<!-- /Paging -->	
 </section>
-
-<!-- 스크립트 -->
-
+<!-- /Contents -->
 <!-- Modal & PopUp Menu -->
-<div id="popUpMenu" style="display:none;">
+<div id="popUpMenu" style="display:none;" class="">
 	<ul class="list-group list-group-flush">
 		<li id="memberPost" class="indiPopUp list-group-item list-group-item-primary opacity-75" style="cursor:pointer"
 		role="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">작성글 보기</li>

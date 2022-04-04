@@ -71,7 +71,6 @@ xhttpComments.addEventListener('readystatechange', (e) => {
 		const comment = JSON.parse(e.target.responseText);
 		
 		if (comment.classnum == 0) {
-			console.log(comment);
 			comments_body.innerHTML += mkComment (
 						comment.member_id, comment.comments, comment.comment_id, comment.post_id, comment.ordernum, comment.category_id
 					);
@@ -96,20 +95,23 @@ document.addEventListener('click', (e) => {
 		const targetOrdernum = document.getElementById('comment_ordernum').value; // ordernum
 		const targetCategoryId = document.getElementById('comment_categoryId').value; //category_id
 		const compare_co_comment_newBtn = 'co_comment_newBtn';
-		const beforeInput = document.getElementById('co_commentInput'); // 이전 생성된 대댓글 input
+		const previousInput = document.getElementById('co_commentInput'); // 이전 생성된 대댓글 input
 		
 		if (targetClass == compare_co_comment_newBtn) {
 			
-			if (beforeInput) {
-				beforeInput.remove();
+			if (previousInput) {
+				previousInput.remove();
 			}
 			
 			targetInput.appendChild(mkCoCommentInput(targetCommentId));
 			/* /코코멘트 input 생성 */
 			
+			const div2_savBtn = document.getElementById('div2_savBtn');
+			const div2_cancel = document.getElementById('div2_cancelBtn');
+			const beforeInput = document.getElementById('co_commentInput');
+			
 			/* 코코멘트 저장 */
 			div2_savBtn.addEventListener('click', (e) => {
-				
 				const coCommentContents = document.getElementById('coCommentTextarea').value;
 				const tempTargetCommentId = targetCommentId;
 				const newCoCommentData = {
@@ -128,17 +130,20 @@ document.addEventListener('click', (e) => {
 				
 				//코코멘트 출력
 				const targetCommentDiv = document.getElementById(tempTargetCommentId);
-				console.log('tempTargetCommentId: ', tempTargetCommentId);
 				xhttpComments.addEventListener('readystatechange', (e) => {
 					const readyState = e.target.readyState;
 					const status = e.target.status;
 					if (readyState == 4 && status == 200)  {
 						const comment = JSON.parse(e.target.responseText);
 						console.log(comment);
-						targetCommentDiv.innerHTML += mkComment(comment.member_id, comment.comments, comment.comment_id);
+						targetCommentDiv.innerHTML += mkCoComment(comment.member_id, comment.comments, comment.comment_id);
 					}
 				});
-				beforeInput.style.display = 'none';
+				beforeInput.remove();
+			});
+			
+			div2_cancel.addEventListener('click', (e) => {
+				beforeInput.remove();
 			});
 		}
 		
@@ -150,10 +155,26 @@ function mkComment(member_id, comments, comment_id, post_id, ordernum, category_
 	return `<div id=${comment_id} class="mb-3 border-bottom">
 				<span class="userId">${member_id}</span><br/>
 				<div class="d-flex justify-content-start">
-					<p>${comments}</p>
+					<p class="pe-3">${comments}</p>
 					<i id="comment_deleteBtn_${comment_id}" class="bi bi-x-circle comment_icon"></i>
-					<i id="comment_editBtn_${comment_id}" class="bi bi-pen comment_icon comment_editBtn"></i>
 					<i id="co_comment_newBtn_${comment_id}" class="bi bi-chat-dots comment_icon co_comment_newBtn"></i>
+					<i id="co_comment_reportBtn_${comment_id }" class="bi bi-flag pointer"></i>
+					<input id="comment_commentId_${comment_id }" type="hidden" value="${comment_id }" />
+					<input id="comment_postId" type="hidden" value="${post_id }" />
+					<input id="comment_ordernum" type="hidden" value="${ordernum }" />
+					<input id="comment_categoryId" type="hidden" value="${category_id }" />
+				</div>
+			</div>`;
+}
+
+function mkCoComment(member_id, comments, comment_id, post_id, ordernum, category_id) {
+	return `<div id=${comment_id} class="mb-3 border-bottom offset-1">
+				<span class="userId">${member_id}</span><br/>
+				<div class="d-flex justify-content-start">
+					<p class="pe-3">${comments}</p>
+					<i id="comment_deleteBtn_${comment_id}" class="bi bi-x-circle comment_icon"></i>
+					<i id="co_comment_newBtn_${comment_id}" class="bi bi-chat-dots comment_icon co_comment_newBtn"></i>
+					<i id="co_comment_reportBtn_${comment_id }" class="bi bi-flag pointer"></i>
 					<input id="comment_commentId_${comment_id }" type="hidden" value="${comment_id }" />
 					<input id="comment_postId" type="hidden" value="${post_id }" />
 					<input id="comment_ordernum" type="hidden" value="${ordernum }" />
@@ -209,7 +230,6 @@ function textNode(str) {
 // 게시글 수정
 const contentsEdit = document.getElementById('contentsEdit');
 contentsEdit.addEventListener('click', (e) => {
-	console.log('나 클릭됐어');
 	location.href = `./write?post_id=${post_id}&edit=true&board_class=${board_class}&edit=true`;
 });
 
@@ -229,7 +249,6 @@ reportBtn.addEventListener('click', (e) => {
 			confirmButtonText: 'Yes'
 		}).then((result) => {
 			if (result.isConfirmed) {
-	  			console.log('report');
 	  			xhttpReport.open('PUT', `/project/rest/main_paragraph?post_id=${post_id}`)
 	  			xhttpReport.send();
 	  		}
@@ -242,14 +261,15 @@ xhttpReport.addEventListener('readystatechange', (e) => {
 	
 	if (readyState == 4 && status == 200)  {
 		const reportNum = JSON.parse(e.target.responseText);		
-		console.log(reportNum);
 		report.innerHTML = `조회수&nbsp;${reportNum}|`;
 	}
 });
 
+// 게시글 삭제
 const xhttpDelete = new XMLHttpRequest();
 let deleteObject = null;
 const compareStr = 'comment_deleteBtn_';
+const compareReport = 'co_comment_reportBtn_';
 document.addEventListener('click', (e) => {
 	if (e.target.id.substr(0, compareStr.length) === compareStr) {
 		Swal.fire({
@@ -268,6 +288,8 @@ document.addEventListener('click', (e) => {
 	  		}
 		})
 	}
+
+	
 });
 
 xhttpDelete.addEventListener('readystatechange', (e) => {
@@ -276,6 +298,27 @@ xhttpDelete.addEventListener('readystatechange', (e) => {
 	if (readyState == 4 && status == 200)  {
 		
 		deleteObject.parentNode.parentNode.remove();
+	}
+});
+
+// 코멘트 신고
+document.addEventListener('click', (e) => {
+		
+	if (e.target.id.substr(0, compareReport.length) === compareReport) {
+		Swal.fire({
+			title: '신고하시겠습니까?',
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Yes'
+		}).then((result) => {
+			if (result.isConfirmed) {
+	  			console.log('report');
+	  			xhttpReport.open('PUT', `/project/rest/comments?post_id=${post_id}`)
+	  			xhttpReport.send();
+	  		}
+		})
 	}
 });
 

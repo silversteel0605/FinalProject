@@ -8,6 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Camping</title>
 <!-- 페이지 CSS-->
+<link rel="stylesheet" href="<c:url value="/resources/css/template.css"/>"/>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="<c:url value="/resources/css/jangec.css"/>"/>
 <link rel="stylesheet" href="<c:url value="/resources/css/jang_main_paragraph.css"/>"/>
@@ -49,75 +50,97 @@
 </section>
 
 <!-- 수정 -->
-<section class="ftco-section">
-	<div class="container">
-		<!-- 컨텐츠 -->
-		<div class="contents">
-			<p class="fs-3">${contents.title }</p>
-			<div class="paragraph_header d-flex justify-content-between">
-				<span id="${contents.member_id }" class="userId pointer">${contents.member_id }</span>
-				<div>
-					<span id="report"></span>
-					<span>${contents.reg_date }|</span>
-					<span>조회수&nbsp;${contents.views }</span>
-				</div>
-			</div> <hr/>
-			<div class="paragraph_body">
-				<p>${contents.contents }</p>
+<section class="section">
+	<div class="container-lg">
+		<p class="fs-3">${contents.title }</p>
+		<div class="paragraph_header d-flex justify-content-between">
+			<span id="${contents.member_id }" class="userId pointer">${contents.member_id }</span>
+			<div>
+				<span id="report"></span>
+				<span>${contents.reg_date }|</span>
+				<span>조회수&nbsp;${contents.views }</span>
 			</div>
-			<div class="paragraph_comments">
-				<div class="comments_header">
-					<p>COMMENTS</p>
-				</div> <hr />
-				<div class="comments_body mb-5" id="comments_body">
-					<c:if test="${not empty commentsList }">
-						<c:forEach items="${commentsList }" var="comment">
+		</div> <hr/>
+		<div class="paragraph_body">
+			<p>${contents.contents }</p>
+		</div>
+	</div>
+	 <div class="container-lg">
+		<div class="paragraph_comments">
+			<div class="comments_header">
+				<p>COMMENTS</p>
+			</div> <hr />
+			<div class="comments_body mb-5" id="comments_body">
+				<c:if test="${not empty commentsList }">
+					<c:forEach items="${commentsList }" var="comment">
+						<c:if test="${comment.classnum eq 0 }">
 						<div id="${comment.comment_id }" class="mb-3 border-bottom">
 							<span class="userId">${comment.member_id}</span><br/>
 							<div class="d-flex justify-content-start">
-								<p>${comment.comments}</p>
+								<p class="pe-3">${comment.comments}</p>
+								<c:if test="${editAuth eq true }">
 								<i id="comment_deleteBtn_${comment.comment_id}" class="bi bi-x-circle comment_icon"></i>
-								<i id="comment_editBtn" class="bi bi-pen comment_icon"></i>
+								<%-- <i id="comment_editBtn_${comment.comment_id }" class="bi bi-pen comment_icon"></i> --%>
+								</c:if>
 								<i id="co_comment_newBtn_${comment.comment_id}" class="bi bi-chat-dots comment_icon co_comment_newBtn"></i>
+								<i id="co_commnet_reportBtn_${comment.comment_id }" class="bi bi-flag pointer"></i>
 								<input id="comment_commentId_${comment.comment_id }" type="hidden" value="${comment.comment_id }" />
 								<input id="comment_postId" type="hidden" value="${comment.post_id }" />
 								<input id="comment_ordernum" type="hidden" value="${comment.ordernum }" />
 								<input id="comment_categoryId" type="hidden" value="${comment.category_id }" />
 							</div>
 						</div>
-						</c:forEach>
-					</c:if>
+						</c:if>
+						<div id="${comment.comment_id }" class="mb-3 border-bottom offset-1">
+							<span class="userId">${comment.member_id}</span><br/>
+							<div class="d-flex justify-content-start">
+								<p class="pe-3">${comment.comments}</p>
+								<c:if test="${editAuth eq true }">
+								<i id="comment_deleteBtn_${comment.comment_id}" class="bi bi-x-circle comment_icon"></i>
+								<%-- <i id="comment_editBtn_${comment.comment_id }" class="bi bi-pen comment_icon"></i> --%>
+								</c:if>
+								<i id="co_comment_newBtn_${comment.comment_id}" class="bi bi-chat-dots comment_icon co_comment_newBtn"></i>
+								<i id="co_comment_reportBtn_${comment.comment_id }" class="bi bi-flag pointer"></i>
+								<input id="comment_commentId_${comment.comment_id }" type="hidden" value="${comment.comment_id }" />
+								<input id="comment_postId" type="hidden" value="${comment.post_id }" />
+								<input id="comment_ordernum" type="hidden" value="${comment.ordernum }" />
+								<input id="comment_categoryId" type="hidden" value="${comment.category_id }" />
+							</div>
+						</div>
+						<c:if test="${comment.classnum eq 1 }">
+						</c:if>
+					</c:forEach>
+				</c:if>
+			</div>
+			<!-- comments 입력 -->
+			<div id="comment">
+				<div class="form-floating">
+				  <input type="hidden" class="commentForm" name="commentPostId" value="${contents.post_id }"/>
+				  <input type="hidden" class="commentForm" name="commentBoardClass" value="${contents.board_class }"/>
+				  <textarea class="form-control commentForm" placeholder="Leave a comment here" name="commentComments" id="commentTextarea"></textarea>
+				  <label for="commentTextarea">Comments</label>
 				</div>
-				<!-- comments 입력 -->
-				<div id="comment">
-					<div class="form-floating">
-					  <input type="hidden" class="commentForm" name="commentPostId" value="${contents.post_id }"/>
-					  <input type="hidden" class="commentForm" name="commentBoardClass" value="${contents.board_class }"/>
-					  <textarea class="form-control commentForm" placeholder="Leave a comment here" name="commentComments" id="commentTextarea"></textarea>
-					  <label for="commentTextarea">Comments</label>
-					</div>
-					<div class="d-flex justify-content-end">
-						<button id="comment_saveBtn" class="btn btn-outline-success" type="button">저장</button>
-					</div>
-				</div>
-				<!-- /comments 입력 -->
-			</div> <hr/>
-			<div class="paragraph_footer d-flex justify-content-between mb-5">
-				<div>
-					<button id="reportBtn" class="btn">신고</button>
-				</div>
-				<div>
-					<c:if test="${editAuth eq true }">
-						<button id="contentsEdit" class="btn">수정</button>
-						<button id="contentsDelete" class="btn">삭제</button>
-					</c:if>
-					<input id="editAuth" type="hidden" value="${editAuth }" />
-					<button id="goBoard" class="btn" onClick="goBoard(${contents.board_class })">목록</button>
+				<div class="d-flex justify-content-end">
+					<button id="comment_saveBtn" class="btn btn-outline-success" type="button">저장</button>
 				</div>
 			</div>
-		</div>		
+			<!-- /comments 입력 -->
+		</div> <hr/>
+		<div class="paragraph_footer d-flex justify-content-between mb-5">
+			<div>
+				<button id="reportBtn" class="btn">신고</button>
+			</div>
+			<div>
+				<c:if test="${editAuth eq true }">
+					<button id="contentsEdit" class="btn">수정</button>
+					<button id="contentsDelete" class="btn">삭제</button>
+				</c:if>
+				<input id="editAuth" type="hidden" value="${editAuth }" />
+				<button id="goBoard" class="btn" onClick="goBoard(${contents.board_class })">목록</button>
+			</div>
+		</div>
+	 </div>
 		<!-- /컨텐츠 -->
-	</div>
 </section>
 <!-- 변수 -->
 <input type="hidden" id="board_class" value="${contents.board_class }" />

@@ -66,4 +66,14 @@ public class RestCommentController {
 		log.info(commentId);
 		service.deleteComment(commentId);
 	}
+	
+	@PutMapping(value = "/comments") 
+	public void commentReport(Integer commentId) {
+		log.info(commentId);
+		Integer reportNum = service.getCommentReport(commentId);
+		service.commentReport(commentId, reportNum);
+	}
+	
+	
+	
 }

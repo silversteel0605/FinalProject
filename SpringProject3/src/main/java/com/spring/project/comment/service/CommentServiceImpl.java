@@ -42,5 +42,14 @@ public class CommentServiceImpl implements CommentService{
 	public void deleteComment(Integer commentId) {
 		dataMapper.deleteComment(commentId);
 	}
-
+	
+	@Override
+	public void commentReport(Integer commentId, Integer reportNum) {
+		dataMapper.commentReport(commentId, reportNum);
+	}
+	
+	@Override
+	public Integer getCommentReport(Integer commentId) {
+		return dataMapper.getCommentReport(commentId); 
+	}
 }
