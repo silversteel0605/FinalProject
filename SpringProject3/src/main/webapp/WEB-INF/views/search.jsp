@@ -8,9 +8,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta charset="EUC-KR">
 <title>Insert title here</title>
-	<link href="<c:url value="/resources/css/john.css?after"/>" rel="stylesheet" />
+	<link href="<c:url value="/resources/css/template.css?after"/>" rel="stylesheet" />
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-	<link src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=77mbzylhqr"></link>
 	<style>
 		
 		
@@ -20,7 +19,7 @@
 			position: relative;
 		}
 		.image-box {
-			width: 60%;
+			width: 70%;
 			height: 80%;
 			overflow: hidden;
 			maring: 0 auto;
@@ -29,15 +28,23 @@
 			bottom: 0;
 		}
 		.text {
-			width: 40%;
+			width: 30%;
 			height: 100%;
 			padding-right: 30px;
+			position: relative;
 			
 		}
 		
 		.text > h3 {
 			  white-space: nowrap;
 		}
+		
+		.sub-info {
+			position: absolute;
+			bottom: 0;
+		}
+		
+		
 		.image-thumbnail {
 			width: 100%;
 			height: 100%;
@@ -61,6 +68,10 @@
 			.text > * {
 				margin: 0;
 			}
+			
+			.sub-info {
+				position: relative;
+			}
 		}
 	</style>
 </head>
@@ -70,7 +81,9 @@
 		const gugun = '${search.gugun}';
 		const them = '${search.locThem}';
 	</script>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	
+<header>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Navbar</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -106,6 +119,8 @@
     </div>
   </div>
 </nav>
+</header>
+
 <section class="wrap">
 	<div class="container-lg bb mb-5">
 	<div class="sub_title">
@@ -125,8 +140,8 @@
 			
 			<div class="tab-content" id="myTabContent">
 			  <div class="tab-pane fade show active" id="condition" role="tabpanel" aria-labelledby="condition-tab">
-			  <form action="" class="camping-form">
-			  	
+			  <form name="condition" class="camping-form">
+			  	<input type="hidden" name="searchTy" value="condition" />
 				<div class="row g-2 pt-5">
 					<div class="col-md">
 				    <div class="form-floating">
@@ -145,8 +160,8 @@
 				</div>
 				<div class="row g-2 pt-3">
 			  	  <div class="col-md minus-left">
-				    <div class="form-floating minus-left">
-				      <select class="form-select" id="floatingSelectGrid" aria-label="Floating label select example" name="locThem" id="locThem">
+				    <div class="form-floating">
+				      <select class="form-select" id="locThem" aria-label="Floating label select example" name="locThem">
 				        <option value="">전체테마</option>
 						<option value="해변">해변</option>
 						<option value="섬">섬</option>
@@ -162,15 +177,15 @@
 				  </div>				  			
 				  <div class="col-md" id="more">
 				    <div class="form-floating">
-				      <div class="form-select" aria-label="Floating select example">
-				      	전체 상세조건
+				      <div class="form-select" aria-label="Floating select example" >
+				  
 						</div>
 				      <label for="floatingSelectGrid">상세조건을 선택하세요</label>
 				    </div>
 				  </div>
 				  <div class="col-md">
 				    <div class="form-floating">
-				      <input type="text" class="form-control" id="floatingInputGrid" placeholder="캠핑장 키워드">
+				      <input type="text" class="form-control" id="floatingInputGrid" placeholder="캠핑장 키워드" name="keyword">
 				      <label for="floatingInputGrid">캠핑장 키워드</label>
 				    </div>
 				  </div>
@@ -179,7 +194,7 @@
 					<div class="col-md-4 more-col">
 						<div class="moreThem p-3">
 							<div class="more-close mb-2">								
-								<button type="button" class="btn-close" aria-label="Close"></button>
+								<button type="button" class="btn-close" aria-label="Close" id="m-close"></button>
 							</div>
 							<div class="form-check">
 							  <input class="form-check-input" type="checkbox" value="지자체" id="flexCheckDefault"  name="facltDivNm">
@@ -230,7 +245,7 @@
 							  </label>
 							</div>		
 							<div class="more-sub mt-4">						
-								<button type="button" class="btn btn-dark">적용하기</button>	
+								<button type="button" class="btn btn-dark" id="apply">적용하기</button>	
 							</div>
 						</div>
 					</div>
@@ -243,22 +258,23 @@
 					<div class="tag_title pt-5">
 						<div class="tit">#태그로 검색하기</div>
 					</div>
+				
 					<div id="tags" class="pt-5">
-						<button type="button" class="btn btn-outline-dark mt-3">#애견동반</button>
-						<button type="button" class="btn btn-outline-dark mt-3">#수영장</button>
-						<button type="button" class="btn btn-outline-dark mt-3">#산</button>
-						<button type="button" class="btn btn-outline-dark mt-3">#커플</button>
-						<button type="button" class="btn btn-outline-dark mt-3">#경치가 좋은</button>
-						<button type="button" class="btn btn-outline-dark mt-3">#사이트 간격이 넓은</button>
-						<button type="button" class="btn btn-outline-dark mt-3">#봄</button>
-						<button type="button" class="btn btn-outline-dark mt-3">#바닷가</button>
-						<button type="button" class="btn btn-outline-dark mt-3" >#산책길</button>
-						<button type="button" class="btn btn-outline-dark mt-3">#친절한</button>
+						<button type="button" class="btn btn-outline-dark mt-3 tag" id="1">#애견동반</button>
+						<button type="button" class="btn btn-outline-dark mt-3 tag" id="2">#수영장</button>
+						<button type="button" class="btn btn-outline-dark mt-3 tag" id="3">#산</button>
+						<button type="button" class="btn btn-outline-dark mt-3 tag" id="4">#커플</button>
+						<button type="button" class="btn btn-outline-dark mt-3 tag" id="5">#경치가 좋은</button>
+						<button type="button" class="btn btn-outline-dark mt-3 tag" id="6">#사이트 간격이 넓은</button>
+						<button type="button" class="btn btn-outline-dark mt-3 tag" id="7">#봄</button>
+						<button type="button" class="btn btn-outline-dark mt-3 tag" id="8">#바닷가</button>
+						<button type="button" class="btn btn-outline-dark mt-3 tag" id="9">#산책길</button>
+						<button type="button" class="btn btn-outline-dark mt-3 tag" id="10">#친절한</button>
 					</div>
 				</form>			  	
 			  </div>
 			  <div class="submitBtn mb-5">			  
-				  <button type="button" class="btn btn-dark mt-5 mb-5">검색하기</button>
+				  <button type="button" class="btn btn-dark mt-5 mb-5" id="submit">검색하기</button>
 			  </div>
 			</div>
 </div>
@@ -271,8 +287,24 @@
 		  	
 		    <div class="text">
 		        <h3><a href="./CampInfo?contentId=${list.contentId }">${list.facltNm }</a></h3>
-		        <p>${list.lineIntro }</p>
-		        <p class="location"><span class="fa fa-map-marker"></span> ${list.addr1 }</p>
+		        <div class="sub-info">
+			        <p class="mb-0">${list.doNm }/${list.sigunguNm }</p>
+			        <p class="mb-0 lct">	
+				        <c:forTokens var="lct" items="${list.lctCl }" delims="," varStatus="status">
+				        	<c:choose>
+				        		<c:when test="${status.last }">
+				        			${lct } 
+				        		</c:when>
+				        		<c:otherwise>
+				        			${lct } |
+				        		</c:otherwise>
+				        	</c:choose>
+				        </c:forTokens>
+				        <c:if test="${empty list.lctCl }">
+				        	<br />
+				        </c:if>
+			        </p>        
+		        </div>
 		      
 		   	</div>
 		   	<div class="image-box">
@@ -281,9 +313,9 @@
 		  </div>
 		</div>
 	</c:forEach>  
+	</div>
 </div>
 
-</div>
 <div class="container-lg">
 	<div class="row">
   <div class="col-12">
@@ -323,53 +355,56 @@
 	
 </section>
 
-<div class="container-fluid">
-  <footer class="row row-cols-5 py-5 my-5 border-top">
-    <div class="col">
-      <a href="/" class="d-flex align-items-center mb-3 link-dark text-decoration-none">
-        <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
-      </a>
-      <p class="text-muted"> 2021</p>
-    </div>
+<footer>
+	<div class="container-fluid">
+	  <div class="row row-cols-5 py-5 my-5 border-top">
+	    <div class="col">
+	      <a href="/" class="d-flex align-items-center mb-3 link-dark text-decoration-none">
+	        <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+	      </a>
+	      <p class="text-muted"> 2021</p>
+	    </div>
+	
+	    <div class="col">
+	
+	    </div>
+	
+	    <div class="col">
+	      <h5>Section</h5>
+	      <ul class="nav flex-column">
+	        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+	        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+	        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+	        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+	        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+	      </ul>
+	    </div>
+	
+	    <div class="col">
+	      <h5>Section</h5>
+	      <ul class="nav flex-column">
+	        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+	        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+	        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+	        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+	        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+	      </ul>
+	    </div>
+	
+	    <div class="col">
+	      <h5>Section</h5>
+	      <ul class="nav flex-column">
+	        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+	        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+	        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+	        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+	        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+	      </ul>
+	    </div>
+	  </div>
+	</div>
+</footer>
 
-    <div class="col">
-
-    </div>
-
-    <div class="col">
-      <h5>Section</h5>
-      <ul class="nav flex-column">
-        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
-        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
-        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
-        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
-        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
-      </ul>
-    </div>
-
-    <div class="col">
-      <h5>Section</h5>
-      <ul class="nav flex-column">
-        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
-        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
-        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
-        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
-        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
-      </ul>
-    </div>
-
-    <div class="col">
-      <h5>Section</h5>
-      <ul class="nav flex-column">
-        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
-        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
-        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
-        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
-        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
-      </ul>
-    </div>
-  </footer>
-</div>
 
 
 <script src="//code.jquery.com/jquery.min.js"></script>
@@ -377,6 +412,7 @@
 <script>
 	$(function() {
 		setHeight();
+		setMoreText();
 		$(window).resize(function() {
 			if($('div.more-col').css('visibility') === 'visible') {				
 				showMoreThem();
@@ -386,7 +422,14 @@
 		$('#more').click(function() {
 			setMoreThem();
 		})
-		
+		$('#apply').click(function() {
+			offMoreThem();
+			setMoreText();
+		})
+		$('#m-close').click(function() {
+			resetMoreThem();
+			offMoreThem();
+		})
 	})
 	
 	function setHeight() {
@@ -394,15 +437,23 @@
 		if($(window).width() < 751) {	
 			$('div.camp_index').css('height', '');			
 			$('div.image-box').css('height', Math.ceil(width * 0.5));	
+		
 			$('div.col-md-6').removeClass('p-5');
 			$('div.col-md-6').addClass('p-3');
 			$('#tag').css('height', '');
+			$('p.lct').addClass('mb-3');
+			console.log($('.minus-left').parent());
+			$('.minus-left').parent().removeClass('pt-3');
+			$('.minus-left').parent().addClass('mt-0');
 		} else {
 			$('div.camp_index').css('height', Math.ceil(width * 0.5));			
 			$('div.image-box').css('height', '80%');	
 			$('div.col-md-6').removeClass('p-3');
-			$('div.col-md-6').addClass('p-5');				
+			$('div.col-md-6').addClass('p-5');
+			$('p.lct').removeClass('mb-3');
 			$('#tag').css('height', $('#condition').height())
+			$('.minus-left').parent().addClass('pt-3');
+			$('.minus-left').parent().removeClass('mt-0');
 		}
 	}
 	
@@ -410,8 +461,8 @@
 		if($('div.more-col').css('visibility') === 'hidden') {
 			showMoreThem()
 		} else {			
-			$('div.more-col').css('visibility', 'hidden');
-			$('div.more-col').css('visibility', '0');
+			resetMoreThem();
+			offMoreThem();
 		}
 	}
 	
@@ -422,16 +473,35 @@
 		$('div.more-col').css('opacity', '1');
 		$('div.more-col').css('left', left - minusLeft);
 	}
+	
+	function offMoreThem() {
+		$('div.more-col').css('visibility', 'hidden');
+		$('div.more-col').css('visibility', '0');
+	}
+	
+	function resetMoreThem() {
+		$('div.moreThem').children('div.form-check').children().prop('checked', false);
+	}
+	
+	function setMoreText() {
+		const checked = $('div.moreThem').children('div.form-check').children('input:checked');
+		var text = '';
+		checked.each(function (i,chk) {
+			text += $(chk).val();
+			if(i < checked.length - 1) {
+				text += ',';
+			}
+		}) 
+		$('#more').children().children('div.form-select').text(text);
+	}
+	
 </script>
 <script src="<c:url value="/resources/js/chain.select.js?after"/>"></script>
-<!--  
 <script src="<c:url value="/resources/js/search.event.listener.js"/>"></script>
-<script src="<c:url value="/resources/js/main.js"/>"></script>
 <script>
 	function keepCondition() {
 		$('input[name=keyword]').val('${search.keyword}');
 		$('#locThem').val('${search.locThem}').prop('selected', true);
-		const facltDivNm = new Array();
 		<c:forEach var="i" items="${search.facltDivNm}">
 			$('input[value=${i }]').prop('checked', true);
 		</c:forEach>
@@ -446,13 +516,12 @@
 		</c:forEach>
 		<c:forEach var="i" items="${search.tagId}">
 			$('#${i}').css('background-color', '#343a40');
-			$('#${i}').css('color', '#ffffff');
+			$('#${i}').css('color', '#212529');
 			$('#${i}').addClass('active');
 		</c:forEach>
 		
 	}
 	keepCondition();
 </script>
--->
 </body>
 </html>

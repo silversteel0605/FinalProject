@@ -85,5 +85,16 @@ public class HomeController {
 		log.info("Connect test");
 		return "freeBoard2";
 	}
+
+	@RequestMapping(value = "/template", method = RequestMethod.GET )
+	public String template() {
+		return "template";
+	}
+	@RequestMapping(value = "/map2", method = RequestMethod.GET )
+	public String map2() {
+		return "map-search";
+	}
+	
+	
 }
 
