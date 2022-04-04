@@ -24,15 +24,12 @@ public class PostRestController {
 	
 	@GetMapping(value = "/individual", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<PostVO> individualPage(String member_id) {
-		log.info("restµé¾î¿È: " + member_id);
-		
 		List<PostVO> postList = postService.getIndividual(member_id);
 		return postList;
 	}
 	
 	@PutMapping(value = "/main_paragraph", produces = MediaType.APPLICATION_JSON_VALUE)
 	public Integer report(Integer post_id) {
-		log.info("post_id: " + post_id);
 		Integer report = postService.getReport(post_id);
 		postService.addReport(post_id, report);
 		report = postService.getReport(post_id);

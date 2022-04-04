@@ -100,7 +100,7 @@
 						</select>
 					</div>
 					<div class="col-md-11">
-						<input type="text" class="form-control" aria-label="Text input with dropdown button" name="title" id="title" placeholder="제목을 입력해 주세요" value="writeTestTitle">
+						<input type="text" class="form-control" aria-label="Text input with dropdown button" name="title" id="title" placeholder="제목을 입력해 주세요">
 					</div>
 				</div>
 			</c:otherwise>
