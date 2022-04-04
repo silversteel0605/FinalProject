@@ -13,8 +13,9 @@ writeSavBtn.addEventListener('click', (e) => {
 	
 	const title = document.getElementById('title').value;
 	const writeCategory = document.getElementById('writeCategory').value;
-	const board_classNum = document.getElementById('board_class').value;
-	const board_class = board_classNum == 0 ? 'freeBoard' : 'supportBoard';
+	// const board_classNum = document.getElementById('board_class').value;
+	//const board_class = board_classNum == 0 ? 'freeBoard' : 'supportBoard';
+	const board_class = document.getElementById('board_class').value;
 	var contents = CKEDITOR.instances.writeEditor.getData();
 	const post_id = 0;
 	const edit = false;
@@ -38,7 +39,6 @@ writeSavBtn.addEventListener('click', (e) => {
 		console.log("수정을 추가한 배열: ", writeContents);
 	}
 	
-	console.log("post보내기 직전");
 	writeSend('./write', {'contents': writeContents});
 	
 });

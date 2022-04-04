@@ -77,7 +77,7 @@
 					<div class="col-md-9">
 						<div class="d-flex justify-content-end">
 					        <a class="ms-3 align-self-bottom" href="./board?categoryName=boardAll">전체</a>
-					        <a class="ms-3" href="./board?categoryName=daily">자유</a>
+					        <a class="ms-3" href="./board?categoryName=daily">일상</a>
 					        <a class="ms-3" href="./board?categoryName=showoff">자랑</a>
 					        <a class="ms-3" href="./board?categoryName=buy">삽니다</a>
 					        <a class="ms-3" href="./board?categoryName=sell">팝니다</a>
@@ -171,6 +171,9 @@
 	<!-- /Paging -->	
 </section>
 <!-- /Contents -->
+<!-- 변수 -->
+<input type="hidden" id="board_class" value="${board_class }" />
+
 <!-- Modal & PopUp Menu -->
 <div id="popUpMenu" style="display:none;" class="">
 	<ul class="list-group list-group-flush">
