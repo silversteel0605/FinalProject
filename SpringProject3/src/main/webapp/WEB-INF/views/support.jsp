@@ -63,7 +63,7 @@
 			<div class="col-md-5">
 				<div class="row">
 					<form action="./support" method="POST" accept-charset="EUC-KR">
-						<div class="input-group input-group-sm mb-3">
+						<div class="input-group input-group-sm mb-3 align-self-bottom">
 							<select id="inputState" class="form-select form-select-sm col-md-3" name="searchByWhat">
 								<option selected value="all">전체</option>
 								<option value="title">제목</option>
@@ -78,7 +78,7 @@
 			<div class="col-md-5 offset-md-2 d-flex align-items-end navCategory">
 			  	<div class="row flex-fill">
 				    <div class="col-md-9">
-					    <div class="d-flex justify-content-end align-self-end">
+					    <div class="d-flex justify-content-end">
 						    <a class="categoryClass ms-3" href="./support?categoryName=supportAll">전체</a>
 						    <a class="categoryClass ms-3" href="./support?categoryName=notice">공지사항</a>
 						    <a class="categoryClass ms-3" href="./support?categoryName=askEdit">수정요청</a>

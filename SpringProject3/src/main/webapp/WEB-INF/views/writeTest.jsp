@@ -4,26 +4,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- Bootstrap CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-<title>Insert title here</title>
-<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Arizonia&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="<c:url value="/resources/css/animate.css"/>"/>
-  <link rel="stylesheet" href="<c:url value="/resources/css/owl.carousel.min.css"/>"/>
-  <link rel="stylesheet" href="<c:url value="/resources/css/owl.theme.default.min.css"/>"/>
-  <link rel="stylesheet" href="<c:url value="/resources/css/magnific-popup.css"/>"/>
-  <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap-datepicker.css"/>"/>
-  <link rel="stylesheet" href="<c:url value="/resources/css/jquery.timepicker.css"/>"/>
-  <link rel="stylesheet" href="<c:url value="/resources/css/flaticon.css"/>" />
-  <link rel="stylesheet" href="<c:url value="/resources/css/style.css"/>"/>
-  <!-- 페이지 css/js -->
-  <link rel="stylesheet" href="<c:url value="/resources/css/jangec.css"/>"/>
-  <script src="<c:url value="/resources/ckeditor/ckeditor.js"/>"></script>
-  <!-- <script src="https://cdn.ckeditor.com/4.18.0/standard/ckeditor.js"></script> -->
+	<meta charset="EUC-KR">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Bootstrap CSS -->
+	<title>Insert title here</title>
+	<!-- 페이지 css/js -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="<c:url value="/resources/css/jangec.css"/>"/>
+	<link rel="stylesheet" href="<c:url value="/resources/css/template.css"/>"/>
+	<script src="<c:url value="/resources/ckeditor/ckeditor.js"/>"></script>
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
@@ -60,57 +49,80 @@
 </section>
 
 <!-- 수정 -->
-<section class="ftco-section">
-	<div class="container">
-		<!-- 컨텐츠 -->
-		<div class="contents">
-			<div class="container">
-				<div class="h3">
-				<c:choose>
-				<c:when test="${board_class eq 'freeBoard' }">자유게시판</c:when>
-				<c:otherwise>고객센터</c:otherwise>
-				</c:choose>
-				</div>
-			    <form id="writeForm">
-			    	<c:choose>
-					<c:when test="${board_class eq 'freeBoard' }">
- 					<div class="input-group mb-3">
-						<select id="writeCategory" class="form-select col-md-3" name="contents_category">
+<!-- 컨텐츠 -->
+<section class="section">
+	<div class="container-lg">
+		<div class="d-flex justify-content-center">
+			<c:choose>
+			<c:when test="${board_class eq 'freeBoard' }">
+			<div class="mt-5 mb-5 d-flex flex-column">
+				<p class="h1 text-center">B&nbsp;O&nbsp;A&nbsp;R&nbsp;D</p>
+				<p class="text-center">마음껏&nbsp;즐기다</p>
+			</div>
+			</c:when>
+			<c:otherwise>
+			<div class="mt-5 mb-5 d-flex flex-column">
+				<p class="h1 text-center">C&nbsp;O&nbsp;N&nbsp;T&nbsp;A&nbsp;C&nbsp;T</p>
+				<p class="text-center">고객의&nbsp;소리에&nbsp;귀&nbsp;기울입니다</p>
+			</div>
+			</c:otherwise>
+			</c:choose>
+		</div>
+		<div class="border-top mb-3 border-dark border-3"></div>
+	</div>
+	<div class="container-lg">
+	    <form id="writeForm">
+	    	<div class="row">
+	    	<c:choose>
+			<c:when test="${board_class eq 'freeBoard' }">
+				<div class="input-group mb-3">
+					<div class="col-md-1">
+						<select id="writeCategory" class="form-select" name="contents_category">
 							<option selected value="daily">자유</option>
 							<option value="showoff">자랑</option>
 							<option value="buy">삽니다</option>
 							<option value="sell">팝니다</option>
 						</select>
-						<input type="text" class="form-control" aria-label="Text input with dropdown button" name="title" id="title" placeholder="제목을 입력해 주세요">
 					</div>
-					</c:when>
-					<c:otherwise>
- 					<div class="input-group mb-3">
+					<div class="col-md-11">
+						<input type="text" class="form-control col-md-9" aria-label="Text input with dropdown button" name="title" id="title" placeholder="제목을 입력해 주세요">
+					</div>
+				</div>
+			</c:when>
+			<c:otherwise>
+				<div class="input-group mb-3">
+					<div class="col-md-1">
 						<select id="writeCategory" class="form-select col-md-3" name="contents_category">
 							<c:if test="${manager eq 'admin' }">
 								<option selected value="notice">공지사항</option>
 							</c:if>
 							<option value="askEdit">건의사항</option>
 						</select>
+					</div>
+					<div class="col-md-11">
 						<input type="text" class="form-control" aria-label="Text input with dropdown button" name="title" id="title" placeholder="제목을 입력해 주세요" value="writeTestTitle">
 					</div>
-					</c:otherwise>
-			    </c:choose>
-	       			<div class="mb-3">
-						<label for="writeEditor">내용</label>
-						<textarea class="form-control" rows="5" name="contents" id="writeEditor" placeholder="내용을 입력해 주세요" >
-							<c:if test="${contents.contents != null }">
-								${contents.contents }
-							</c:if>
-						</textarea>
-					</div>	
-			    </form>
-				<button id="writeSavBtn" class="btn">저장</button>
-			</div>
-		<!-- /컨텐츠 -->	
-		</div>		
+				</div>
+			</c:otherwise>
+	    	</c:choose>
+	    	</div>
+   			<div class="mb-3">
+				<label for="writeEditor">내용</label>
+				<textarea class="form-control" rows="5" name="contents" id="writeEditor" placeholder="내용을 입력해 주세요" >
+					<c:if test="${contents.contents != null }">
+						${contents.contents }
+					</c:if>
+				</textarea>
+			</div>	
+	    </form>
+	</div>
+	<div class="container-lg">
+		<div class="d-flex justify-content-end">
+			<button id="writeSavBtn" class="btn">저장</button>
+		</div>
 	</div>
 </section>
+<!-- /컨텐츠 -->	
 
 <!-- 변수 -->
 <input type="hidden" id="board_class" value="${board_class }" />
@@ -119,8 +131,6 @@
 <input type="hidden" id="edit" value="true" />
 </c:if>
 
-<!-- Modal -->
-	
 <!-- /수정 -->
 
 <section class="ftco-intro ftco-section ftco-no-pt">
@@ -207,26 +217,10 @@
 <!-- loader -->
 <%-- <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div> --%>
 
-
-<script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
-<script src="<c:url value="/resources/js/jquery-migrate-3.0.1.min.js"/>"></script>
-<script src="<c:url value="/resources/js/popper.min.js"/>"></script>
-<script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
-<script src="<c:url value="/resources/js/jquery.easing.1.3.js"/>"></script>
-<script src="<c:url value="/resources/js/jquery.waypoints.min.js"/>"></script>
-<script src="<c:url value="/resources/js/jquery.stellar.min.js"/>"></script>
-<script src="<c:url value="/resources/js/owl.carousel.min.js"/>"></script>
-<script src="<c:url value="/resources/js/jquery.magnific-popup.min.js"/>"></script>
-<script src="<c:url value="/resources/js/jquery.animateNumber.min.js"/>"></script>
-<script src="<c:url value="/resources/js/bootstrap-datepicker.js"/>"></script>
-<script src="<c:url value="/resources/js/scrollax.min.js"/>"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-<script src="<c:url value="/resources/js/google-map.js"/>"></script>
-<script src="<c:url value="/resources/js/main.js"/>"></script>
 <!-- 페이지 js -->
 <script src="<c:url value="/resources/js/jangec.js"/>"></script>
 <script src="<c:url value="/resources/js/jangWriteTest.js"/>"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
