@@ -75,7 +75,11 @@ public class HomeController {
 		
 		return "profile";
 	}
-	
+	@RequestMapping(value = "/write2", method = RequestMethod.GET)
+	public String write() {
+		
+		return "write2";
+	}
 
 
 	@RequestMapping(value = "/camping_index", method = RequestMethod.GET )
