@@ -119,3 +119,29 @@
     left: 50%;
 	transform: translate(-50%,-50%);
 }
+@media screen and (max-width: 1092px){
+	#modal_day>.modal_body{
+		width:500px;
+	}
+	#modal_place>.modal_body{
+		width:500px;
+	}
+}
+@media screen and (max-width: 600px){
+	#modal_day>.modal_body{
+		width:300px;
+	}
+	#modal_place>.modal_body{
+		width:300px;
+	}
+	#box_text{
+	    width: 200px;
+	    height: 50px;
+	    padding: 0 25px;
+	}
+	#box_submit{
+	    left: -5px;
+	    width: 100px;
+	    height: 50px;
+	}
+}
