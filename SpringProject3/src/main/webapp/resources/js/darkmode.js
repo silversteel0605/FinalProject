@@ -7,7 +7,9 @@ var darkmodebg = document.getElementById("darkmodebg");
 var main_ani = document.getElementById("main_ani");
 var moon = document.getElementById("moon");
 var date = new Date();
-var potal = document.getElementsByClassName("potal")
+var potal = document.getElementsByClassName("potal");
+var dropmenu = document.getElementById("dropmenu");
+var dropitem = document.getElementsByClassName('dropdown_item');
 date.setDate(date.getDate()+1);
 
 function getCookie(cname) {        // 쿠키 체크 함수
@@ -65,6 +67,8 @@ if(getCookie("DarkMode")=="Y"){  // 화면이동시에 쿠키값확인후 체크
     bird1.style.display = "none"
 	bird2.style.display = "none"
 	$(main_ani).addClass('darkmode');
+	$(dropmenu).addClass('darkmodeY');
+	$(dropitem).addClass('darkmodeY');
 	moon.style.display = "flex"
 	
 }else if(getCookie("DarkMode")=="N"){

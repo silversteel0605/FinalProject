@@ -22,15 +22,12 @@
     <link rel="stylesheet" href="<c:url value="/resources/css/darkmode.css"/>"/>
     <!-- 모달 css -->
     <link rel="stylesheet" href="<c:url value="/resources/css/modal.css"/>"/>
-    
+    <!-- 드롭다운 -->
+    <link rel="stylesheet" href="<c:url value="/resources/css/dropdown.css"/>"/>
     <!-- 현제 페이지용 css -->
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/main.css"/>"/>
-	<style>
-		/*
-			각 페이지 css
-		*/
-	</style>
+
 </head>
 <body style="overflow-x: hidden">
 	
@@ -328,6 +325,7 @@
 
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <script src="<c:url value="/resources/js/home.js"/>"></script>
+<script src="<c:url value="/resources/js/dropdown.js"/>"></script>
 
 </body>
 </html>
