@@ -85,15 +85,10 @@ function create_review_form(type){
 	//newMainForm.setAttribute("method", "get");
 	
 	if(type == 1){
-		//newMainForm.setAttribute("action", "./reviewUpdata");
-		
-		newMainForm.setAttribute("method", "put");	
+		newMainForm.setAttribute("action", "./reviewUpdata");
 		
 	}else{
-		
-		newMainForm.setAttribute("method", "post");
-		
-		//newMainForm.setAttribute("action", "./reviewSave");	
+		newMainForm.setAttribute("action", "./reviewSave");	
 	}
 	
 	return newMainForm;
