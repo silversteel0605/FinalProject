@@ -282,7 +282,7 @@
 <div class="container-lg lbb">
     <div class="row">
      <c:forEach var="list" items="${lists }">
-		<div class="col-md-6">
+		<div class="camp col-md-6">
 		  <div class="camp_index">
 		  	
 		    <div class="text">
@@ -438,8 +438,8 @@
 			$('div.camp_index').css('height', '');			
 			$('div.image-box').css('height', Math.ceil(width * 0.5));	
 		
-			$('div.col-md-6').removeClass('p-5');
-			$('div.col-md-6').addClass('p-3');
+			$('div.camp.col-md-6').removeClass('p-5');
+			$('div.camp.col-md-6').addClass('p-3');
 			$('#tag').css('height', '');
 			$('p.lct').addClass('mb-3');
 			console.log($('.minus-left').parent());
@@ -448,8 +448,8 @@
 		} else {
 			$('div.camp_index').css('height', Math.ceil(width * 0.5));			
 			$('div.image-box').css('height', '80%');	
-			$('div.col-md-6').removeClass('p-3');
-			$('div.col-md-6').addClass('p-5');
+			$('div.camp.col-md-6').removeClass('p-3');
+			$('div.camp.col-md-6').addClass('p-5');
 			$('p.lct').removeClass('mb-3');
 			$('#tag').css('height', $('#condition').height())
 			$('.minus-left').parent().addClass('pt-3');

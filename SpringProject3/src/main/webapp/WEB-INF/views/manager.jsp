@@ -293,7 +293,7 @@ String member_id = (String)session.getAttribute("member_id");
 						  <input class="form-control form-control-sm" id="pictureOfSite" type="file" multiple>
 						</div>
 			      	</form>
-			      	<button type="button" class="btn btn-primary" id="camp_add">추가</button>
+			      	<button type="button" class="btn btn-dark" id="camp_add">추가</button>
 				  </div>
 				</div>
 	      	</div>	
@@ -540,29 +540,13 @@ String member_id = (String)session.getAttribute("member_id");
 <script src="<c:url value="/resources/js/scrollax.min.js"/>"></script>
 <script src="<c:url value="/resources/js/main.js"/>"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" ></script>
-<script src="<c:url value="/resources/js/pagination.js?after"/>"></script>
 <script src="<c:url value="/resources/js/jangManager.js?after"/>"></script>
-<script src="<c:url value="/resources/js/contextpath.js?after"/>"></script>
-<script src="<c:url value="/resources/js/set.post.js?after"/>"></script>
 <script src="<c:url value="/resources/js/manager.set.data.js?after"/>"></script>
+<script src="<c:url value="/resources/js/pagination.js?after"/>"></script>
+<script src="<c:url value="/resources/js/set.post.js?after"/>"></script>
+<script src="<c:url value="/resources/js/contextpath.js?after"/>"></script>
 <script src="<c:url value="/resources/js/manager.rest.js?after"/>"></script>
-<script>
-(function() {
-  "use strict";
-  window.addEventListener("load", function() {
-    var form = document.getElementById("needs-validation");
-    form.addEventListener("submit", function(event) {
-      if (form.checkValidity() == false) {
-        event.preventDefault();
-        event.stopPropagation();
-        form.classList.add("was-validated");
-      }
-      
-      // 서버 연동 처리
-    }, false);
-  }, false);
-}());
-</script>
+
 <!-- 주소검색 -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>

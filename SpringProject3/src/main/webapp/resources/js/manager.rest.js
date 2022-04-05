@@ -32,6 +32,7 @@ $('#review').click(function() {
 })
 
 $('#sup').click(function() {
+	console.log('hello');
 	uri = 'board_class=1';
 	getSupList(1);
 })
@@ -69,17 +70,18 @@ $('.decl_selc').change(function(e) {
 	} else {
 		uri += value;
 	}
-	console.log(uri);
 	selectPage(name, 1);
+})
+
+
+camp.addEventListener('click', () => {
+	console.log('hello');
+	uri='';
+	getCampingList(1);
 })
 
 camp_sub.addEventListener('click', () => {
 	uri = `searchTy=condition&${camp_selc.value}=${camp_srch.value}`
-	getCampingList(1);
-})
-
-camp.addEventListener('click', () => {
-	uri='';
 	getCampingList(1);
 })
 
@@ -91,11 +93,12 @@ camp_add.addEventListener('click', () => {
 $('#pills-home-tab').click(function() {
 	$('#camp_selc').show();
 	$('#paging').show();
+	$('#camp_search_field').show();
 })
 $('#pills-profile-tab').click(function() {
-	console.log('hello')
 	$('#camp_selc').hide();
 	$('#paging').hide();
+	$('#camp_search_field').hide();
 })
 
 
@@ -105,7 +108,7 @@ $('#pills-profile-tab').click(function() {
 function campingBtn(btn) {
 	var tr = $(btn).parent().parent();
 	var td = tr.children();
-	var contentId = td.eq(2).text();
+	var contentId = td.eq(1).text();
 	if (btn.innerText === '수정') {
 		makeUpdateWindow(contentId);
 	} else {
@@ -159,7 +162,7 @@ function getBoardList(nowPage) {
 		} else {
 			total = 0;
 		}
-		pagination(total, nowPage, 10, 10);
+		pagination(total, nowPage, 10, 5);
 		drawPage('board');
 	});	
 }
@@ -187,7 +190,7 @@ function getSupList(nowPage) {
 		} else {
 			total = 0;
 		}
-		pagination(total, nowPage, 10, 10);
+		pagination(total, nowPage, 10, 5);
 		drawPage('sup');
 	});	
 }
@@ -218,7 +221,7 @@ function getReviewList(nowPage) {
 		} else {
 			total = 0;
 		}
-		pagination(total, nowPage, 10, 10);
+		pagination(total, nowPage, 10, 5);
 		drawPage('review');
 	});	
 }
@@ -238,7 +241,10 @@ function permitting(btn) {
 		  contentType : 'application/json',
 		  success : function(result) {
 			if(result == 1) {
-				alert("가입신청을 허용했습니다")
+				alert("가입신청을 허용했습니다");
+			} else {
+				alert("이미 가입신청이 되었습니다");
+				
 			}
 	    },
 	    error: function(request, status, error) {
@@ -272,7 +278,7 @@ function getCommentList(nowPage) {
 			total = 0;
 		}
 		console.log(total)
-		pagination(total, nowPage, 10, 10);
+		pagination(total, nowPage, 10, 5);
 		drawPage('comment');
 	});	
 }
@@ -334,8 +340,8 @@ function getMemberList(nowPage) {
 			+ '<td>' + member.rn + '</td>' 
 			+ '<td>' + member.member_id + '</td>' 
 			+ '<td>' + member.member_name + '</td>' 
-			+ '<td>' + member.addr1 + '</td>' 
 			+ '<td>' + member.email + '</td>'
+			+ '<td>' + member.addr1 + '</td>' 
 			+ '</tr>');				
 		})
 		if (res.length > 0) {			
@@ -344,7 +350,7 @@ function getMemberList(nowPage) {
 			total = 0;
 		}
 
-		pagination(total, nowPage, 10, 10);
+		pagination(total, nowPage, 10, 5);
 		drawPage('member');
 	});	
 }
@@ -365,8 +371,8 @@ function getBMemberList(nowPage) {
 			+ '<td>' + member.camp + '</td>' 
 			+ '<td>' + (member.permit == 1 ?
 			 '완료</td>' :
-			 '가입신청</td>'
-		 	+ '<td><button type="button" class="btn btn-link" onclick="permitting(this)">허용하기</button></td>')
+			 '가입신청</td>')
+		 	+ '<td><button type="button" class="btn btn-link" onclick="permitting(this)">허용하기</button></td>'
 			+ '</tr>');				
 		})
 		if (res.length > 0) {			
@@ -375,7 +381,7 @@ function getBMemberList(nowPage) {
 			total = 0;
 		}
 
-		pagination(total, nowPage, 10, 10);
+		pagination(total, nowPage, 10, 5);
 		drawPage('Bmember');
 	});	
 }
@@ -437,8 +443,8 @@ function getCampingList(nowPage) {
 			+ '<td>' + camping.rn + '</td>' 
 			+ '<td>' + camping.contentId + '</td>' 
 			+ '<td>' + camping.facltNm + '</td>' 
-			+ '<td>' + camping.rn + '</td>' 
-			+ '<td>' + camping.rn + '</td>'
+			+ '<td>' + camping.tel + '</td>' 
+			+ '<td>' + camping.doNm + '</td>'
 			+ '<td><button type="button" class="btn btn-link" onclick="campingBtn(this)">수정</button>'
 			+ '<button type="button" class="btn btn-link" onclick="campingBtn(this)">삭제</button></td>'  
 			+ '</tr>');				
@@ -448,7 +454,7 @@ function getCampingList(nowPage) {
 		} else {
 			total = 0;
 		}
-		pagination(total, nowPage, 10, 10);
+		pagination(total, nowPage, 10, 5);
 		drawPage('camping');
 	});	
 }
@@ -458,20 +464,20 @@ function getCampingList(nowPage) {
 // paging
 function drawPage(tab) {
 	$("#paging").empty();
-	$('#paging').append('<li onclick="paging(this)"><a>&lt;&lt;</a></li>')
-	$('#paging').append('<li onclick="paging(this)"><a>&lt;</a></li>')
+	$('#paging').append('<li class="page-item" onclick="paging(this)"><a class="page-link arrow">&lt;&lt;</a></li>')
+	$('#paging').append('<li "page-item" onclick="paging(this)"><a  class="page-link arrow">&lt;</a></li>')
 	for(var p = startPage; p <= endPage; ++p) {
 		if (p == nowPage) {
-			$('#paging').append(`<li class="active" onclick="paging(this)"><a>` + p + '</a></li>')			
+			$('#paging').append(`<li class="page-item active" onclick="paging(this)"><a class="page-link">` + p + '</a></li>')			
 		} else {
-			$('#paging').append(`<li onclick="paging(this)"><a>` + p + '</a></li>')			
+			$('#paging').append(`<li class="page-item" onclick="paging(this)"><a class="page-link">` + p + '</a></li>')			
 		}
 		
 	}
-	$('#paging').append('<li onclick="paging(this)"><a>&gt;</a></li>')
-	$('#paging').append('<li onclick="paging(this)"><a>&gt;&gt;</a></li>')
+	$('#paging').append('<li class="page-item" onclick="paging(this)"><a class="page-link arrow">&gt;</a></li>')
+	$('#paging').append('<li class="page-item" onclick="paging(this)"><a class="page-link arrow">&gt;&gt;</a></li>')
 	$('#paging').removeClass();
-	$('#paging').addClass(tab);
+	$('#paging').addClass(tab + ' pagination');
 }
 
 

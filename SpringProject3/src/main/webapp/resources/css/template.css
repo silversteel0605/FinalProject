@@ -29,6 +29,11 @@ li {
 	background: #ffffff  !important;
 }
 
+.nav-link.active[area=camp] {
+	background: #212529 !important;
+	color: #ffffff !important;
+}
+
 .nav-link, .nav-link:hover {
 	color: black !important;
 }
@@ -104,6 +109,7 @@ li {
     letter-spacing: 14px !important;
     font-family: Lato-Bold !important;
     color: #000 !important;
+    text-indent: 14px;
 }
 
 .submitBtn {

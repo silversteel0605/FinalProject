@@ -61,7 +61,7 @@ public class HomeController {
 	@RequestMapping(value = "/manager", method = RequestMethod.GET)
 	public String manager() {
 		
-		return "manager";
+		return "new.manager";
 	}
 
 	@RequestMapping(value = "/updateWindow", method = RequestMethod.GET)

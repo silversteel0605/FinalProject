@@ -18,7 +18,7 @@
 		)
 	</insert>
 	<insert id="addData">
-		insert inzto camping_list (contentId, addr1, addr2, doNm, sigunguNm, facltNm, lineIntro) 
+		insert into camping_list (contentId, addr1, addr2, doNm, sigunguNm, facltNm, lineIntro) 
 		values (content_id_seq.nextval, #{addr1}, #{addr2}, #{doNm}, #{sigunguNm}, #{facltNm}, #{lineIntro})
 	</insert>
 	<select id="getInfo" resultType="com.spring.project.camping.DTO.CampingVO">
