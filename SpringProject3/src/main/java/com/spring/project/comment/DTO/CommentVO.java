@@ -1,9 +1,11 @@
 package com.spring.project.comment.DTO;
 
+import com.spring.project.utill.PageSearchVO;
+
 import lombok.Data;
 
 @Data
-public class CommentVO {
+public class CommentVO extends PageSearchVO{
 	private String comment_id;      
 	private String post_id;    
 	private String member_id;
@@ -18,6 +20,7 @@ public class CommentVO {
 	private int view;      
 	private int rn;
 	private int total;  
+	private String order;
 	
 	public void blinding() {
 		setBlind("true");

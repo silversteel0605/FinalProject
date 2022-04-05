@@ -17,7 +17,8 @@ public class MemberVO extends PageSearchVO{
 	private int member_type;
 	private String email;
 	private String tel;
-	private int permit;
+	private String permit;
 	private int total;
 	private int rn;
+	private String order;
 }

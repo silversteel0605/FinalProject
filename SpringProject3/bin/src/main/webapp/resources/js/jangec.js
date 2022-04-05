@@ -4,8 +4,10 @@ const popUpMenu = document.getElementById('popUpMenu');
 document.addEventListener('click', (e) => {
 	const className = e.target.className;
 	const targetId = e.target.id;
+
 	
-	if (className === 'userId') {
+	if (className === 'userId pointer') {
+
 		popUpMenu.style.position = 'absolute';
 		popUpMenu.style.zIndex = 99999;
 		popUpMenu.style.left = `${e.pageX}px`;
@@ -29,3 +31,8 @@ document.addEventListener('click', (e) => {
 	});
 	
 });
+
+// 게시글보기
+function mainContents(post_id) {
+	location.href = `/project/main_paragraph?post_id=${post_id}`
+};

@@ -1,6 +1,6 @@
 <%@page import="com.spring.project.review.DTO.CampingReviewDTO"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+    pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
@@ -21,13 +21,16 @@
   <link rel="stylesheet" href="<c:url value="/resources/css/jquery.timepicker.css"/>"/>
   <link rel="stylesheet" href="<c:url value="/resources/css/flaticon.css"/>" />
   <link rel="stylesheet" href="<c:url value="/resources/css/style.css"/>"/>
-  <!-- JangEc ∞≥¿Œ CSS/Script -->
+  <!-- JangEc Í∞úÏù∏ CSS/Script -->
   <link rel="stylesheet" href="<c:url value="/resources/css/jangec.css"/>"/>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  
+  <script src="<c:url value="/resources/js/review.js"/>" charset="UTF-8"></script>
 </head>
 <body>
-	<% CampingReviewDTO info = (CampingReviewDTO)request.getAttribute("c_dto"); %>
+	<% CampingReviewDTO info = (CampingReviewDTO)request.getAttribute("r_dto"); %>
 	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
    <div class="container">
      <a class="navbar-brand" href="index.html">Pacific<span>Travel Agency</span></a>
@@ -54,22 +57,22 @@
   <div class="container">
     <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
       <div class="col-md-9 ftco-animate pb-5 text-center">
-       <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="fa fa-chevron-right"></i></a></span> <span>Blog <i class="fa fa-chevron-right"></i></span></p>
-       <h1 class="mb-0 bread">Blog</h1>
+       <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="fa fa-chevron-right"></i></a></span> <span>Review <i class="fa fa-chevron-right"></i></span></p>
+       <h1 class="mb-0 bread">Review</h1>
      </div>
    </div>
  </div>
 </section>
 
-<!-- ºˆ¡§ -->
+<!-- ÏàòÏ†ï -->
 <section class="ftco-section">
 	<div class="container">
-		<!-- ƒ¡≈Ÿ√˜ -->
+		<!-- Ïª®ÌÖêÏ∏† -->
 		<div class="contents">
 			<p class="fs-3"><%= info.getTitle() %></p>
 			<div class="paragraph_header d-flex justify-content-between">
 				<span id="id" data-bs-toggle="modal" data-bs-target="#memberDescription"><%= info.getMember_id() %></span>
-				<span><%= info.getReg_date() %></span>
+				<span><%= info.getUp_date() %></span>
 			</div> <hr/>
 			<div class="paragraph_body">
 				<p>
@@ -80,14 +83,16 @@
 				<div class="comments_header d-flex justify-content-between">
 					<p>COMMENTS</p>
 					<div>
-						<span data-bs-toggle="modal" data-bs-target="#memberDescription">¡∂»∏ºˆ : <%= info.getViews() %></span>
-						<span>∆Ú¡° : <%= info.getStarRanking() %></span>
+						<span data-bs-toggle="modal" data-bs-target="#memberDescription">Ï°∞ÌöåÏàò : <%=info.getViews()  %></span>
+						<span>ÌèâÏ†ê : <%= info.getStarRanking() %> </span>
+						<span>Ï∂îÏ≤ú : 0 </span>
+						<span>Ïã†Í≥† : <%= info.getDecl() %> </span>
 					</div>
 				</div> <hr />
 				<div class="comments_body">
-					<p>∆Êº« ªÁ¿Â¥‘</p>
+					<p>ÌéúÏÖò ÏÇ¨Ïû•Îãò</p>
 					<div class="d-flex justify-content-start">
-						<p>±◊∞‘ ≥ æﬂ</p>
+						<p>Í∑∏Í≤å ÎÑàÏïº</p>
 						<i class="bi bi-x-circle comment_icon"></i>
 						<i id="co_comment_addBtn" class="bi bi-pen comment_icon"></i>
 						<i id="co_comment_newBtn" class="bi bi-chat-dots comment_icon"></i>
@@ -95,23 +100,12 @@
 					<div id="co_comment">
 						<form action="">
 							<div class="form-floating">
-							  <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea">Test Text</textarea>
-							  <label for="floatingTextarea">Comments</label>
-							</div>
-							<div class="d-flex justify-content-end">
-								<button id="co_comment_saveBtn" class="btn btn-outline-success" type="submit">¿˙¿Â</button>
-								<button id="co_comment_cancelBtn" class="btn btn-outline-success" type="button">√Îº“</button>
-							</div>
-						</form>
-					</div>
-					<div id="comment">
-						<form action="">
-							<div class="form-floating">
 							  <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
 							  <label for="floatingTextarea">Comments</label>
 							</div>
 							<div class="d-flex justify-content-end">
-								<button id="comment_saveBtn" class="btn btn-outline-success" type="submit">¿˙¿Â</button>
+								<button id="co_comment_saveBtn" class="btn btn-outline-success" type="submit">Ï†ÄÏû•</button>
+								<button id="co_comment_cancelBtn" class="btn btn-outline-success" type="button">Ï∑®ÏÜå</button>
 							</div>
 						</form>
 					</div>
@@ -119,24 +113,16 @@
 				<div class="comments_footer"></div>
 			</div> <hr />
 			<div class="paragraph_footer d-flex justify-content-end">
-				<button class="btn">ºˆ¡§</button>
-				<button id="paragraphDeleteBtn" class="btn">ªË¡¶</button>
-				<button class="btn">∏Ò∑œ</button>
+				<button class="btn"><a href="/project/review?type=1&reviewId=<%= info.getReview_id() %>&contentId=<%=info.getContentId() %>">ÏàòÏ†ï</a></button>
+				<button id="reivewDelete" class="btn" onclick="showPopUp('<%= info.getReview_id() %>','<%=info.getContentId() %>')">ÏÇ≠Ï†ú</button>
+				<button class="btn" onclick="back()">Î™©Î°ù</button>
 			</div>
 		</div>		
-		<!-- /ƒ¡≈Ÿ√˜ -->
+		<!-- /Ïª®ÌÖêÏ∏† -->
 	</div>
 </section>
-
-<!-- Modal -->
-<template id="deleteModal">
-	<swal-title>ªË¡¶«œΩ√∞⁄Ω¿¥œ±Ó?</swal-title>
-	<swal-button type="confirm">»Æ¿Œ</swal-button>
-	<swal-button type="cancel">√Îº“</swal-button>
-</template>
-<!-- /Modal -->
 	
-<!-- /ºˆ¡§ -->
+<!-- /ÏàòÏ†ï -->
 
 <section class="ftco-intro ftco-section ftco-no-pt">
  <div class="container">
@@ -236,7 +222,6 @@
 <script src="<c:url value="/resources/js/bootstrap-datepicker.js"/>"></script>
 <script src="<c:url value="/resources/js/scrollax.min.js"/>"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-<script src="<c:url value="/resources/js/google-map.js"/>"></script>
 <script src="<c:url value="/resources/js/main.js"/>"></script>
 <script src="<c:url value="/resources/js/jangec.js"/>"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>

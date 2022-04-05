@@ -31,13 +31,13 @@
     font-size: 12px;
     padding : 12px 20px;
   }
+  
   .all{
       cursor :pointer;
   }
   .dropdown-content a:hover{
     background-color : #ececec
   }
-  
   .dropdown:hover .dropdown-content {
     display: block;
   }
@@ -68,6 +68,6 @@
 	color:black !important;
 }
 .dropdownn{
-	background:rgb(55, 49, 89) !important;
+	background:#1a1a40 !important;
 	color:#fff !important;
 }

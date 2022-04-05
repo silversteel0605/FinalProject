@@ -67,78 +67,84 @@
 		<div class="contents">
 			<p class="fs-3">${contents.title }</p>
 			<div class="paragraph_header d-flex justify-content-between">
-				<span id="${contents.member_id }" class="userId">${contents.member_id }</span>
+				<span id="${contents.member_id }" class="userId pointer">${contents.member_id }</span>
 				<span>${contents.reg_date }</span>
 			</div> <hr/>
 			<div class="paragraph_body">
-				<p>
-					${contents.contents }
-				</p>
+				<p>${contents.contents }</p>
 			</div>
 			<div class="paragraph_comments">
 				<div class="comments_header">
 					<p>COMMENTS</p>
 				</div> <hr />
-				<div class="comments_body">
-					<p>숲속의바다펜션사장</p>
-					<div class="d-flex justify-content-start">
-						<p>축하해요 ㄹㄹ</p>
-						<i class="bi bi-x-circle comment_icon"></i>
-						<i id="co_comment_addBtn" class="bi bi-pen comment_icon"></i>
-						<i id="co_comment_newBtn" class="bi bi-chat-dots comment_icon"></i>
+				<div class="comments_body mb-5" id="comments_body">
+					<c:if test="${not empty commentsList }">
+						<c:forEach items="${commentsList }" var="comment">
+						<div id="${comment.comment_id }" class="mb-3 border-bottom">
+							<span class="userId">${comment.member_id}</span><br/>
+							<div class="d-flex justify-content-start">
+								<p>${comment.comments}</p>
+								<i class="bi bi-x-circle comment_icon"></i>
+								<i id="co_comment_editBtn" class="bi bi-pen comment_icon"></i>
+								<i id="co_comment_newBtn_${comment.comment_id}" class="bi bi-chat-dots comment_icon co_comment_newBtn"></i>
+								<input id="comment_commentId_${comment.comment_id }" type="hidden" value="${comment.comment_id }" />
+								<input id="comment_postId" type="hidden" value="${comment.post_id }" />
+								<input id="comment_ordernum" type="hidden" value="${comment.ordernum }" />
+								<input id="comment_categoryId" type="hidden" value="${comment.category_id }" />
+							</div>
+						</div>
+						</c:forEach>
+					</c:if>
+				</div>
+				<!-- comments 입력 -->
+				<div id="comment">
+					<div class="form-floating">
+					  <input type="hidden" class="commentForm" name="commentPostId" value="${contents.post_id }"/>
+					  <input type="hidden" class="commentForm" name="commentBoardClass" value="${contents.board_class }"/>
+					  <textarea class="form-control commentForm" placeholder="Leave a comment here" name="commentComments" id="commentTextarea"></textarea>
+					  <label for="commentTextarea">Comments</label>
 					</div>
-					<div id="co_comment">
-						<form action="">
-							<div class="form-floating">
-							  <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea">Test Text</textarea>
-							  <label for="floatingTextarea">Comments</label>
-							</div>
-							<div class="d-flex justify-content-end">
-								<button id="co_comment_saveBtn" class="btn btn-outline-success" type="submit">저장</button>
-								<button id="co_comment_cancelBtn" class="btn btn-outline-success" type="button">취소</button>
-							</div>
-						</form>
-					</div>
-					<div id="comment">
-						<form action="">
-							<div class="form-floating">
-							  <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
-							  <label for="floatingTextarea">Comments</label>
-							</div>
-							<div class="d-flex justify-content-end">
-								<button id="comment_saveBtn" class="btn btn-outline-success" type="submit">저장</button>
-							</div>
-						</form>
+					<div class="d-flex justify-content-end">
+						<button id="comment_saveBtn" class="btn btn-outline-success">저장</button>
 					</div>
 				</div>
-				<div class="comments_footer"></div>
-			</div> <hr />
+				<!-- /comments 입력 -->
+			</div> <hr/>
 			<div class="paragraph_footer d-flex justify-content-end">
-					<button class="btn">수정</button>
+				<c:if test="${editAuth eq true }">
+					<button id="contentsEdit" class="btn">수정</button>
 					<button id="contentsDelete" class="btn">삭제</button>
-					<button id="goBoard" class="btn">목록</button>
+				</c:if>
+				<input id="editAuth" type="hidden" value="${editAuth }" />
+				<button id="goBoard" class="btn" onClick="goBoard(${contents.board_class })">목록</button>
 			</div>
-			<form action="./support" method="POST" id="deleteForm">
-				<input type="hidden" name="delete" value="true" />
-			</form>
 		</div>		
 		<!-- /컨텐츠 -->
 	</div>
 </section>
+<!-- 변수 -->
+<input type="hidden" id="board_class" value="${contents.board_class }" />
+<input type="hidden" id="post_id" value="${contents.post_id }" />
 
 <!-- Modal -->
-<template id="deleteModal">
-	<swal-title>삭제하시겠습니까?</swal-title>
-	<swal-button type="confirm">확인</swal-button>
-	<swal-button type="cancel">취소</swal-button>
-</template>
-
 <div id="popUpMenu" style="display:none;">
 	<ul class="list-group list-group-flush">
 		<li id="memberInfo" class="indiPopUp list-group-item list-group-item-primary opacity-75" style="cursor:pointer">회원정보 보기</li>
 		<li id="memberPost" class="indiPopUp list-group-item list-group-item-primary opacity-75" style="cursor:pointer">작성글 보기</li>
 	</ul>
 </div>
+<!-- 
+<div id="co_commentInput" class="co_commentInput">
+	<div class="form-floating">
+		<textarea class="form-control" placeholder="Leave a Comment" id="coCommentTextarea"></textarea>
+		<label for="coCommentTextarea">Comments</label>
+	</div>
+	<div class="d-flex justify-content-end">
+		<input />
+		<button class="btn btn-outline-success co_comment_saveBtn">저장</button>
+		<button class="btn btn-outline-success co_comment_cancelBtn">취소</button>
+	</div>
+</div> -->
 <!-- /Modal -->
 	
 <!-- /수정 -->

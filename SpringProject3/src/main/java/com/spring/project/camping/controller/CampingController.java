@@ -36,28 +36,18 @@ public class CampingController {
 	
 	CampingReviewController crc = null;
 
-	private static int cntPerPage = 9;
+	private static int cntPerPage = 10;
 	
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public String search(Model m, @RequestParam(value="nowPage", required=false)String nowPage, SearchVO vo)  throws  IOException, JDOMException {
 		controlling(m, nowPage, vo);
-		return "search";
+		return "main_search";
 	}
 
 
-	//rest로 태그 검색하기  ※지금 안씀
-	@RequestMapping(value = "/search2", method = RequestMethod.GET)
-	public String search2(Model m, SearchVO vo, @RequestParam(value="nowPage", required=false)String nowPage)  throws  IOException, JDOMException {
-		log.info(vo);
-		nowPage = nowPage != null ? nowPage :"1";
-		vo.setTagUri();
-		m.addAttribute("tags", vo);
-		m.addAttribute("nowPage", nowPage);
-		return "rest_search";
-	}
 
 	
-	@RequestMapping(value = "/TempCampInfo", method = RequestMethod.GET)
+	@RequestMapping(value = "/CampInfo", method = RequestMethod.GET)
 	public String info(
 			Model m, 
 			@RequestParam(value="contentId") String contentId, 
@@ -94,7 +84,7 @@ public class CampingController {
 	@RequestMapping(value = "/map", method = RequestMethod.GET)
 	public String map(Model m, @RequestParam(value="nowPage", required=false)String nowPage, SearchVO vo) {
 		controlling(m, nowPage, vo);
-		return "map-search";
+		return "map";
 	}
 	
 	@RequestMapping(value = "/init", method = RequestMethod.GET)
@@ -113,10 +103,7 @@ public class CampingController {
 		searchTy = vo.getSearchTy();
 		total = service.getDbSearchTotal(vo);
 		pvo = new PagingVO(total, Integer.parseInt(nowPage), cntPerPage);
-		log.info(pvo.getCntPerPage());
 		vo.calcStartEnd(Integer.parseInt(nowPage), pvo.getCntPerPage());
-		log.info(vo.getStart());
-		log.info(vo.getEnd());
 		if (searchTy != null) {
 			if (searchTy.equals("condition")) {
 				vo.setConditionUri();
@@ -124,11 +111,10 @@ public class CampingController {
 				vo.setTagUri();
 			}
 		}
-		
 		vo.setOrderUri();
-		log.info(vo.getUri());
 		ar = service.getDbSearchData(vo);
 		
+		log.info(vo);
 		m.addAttribute("search", vo);
 		m.addAttribute("paging", pvo);
 		m.addAttribute("lists", ar);

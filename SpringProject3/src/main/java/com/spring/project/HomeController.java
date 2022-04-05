@@ -61,7 +61,7 @@ public class HomeController {
 	@RequestMapping(value = "/manager", method = RequestMethod.GET)
 	public String manager() {
 		
-		return "manager";
+		return "new.manager";
 	}
 
 	@RequestMapping(value = "/updateWindow", method = RequestMethod.GET)
@@ -93,5 +93,16 @@ public class HomeController {
 		log.info("Connect test");
 		return "freeBoard2";
 	}
+
+	@RequestMapping(value = "/template", method = RequestMethod.GET )
+	public String template() {
+		return "template";
+	}
+	@RequestMapping(value = "/map2", method = RequestMethod.GET )
+	public String map2() {
+		return "map-search";
+	}
+	
+	
 }
 

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.spring.project.comment.mapper.CommentDataMapper">
+
+	<select id="getComments" resultType="com.spring.project.comment.DTO.CommentVO">
+		SELECT * 
+		FROM (
+			SELECT ROWNUM RN, A.* 
+				FROM (
+				    select * from comments
+				    ) A
+				)
+		WHERE RN BETWEEN #{start} AND #{end}
+	</select>
+	
+	<select id="CommentCnt" resultType="int">
+		select count(*) from comments
+	</select>
+	
+	<update id="blind">
+		update comments set member_id = #{member_id}, comments = #{blindComment}, blind = #{blind} 
+		where comment_id = #{comment_id} and blind = 'false'
+	</update>
+</mapper>
