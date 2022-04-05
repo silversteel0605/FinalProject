@@ -18,7 +18,7 @@ public class CommentServiceImpl implements CommentService{
 	CommentDataMapper dataMapper;
 	
 	@Override
-	public CommentVO[] getComments(CommentSearchVO vo) {
+	public CommentVO[] getComments(CommentVO vo) {
 		return dataMapper.getComments(vo);
 	}
 

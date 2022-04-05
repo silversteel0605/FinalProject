@@ -68,4 +68,9 @@ public class CampingReviewServiceImpl implements CampingReviewService{
 		return dataMapper.getSortReviewDatas(reviewMap);
 	}
 
+	@Override
+	public CampingReviewDTO[] getAllReviews(CampingReviewDTO dto) {
+		return dataMapper.getAllReviews(dto);
+	}
+
 }

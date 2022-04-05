@@ -10,7 +10,10 @@ p, div {
 .pointer {
 	cursor: pointer;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> refs/heads/master
 
 /* Free Board */
 
@@ -37,5 +40,9 @@ p, div {
 }
 
 .ck-editor__editable {
+<<<<<<< HEAD
     min-height: 500px;
+=======
+    min-height: 300px;
+>>>>>>> refs/heads/master
 }

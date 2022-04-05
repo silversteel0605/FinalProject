@@ -10,4 +10,5 @@ public class SearchVO {
 	private Integer category;
 	private String searchByWhat;
 	private String searchKeyword;
+	private String order;
 }

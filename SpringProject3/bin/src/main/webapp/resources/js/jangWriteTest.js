@@ -13,6 +13,7 @@ writeSavBtn.addEventListener('click', (e) => {
 	
 	const title = document.getElementById('title').value;
 	const writeCategory = document.getElementById('writeCategory').value;
+<<<<<<< HEAD
 	const board_classNum = document.getElementById('board_class').value;
 	const board_class = board_classNum == 0 ? 'freeBoard' : 'supportBoard';
 	var contents = CKEDITOR.instances.writeEditor.getData();
@@ -47,6 +48,27 @@ function writeSend(url, params) {
 	var form = document.createElement('form');
 	form.setAttribute('method', 'POST');
 	form.setAttribute('action', url);
+=======
+	const board_class = document.getElementById('board_class').value;
+	var contents = CKEDITOR.instances.writeEditor.getData();
+	
+	console.log(title);
+	console.log(writeCategory);
+	console.log(board_class);
+	console.dir(contents);
+	
+	var writeContents = [title, contents, board_class, writeCategory];
+	
+	writeSend('./write', {'contents': writeContents});
+	
+});
+
+function writeSend(url, params) {
+	var form = document.createElement('form');
+	form.setAttribute('method', 'POST');
+	form.setAttribute('action', url);
+	
+>>>>>>> refs/heads/master
 	for (var key in params) {
 		var hiddenField = document.createElement('input');
 		hiddenField.setAttribute('type', 'hidden');

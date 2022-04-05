@@ -84,7 +84,13 @@
 					<p>COMMENTS</p>
 					<div>
 						<span data-bs-toggle="modal" data-bs-target="#memberDescription">조회수 : <%=info.getViews()  %></span>
+<<<<<<< HEAD
 						<span>평점 : <%= info.getStarRanking() %></span>
+=======
+						<span>평점 : <%= info.getStarRanking() %> </span>
+						<span>추천 : 0 </span>
+						<span>신고 : <%= info.getDecl() %> </span>
+>>>>>>> refs/heads/master
 					</div>
 				</div> <hr />
 				<div class="comments_body">

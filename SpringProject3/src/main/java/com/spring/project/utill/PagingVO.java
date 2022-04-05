@@ -7,7 +7,7 @@ import lombok.Setter;
 @Setter
 public class PagingVO {
 	private int nowPage, startPage, endPage, total, lastPage, start, end, lastPageCnt, limitPage, cntPerPage;
-	private int cntPage = 10;
+	private int cntPage = 5;
 	
 	public PagingVO() {
 	}

@@ -101,6 +101,15 @@ public class PostServiceImpl implements PostService {
 	public Integer getReport(Integer post_id) {
 		return postMapper.getReport(post_id);
 	}
+	
+	public PostVO[] getAllPost(PostVO vo) {
+		return postMapper.getAllPost(vo);
+	}
+
+	@Override
+	public int getAllCounts() {
+		return postMapper.getAllCounts();
+	}
 }
 
 

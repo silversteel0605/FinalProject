@@ -30,4 +30,9 @@ public interface PostXMLMapper {
 	
 	public void addReport(@Param("post_id") Integer post_id, @Param("report") Integer report);
 	public Integer getReport(Integer post_id);
+	
+	// 관리자에서 불러오기
+	public PostVO[] getAllPost(PostVO vo);
+	
+	public int getAllCounts();
 }

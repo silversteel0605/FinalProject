@@ -28,4 +28,8 @@ public interface PostService {
 	
 	public void addReport(Integer post_id, Integer report);
 	public Integer getReport(Integer post_id);
+	public PostVO[] getAllPost(PostVO vo);
+	
+	public int getAllCounts();
+	
 }

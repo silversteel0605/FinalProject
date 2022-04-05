@@ -65,6 +65,7 @@
 		<!-- 컨텐츠 -->
 		<div class="contents container">
 			<!-- Support Board Nav -->
+<<<<<<< HEAD
 			  <div class="container">
 			  	<div class="row mb-5">
 					<h1 class="text-start">고객의 소리에 주목합니다</h1>
@@ -98,6 +99,35 @@
 				    	</div>
 				    </div>
 				  </div>
+=======
+			<nav class="navbar navbar-expand-lg navbar-light">
+			  <div class="container-fluid">
+			    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+			      <form class="d-flex" action="./support" method="POST" accept-charset="EUC-KR">
+					<div class="input-group mb-3">
+						<select id="inputState" class="form-select col-md-3" name="searchByWhat">
+							<option selected value="all">전체</option>
+							<option value="title">제목</option>
+							<option value="contents">내용</option>
+						</select>
+						<input type="text" class="form-control" aria-label="Text input with dropdown button" name="searchKeyword">
+						<button class="btn btn-outline-success" type="submit">Search</button>
+					</div>
+			      </form>
+			      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+			        <li class="nav-item">
+			          <a class="nav-link categoryClass active" aria-current="page" href="./support?categoryName=supportAll">전체</a>
+			        </li>
+			        <li class="nav-item">
+			          <a class="nav-link categoryClass " href="./support?categoryName=notice">공지사항</a>
+			        </li>
+			        <li class="nav-item">
+			          <a class="nav-link categoryClass " href="./support?categoryName=askEdit">수정요청</a>
+			        </li>
+			      </ul>
+			    </div>
+			   	<a class="" href="./write?board_class=supportBoard">글쓰기</a>
+>>>>>>> refs/heads/master
 			  </div>
 			<!-- /Support Board Nav -->
 			<!-- Table -->

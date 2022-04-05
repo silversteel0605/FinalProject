@@ -1,6 +1,8 @@
 package com.spring.project.camping.controller;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 
 import org.jdom2.JDOMException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,14 +13,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.spring.project.camping.DTO.CampingImgVO;
 import com.spring.project.camping.DTO.CampingVO;
 import com.spring.project.camping.DTO.SearchVO;
 import com.spring.project.camping.service.CampingService;
-import com.spring.project.member.DTO.MemberVO;
 
 import lombok.extern.log4j.Log4j;
 
@@ -46,7 +45,7 @@ public class RestCampingController {
 	}
 	
 	@PutMapping(value="/manager/camp")
-	public int update(@RequestBody CampingVO vo) {
+	public int update(@RequestBody CampingVO vo) throws UnsupportedEncodingException {
 		return service.updateData(vo);
 	}
 	

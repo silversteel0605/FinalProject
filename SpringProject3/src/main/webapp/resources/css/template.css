@@ -1,6 +1,9 @@
 @charset "EUC-KR";
-@charset "EUC-KR";
 
+body {
+	overflow-x: hidden;
+	
+}
 
 a, a:hover {
 	color: black !important;
@@ -31,12 +34,22 @@ li {
 	background: #ffffff  !important;
 }
 
+.nav-link.active[area=camp] {
+	background: #212529 !important;
+	color: #ffffff !important;
+}
+
 .nav-link, .nav-link:hover {
 	color: black !important;
 }
 
 .form-select:disabled {
 	background: #ffffff !important;
+}
+
+.form-check-input:checked {
+    background-color: #212529 !important;
+    border-color: #212529 !important;
 }
 /* custom Å¬·¡½º css */
 
@@ -53,18 +66,18 @@ li {
 }
 
 .more-col {
-	position: absolute !important;
-	visibility: hidden !important;
-	opacity : 0 !important;
-	z-index: 10 !important;	
-	left: 0 !important;
-	top: 10px !important;
+	position: absolute;
+	visibility: hidden;
+	opacity : 0 ;
+	z-index: 10 ;	
+	left: 0;
+	top: 10px;
 }
 
 .moreThem {
-	background: #ffffff !important;
-	border: 1px solid #dee2e6 !important;
-	text-overflow: clip !important;
+	background: #ffffff;
+	border: 1px solid #dee2e6;
+	text-overflow: ellipsis;
 }
 
 #tag {
@@ -76,10 +89,11 @@ li {
 	flex-wrap: wrap !important;
 }
 
-#tags button {
-	margin-top: 0 !important!important;
+#tags .tag {
+	margin-top: 0 !important;
 	margin-right: 10px !important;
 	margin-bottom: 10px !important;
+	border: none ;
 }
 
 .bb {		
@@ -100,6 +114,7 @@ li {
     letter-spacing: 14px !important;
     font-family: Lato-Bold !important;
     color: #000 !important;
+    text-indent: 14px;
 }
 
 .submitBtn {
@@ -120,3 +135,9 @@ li {
   		max-width: none !important;
 	} 
 }
+     
+@media screen and (max-width: 767px){	
+	body {
+		overflow-x : hidden;
+	}
+}     

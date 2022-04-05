@@ -33,8 +33,9 @@ public class RestCommentController {
 	MessageService mService;
 	
 	@GetMapping(value="/manager/comment")
-	public CommentVO[] getComments(CommentSearchVO vo) {
+	public CommentVO[] getComments(CommentVO vo) {
 		vo.calcStartEnd(10);
+		log.info(vo);
 		CommentVO[] cvo = service.getComments(vo);
 		if(cvo.length > 0) {
 			cvo[0].setTotal(service.CommentCnt());

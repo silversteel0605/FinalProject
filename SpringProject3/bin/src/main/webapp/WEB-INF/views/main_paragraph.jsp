@@ -86,7 +86,11 @@
 							<div class="d-flex justify-content-start">
 								<p>${comment.comments}</p>
 								<i class="bi bi-x-circle comment_icon"></i>
+<<<<<<< HEAD
 								<i id="comment_editBtn" class="bi bi-pen comment_icon"></i>
+=======
+								<i id="co_comment_editBtn" class="bi bi-pen comment_icon"></i>
+>>>>>>> refs/heads/master
 								<i id="co_comment_newBtn_${comment.comment_id}" class="bi bi-chat-dots comment_icon co_comment_newBtn"></i>
 								<input id="comment_commentId_${comment.comment_id }" type="hidden" value="${comment.comment_id }" />
 								<input id="comment_postId" type="hidden" value="${comment.post_id }" />
@@ -106,7 +110,11 @@
 					  <label for="commentTextarea">Comments</label>
 					</div>
 					<div class="d-flex justify-content-end">
+<<<<<<< HEAD
 						<button id="comment_saveBtn" class="btn btn-outline-success" type="button">저장</button>
+=======
+						<button id="comment_saveBtn" class="btn btn-outline-success">저장</button>
+>>>>>>> refs/heads/master
 					</div>
 				</div>
 				<!-- /comments 입력 -->
@@ -126,7 +134,10 @@
 <!-- 변수 -->
 <input type="hidden" id="board_class" value="${contents.board_class }" />
 <input type="hidden" id="post_id" value="${contents.post_id }" />
+<<<<<<< HEAD
 <input type="hidden" id="commentsEA" value="${commentsEA }" />
+=======
+>>>>>>> refs/heads/master
 
 <!-- Modal -->
 <div id="popUpMenu" style="display:none;">

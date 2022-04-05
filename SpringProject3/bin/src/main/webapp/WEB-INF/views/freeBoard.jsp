@@ -61,6 +61,7 @@
 <section class="ftco-section">
 	<div class="container">
 		<!-- Board Nav -->
+<<<<<<< HEAD
 		<div class="container p-0">
 			<div class="row">
 				<div class="col-md-5">
@@ -88,10 +89,49 @@
 						<div class="col-3">
 						 	<a class="" href="./write?board_class=freeBoard">글쓰기</a>
 						</div>
+=======
+		<nav class="navbar navbar-expand-lg navbar-light p-0">
+		  <div class="container-fluid p-0">
+		    <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
+			      <form class="d-flex" action="./board" method="POST" accept-charset="EUC-KR">
+					<div class="input-group mb-3">
+						<select id="inputState" class="form-select col-md-3" name="searchByWhat">
+							<option selected value="all">전체</option>
+							<option value="title">제목</option>
+							<option value="contents">내용</option>
+						</select>
+						<input type="text" class="form-control" aria-label="Text input with dropdown button" name="searchKeyword">
+						<button class="btn btn-outline-success" type="submit">Search</button>
+>>>>>>> refs/heads/master
 					</div>
+<<<<<<< HEAD
 				</div>
 			</div>
 		</div>
+=======
+			      </form>
+		      <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
+		        <li class="nav-item">
+		          <a class="nav-link active" aria-current="page" href="./board?categoryName=boardAll">전체</a>
+		        </li>
+		        <li class="nav-item">
+		          <a class="nav-link" href="./board?categoryName=daily">자유</a>
+		        </li>
+		        <li class="nav-item">
+		          <a class="nav-link" href="./board?categoryName=showoff">자랑</a>
+		        </li>
+		        <li class="nav-item">
+		          <a class="nav-link" href="./board?categoryName=buy">삽니다</a>
+		        </li>
+		        <li class="nav-item">
+		          <a class="nav-link" href="./board?categoryName=sell">팝니다</a>
+		        </li>
+		      </ul>
+		    </div>
+		   	<a class="btn" href="./write?board_class=freeBoard">글쓰기</a>
+		  </div>
+		</nav>
+>>>>>>> refs/heads/master
 		<hr />
 		<!-- /Board Nav -->
 		<!-- 컨텐츠 -->
@@ -179,7 +219,13 @@
 <!-- Modal & PopUp Menu -->
 <div id="popUpMenu" style="display:none;">
 	<ul class="list-group list-group-flush">
+<<<<<<< HEAD
 		<li id="memberPost" class="indiPopUp list-group-item list-group-item-primary opacity-75" style="cursor:pointer">작성글 보기</li>
+=======
+		<li id="memberInfo" class="indiPopUp list-group-item list-group-item-primary opacity-75" style="cursor:pointer">회원정보 보기</li>
+		<li id="memberPost" class="indiPopUp list-group-item list-group-item-primary opacity-75" style="cursor:pointer">작성글 보기</li>
+		
+>>>>>>> refs/heads/master
 	</ul>
 </div>
 	

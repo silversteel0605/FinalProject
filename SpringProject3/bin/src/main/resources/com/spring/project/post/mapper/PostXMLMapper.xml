@@ -30,12 +30,20 @@
 	<select id="getPostList" resultType="com.spring.project.post.dto.PostVO">
 		SELECT 
 			post.rownumber, post.post_id,  post.member_id, post.title, post.contents, to_char(post.reg_date, 'yyyy. MM. dd.'), 
+<<<<<<< HEAD
 			post.board_class, post.contents_category, post.process, post.imgurl, post.views
+=======
+			post.board_class, post.contents_category, post.process, post.imgurl 
+>>>>>>> refs/heads/master
 		FROM 
 			(
 				SELECT 
 					rownum as rownumber, post_id, member_id, title, contents, reg_date, 
+<<<<<<< HEAD
 					board_class, contents_category, process, imgurl, views
+=======
+					board_class, contents_category, process, imgurl
+>>>>>>> refs/heads/master
 				FROM 
 					post
 				WHERE
@@ -56,12 +64,20 @@
 	<select id="getPostSearch" resultType="com.spring.project.post.dto.PostVO" parameterType="com.spring.project.post.dto.SearchVO">
 		SELECT 
 			post.rownumber, post.post_id,  post.member_id, post.title, post.contents,to_char(post.reg_date, 'yyyy. MM. dd.'), 
+<<<<<<< HEAD
 			post.board_class, post.contents_category, post.process, post.imgurl, post.views
+=======
+			post.board_class, post.contents_category, post.process, post.imgurl
+>>>>>>> refs/heads/master
 		FROM 
 			(
 				SELECT 
 					rownum as rownumber, post_id, member_id, title, contents, reg_date, 
+<<<<<<< HEAD
 					board_class, contents_category, process, imgurl, views
+=======
+					board_class, contents_category, process, imgurl
+>>>>>>> refs/heads/master
 				FROM 
 					post
 				WHERE
@@ -93,12 +109,20 @@
 	<select id="getContents" resultType="com.spring.project.post.dto.PostVO">
 		SELECT 
 			post.rownumber, post.post_id,  post.member_id, post.title, post.contents,to_char(post.reg_date, 'yyyy. MM. dd.'), 
+<<<<<<< HEAD
 			post.board_class, post.contents_category, post.process, post.imgurl, post.views
+=======
+			post.board_class, post.contents_category, post.process, post.imgurl
+>>>>>>> refs/heads/master
 		FROM 
 			(
 				SELECT 
 					rownum as rownumber, post_id, member_id, title, contents, reg_date, 
+<<<<<<< HEAD
 					board_class, contents_category, process, imgurl, views
+=======
+					board_class, contents_category, process, imgurl
+>>>>>>> refs/heads/master
 				FROM 
 					post
 			) 
@@ -109,6 +133,7 @@
 	<delete id="deletePost">
 		DELETE FROM post WHERE post_id = #{post_id}
 	</delete>
+<<<<<<< HEAD
 	
 	<update id="increaseViews">
 		UPDATE post SET views = #{post.views} WHERE post_id = #{post.post_id} 
@@ -143,6 +168,46 @@
 		WHERE
 			post_id = #{post_id}
 	</update>
+=======
+	<insert id="addComment">
+		<selectKey keyProperty="comment_id" resultType="_integer" order="BEFORE">
+	    	SELECT comment_id_seq.nextval FROM dual
+		</selectKey>
+		INSERT INTO 
+			comments 
+		VALUES (
+			#{comment_id}, #{post_id}, #{category_id}, #{member_id}, #{comments}, #{classnum}, #{ordernum}, 
+			<choose>
+			<when test="groupnum eq null">
+			#{comment_id}
+			</when>
+			<otherwise>
+			#{groupnum} 
+			</otherwise>
+			</choose>
+		)
+	</insert>
+	
+	<!-- Comments -->
+	<select id="getComments" resultType="com.spring.project.post.dto.CommentVO">
+		SELECT * FROM comments WHERE post_id = #{post_id} AND category_id = #{board_class}
+	</select>
+	
+	<!-- addPost -->
+	<insert id="addPost">
+		<selectKey keyProperty="post_id" resultType="_integer" order="BEFORE">
+    		SELECT post_id_seq.nextval FROM dual
+		</selectKey>
+			INSERT INTO 
+				post 
+			(post_id, member_id, title, contents, reg_date, board_class, contents_category, process, imgurl)
+			VALUES (
+				#{post_id}, #{member_id}, #{title}, #{contents}, sysdate, 
+				#{board_class}, #{contents_category}, #{process}, null
+			)
+	</insert>
+	
+>>>>>>> refs/heads/master
 </mapper>
 
 

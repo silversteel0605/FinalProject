@@ -24,6 +24,7 @@
 		update comments set member_id = #{member_id}, comments = #{blindComment}, blind = #{blind} 
 		where comment_id = #{comment_id} and blind = 'false'
 	</update>
+<<<<<<< HEAD
 
 	<insert id="addComment">
 	<selectKey keyProperty="comment_id" resultType="_integer" order="BEFORE">
@@ -45,4 +46,6 @@
 			</choose>, 0, 0, #{member_id}, 'false'
 		)
 	</insert>
+=======
+>>>>>>> refs/heads/master
 </mapper>
