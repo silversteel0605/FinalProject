@@ -39,8 +39,8 @@
 	
 	
 	<!-- 실내용 기입란 -->
-	<section id ="contants">
-		<br />
+	<section id ="contants" style="padding-top: 76px">
+		<br />hi hello
 		<br />
 		<br />
 		<br />
