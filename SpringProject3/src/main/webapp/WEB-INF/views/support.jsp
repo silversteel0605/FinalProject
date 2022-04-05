@@ -292,6 +292,7 @@
 <!-- ÆäÀÌÁö js -->
 <script src="<c:url value="/resources/js/jangSupport.js"/>"></script>
 <script src="<c:url value="/resources/js/jangec.js"/>"></script>
+<script src="<c:url value="/resources/js/darktest.js"/>"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
