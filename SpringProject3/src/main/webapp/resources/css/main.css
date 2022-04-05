@@ -40,6 +40,7 @@
     text-align: center;
     position: relative;
     margin-top: 50px;
+    padding-top:30px;
   }
   .recommended::after {
     width: 100%;
