@@ -1,23 +1,23 @@
 package com.spring.project.post.controller;
 
 import java.io.UnsupportedEncodingException;
-import java.util.Map;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.project.post.dto.CommentVO;
-import com.spring.project.post.dto.ImageUploadVO;
+import com.spring.project.post.dto.PostVO;
+import com.spring.project.post.dto.SearchVO;
 import com.spring.project.post.service.PostService;
+import com.spring.project.utill.PagingVO;
 
 import lombok.extern.log4j.Log4j;
 
@@ -41,7 +41,19 @@ public class PostRestController {
 		
 		return comment;
 	}
-
+	
+	@GetMapping(value="/rest/manager/post")
+	public List<PostVO> getAllPost( String nowPage, SearchVO search) {
+		Integer total = postService.getCount(search);
+		PagingVO pvo = new PagingVO(total, Integer.parseInt(nowPage), 10);
+		log.info(search);	
+		List<PostVO> list = postService.getPostList(search, pvo);
+		if(list.size() > 0) {
+			list.get(0).setTotal(total);
+		}
+		
+		return list;
+	}
 	
 }
 

@@ -53,38 +53,41 @@
 				    			</if>
 				    			<if test='facltDivNm != null &amp;&amp; facltDivNm.length != 0'>
 				    				and
-				    				<foreach collection="facltDivNm" item="index" separator="or">
-										 facltDivNm like '%${index}%'
+				    				facltDivNm in
+				    				<foreach collection="facltDivNm" item="index" separator="," open="(" close=")">
+										 #{index}
 									</foreach>
 				    			</if>
 				    			<if test='induty != null &amp;&amp; induty.length != 0'>
 				    				and
-				    				<foreach collection="induty" item="index" separator="or">
-										 induty like '%${index}%'
+				    				induty in
+				    				<foreach collection="induty" item="index" separator="," open="(" close=")">
+										 #{index}
 									</foreach>
 				    			</if>
 				    			<if test='themaEnvrnCl != null &amp;&amp; themaEnvrnCl.length != 0'>
 				    				and
-				    				<foreach collection="themaEnvrnCl" item="index" separator="or">
-										 themaEnvrnCl like '%${index}%'
+				    				themaEnvrnCl in
+				    				<foreach collection="themaEnvrnCl" item="index" separator="," open="(" close=")">
+										 #{index}
 									</foreach>
 				    			</if>
 				    			<if test='sbrsCl != null &amp;&amp; sbrsCl.length != 0'>
 				    				and
-				    				<foreach collection="sbrsCl" item="index" separator="or">
-										 sbrsCl like '%${index}%'
+				    				sbrsCl in
+				    				<foreach collection="sbrsCl" item="index" separator="," open="(" close=")">
+										 #{index}
 									</foreach>
 				    			</if>
 			    			</where>
 			    		</when>
 			    		<when test='searchTy.equals("tag")'>
-			    			<where>
-			    				<if test='tagId != null &amp;&amp; tagId.length != 0'>
-				    				<foreach collection="tagId" item="index" separator="or">
-										 tagId like '%${index}%'
-									</foreach>
-				    			</if>
-			    			</where>
+		    				<if test='tagId != null &amp;&amp; tagId.length != 0'>
+		    					tagId in
+			    				<foreach collection="tagId" item="index" separator="," open="(" close=")">
+									 #{index}
+								</foreach>
+			    			</if>
 			    		</when>
 			    	</choose>
 			    </if>
@@ -120,38 +123,41 @@
 	    			</if>
 	    			<if test='facltDivNm != null &amp;&amp; facltDivNm.length != 0'>
 	    				and
-	    				<foreach collection="facltDivNm" item="index" separator="or">
-							 facltDivNm like '%${index}%'
+	    				facltDivNm in
+	    				<foreach collection="facltDivNm" item="index" separator="," open="(" close=")">
+							 #{index}
 						</foreach>
 	    			</if>
 	    			<if test='induty != null &amp;&amp; induty.length != 0'>
 	    				and
-	    				<foreach collection="induty" item="index" separator="or">
-							 induty like '%${index}%'
+	    				induty in
+	    				<foreach collection="induty" item="index" separator="," open="(" close=")">
+							 #{index}
 						</foreach>
 	    			</if>
 	    			<if test='themaEnvrnCl != null &amp;&amp; themaEnvrnCl.length != 0'>
 	    				and
-	    				<foreach collection="themaEnvrnCl" item="index" separator="or">
-							 themaEnvrnCl like '%${index}%'
+	    				themaEnvrnCl in
+	    				<foreach collection="themaEnvrnCl" item="index" separator="," open="(" close=")">
+							 #{index}
 						</foreach>
 	    			</if>
 	    			<if test='sbrsCl != null &amp;&amp; sbrsCl.length != 0'>
 	    				and
-	    				<foreach collection="sbrsCl" item="index" separator="or">
-							 sbrsCl like '%${index}%'
+	    				sbrsCl in
+	    				<foreach collection="sbrsCl" item="index" separator="," open="(" close=")">
+							 #{index}
 						</foreach>
 	    			</if>
     			</where>
     		</when>
     		<when test='searchTy.equals("tag")'>
-    			<where>
-    				<if test='tagId != null &amp;&amp; tagId.length != 0'>
-	    				<foreach collection="tagId" item="index" separator="or">
-							 tagId like '%${index}%'
-						</foreach>
-	    			</if>
-    			</where>
+    			<if test='tagId != null &amp;&amp; tagId.length != 0'>
+   					tagId in
+    				<foreach collection="tagId" item="index" separator="," open="(" close=")">
+						 #{index}
+					</foreach>
+    			</if>
     		</when>
     	</choose>
     	</if>

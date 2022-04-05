@@ -27,4 +27,6 @@ public interface CampingReviewService {
 	
 	public List<CampingReviewDTO> getSortReviewDatas(Map<String, Object> reviewMap); //Review Sort Data
 	
+	public CampingReviewDTO[] getAllReviews(CampingReviewDTO dto);
+	
 }

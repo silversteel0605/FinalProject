@@ -62,7 +62,25 @@ a:hover, a:active {text-decoration: none; color:red;}
 }
 
 .bgc_color_box{
-    background-color: #FFFFEF;
+
+    
+    background-color: wheat;
+}
+
+.bgc_box{
+
+    display: flex;
+    align-items: center;
+
+    position: relative;
+    left: -20%;
+    z-index: 1;
+    width: 30%;
+}
+
+.img_boxs{
+    position: absolute;
+    left: 30%;
     z-index: 2;
 }
 

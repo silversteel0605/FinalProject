@@ -1,0 +1,117 @@
+@charset "EUC-KR";
+
+
+a, a:hover {
+	color: black !important;
+	text-decoration: none !important;
+}
+
+li {
+	list-style: none !important;
+}
+
+/* bootstrap css 수정 */
+.container-lg {
+	padding: 0 0 30px 0 !important;
+}
+
+.pagination {
+	justify-content: center !important;
+	padding-top: 50px !important;
+}
+
+.page-link {
+	border: none !important;
+	color: #dee2e6 !important;
+}
+
+.page-item.active .page-link, .page-link:hover {
+	color: black !important;
+	background: #ffffff  !important;
+}
+
+.nav-link, .nav-link:hover {
+	color: black !important;
+}
+
+.form-select:disabled {
+	background: #ffffff !important;
+}
+/* custom 클래스 css */
+
+.wrap {
+	padding: 0 10px !important;
+}
+
+.arrow {
+	color: black !important;
+}
+
+.more-row{
+	position: relative !important;
+}
+
+.more-col {
+	position: absolute !important;
+	visibility: hidden !important;
+	opacity : 0 !important;
+	z-index: 10 !important;	
+	left: 0 !important;
+	top: 10px !important;
+}
+
+.moreThem {
+	background: #ffffff !important;
+	border: 1px solid #dee2e6 !important;
+	text-overflow: clip !important;
+}
+
+#tag {
+	padding: 1px !important;
+}
+
+#tags {
+	display: flex !important;
+	flex-wrap: wrap !important;
+}
+
+
+
+.bb {		
+	border-bottom: 3px solid black !important;
+}
+
+.lbb {
+	border-bottom: 1px solid #dee2e6 !important;
+}
+
+.sub_title {
+	text-align: center !important;
+	padding-top: 150px !important;
+}
+
+.tit {
+	font-size: 18px !important;
+    letter-spacing: 14px !important;
+    font-family: Lato-Bold !important;
+    color: #000 !important;
+}
+
+.submitBtn {
+	text-align: center !important;
+}
+
+.more-close {
+	text-align: right !important;
+}
+
+.more-sub {
+	text-align: center !important;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1200px) { 
+	.container-lg {
+		width: 1140px !important;
+  		max-width: none !important;
+	} 
+}

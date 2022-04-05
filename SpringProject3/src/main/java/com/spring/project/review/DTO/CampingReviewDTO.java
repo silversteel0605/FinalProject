@@ -2,6 +2,8 @@ package com.spring.project.review.DTO;
 
 import java.sql.Date;
 
+import com.spring.project.utill.PageSearchVO;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CampingReviewDTO {
+public class CampingReviewDTO extends PageSearchVO{
 	private int review_id;
 	private String member_id;
 	private int contentId;
@@ -22,4 +24,7 @@ public class CampingReviewDTO {
 	private int views;
 	private int reviewGreate;
 	private int decl;
+	private int total;
+	private int rn;
+	private String order;
 }
