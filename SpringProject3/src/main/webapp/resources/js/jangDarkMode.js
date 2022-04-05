@@ -8,6 +8,7 @@ var atag = document.querySelectorAll('.section a');
 var thtag = document.querySelectorAll('.section th');
 var tdtag = document.querySelectorAll('.section td');
 var smalltag = document.querySelectorAll('.section small');
+var h2tag = document.querySelectorAll('.section h2');
 var h5tag = document.querySelectorAll('.section h5');
 var spantag = document.querySelectorAll('.section span');
 var seperator = document.querySelectorAll('.seperator');
@@ -79,6 +80,9 @@ $(document).ready(function(){
 		$(modalDiv).addClass('darkmodeDiv');
 		$(modalH5).addClass('darkmodeFont');
 		$(modalButton).addClass('darkmodeFont');
+		$(h2tag).addClass('darkmodeFont');
+		$(h2tag).removeAttr('style');
+		$(h2tag).attr('style', 'border-bottom: 2px solid #D6D6D7')
 		
 	} else if (getCookie('DarkMode') == 'N') {
 		
@@ -94,6 +98,7 @@ $(document).ready(function(){
 		$(atag).removeClass('darkmodeDiv');
 		$(thtag).removeClass('darkmodeFont');
 		$(tdtag).removeClass('darkmodeFont');
+		$(h2tag).remoceClass('darkmodeFont');
 		$(h5tag).removeClass('darkmodeFont');
 		$(spantag).removeClass('darkmodeFont');
 		$(smalltag).removeClass('darkmodeFont');
@@ -106,5 +111,7 @@ $(document).ready(function(){
 		$(modalDiv).removeClass('darkmodeDiv');
 		$(modalH5).removeClass('darkmodeFont');
 		$(modalButton).removeClass('darkmodeFont');
+		$(h2tag).removeAttr('style');
+		$(h2tag).attr('style', 'border-bottom: 2px solid #111');
 	}
 });
