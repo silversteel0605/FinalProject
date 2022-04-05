@@ -31,20 +31,12 @@
 	<select id="getPostList" resultType="com.spring.project.post.dto.PostVO">
 		SELECT 
 			post.rownumber, post.post_id,  post.member_id, post.title, post.contents, to_char(post.reg_date, 'yyyy. MM. dd.'), 
-<<<<<<< HEAD
 			post.board_class, post.contents_category, post.process, post.imgurl, post.views
-=======
-			post.board_class, post.contents_category, post.process, post.imgurl , post.decl
->>>>>>> refs/heads/master
 		FROM 
 			(
 				SELECT 
 					rownum as rownumber, post_id, member_id, title, contents, reg_date, 
-<<<<<<< HEAD
 					board_class, contents_category, process, imgurl, views
-=======
-					board_class, contents_category, process, imgurl, decl
->>>>>>> refs/heads/master
 				FROM 
 					post
 				WHERE

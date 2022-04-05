@@ -281,10 +281,10 @@ function mkCoCommentInput(comment_id) {
 	innerDiv2.setAttribute('id', 'innerDiv2');
 	innerDiv2.setAttribute('class', 'd-flex justify-content-end');
 	div2_savBtn.setAttribute('id', 'div2_savBtn');
-	div2_savBtn.setAttribute('class', 'btn btn-outline-success co_comment_saveBtn');
+	div2_savBtn.setAttribute('class', 'btn btn-outline-dark co_comment_saveBtn');
 	div2_savBtn.appendChild(textNode('历厘'));
 	div2_cancelBtn.setAttribute('id', 'div2_cancelBtn');
-	div2_cancelBtn.setAttribute('class', 'btn btn-outline-success co_comment_cancelBtn');
+	div2_cancelBtn.setAttribute('class', 'btn btn-outline-dark co_comment_cancelBtn');
 	div2_cancelBtn.appendChild(textNode('秒家'));
 	commentIdHidden.setAttribute('type', 'hidden');
 	commentIdHidden.setAttribute('value', comment_id);
@@ -312,7 +312,7 @@ function mkCoCommentInputDark(comment_id) {
 	coCommentInput.setAttribute('class', 'co_commentInput');
 	innerDiv1.setAttribute('class', 'form-floating');
 	innerDiv1.setAttribute('id', 'innerDiv1');
-	div1_textarea.setAttribute('class', 'form-control');
+	div1_textarea.setAttribute('class', 'form-control darkmodeDiv darkmodeFont');
 	div1_textarea.setAttribute('placeholder', 'Leave a Comment');
 	div1_textarea.setAttribute('id', 'coCommentTextarea');
 	div1_label.setAttribute('id', 'div1_label');
@@ -321,10 +321,10 @@ function mkCoCommentInputDark(comment_id) {
 	innerDiv2.setAttribute('id', 'innerDiv2');
 	innerDiv2.setAttribute('class', 'd-flex justify-content-end');
 	div2_savBtn.setAttribute('id', 'div2_savBtn');
-	div2_savBtn.setAttribute('class', 'btn btn-outline-success co_comment_saveBtn');
+	div2_savBtn.setAttribute('class', 'btn btn-outline-dark co_comment_saveBtn darkmodeFont');
 	div2_savBtn.appendChild(textNode('历厘'));
 	div2_cancelBtn.setAttribute('id', 'div2_cancelBtn');
-	div2_cancelBtn.setAttribute('class', 'btn btn-outline-success co_comment_cancelBtn');
+	div2_cancelBtn.setAttribute('class', 'btn btn-outline-dark co_comment_cancelBtn darkmodeFont');
 	div2_cancelBtn.appendChild(textNode('秒家'));
 	commentIdHidden.setAttribute('type', 'hidden');
 	commentIdHidden.setAttribute('value', comment_id);
