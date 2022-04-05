@@ -32,6 +32,9 @@
   	<!-- camping_index css -->
 	<link rel="stylesheet" href="./resources/css/camping_index_style.css">
 	
+	<!-- camping_font -->
+	<link rel="stylesheet" href="./resources/fonts/review&campingInfo/campingInfo.css">
+	
 	<!-- google icon -->
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
@@ -39,15 +42,6 @@
 	
 <header>
 	<jsp:include page='renewal_nav.jsp'/>
-	<div id="main_ani">
-		<h2 id=main_text><span>Let's go</span><br>Camping</h2>
-		<img src="resources/images/moon.png" id="moon">
-		<img src="resources/images/bird1.png" id="bird1">
-		<img src="resources/images/bird2.png" id="bird2">
-		<img src="resources/images/forest.png" id="forest">
-		<img src="resources/images/rocks.png" id="rocks">
-		<img src="resources/images/water.png" id="water">
-	</div>
 </header>
 <!-- 
 <header>
@@ -96,7 +90,7 @@
 <section class="wrap">
 	<div class="container-lg bb mb-5">
 		<div class="sub_title">
-			<div class="tit mb-2">상세페이지</div>
+			<div class="tit mb-2">CAMPGROUND DETAILS</div>
 			<div class="txt"><%= info.getFacltNm() %></div>
 		</div>
 	</div>
@@ -108,7 +102,7 @@
 				<div class = "obj_row_center container bgc_box">
 					<div class="ftco-section align-items-center bgc_box_size">
 						<div class="title_txt">
-							<h2 class="h2_size"><%= info.getFacltNm() %></h2>
+							<h2 class="h2_size ibm-bold-font"><%= info.getFacltNm() %></h2>
 							<hr style="width: 80%">
 							<div class="">
 								<c:if test="${info.homepage != null }">
@@ -317,7 +311,9 @@
 			  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 			  	<div class = "map_warp">
 						<div class="map_text inner_content">
-							<p>주소지 : <%= info.getAddr1() %> <%= info.getAddr2() %></p>
+							<c:if test="">
+								<p>주소지 : <%= info.getAddr1() %> <%= info.getAddr2() %></p>
+							</c:if>
 						</div>
 						
 						<div id = "map">
@@ -368,38 +364,38 @@
 								    <div class="block-27">
 								      <ul class = "page_number">	
 										<li>
-											<a data-toggle="tab" href="./TempCampInfo?contentId=<%= info.getContentId() %>&nowPage=1&cntPerPage=${paging.cntPerPage}${search.uri}&type=3#tab03">&lt;&lt;</a>
+											<a data-toggle="tab" href="./CampInfo?contentId=<%= info.getContentId() %>&nowPage=1&cntPerPage=${paging.cntPerPage}${search.uri}&type=3#tab03">&lt;&lt;</a>
 										</li>
 										
 										<c:choose>
 											<c:when test="${paging.startPage != 1}">
-												<li class="page_btn"><a href="./TempCampInfo?contentId=<%= info.getContentId() %>&nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}${search.uri}&type=3#tab03">&lt;</a></li>
+												<li class="page_btn"><a href="./CampInfo?contentId=<%= info.getContentId() %>&nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}${search.uri}&type=3#tab03">&lt;</a></li>
 											</c:when>
 											<c:otherwise>
-												<li class="page_btn"><a href="./TempCampInfo?contentId=<%= info.getContentId() %>&nowPage=${paging.startPage }&cntPerPage=${paging.cntPerPage}${search.uri}&type=3#tab03">&lt;</a></li>
+												<li class="page_btn"><a href="./CampInfo?contentId=<%= info.getContentId() %>&nowPage=${paging.startPage }&cntPerPage=${paging.cntPerPage}${search.uri}&type=3#tab03">&lt;</a></li>
 											</c:otherwise>
 										</c:choose>
 										      
 										<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
 											<c:choose>
 												<c:when test="${p == paging.nowPage }">
-													<li class="page_numbering active"><a href="./TempCampInfo?contentId=<%= info.getContentId() %>&nowPage=${p }&cntPerPage=${paging.cntPerPage}${search.uri}&type=3#tab03">${p }</a></li>
+													<li class="page_numbering active"><a href="./CampInfo?contentId=<%= info.getContentId() %>&nowPage=${p }&cntPerPage=${paging.cntPerPage}${search.uri}&type=3#tab03">${p }</a></li>
 												</c:when>
 												<c:when test="${p != paging.nowPage }">
-													<li class= "page_numbering"><a href="./TempCampInfo?contentId=<%= info.getContentId() %>&nowPage=${p }&cntPerPage=${paging.cntPerPage}${search.uri}&type=3#tab03">${p }</a></li>
+													<li class= "page_numbering"><a href="./CampInfo?contentId=<%= info.getContentId() %>&nowPage=${p }&cntPerPage=${paging.cntPerPage}${search.uri}&type=3#tab03">${p }</a></li>
 												</c:when>
 											</c:choose>
 										</c:forEach>
 										
 										<c:choose>
 											<c:when test="${paging.endPage != paging.lastPage}">
-												<li class="page_btn"><a href="./TempCampInfo?contentId=<%= info.getContentId() %>&nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}${search.uri}&type=3#tab03">&gt;</a></li>
+												<li class="page_btn"><a href="./CampInfo?contentId=<%= info.getContentId() %>&nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}${search.uri}&type=3#tab03">&gt;</a></li>
 											</c:when>
 											<c:otherwise>
-												<li class="page_btn"><a href="./TempCampInfo?contentId=<%= info.getContentId() %>&nowPage=${paging.endPage }&cntPerPage=${paging.cntPerPage}${search.uri}&type=3#tab03">&gt;</a></li>
+												<li class="page_btn"><a href="./CampInfo?contentId=<%= info.getContentId() %>&nowPage=${paging.endPage }&cntPerPage=${paging.cntPerPage}${search.uri}&type=3#tab03">&gt;</a></li>
 											</c:otherwise>
 										</c:choose>
-										<li><a href="./TempCampInfo?contentId=<%= info.getContentId() %>&nowPage=${paging.lastPage }&cntPerPage=${paging.cntPerPage}${search.uri}&type=3#tab03">&gt;&gt;</a></li>
+										<li><a href="./CampInfo?contentId=<%= info.getContentId() %>&nowPage=${paging.lastPage }&cntPerPage=${paging.cntPerPage}${search.uri}&type=3#tab03">&gt;&gt;</a></li>
 								      </ul>
 								</div>
 							</div>
@@ -488,8 +484,6 @@
 </c:if> 
 
 <!-- 다크모드 js-->
-<script src="<c:url value="/resources/js/main_ani.js"/>"></script>
-<script src="<c:url value="/resources/js/anime.min.js"/>"></script>
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 <script src="<c:url value="/resources/js/darkmode.js"/>"></script>

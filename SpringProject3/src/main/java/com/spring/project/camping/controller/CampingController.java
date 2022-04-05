@@ -45,9 +45,6 @@ public class CampingController {
 		controlling(m, nowPage, vo);
 		return "main_search";
 	}
-
-
-
 	
 	@RequestMapping(value = "/CampInfo", method = RequestMethod.GET)
 	public String info(

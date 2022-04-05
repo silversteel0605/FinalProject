@@ -37,7 +37,7 @@ public class CampingReviewController {
 		m.addAttribute("contentId", contentId);
 		m.addAttribute("type", type);
 		
-		return "redirect:TempCampInfo#tab03";
+		return "redirect:CampInfo#tab03";
 	}
 	
 	
@@ -103,7 +103,7 @@ public class CampingReviewController {
 		m.addAttribute("contentId", contentId);
 		m.addAttribute("type", type);
 		
-		return "redirect:TempCampInfo#tab03";
+		return "redirect:CampInfo#tab03";
 	}
 
 	@RequestMapping(value = "/reviewSave", method = RequestMethod.GET)
@@ -121,7 +121,7 @@ public class CampingReviewController {
 		m.addAttribute("contentId", r_dto.getContentId());
 		m.addAttribute("type", type);
 		
-		return "redirect:TempCampInfo#tab03";
+		return "redirect:CampInfo#tab03";
 	}
 	
 	@RequestMapping(value = "/reviewViewer", method = RequestMethod.GET)

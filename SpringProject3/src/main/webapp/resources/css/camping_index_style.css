@@ -64,7 +64,7 @@ a:hover, a:active {text-decoration: none; color:red;}
 .bgc_color_box{
 
     
-    background-color: wheat;
+    background-color :  #FFF9E3; 
 }
 
 .bgc_box{
@@ -226,6 +226,7 @@ a:hover, a:active {text-decoration: none; color:red;}
 	width: 100%;
 }
 
+
 .inner_content{
 	padding: 5%;
 	padding-top: 2%;
@@ -277,10 +278,9 @@ a:hover, a:active {text-decoration: none; color:red;}
     justify-content: center;
 }
 
-
-
 .viewer{
 	width: 20%;
+	max-width: 25%;
     border: 1px solid;
 	margin: 5%;
 }

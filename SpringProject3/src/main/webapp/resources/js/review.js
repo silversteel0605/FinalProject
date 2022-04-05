@@ -4,7 +4,7 @@ function back(){
 };
 
 function listGo(reviewId, contentId){
-	location.href="/project/reviewDelete?reviewId="+reviewId+"&contentId="+contentId+"#tab03";
+	location.href="/project/CampInfo?contentId="+contentId+"#tab03";
 }
 
 function showPopUp(reviewId, contentId) {
