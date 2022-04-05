@@ -11,7 +11,6 @@
 <title>Insert title here</title>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
-    <link rel="stylesheet" href="<c:url value="/resources/css/template.css"/>"/>
 	<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
 	<link rel="stylesheet" href="<c:url value="/resources/css/reset.css"/>"/>
 	<!-- header css -->
@@ -76,11 +75,11 @@
 
 
 
-	<script src="<c:url value="/resources/js/main_ani.js"/>"></script>
-	<script src="<c:url value="/resources/js/anime.min.js"/>"></script>
 	<!-- jquery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- 다크모드 js-->
+	<script src="<c:url value="/resources/js/main_ani.js"/>"></script>
+	<script src="<c:url value="/resources/js/anime.min.js"/>"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script src="<c:url value="/resources/js/darkmode.js"/>"></script>

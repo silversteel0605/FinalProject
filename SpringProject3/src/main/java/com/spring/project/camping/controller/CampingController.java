@@ -41,7 +41,7 @@ public class CampingController {
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public String search(Model m, @RequestParam(value="nowPage", required=false)String nowPage, SearchVO vo)  throws  IOException, JDOMException {
 		controlling(m, nowPage, vo);
-		return "search";
+		return "main_search";
 	}
 
 

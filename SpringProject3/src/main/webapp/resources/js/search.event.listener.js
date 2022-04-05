@@ -1,7 +1,5 @@
-
-	
-const tags = document.querySelectorAll('.tag');
-tags.forEach(tag => {
+const Tags = document.querySelectorAll('.tag');
+Tags.forEach(tag => {
 	tag.onclick = () => {
 		if (tag.classList.contains('active')) {				
 			tag.style.backgroundColor = "#ffffff";
@@ -26,7 +24,7 @@ $('#submit').click(function() {
 		form.submit();
 	} else {		
 		let uri = location.pathname + '?searchTy=tag';
-		tags.forEach(tag => {
+		Tags.forEach(tag => {
 			if(tag.classList.contains('active')) {
 				var id = tag.id;
 				uri += '&tagId=' + id;
