@@ -70,6 +70,10 @@ public class PostController {
 	public String supportPage(HttpServletRequest request, Model model, String nowPage, String categoryName, SearchVO search, boolean delete) {
 		HttpSession session = request.getSession();
 		
+		if (model.getAttribute("member_id") == null) {
+			model.addAttribute("member_id", session.getAttribute("member_id"));
+		}
+		
 		// 초기 세션 생성
 		if (session.getAttribute("search") == null || ((SearchVO)session.getAttribute("search")).getBoard_class() != 1) {
 			Integer category = categoryNameMap.get("supportAll");
@@ -108,7 +112,7 @@ public class PostController {
 	}
 	
 	@PostMapping("/support")
-	public String supportSearch(HttpServletRequest request, Model model, SearchVO search, String nowPage, DeleteVO del) {
+	public String supportSearch(HttpServletRequest request, Model model, SearchVO search, String nowPage) {
 		HttpSession session = request.getSession();
 		
 		// 검색 출력
@@ -137,6 +141,10 @@ public class PostController {
 	@GetMapping("/board")
 	public String board(HttpServletRequest request, Model model, String nowPage, SearchVO search, String categoryName, boolean delete) {
 		HttpSession session = request.getSession();
+		
+		if (model.getAttribute("member_id") == null) {
+			model.addAttribute("member_id", session.getAttribute("member_id"));
+		}
 		
 		// 초기 세션 생성
 		if (session.getAttribute("search") == null || ((SearchVO)session.getAttribute("search")).getBoard_class() != 0) {
@@ -213,9 +221,10 @@ public class PostController {
 		
 		// 수정권한 부여
 		String member_id = (String) session.getAttribute("member_id");
-		
-		if (post.getMember_id().equals(member_id) || member_id.equals("admin")) {
-			model.addAttribute("editAuth", true);
+		if (member_id != null) {
+			if (post.getMember_id().equals(member_id) || member_id.equals("admin")) {
+				model.addAttribute("editAuth", true);
+			}
 		}
 		
 		// 코멘트 개수

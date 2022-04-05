@@ -74,7 +74,7 @@
 			</div>
 			<div class="col-md-5 offset-md-2 d-flex align-items-end navCategory">
 				<div class="row flex-fill">
-					<div class="col-md-9">
+					<div class="col-md">
 						<div class="d-flex justify-content-end">
 					        <a class="ms-3 align-self-bottom" href="./board?categoryName=boardAll">전체</a>
 					        <a class="ms-3" href="./board?categoryName=daily">일상</a>
@@ -83,9 +83,11 @@
 					        <a class="ms-3" href="./board?categoryName=sell">팝니다</a>
 						</div>
 					</div>
+				    <c:if test="${not empty member_id }">
 					<div class="col-md-3 d-flex justify-content-end">
 					 	<a class="" href="./write?board_class=freeBoard">글쓰기</a>
 					</div>
+				    </c:if>
 				</div>
 			</div>
 		</div>

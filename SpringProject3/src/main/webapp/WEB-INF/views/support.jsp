@@ -77,16 +77,18 @@
 			</div>
 			<div class="col-md-5 offset-md-2 d-flex align-items-end navCategory">
 			  	<div class="row flex-fill">
-				    <div class="col-md-9">
+				    <div class="col-md">
 					    <div class="d-flex justify-content-end">
 						    <a class="categoryClass ms-3" href="./support?categoryName=supportAll">전체</a>
 						    <a class="categoryClass ms-3" href="./support?categoryName=notice">공지사항</a>
 						    <a class="categoryClass ms-3" href="./support?categoryName=askEdit">수정요청</a>
 					    </div>
 				    </div>
+				    <c:if test="${not empty member_id }">
 				    <div class="col-md-3 d-flex justify-content-end">
 					   	<a class="" href="./write?board_class=supportBoard">글쓰기</a>
 				    </div>
+				    </c:if>
 			  	</div>
 			</div>
 		</div>
