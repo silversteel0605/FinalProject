@@ -91,6 +91,7 @@
 							</div>
 						</div>
 						</c:if>
+						<c:if test="${comment.classnum eq 1 }">
 						<div id="${comment.comment_id }" class="mb-3 border-bottom offset-1">
 							<span class="userId">${comment.member_id}</span><br/>
 							<div class="d-flex justify-content-start">
@@ -107,7 +108,6 @@
 								<input id="comment_categoryId" type="hidden" value="${comment.category_id }" />
 							</div>
 						</div>
-						<c:if test="${comment.classnum eq 1 }">
 						</c:if>
 					</c:forEach>
 				</c:if>
