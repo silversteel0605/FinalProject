@@ -11,6 +11,7 @@
 <title>Insert title here</title>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
+    <link rel="stylesheet" href="<c:url value="/resources/css/template.css"/>"/>
 	<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
 	<link rel="stylesheet" href="<c:url value="/resources/css/reset.css"/>"/>
 	<!-- header css -->

@@ -1,5 +1,2 @@
 eclipse.preferences.version=1
-encoding//src/main/webapp/resources/js/camping_index.js=EUC-KR
-encoding//src/main/webapp/resources/js/chain.select.js=EUC-KR
-encoding//src/main/webapp/resources/js/manager.rest.js=EUC-KR
-encoding//src/main/webapp/resources/js/manager.rest.update.js=EUC-KR
+encoding//src/main/webapp/WEB-INF/views/renewal_nav.jsp=EUC-KR
