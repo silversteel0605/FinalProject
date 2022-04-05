@@ -12,7 +12,9 @@
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="<c:url value="/resources/css/jangec.css"/>"/>
 	<link rel="stylesheet" href="<c:url value="/resources/css/template.css"/>"/>
+	<link rel="stylesheet" href="<c:url value="/resources/css/jangDarkMode.css"/>"/>
 	<script src="<c:url value="/resources/ckeditor/ckeditor.js"/>"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
@@ -76,7 +78,7 @@
 	    	<c:choose>
 			<c:when test="${board_class eq 'freeBoard' }">
 				<div class="input-group mb-3">
-					<div class="col-md-1">
+					<div class="col-md-2">
 						<select id="writeCategory" class="form-select" name="contents_category">
 							<option selected value="daily">자유</option>
 							<option value="showoff">자랑</option>
@@ -84,14 +86,14 @@
 							<option value="sell">팝니다</option>
 						</select>
 					</div>
-					<div class="col-md-11">
+					<div class="col-md-10">
 						<input type="text" class="form-control col-md-9" aria-label="Text input with dropdown button" name="title" id="title" placeholder="제목을 입력해 주세요">
 					</div>
 				</div>
 			</c:when>
 			<c:otherwise>
 				<div class="input-group mb-3">
-					<div class="col-md-1">
+					<div class="col-md-2">
 						<select id="writeCategory" class="form-select col-md-3" name="contents_category">
 							<c:if test="${manager eq 'admin' }">
 								<option selected value="notice">공지사항</option>
@@ -99,7 +101,7 @@
 							<option value="askEdit">건의사항</option>
 						</select>
 					</div>
-					<div class="col-md-11">
+					<div class="col-md-10">
 						<input type="text" class="form-control" aria-label="Text input with dropdown button" name="title" id="title" placeholder="제목을 입력해 주세요">
 					</div>
 				</div>
@@ -219,6 +221,7 @@
 <!-- 페이지 js -->
 <script src="<c:url value="/resources/js/jangec.js"/>"></script>
 <script src="<c:url value="/resources/js/jangWriteTest.js"/>"></script>
+<script src="<c:url value="/resources/js/jangDarkMode.js"/>"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
 </body>

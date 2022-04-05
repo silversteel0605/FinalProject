@@ -4,16 +4,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Camping</title>
-<!-- 페이지 CSS-->
-<link rel="stylesheet" href="<c:url value="/resources/css/template.css"/>"/>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="<c:url value="/resources/css/jangec.css"/>"/>
-<link rel="stylesheet" href="<c:url value="/resources/css/jang_main_paragraph.css"/>"/>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<meta charset="EUC-KR">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Camping</title>
+	<!-- 페이지 CSS-->
+	<link rel="stylesheet" href="<c:url value="/resources/css/template.css"/>"/>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="<c:url value="/resources/css/jangec.css"/>"/>
+	<link rel="stylesheet" href="<c:url value="/resources/css/jang_main_paragraph.css"/>"/>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<link rel="stylesheet" href="<c:url value="/resources/css/jangDarkMode.css"/>"/>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
@@ -52,6 +54,25 @@
 <!-- 수정 -->
 <section class="section">
 	<div class="container-lg">
+		<div class="d-flex justify-content-center">
+			<c:choose>
+			<c:when test="${contents.board_class eq 0 }">
+			<div class="mt-5 mb-5 d-flex flex-column">
+				<p class="h1 text-center">B&nbsp;O&nbsp;A&nbsp;R&nbsp;D</p>
+				<p class="text-center">마음껏&nbsp;즐기다</p>
+			</div>
+			</c:when>
+			<c:otherwise>
+			<div class="mt-5 mb-5 d-flex flex-column">
+				<p class="h1 text-center">C&nbsp;O&nbsp;N&nbsp;T&nbsp;A&nbsp;C&nbsp;T</p>
+				<p class="text-center">고객의&nbsp;소리에&nbsp;귀&nbsp;기울입니다</p>
+			</div>
+			</c:otherwise>
+			</c:choose>
+		</div>
+		<div class="border-top mb-3 border-dark border-3"></div>
+	</div>
+	<div class="container-lg">
 		<p class="fs-3">${contents.title }</p>
 		<div class="paragraph_header d-flex justify-content-between">
 			<span id="${contents.member_id }" class="userId pointer">${contents.member_id }</span>
@@ -60,7 +81,8 @@
 				<span>${contents.reg_date }|</span>
 				<span>조회수&nbsp;${contents.views }</span>
 			</div>
-		</div> <hr/>
+		</div>
+		<div class="border-top mb-3 border-dark border-1 seperator"></div>
 		<div class="paragraph_body">
 			<p>${contents.contents }</p>
 		</div>
@@ -69,7 +91,8 @@
 		<div class="paragraph_comments">
 			<div class="comments_header">
 				<p>COMMENTS</p>
-			</div> <hr />
+			</div>
+			<div class="border-top mb-3 border-dark border-1 seperator"></div>
 			<div class="comments_body mb-5" id="comments_body">
 				<c:if test="${not empty commentsList }">
 					<c:forEach items="${commentsList }" var="comment">
@@ -125,7 +148,8 @@
 				</div>
 			</div>
 			<!-- /comments 입력 -->
-		</div> <hr/>
+		</div>
+		<div class="border-top mb-3 border-dark border-1 seperator"></div>
 		<div class="paragraph_footer d-flex justify-content-between mb-5">
 			<div>
 				<button id="reportBtn" class="btn">신고</button>
@@ -260,26 +284,12 @@
 <%-- <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div> --%>
 
 
-<script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
-<script src="<c:url value="/resources/js/jquery-migrate-3.0.1.min.js"/>"></script>
-<script src="<c:url value="/resources/js/popper.min.js"/>"></script>
-<script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
-<script src="<c:url value="/resources/js/jquery.easing.1.3.js"/>"></script>
-<script src="<c:url value="/resources/js/jquery.waypoints.min.js"/>"></script>
-<script src="<c:url value="/resources/js/jquery.stellar.min.js"/>"></script>
-<script src="<c:url value="/resources/js/owl.carousel.min.js"/>"></script>
-<script src="<c:url value="/resources/js/jquery.magnific-popup.min.js"/>"></script>
-<script src="<c:url value="/resources/js/jquery.animateNumber.min.js"/>"></script>
-<script src="<c:url value="/resources/js/bootstrap-datepicker.js"/>"></script>
-<script src="<c:url value="/resources/js/scrollax.min.js"/>"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-<script src="<c:url value="/resources/js/google-map.js"/>"></script>
-<script src="<c:url value="/resources/js/main.js"/>"></script>
 <!-- 개인 JS -->
 <script src="<c:url value="/resources/js/jang_main_paragraph.js"/>"></script>
 <script src="<c:url value="/resources/js/jangec.js"/>"></script>
-<script src="sweetalert2.all.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+<script src="<c:url value="/resources/js/jangDarkMode.js"/>"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
 </body>
 </html>

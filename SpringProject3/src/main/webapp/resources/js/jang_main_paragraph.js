@@ -9,6 +9,26 @@ function goBoard(board_class) {
 	}
 }
 
+function getCookie(cname) { 						// 다크모드        
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for(var i = 0; i <ca.length; i++) {
+    var c = ca[i];
+    console.log('c: ', c);
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+      console.log('while안의 c: ', c);
+    }
+    if (c.indexOf(name) == 0) {
+      console.log('if안의 c: ', c);
+      console.log('c.substring(name.length, c.length): ', c.substring(name.length, c.length))
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
 // 게시글 삭제
 const editAuth = document.getElementById('editAuth').value;
 console.log('edit권한: ', editAuth);
@@ -71,9 +91,17 @@ xhttpComments.addEventListener('readystatechange', (e) => {
 		const comment = JSON.parse(e.target.responseText);
 		
 		if (comment.classnum == 0) {
-			comments_body.innerHTML += mkComment (
-						comment.member_id, comment.comments, comment.comment_id, comment.post_id, comment.ordernum, comment.category_id
-					);
+			
+			if (getCookie('DarkMode') == 'N') {
+				
+				comments_body.innerHTML += mkComment (
+							comment.member_id, comment.comments, comment.comment_id, comment.post_id, comment.ordernum, comment.category_id
+						);
+			} else if (getCookie('DarkMode') == 'Y') {
+				comments_body.innerHTML += mkCommentDark (
+							comment.member_id, comment.comments, comment.comment_id, comment.post_id, comment.ordernum, comment.category_id
+						);
+			}
 		}
 	}
 	
@@ -85,10 +113,12 @@ xhttpComments.addEventListener('readystatechange', (e) => {
 const co_comment_input = document.getElementById('co_comment_input');
 
 document.addEventListener('click', (e) => {
+	console.log('e.target.id: ', e.target.id);
 	const commentsEA = document.querySelector('#commentsEA').value;
+	console.log('commentsEA: ', commentsEA);
 	
 	if (commentsEA > 0) {
-		const targetClass = e.target.className.substring('bi bi-chat-dots comment_icon '.length);
+		const targetClass = e.target.className.substring('bi bi-chat-dots comment_icon '.length, 'bi bi-chat-dots comment_icon co_comment_newBtn'.length);
 		const targetCommentId = e.target.id.substring('co_comment_newBtn_'.length); // comment_id
 		const targetInput = document.getElementById(targetCommentId); //대댓글 div
 		const targetPostId = document.getElementById('post_id').value; // post_id
@@ -97,13 +127,21 @@ document.addEventListener('click', (e) => {
 		const compare_co_comment_newBtn = 'co_comment_newBtn';
 		const previousInput = document.getElementById('co_commentInput'); // 이전 생성된 대댓글 input
 		
+		console.log('cocoment in1');
+		console.log('targetClass: ', targetClass);
 		if (targetClass == compare_co_comment_newBtn) {
+		console.log('cocoment in2');
 			
 			if (previousInput) {
 				previousInput.remove();
 			}
 			
-			targetInput.appendChild(mkCoCommentInput(targetCommentId));
+			
+			if (getCookie('DarkMode') == 'N') {
+				targetInput.appendChild(mkCoCommentInput(targetCommentId));
+	 		} else if (getCookie('DarkMode') == 'Y') {
+				targetInput.appendChild(mkCoCommentInputDark(targetCommentId));
+			}
 			/* /코코멘트 input 생성 */
 			
 			const div2_savBtn = document.getElementById('div2_savBtn');
@@ -136,7 +174,12 @@ document.addEventListener('click', (e) => {
 					if (readyState == 4 && status == 200)  {
 						const comment = JSON.parse(e.target.responseText);
 						console.log(comment);
-						targetCommentDiv.innerHTML += mkCoComment(comment.member_id, comment.comments, comment.comment_id);
+						
+						if (getCookie('DarkMode') == 'N') {
+							targetCommentDiv.innerHTML += mkCoComment(comment.member_id, comment.comments, comment.comment_id);
+						} else if (getCookie('DarkMode') == 'Y') {
+							targetCommentDiv.innerHTML += mkCoCommentDark(comment.member_id, comment.comments, comment.comment_id);
+						}
 					}
 				});
 				beforeInput.remove();
@@ -167,23 +210,95 @@ function mkComment(member_id, comments, comment_id, post_id, ordernum, category_
 			</div>`;
 }
 
+function mkCommentDark (member_id, comments, comment_id, post_id, ordernum, category_id) {
+	return `<div id=${comment_id} class="mb-3 border-bottom darkmodeDiv">
+				<span class="userId darkmodeFont">${member_id}</span><br/>
+				<div class="d-flex justify-content-start">
+					<p class="pe-3 darkmodeFont">${comments}</p>
+					<i id="comment_deleteBtn_${comment_id}" class="bi bi-x-circle comment_icon darkmodeFont"></i>
+					<i id="co_comment_newBtn_${comment_id}" class="bi bi-chat-dots comment_icon co_comment_newBtn darkmodeFont"></i>
+					<i id="co_comment_reportBtn_${comment_id }" class="bi bi-flag pointer darkmodeFont"></i>
+					<input id="comment_commentId_${comment_id }" type="hidden" value="${comment_id }" class="darkmodeDiv darkmodeFont" />
+					<input id="comment_postId" type="hidden" value="${post_id }" class="darkmodeDiv darkmodeFont" />
+					<input id="comment_ordernum" type="hidden" value="${ordernum }" class="darkmodeDiv darkmodeFont" />
+					<input id="comment_categoryId" type="hidden" value="${category_id }" class="darkmodeDiv darkmodeFont" />
+				</div>
+			</div>`;
+}
+
 function mkCoComment(member_id, comments, comment_id, post_id, ordernum, category_id) {
 	return `<div id=${comment_id} class="mb-3 border-bottom offset-1">
 				<span class="userId">${member_id}</span><br/>
 				<div class="d-flex justify-content-start">
-					<p class="pe-3">${comments}</p>
-					<i id="comment_deleteBtn_${comment_id}" class="bi bi-x-circle comment_icon"></i>
-					<i id="co_comment_newBtn_${comment_id}" class="bi bi-chat-dots comment_icon co_comment_newBtn"></i>
-					<i id="co_comment_reportBtn_${comment_id }" class="bi bi-flag pointer"></i>
-					<input id="comment_commentId_${comment_id }" type="hidden" value="${comment_id }" />
-					<input id="comment_postId" type="hidden" value="${post_id }" />
-					<input id="comment_ordernum" type="hidden" value="${ordernum }" />
-					<input id="comment_categoryId" type="hidden" value="${category_id }" />
+					<p class="pe-3 darkmodeFont">${comments}</p>
+					<i id="comment_deleteBtn_${comment_id}" class="bi bi-x-circle comment_icon darkmodeFont"></i>
+					<i id="co_comment_newBtn_${comment_id}" class="bi bi-chat-dots comment_icon co_comment_newBtn darkmodeFont"></i>
+					<i id="co_comment_reportBtn_${comment_id }" class="bi bi-flag pointer darkmodeFont"></i>
+					<input id="comment_commentId_${comment_id }" type="hidden" value="${comment_id }" class="darkmodeFont darkmodeDiv" />
+					<input id="comment_postId" type="hidden" value="${post_id }" class="darkmodeFont darkmodeDiv" />
+					<input id="comment_ordernum" type="hidden" value="${ordernum }" class="darkmodeFont darkmodeDiv" />
+					<input id="comment_categoryId" type="hidden" value="${category_id }" class="darkmodeFont darkmodeDiv" />
+				</div>
+			</div>`;
+}
+
+function mkCoCommentDark(member_id, comments, comment_id, post_id, ordernum, category_id) {
+	return `<div id=${comment_id} class="mb-3 border-bottom offset-1 darkmodeDiv">
+				<span class="userId darkmodeFont">${member_id}</span><br/>
+				<div class="d-flex justify-content-start">
+					<p class="pe-3 darkmodeFont">${comments}</p>
+					<i id="comment_deleteBtn_${comment_id}" class="bi bi-x-circle comment_icon darkmodeFont"></i>
+					<i id="co_comment_newBtn_${comment_id}" class="bi bi-chat-dots comment_icon co_comment_newBtn darkmodeFont"></i>
+					<i id="co_comment_reportBtn_${comment_id }" class="bi bi-flag pointer darkmodeFont"></i>
+					<input id="comment_commentId_${comment_id }" type="hidden" value="${comment_id }" class="darkmodeFont darkmodeDiv" />
+					<input id="comment_postId" type="hidden" value="${post_id }" class="darkmodeFont darkmodeDiv" />
+					<input id="comment_ordernum" type="hidden" value="${ordernum }" class="darkmodeFont darkmodeDiv" />
+					<input id="comment_categoryId" type="hidden" value="${category_id }" class="darkmodeFont darkmodeDiv" />
 				</div>
 			</div>`;
 }
 
 function mkCoCommentInput(comment_id) {
+	const coCommentInput = document.createElement('div');
+	const innerDiv1 = document.createElement('div');
+	const div1_textarea = document.createElement('textarea');
+	const div1_label = document.createElement('label');
+	const innerDiv2 = document.createElement('div');
+	const div2_savBtn = document.createElement('button');
+	const div2_cancelBtn = document.createElement('button');
+	const commentIdHidden = document.createElement('input');
+	
+	coCommentInput.setAttribute('id', 'co_commentInput');
+	coCommentInput.setAttribute('class', 'co_commentInput');
+	innerDiv1.setAttribute('class', 'form-floating');
+	innerDiv1.setAttribute('id', 'innerDiv1');
+	div1_textarea.setAttribute('class', 'form-control');
+	div1_textarea.setAttribute('placeholder', 'Leave a Comment');
+	div1_textarea.setAttribute('id', 'coCommentTextarea');
+	div1_label.setAttribute('id', 'div1_label');
+	div1_label.setAttribute('for', 'coCommentTextarea');
+	div1_label.appendChild(textNode('Comments'));
+	innerDiv2.setAttribute('id', 'innerDiv2');
+	innerDiv2.setAttribute('class', 'd-flex justify-content-end');
+	div2_savBtn.setAttribute('id', 'div2_savBtn');
+	div2_savBtn.setAttribute('class', 'btn btn-outline-success co_comment_saveBtn');
+	div2_savBtn.appendChild(textNode('저장'));
+	div2_cancelBtn.setAttribute('id', 'div2_cancelBtn');
+	div2_cancelBtn.setAttribute('class', 'btn btn-outline-success co_comment_cancelBtn');
+	div2_cancelBtn.appendChild(textNode('취소'));
+	commentIdHidden.setAttribute('type', 'hidden');
+	commentIdHidden.setAttribute('value', comment_id);
+	
+	coCommentInput.appendChild(innerDiv1).appendChild(div1_textarea);
+	coCommentInput.appendChild(innerDiv1).appendChild(div1_label);
+	coCommentInput.appendChild(innerDiv2).appendChild(div2_savBtn);
+	coCommentInput.appendChild(innerDiv2).appendChild(div2_cancelBtn);
+	coCommentInput.appendChild(commentIdHidden);
+	
+	return coCommentInput;
+}
+
+function mkCoCommentInputDark(comment_id) {
 	const coCommentInput = document.createElement('div');
 	const innerDiv1 = document.createElement('div');
 	const div1_textarea = document.createElement('textarea');
@@ -229,9 +344,11 @@ function textNode(str) {
 
 // 게시글 수정
 const contentsEdit = document.getElementById('contentsEdit');
-contentsEdit.addEventListener('click', (e) => {
-	location.href = `./write?post_id=${post_id}&edit=true&board_class=${board_class}&edit=true`;
-});
+if (contentsEdit != null) {
+	contentsEdit.addEventListener('click', (e) => {
+		location.href = `./write?post_id=${post_id}&edit=true&board_class=${board_class}&edit=true`;
+	});
+}
 
 // 게시글 신고
 const reportBtn = document.getElementById('reportBtn');

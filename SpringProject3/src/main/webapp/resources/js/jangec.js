@@ -66,11 +66,12 @@ modalBtn.addEventListener('click', (e) => {
 	data = '';
 });
 
-// 메인보기
+// 메인글보기
 function mainContents(post_id) {
 	location.href = `/project/main_paragraph?post_id=${post_id}`
 };
 
+// 개인작성글 보기 html구문 생성
 function mkIndividual(contents_category, post_id, title, member_id, reg_date, views) {
 	return `<tr>
 				<td>${post_id}</td>
@@ -81,4 +82,7 @@ function mkIndividual(contents_category, post_id, title, member_id, reg_date, vi
 				<td>${views }</td>
 			</tr>`;
 };
+
+// 다크모드
+
 

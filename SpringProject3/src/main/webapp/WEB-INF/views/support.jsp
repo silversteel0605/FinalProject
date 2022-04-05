@@ -12,6 +12,8 @@
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="<c:url value="/resources/css/jangec.css"/>"/>
 	<link rel="stylesheet" href="<c:url value="/resources/css/jangSupport.css"/>"/>
+	<link rel="stylesheet" href="<c:url value="/resources/css/jangDarkMode.css"/>"/>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
@@ -58,7 +60,7 @@
 				<p class="text-center">고객의&nbsp;소리에&nbsp;귀&nbsp;기울입니다</p>
 			</div>
 		</div>
-		<div class="border-top mb-3 border-dark border-3"></div>
+		<div class="border-top mb-3 border-dark border-3 seperator"></div>
 		<div class="row">
 			<div class="col-md-5">
 				<div class="row">
@@ -92,11 +94,11 @@
 			  	</div>
 			</div>
 		</div>
+		<div class="border-top mb-3 border-dark border-1 seperator"></div>
 	</div>
 	<!-- /Support Board Nav -->
 	<!-- Table -->
 	<div class="container-lg">
-		<hr />
 		<div class="table-responsive">
 			<table class="table table-hover">
 			  <thead>
@@ -204,21 +206,6 @@
 
 <!-- /수정 -->
 
-<section class="ftco-intro ftco-section ftco-no-pt">
- <div class="container">
-  <div class="row justify-content-center">
-   <div class="col-md-12 text-center">
-    <div class="img"  style="background-image: url(resources/images/bg_2.jpg);">
-     <div class="overlay"></div>
-     <h2>We Are Pacific A Travel Agency</h2>
-     <p>We can manage your dream building A small river named Duden flows by their place</p>
-     <p class="mb-0"><a href="#" class="btn btn-primary px-4 py-3">Ask For A Quote</a></p>
-   </div>
- </div>
-</div>
-</div>
-</section>
-
 <footer class="ftco-footer bg-bottom ftco-no-pt" style="background-image: url(resources/images/bg_3.jpg);">
   <div class="container">
     <div class="row mb-5">
@@ -292,7 +279,7 @@
 <!-- 페이지 js -->
 <script src="<c:url value="/resources/js/jangSupport.js"/>"></script>
 <script src="<c:url value="/resources/js/jangec.js"/>"></script>
-<script src="<c:url value="/resources/js/darktest.js"/>"></script>
+<script src="<c:url value="/resources/js/jangDarkMode.js"/>"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

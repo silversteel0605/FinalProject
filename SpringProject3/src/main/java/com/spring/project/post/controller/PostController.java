@@ -70,6 +70,8 @@ public class PostController {
 	public String supportPage(HttpServletRequest request, Model model, String nowPage, String categoryName, SearchVO search, boolean delete) {
 		HttpSession session = request.getSession();
 		
+		session.setAttribute("member_id", "qq");
+		
 		if (model.getAttribute("member_id") == null) {
 			model.addAttribute("member_id", session.getAttribute("member_id"));
 		}
