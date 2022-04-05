@@ -19,6 +19,7 @@
     <!-- И№До css -->
     <link rel="stylesheet" href="<c:url value="/resources/css/modal.css"/>"/>
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+   <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=77mbzylhqr"></script>
 	<style>
 		.map-list {
 			display: flex;

@@ -1,5 +1,10 @@
 @charset "EUC-KR";
 
+body {
+	overflow-x: hidden;
+	
+}
+
 a, a:hover {
 	color: black !important;
 	text-decoration: none !important;
