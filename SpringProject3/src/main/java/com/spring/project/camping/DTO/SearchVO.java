@@ -16,6 +16,7 @@ public class SearchVO {
 	private String[] sbrsCl;
 	private String[] tagId;
 	private String order;
+	private String contentId;
 	private int start;
 	private int end;
 	

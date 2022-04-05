@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.project.post.dto.CommentVO;
 import com.spring.project.post.dto.PostVO;
 import com.spring.project.post.dto.SearchVO;
 import com.spring.project.post.mapper.PostXMLMapper;
@@ -25,30 +26,59 @@ public class PostServiceImpl implements PostService {
 	}
 	
 	@Override
-	public List<PostVO> getSupportPostList(SearchVO search, PagingVO pvo) {
+	public List<PostVO> getPostList(SearchVO search, PagingVO pvo) {
 		
 		Integer startNum = pvo.getTotal() - (pvo.getCntPerPage() * pvo.getNowPage());
 		Integer endNum = pvo.getTotal() - (pvo.getCntPerPage() * (pvo.getNowPage() - 1));
 		pvo.setStart(startNum);
 		pvo.setEnd(endNum);
 		
-		return postMapper.getSupportPostList(search, pvo);
+		return postMapper.getPostList(search, pvo);
 	}
 	
 	@Override
-	public List<PostVO> getSupportSearch(SearchVO search, PagingVO pvo) {
+	public List<PostVO> getPostSearch(SearchVO search, PagingVO pvo) {
 		
 		Integer startNum = pvo.getTotal() - (pvo.getCntPerPage() * pvo.getNowPage());
 		Integer endNum = pvo.getTotal() - (pvo.getCntPerPage() * (pvo.getNowPage() - 1));
 		pvo.setStart(startNum);
 		pvo.setEnd(endNum);
 		
-		return postMapper.getSupportSearch(search, pvo);
+		return postMapper.getPostSearch(search, pvo);
 	}
 	
 	@Override
 	public PostVO getContents(Integer post_id) {
 		return postMapper.getContents(post_id);
+	}
+	
+	@Override
+	public void deletePost(Integer post_id) {
+		postMapper.deletePost(post_id);
+	}
+	
+	@Override
+	public void addComment(CommentVO comment) {
+		postMapper.addComment(comment);
+	};
+	
+	@Override
+	public List<PostVO> getComments(PostVO post) {
+		return postMapper.getComments(post);
+	}
+	
+	@Override
+	public void addPost(PostVO post) {
+		postMapper.addPost(post);
+	}
+	
+	public PostVO[] getAllPost(PostVO vo) {
+		return postMapper.getAllPost(vo);
+	}
+
+	@Override
+	public int getAllCounts() {
+		return postMapper.getAllCounts();
 	}
 }
 

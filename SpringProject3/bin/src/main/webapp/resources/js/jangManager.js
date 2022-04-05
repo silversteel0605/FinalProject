@@ -1,43 +1,29 @@
 const joinProhibitSwitch = document.getElementById('joinProhibitSwitch');
 const joinProhibitSentence = document.getElementById('joinProhibitSentence');
 
-var joinProhibit = false;
+let joinProhibit = false;
 
 if (joinProhibit == false) {
 	joinProhibitSwitch.checked = false;
-	joinProhibitSentence.innerHTML = 'ê°€ìž…í—ˆìš©';
+	joinProhibitSentence.innerHTML = '°¡ÀÔÇã¿ë';
 } else {
 	joinProhibitSwitch.checked = true;
-	joinProhibitSentence.innerHTML = 'ê°€ìž…ê¸ˆì§€';
+	joinProhibitSentence.innerHTML = '°¡ÀÔ±ÝÁö';
 }
 
 joinProhibitSwitch.addEventListener('change', (e) => {
 	
-	if (!joinProhibitSwitch.checked == true) {
+	if (joinProhibitSwitch.checked == true) {
 		joinProhibit = true;
-		joinProhibitSentence.innerHTML = 'ê°€ìž…í—ˆìš©';
+		console.log("È¸¿ø°¡ÀÔ Çã¿ë")
+		joinProhibitSentence.innerHTML = '°¡ÀÔÇã¿ë';
 		
 		
 	} else {
+		console.log("È¸¿ø°¡ÀÔ ±ÝÁö")
 		joinProhibit = false;
-		joinProhibitSentence.innerHTML = 'ê°€ìž…ê¸ˆì§€';
+		joinProhibitSentence.innerHTML = '°¡ÀÔ±ÝÁö';
 	}
 });
 
-
-
-
-function findAdr() {
-	new daum.Postcode({
-	    oncomplete: function(data) {
-	        console.log(data);
-	        console.log(data.zonceode);
-			var postNumInput = document.getElementById('postNumOfSite');
-			var adrOfSiteInput = document.getElementById('adrOfSite');
-			
-	        postNumInput.value = data.zonecode;
-	        adrOfSiteInput.value = data.address;
-	    }
-	}).open();
-}
-
+		

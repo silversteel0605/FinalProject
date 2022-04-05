@@ -7,20 +7,24 @@
 	
 	<insert id="initData">
 		insert into camping_list (
-		contentId, facltNm, lineIntro, addr1, firstImageUrl, doNm,
+		contentId, facltNm, lineIntro, addr1, addr2, firstImageUrl, doNm,
 		sigunguNm, lctCl, facltDivNm, induty, themaEnvrnCl, sbrsCl,
 		mapX, mapY
 		) 
 		values (
-		#{contentId}, #{facltNm}, #{lineIntro}, #{addr1}, #{firstImageUrl},
+		#{contentId}, #{facltNm}, #{lineIntro}, #{addr1}, #{addr2}, #{firstImageUrl},
 		#{doNm}, #{sigunguNm}, #{lctCl}, #{facltDivNm}, #{induty},
 		#{themaEnvrnCl}, #{sbrsCl}, #{mapX}, #{mapY}
 		)
 	</insert>
+	<insert id="addData">
+		insert into camping_list (contentId, addr1, addr2, doNm, sigunguNm, facltNm, lineIntro) 
+		values (content_id_seq.nextval, #{addr1}, #{addr2}, #{doNm}, #{sigunguNm}, #{facltNm}, #{lineIntro})
+	</insert>
 	<select id="getInfo" resultType="com.spring.project.camping.DTO.CampingVO">
         SELECT * from camping_list where contentId=#{contentId}
     </select>
-
+    
     <select id="getSearchData" resultType="com.spring.project.camping.DTO.CampingVO">
     	SELECT * 
 		FROM (
@@ -31,17 +35,20 @@
 				   		<choose>
 			    		<when test='searchTy.equals("condition")'>
 			    			<where>
-				    			<if test='!keyword.equals("")'>
+				    			<if test='keyword != null &amp;&amp; !keyword.equals("")'>
 				    				facltNm like '%${keyword}%'
 				    			</if>
-				    			<if test='!sido.equals("")'>
+				    			<if test='sido != null &amp;&amp; !sido.equals("")'>
 				    				and doNm = #{sido}
 				    			</if>
-				    			<if test='!gugun.equals("")'>
+				    			<if test='gugun != null &amp;&amp; !gugun.equals("")'>
 				    				and sigunguNm = #{gugun}
 				    			</if>
-				    			<if test='!locThem.equals("")'>
+				    			<if test='locThem != null &amp;&amp; !locThem.equals("")'>
 				    				and lctCl = #{locThem}
+				    			</if>
+				    			<if test='contentId != null &amp;&amp; !contentId.equals("")'>
+				    				and contentId like '%${contentId}%'
 				    			</if>
 				    			<if test='facltDivNm != null &amp;&amp; facltDivNm.length != 0'>
 				    				and
@@ -95,17 +102,20 @@
     		<choose>
     		<when test='searchTy.equals("condition")'>
     			<where>
-	    			<if test='!keyword.equals("")'>
+	    			<if test='keyword != null &amp;&amp; !keyword.equals("")'>
 	    				facltNm like '%${keyword}%'
 	    			</if>
-	    			<if test='!sido.equals("")'>
+	    			<if test='sido != null &amp;&amp; !sido.equals("")'>
 	    				and doNm = #{sido}
 	    			</if>
-	    			<if test='!gugun.equals("")'>
+	    			<if test='gugun != null &amp;&amp; !gugun.equals("")'>
 	    				and sigunguNm = #{gugun}
 	    			</if>
-	    			<if test='!locThem.equals("")'>
+	    			<if test='locThem != null &amp;&amp; !locThem.equals("")'>
 	    				and lctCl = #{locThem}
+	    			</if>
+	    			<if test='contentId != null &amp;&amp; !contentId.equals("")'>
+	    				and contentId like '%${contentId}%'
 	    			</if>
 	    			<if test='facltDivNm != null &amp;&amp; facltDivNm.length != 0'>
 	    				and
@@ -145,23 +155,18 @@
     	</choose>
     	</if>
     </select>
+    
     <update id="addViews">
     	update camping_list set views = views + 1 where contentId = #{contentId}
     </update>
     
-    <select id="getReviewAllInfoList"  resultType="com.spring.project.camping.DTO.CampingReviewDTO">
-    	SELECT * from review_table where contentId=#{contentId}
-    </select>
-    
-    <select id="getReviewInfo"  resultType="com.spring.project.camping.DTO.CampingReviewDTO">
-    	SELECT * from review_table where reviewId=#{reviewId}
-    </select>
-    
-    <insert id="initReviewData" parameterType="com.spring.project.camping.DTO.CampingReviewDTO">
-    	insert INTO review_table VALUES (REVIEW_SEQ.nextval, 0, #{contentId}, #{title}, SYSDATE, #{contentValue}, null, #{starRanking}, 0)
-    </insert>
-    
-    <update id="reviewClickNumUp" parameterType="com.spring.project.camping.DTO.CampingReviewDTO">
-    	UPDATE review_table set clickNum=clickNum+1 WHERE reviewId = #{reviewId}
+    <update id="updateData" >
+    	update camping_list set facltNm = #{facltNm}, doNm = #{doNm}, sigunguNm = #{sigunguNm}, addr1 = #{addr1}, lineIntro = #{lineIntro} 
+    	where contentId = #{contentId}
     </update>
+    
+    <delete id="deleteData">
+		delete from camping_list where contentId = #{contentId}    
+    </delete>
+    
 </mapper>

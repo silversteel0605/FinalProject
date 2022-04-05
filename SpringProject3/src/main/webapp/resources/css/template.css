@@ -1,0 +1,141 @@
+@charset "EUC-KR";
+
+a, a:hover {
+	color: black !important;
+	text-decoration: none !important;
+}
+
+li {
+	list-style: none !important;
+}
+
+/* bootstrap css 수정 */
+.container-lg {
+	padding: 0 0 30px 0 !important;
+}
+
+.pagination {
+	justify-content: center !important;
+	padding-top: 50px !important;
+}
+
+.page-link {
+	border: none !important;
+	color: #dee2e6 !important;
+}
+
+.page-item.active .page-link, .page-link:hover {
+	color: black !important;
+	background: #ffffff  !important;
+}
+
+.nav-link.active[area=camp] {
+	background: #212529 !important;
+	color: #ffffff !important;
+}
+
+.nav-link, .nav-link:hover {
+	color: black !important;
+}
+
+.form-select:disabled {
+	background: #ffffff !important;
+}
+
+.form-check-input:checked {
+    background-color: #212529 !important;
+    border-color: #212529 !important;
+}
+/* custom 클래스 css */
+
+.wrap {
+	padding: 0 10px !important;
+}
+
+.arrow {
+	color: black !important;
+}
+
+.more-row{
+	position: relative !important;
+}
+
+.more-col {
+	position: absolute;
+	visibility: hidden;
+	opacity : 0 ;
+	z-index: 10 ;	
+	left: 0;
+	top: 10px;
+}
+
+.moreThem {
+	background: #ffffff;
+	border: 1px solid #dee2e6;
+	text-overflow: ellipsis;
+}
+
+#tag {
+	padding: 1px !important;
+}
+
+#tags {
+	display: flex !important;
+	flex-wrap: wrap !important;
+}
+
+#tags .tag {
+	margin-top: 0 !important;
+	margin-right: 10px !important;
+	margin-bottom: 10px !important;
+	border: none ;
+}
+
+.bb {		
+	border-bottom: 3px solid black !important;
+}
+
+.lbb {
+	border-bottom: 1px solid #dee2e6 !important;
+}
+
+.sub_title {
+	text-align: center !important;
+	padding-top: 150px !important;
+}
+
+.tit {
+	font-size: 18px !important;
+    letter-spacing: 14px !important;
+    font-family: Lato-Bold !important;
+    color: #000 !important;
+    text-indent: 14px;
+}
+
+.submitBtn {
+	text-align: center !important;
+}
+
+.more-close {
+	text-align: right !important;
+}
+
+.more-sub {
+	text-align: center !important;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1200px) { 
+	.container-lg {
+		width: 1140px !important;
+  		max-width: none !important;
+	} 
+}
+     
+@media screen and (max-width: 767px){	
+	body {
+		overflow-x : hidden;
+	}
+}     
+      
+      
+      

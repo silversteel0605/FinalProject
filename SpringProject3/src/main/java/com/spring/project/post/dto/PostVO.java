@@ -1,21 +1,25 @@
 package com.spring.project.post.dto;
 
+import com.spring.project.utill.PageSearchVO;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class PostVO {
-	private int rownumber;
-	private int post_id;
+	private Integer rownumber;
+	private Integer post_id;
 	private String member_id;
-	private int comment_id;
 	private String title;
 	private String contents;
 	private String reg_date;
-	private String edit_date;
-	private int board_class;
-	private int contents_category;
-	private int process;
+	private Integer board_class;
+	private Integer contents_category;
+	private Integer process;
+	private String imgURL;
+	private Integer total;
 	
 }
