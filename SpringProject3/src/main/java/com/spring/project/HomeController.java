@@ -45,7 +45,7 @@ public class HomeController {
 	}
 	@RequestMapping(value = "/test3", method = RequestMethod.GET)
 	public String reservation3() {
-		return "reservation3";
+		return "template";
 	}
 	
 }
