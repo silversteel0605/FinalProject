@@ -7,6 +7,7 @@
 <html>
 <head>
 <meta charset="EUC-KR">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Insert title here</title>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
@@ -22,6 +23,7 @@
 <body style="overflow-x: hidden">
 	
 	<!-- header 호출 -->
+
 	<jsp:include page='renewal_nav.jsp'/>
 
 	<div id="main_ani">
@@ -33,48 +35,35 @@
 		<img src="resources/images/rocks.png" id="rocks">
 		<img src="resources/images/water.png" id="water">
 	</div>
-
+	
+	
 	
 	<!-- 실내용 기입란 -->
 	<section id ="contants">
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		
-		
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
 	</section>
 	
 	
