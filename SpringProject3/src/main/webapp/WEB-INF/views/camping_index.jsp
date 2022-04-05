@@ -12,7 +12,13 @@
 	<link href="<c:url value="/resources/css/template.css?after"/>" rel="stylesheet" />
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 	<link src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=77mbzylhqr"></link>
-
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+	
+	<!-- header css -->
+	<link rel="stylesheet" href="<c:url value="/resources/css/renewal_nav.css"/>"/>
+    <!--다크모드 관련 css-->
+    <link rel="stylesheet" href="<c:url value="/resources/css/darkmode.css"/>"/>
+    
 	<!-- new carousel -->
 	<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
 	
@@ -31,6 +37,19 @@
 </head>
 <body>
 	
+<header>
+	<jsp:include page='renewal_nav.jsp'/>
+	<div id="main_ani">
+		<h2 id=main_text><span>Let's go</span><br>Camping</h2>
+		<img src="resources/images/moon.png" id="moon">
+		<img src="resources/images/bird1.png" id="bird1">
+		<img src="resources/images/bird2.png" id="bird2">
+		<img src="resources/images/forest.png" id="forest">
+		<img src="resources/images/rocks.png" id="rocks">
+		<img src="resources/images/water.png" id="water">
+	</div>
+</header>
+<!-- 
 <header>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
@@ -70,6 +89,8 @@
 </nav>
 </header>
 
+ -->
+
 <% CampingVO info = (CampingVO)request.getAttribute("info"); %>
 
 <section class="wrap">
@@ -80,21 +101,21 @@
 		</div>
 	</div>
 
-
-<div class="container-lg lbb">	
-	<section id="content01" class = "content01_wrap bgc_color_box obj_row_center">
+<section id="content01" class = "content01_wrap bgc_color_box obj_row_center">
 			
 			<!-- Swiper -->
 			<div #swiperRef="" class="swiper mySwiper img_boxs container flex_1">
 				<div class = "obj_row_center container bgc_box">
 					<div class="ftco-section align-items-center bgc_box_size">
-						<div>
+						<div class="title_txt">
 							<h2 class="h2_size"><%= info.getFacltNm() %></h2>
-							<hr>
-							<c:if test="${info.homepage != null }">
-						        <div><a href="<%=info.getHomepage() %>">사이트 상세정보</a></div>
-						    </c:if>
-							<div><a href="">예약하기</a></div>
+							<hr style="width: 80%">
+							<div class="">
+								<c:if test="${info.homepage != null }">
+							        <div><a href="<%=info.getHomepage() %>">사이트 상세정보</a></div>
+							    </c:if>
+								<div style="text-align: end;"><a href="">예약하기</a></div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -111,6 +132,10 @@
 		    </div>
 	    
 	</section>
+
+
+<div class="container-lg lbb">	
+	
 	
 	<section id="content02" class=" wrap ftco-section services-section text-center">
 	
@@ -462,5 +487,11 @@
 	</script>
 </c:if> 
 
+<!-- 다크모드 js-->
+<script src="<c:url value="/resources/js/main_ani.js"/>"></script>
+<script src="<c:url value="/resources/js/anime.min.js"/>"></script>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script src="<c:url value="/resources/js/darkmode.js"/>"></script>
 </body>
 </html>
