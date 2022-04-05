@@ -19,7 +19,7 @@
     <!-- 모달 css -->
     <link rel="stylesheet" href="<c:url value="/resources/css/modal.css"/>"/>
 </head>
-<body style="overflow-x: hidden">
+<body style="overflow-x: ">
 	
 	<!-- header 호출 -->
 	<jsp:include page='renewal_nav.jsp'/>
@@ -37,43 +37,6 @@
 	
 	<!-- 실내용 기입란 -->
 	<section id ="contants">
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		
 		
 	</section>
 	

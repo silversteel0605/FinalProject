@@ -104,9 +104,16 @@
   font-size: 20px;
   display:none;
 }
+#contants{
+	padding-top:76px;
+}
+#main_contents{
+	padding-top:76px;
+}
 #maindk{
 	display: flex;
 }
+
 @media screen and (max-width: 1092px) { 
 	#navbar{
 		display: flex;
