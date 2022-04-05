@@ -18,8 +18,6 @@ public interface CampingService {
 	public void getAllXML() throws  IOException, JDOMException;
 	
 	public CampingVO[] getXMLData();
-	
-	public void getTest();
 
 	public CampingVO[] getDbSearchData(SearchVO vo);
 	
@@ -36,6 +34,8 @@ public interface CampingService {
 	public int updateData(CampingVO vo);
 	
 	public int deleteData(String contentId);
+	
+	public int addCampingUpdataData(CampingVO vo);
 	
 	//Img Data
 	public List<CampingImgVO> getCampingImgXML(String contentId) throws IOException, JDOMException;

@@ -8,7 +8,7 @@
 	
 	w_box = document.getElementById("write_box");
 	
-	w_box.style.display = 'none';
+	//w_box.style.display = 'none';
 	
 	document.getElementById("write_btn").addEventListener('click', function(){
 		if(ac == true){
@@ -20,30 +20,35 @@
 		}
 			
 	});
-	
 });
+
+var swiper = new Swiper(".mySwiper", {
+    slidesPerView: 3,
+    centeredSlides: true,
+    spaceBetween: 30,
+    pagination: {
+      el: ".swiper-pagination",
+      type: "fraction",
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+  });
+
 
 function select_click_event(value, contentId){
 	location.href="/project/reviewSort?value="+value+"&contentId="+contentId;
 }
 
-$('#recipeCarousel').carousel({
-  interval :2000
-})
 
-$('.carousel .carousel-item').each(function(){
-    var next = $(this).next();
-    if (!next.length) {
-    next = $(this).siblings(':first');
-    }
-    next.children(':first-child').clone().appendTo($(this));
-    
-    for (var i=0;i<2;i++) {
-        next=next.next();
-        if (!next.length) {
-        	next = $(this).siblings(':first');
-      	}
-        
-        next.children(':first-child').clone().appendTo($(this));
-      }
-});
+//tab
+var triggerTabList = [].slice.call(document.querySelectorAll('#myTab a'))
+triggerTabList.forEach(function (triggerEl) {
+  var tabTrigger = new bootstrap.Tab(triggerEl)
+
+  triggerEl.addEventListener('click', function (event) {
+    event.preventDefault()
+    tabTrigger.show()
+  })
+})

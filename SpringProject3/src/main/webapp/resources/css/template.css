@@ -1,0 +1,94 @@
+@charset "EUC-KR";
+
+/* 공통 태그 css */
+a, a:hover {
+	color: black;
+	text-decoration: none;
+}
+
+li {
+	list-style: none;
+}
+
+/* bootstrap css 수정 */
+.container-lg {
+	padding-bottom: 30px
+}
+
+.pagination {
+	border-top: 1px solid #dee2e6;
+	justify-content: center;
+	padding-top: 50px;
+}
+
+.page-link {
+	border: none;
+	color: #dee2e6;
+}
+
+.page-item.active .page-link, .page-link:hover {
+	color: black;
+	background: #ffffff ;
+}
+
+
+.nav-link, .nav-link:hover {
+	color: black;
+}
+
+/* custom 태그 css */
+
+.camp_index {	
+	width: 100%;
+	display: flex;
+	position: relative;
+}
+.image-box {
+	width: 60%;
+	height: 80%;
+	overflow: hidden;
+	maring: 0 auto;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+}
+.text {
+	width: 40%;
+	height: 100%;
+	padding-right: 30px;
+	
+}
+
+.text > h3 {
+	  white-space: nowrap;
+}
+.image-thumbnail {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1200px) { 
+	.container-lg {
+		width: 1140px !important;
+  		max-width: none !important;
+	} 
+}
+@media screen and (max-width: 767px){ 
+	.camp_index {
+		flex-direction: column;
+	} 
+	.image-box {
+		width: 100%;
+		overflow: hidden;
+		maring: 0 auto;
+		position: relative;
+	}
+	.text {
+		width: 100%;
+	}
+	
+	.text > * {
+		margin: 0;
+	}
+}

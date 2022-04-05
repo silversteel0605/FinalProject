@@ -10,6 +10,9 @@
 .min-vh-80 {
     min-height: 80vh !important; }
 
+a {color: black; text-decoration: none; outline: none}
+a:hover, a:active {text-decoration: none; color:red;}
+
 .w1280{
     width: 80%;
 }
@@ -24,6 +27,15 @@
 	display: flex;
 	
 	justify-content: space-between;
+}
+
+.header-style{
+	padding-bottom: 1.75rem;
+}
+
+.flex-center{
+	display: flex;
+    justify-content: center;
 }
 
 .select_text{
@@ -41,25 +53,6 @@
     align-items: flex-end;
 }
 
-.nav-tabs {
-    text-align:center;
-}
-/*tab css*/
-.tab{ width:100%;}
-.tabnav{font-size:0; width:100%; border:1px solid #ddd;}
-.tabnav li{display: inline-block;  height:46px; text-align:center; border-right:1px solid #ddd;}
-.tabnav li a:before{content:""; position:absolute; left:0; top:0px; width:100%; height:3px; }
-.tabnav li a.active:before{background:#7ea21e;}
-.tabnav li a.active{border-bottom:1px solid #fff;}
-.tabnav li a{ position:relative; display:block; background: #f8f8f8; color: #000; padding:0 30px; line-height:46px; text-decoration:none; font-size:16px;}
-.tabnav li a:hover,
-.tabnav li a.active{background:#fff; color:#7ea21e; }
-
-.tab_wrap{
-    margin-left: 0;
-}
-/*tab css*/
-
 .h2_size{
     color: rgba(red, green, blue, alpha);
 }
@@ -69,33 +62,10 @@
 }
 
 .bgc_color_box{
-
     background-color: #FFFFEF;
-}
-
-.bgc_box{
-
-    display: flex;
-    align-items: center;
-    
-    /*
-    position: relative;
-    left: -20%;
-    z-index: 1;
-    width: 30%;
-    */
-}
-
-.img_boxs{
-    position: absolute;
-    left: 30%;
     z-index: 2;
 }
 
-.img_boxs > img{
-    margin-right: 2vw;
-    width: auto;
-}
 
 .boders > *{
 	border: solid 1px black;
@@ -151,38 +121,176 @@
 /* borad */
 
 
-
-/*Ä³·¯¼¿*/
-
-.carousel_size{
-	width: 80%;
+/* img content*/
+.content01_wrap{
+	display: flex;
 }
 
-.carousel_location{
+.bgc_box{
+	position: relative;
+	width : 30%;
+	
+	z-index : 2;
+	background-color :  #FFFFEF; 
+	
+	left:-20px;
+	
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bgc_box_size{
+	width: 200px;
+	margin-left: 40px
+}
+
+/* new carousel */
+.img_boxs{
+	z-index: 1;
+}
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+
+  /* Center slide text vertically */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.swiper {
+  width: 100%;
+  height: 300px;
+  margin: 20px auto;
+}
+.append-buttons {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.append-buttons button {
+  display: inline-block;
+  cursor: pointer;
+  border: 1px solid #007aff;
+  color: #007aff;
+  text-decoration: none;
+  padding: 4px 10px;
+  border-radius: 4px;
+  margin: 0 10px;
+  font-size: 13px;
+}
+
+
+.inner_hr_max{
+	width: 100%;
+}
+
+.inner_content{
+	padding: 5%;
+	padding-top: 2%;
+}
+
+.intro_text > p{
+	padding-top: 5%;
+}
+
+.table_td{
+	padding-right: 30px;
+}
+
+.tab_margin{
+	margin-top: 5%;
+	margin-bottom: 5%;  
+}
+
+/* review */
+.day{
+	border: 1px solid;
+    border-radius: 10px;
+    position: relative;
+    z-index: 2;
+    background-color: white;
+    top: -10px;
+    max-width: 70%;
+    left: -5%;
+}
+
+.review_img_box{
+	padding-bottom: 5%;
+}
+
+.img{
+	width: 90%;
+}
+
+.review_text_box{
 	
 }
-
-.carousel-inner .carousel-item.active,
-.carousel-inner .carousel-item-next,
-.carousel-inner .carousel-item-prev {
-  display: flex;
+.date_text{
+	font-size: 1.5rem;
 }
 
-.carousel-inner .carousel-item-right.active,
-.carousel-inner .carousel-item-next {
-  transform: translateX(25%);
+.review_viewer{
+	display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
-.carousel-inner .carousel-item-left.active, 
-.carousel-inner .carousel-item-prev {
-  transform: translateX(-25%);
+
+
+.viewer{
+	width: 20%;
+    border: 1px solid;
+	margin: 5%;
 }
-  
-.carousel-inner .carousel-item-right,
-.carousel-inner .carousel-item-left{ 
-  transform: translateX(0);
-  
+
+.page_number{
+	display: flex;
+    justify-content: center;
 }
+
+.page_numbering{
+	border: 1px solid;
+    border-radius: 50%;
+    min-width: 1.6rem;
+}
+
+.page_btn{
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+
+
+
+
+
+
+
 
 
 
