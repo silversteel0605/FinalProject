@@ -1,6 +1,7 @@
 package com.spring.project.camping.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -68,12 +69,17 @@ public class CampingController {
 			@RequestParam(value="value", required=false)String value
 		) throws IOException, JDOMException {
 		
+		List<String> sbrsCls=null;
 		List<CampingImgVO> img_vo = service.getCampingImgXML(contentId);
 		
 		service.addViews(contentId);
 		
 		CampingVO info = service.getInfo(contentId);
-		List<String> sbrsCls = new WordChange().strBackCut(info.getSbrsCl());
+		
+		if(info.getSbrsCl()!= null) {
+			sbrsCls = new WordChange().strBackCut(info.getSbrsCl());	
+		}
+		
 		
 		type = type != null ? type :"1";
 		

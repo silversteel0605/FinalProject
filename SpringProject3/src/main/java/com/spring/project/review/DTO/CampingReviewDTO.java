@@ -20,5 +20,6 @@ public class CampingReviewDTO {
 	private String imgUrl;
 	private int starRanking;
 	private int views;
+	private int reviewGreate;
 	private int decl;
 }

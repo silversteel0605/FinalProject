@@ -40,3 +40,12 @@
   transform: scale(0.8);
   transition: 0.3s ease;
 }
+
+.comments_header{
+	display: flex;
+    justify-content: flex-end;
+}
+
+.padding_left_10px{
+	padding-left: 10px;
+}
