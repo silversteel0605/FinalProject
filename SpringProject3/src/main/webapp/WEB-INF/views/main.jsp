@@ -33,15 +33,7 @@
 	
 <jsp:include page='renewal_nav.jsp'/>
 
-	<div id="main_ani">
-		<h2 id=main_text><span>Let's go</span><br>Camping</h2>
-		<img src="resources/images/moon.png" id="moon">
-		<img src="resources/images/bird1.png" id="bird1">
-		<img src="resources/images/bird2.png" id="bird2">
-		<img src="resources/images/forest.png" id="forest">
-		<img src="resources/images/rocks.png" id="rocks">
-		<img src="resources/images/water.png" id="water">
-	</div>
+<jsp:include page='header_ani.jsp'/>
 
 <section id = "main_contents" class="wrap">
 	

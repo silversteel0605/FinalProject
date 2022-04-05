@@ -64,20 +64,6 @@
 	    	</div>
 		</div>
     </div>
- <!-- END nav -->
- <!-- 다크모드 애니 -->
-	<section class="skybird" id="sky">
-	    <span></span>
-	    <span></span>
-	    <span></span>
-	    <span></span>
-	    <span></span>
-	    <span></span>
-	    <span></span>
-	    <span></span>
-	    <span></span>
-	    <span></span>
-	</section>
 	
 </body>
 
