@@ -1,17 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%
+String member_id = (String)session.getAttribute("member_id");
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="EUC-KR">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Bootstrap CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <title>Insert title here</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<!--  
 <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Arizonia&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  -->
   <link rel="stylesheet" href="<c:url value="/resources/css/animate.css"/>"/>
   <link rel="stylesheet" href="<c:url value="/resources/css/owl.carousel.min.css"/>"/>
   <link rel="stylesheet" href="<c:url value="/resources/css/owl.theme.default.min.css"/>"/>
@@ -19,10 +24,17 @@
   <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap-datepicker.css"/>"/>
   <link rel="stylesheet" href="<c:url value="/resources/css/jquery.timepicker.css"/>"/>
   <link rel="stylesheet" href="<c:url value="/resources/css/flaticon.css"/>" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <link rel="stylesheet" href="<c:url value="/resources/css/style.css"/>"/>
   <link rel="stylesheet" href="<c:url value="/resources/css/jangec.css"/>"/>
 </head>
 <body>
+	<script>
+		<c:if test="${member_id ne 'admin'}">
+			alert("권한이 없습니다");
+			location.href = './about';
+		</c:if>
+	</script>
 	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
    <div class="container">
      <a class="navbar-brand" href="index.html">Pacific<span>Travel Agency</span></a>
@@ -63,16 +75,26 @@
 		<!-- 네비게이션 -->
 		<ul class="nav nav-tabs navTabs mb-5">
 	      <li class="nav-item">
-	        <a class="nav-link active" data-toggle="tab" href="#memberManagement">회원관리</a>
+	        <a class="nav-link active" data-toggle="tab" href="#memberManagement" id="member">회원관리</a>
+	      </li>
+	      
+	      <li class="nav-item">
+	        <a class="nav-link" data-toggle="tab" href="#BmemberManagement" id="Bmember">사업자관리</a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" data-toggle="tab" href="#reservationManagement">예약관리</a>
+	        <a class="nav-link" data-toggle="tab" href="#siteManagement" id="camp">캠핑장관리</a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" data-toggle="tab" href="#siteManagement">캠핑장관리</a>
+	        <a class="nav-link" data-toggle="tab" href="#supportManagement" id="sup">고객센터</a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" data-toggle="tab" href="#supportManagement">고객센터</a>
+	        <a class="nav-link" data-toggle="tab" href="#board-tab" id="board">자유게시판</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" data-toggle="tab" href="#comment-tab" id="comment">댓글</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" data-toggle="tab" href="#review-tab" id="review">리뷰</a>
 	      </li>
 	    </ul>
 	    <!-- /네비게이션 -->
@@ -83,51 +105,70 @@
 		    		<div class="col">
 		    			<p>회원가입</p>
 		    		</div>
-					<div class="form-check form-switch col justify-content-start">
-						<div class="row">
-							<span class="col-6" id="joinProhibitSentence"></span>
-							<input class="form-check-input col-6" type="checkbox" role="checkbox" id="joinProhibitSwitch">
-						</div>
-					</div>
 				</div>
 				<hr />
 				<div class="searchMember">
 					<div class="d-flex justify-content-between mb-3">
 						<p class="">회원검색</p>
-						<form class="d-flex flex-row">
-							<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-							<button class="btn btn-outline-success" type="submit">Search</button>
-						</form>
+						<div class="d-flex flex-row">
+							<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="member_search">
+							<button class="btn btn-outline-success" id="member_sub">Search</button>
+						</div>
 					</div>
 					<table class="table">
 						<thead>
 							<tr>
 								<th>#</th>
-								<th>이름</th>
 								<th>ID</th>
-								<th>가입일</th>
-								<th>특이사항</th>
-								<th></th>
+								<th>이름</th>
+								<th>주소</th>
+								<th>이메일</th>
 							</tr>
 						</thead>
-						<tbody>
-							<tr>
-								<td>1</td>
-								<td>김덕팔</td>
-								<td>abcde</td>
-								<td>2022/01/01</td>
-								<td>요주의 인물</td>
-								<td>
-									<button type="button" class="btn btn-link">수정</button>
-									<button type="button" class="btn btn-link">삭제</button>
-								</td>
-							</tr>
+						<tbody id="member_body" type="0">
+							
 						</tbody>
 					</table>
 				</div>
 			</div>
 	      	<!-- /회원관리 -->
-	      	<!-- 예약관리 -->
+	      	 <div class="tab-pane fade" id="BmemberManagement">
+		    	<div class="row">
+		    		<div class="col">
+		    			<p>회원가입</p>
+		    		</div>
+				</div>
+				<select id="Bm_selc">
+					<option value="">모든 회원보기</option>
+					<option value="&permit=0">가입허용 안된 회원만 보기</option>
+				</select>
+				<hr />
+				<div class="searchMember">
+					<div class="d-flex justify-content-between mb-3">
+						<p class="">회원검색</p>
+						<div class="d-flex flex-row">
+							<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="Bmember_search">
+							<button class="btn btn-outline-success" id="Bmember_sub" >Search</button>
+						</div>
+					</div>
+					<table class="table">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>ID</th>
+								<th>이름</th>
+								<th>캠핑장</th>
+								<th>가입상태</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody id="Bmember_body" type="1">
+							
+						</tbody>
+					</table>
+				</div>
+			</div>
+	      	<!-- 예약관리
 	      	<div class="tab-pane fade" id="reservationManagement">
 		      	<div class="reservationManagement">
 					<div class="d-flex justify-content-between mb-3">
@@ -164,7 +205,7 @@
 					</table>
 				</div>
 	      	</div>
-	      	<!-- /예약관리 -->
+	      	 /예약관리 -->
 	      	<!-- 캠핑장관리 -->
 	      	<div class="tab-pane fade" id="siteManagement">
 	      		<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
@@ -172,71 +213,79 @@
 				    <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">캠핑장검색</button>
 				  </li>
 				  <li class="nav-item" role="presentation">
-				    <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">캠핑장추가</button>
+				    <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">캠핑장 추가</button>
 				  </li>
 				</ul>
+				<select id="camp_selc">
+					<option value="keyword">캠핑장 이름으로 검색</option>
+					<option value="contentId">캠핑장 ID로 검색</option>
+				</select>
 				<div class="tab-content" id="pills-tabContent">
 				  <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 					<div class="reservationManagement">
 						<div class="d-flex justify-content-between mb-3">
 							<p class="">캠핑장검색</p>
-							<form class="d-flex flex-row">
-								<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-								<button class="btn btn-outline-success" type="submit">Search</button>
-							</form>
+							
+							<div class="d-flex flex-row">
+								<input class="form-control me-2" id="camp_search" type="search" placeholder="Search" aria-label="Search">
+								<button class="btn btn-outline-success" id="camp_submit">Search</button>
+							</div>
 						</div>
-						<table class="table">
+					<table class="table">
 							<thead>
 								<tr>
 									<th>#</th>
+									<th>캠핑장ID</th>
 									<th>이름</th>
-									<th>등록번호</th>
 									<th>등록일</th>
 									<th>특이사항</th>
 									<th></th>
 								</tr>
 							</thead>
-							<tbody>
-								<tr>
-									<td>1</td>
-									<td>바다 아래 캠핑장</td>
-									<td>a-123456</td>
-									<td>2022/01/01</td>
-									<td>산위에 있음</td>
-									<td>
-										<button type="button" class="btn btn-link">수정</button>
-										<button type="button" class="btn btn-link">삭제</button>
-									</td>
-								</tr>
+							<tbody id="camp_body">
+								
 							</tbody>
 						</table>
 					</div>
 				  </div>
 				  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-			      	<form action="" class="row">
-					    <div class="col-md-6">
-						    <label for="nameOfSite" class="form-label">캠핑장 이름</label>
-						    <input type="password" class="form-control" id="nameOfSite">
-					  	</div>
+			      	<form  id="needs-validation" class="row">
+
+					  	<div class="form-group col-md-6">
+					      <label for="nameOfSite" class="form-label">캠핑장 이름</label>
+					      <input type="text" class="form-control" id="nameOfSite" placeholder="캠핑장 이름" required="" minlength="1">
+					      <div class="valid-feedback">
+					        Looks good!
+					      </div>
+					      <div class="invalid-feedback">
+					        캠핑장 이름을 기입하세요
+					      </div>
+					    </div>
 			      		<div class="col-md-6">
-						    <label for="nameOfApplicant" class="form-label">신청인 이름</label>
-						    <input type="text" class="form-control" id="nameOfApplicant">
+						    <label for="lineIntro" class="form-label">한줄소개</label>
+						    <input type="text" class="form-control" id="lineIntro">
 					  	</div>
 					  	<div class="col-md-4 mb-3">
 							<label for="postNumOfSite" class="form-label">우편번호</label>
 					  		<div class="input-group">
 							  	<input type="text" class="form-control" id="postNumOfSite" readonly>
-							  	<button class="btn btn-outline-secondary" type="button" id="findAdrr" onclick="findAdr()">우편번호찾기</button>
+							  	<button class="btn btn-outline-secondary" type="button" id="post" onclick="findAdr()">우편번호찾기</button>
 							</div>
 					  	</div>
 					  	<div class="row mb-3">
-						  	<div class="col-md-6">
-							    <label for="adrOfSite" class="form-label">캠핑장 주소</label>
-							    <input type="text" class="form-control" id="adrOfSite" readonly>
-						  	</div>
+						  	<div class="form-group col-md-6">
+						      <label for="adrOfSite" class="form-label">캠핑장 주소</label>
+						      <input type="text" class="form-control" id="addr1" readonly>
+						      <div class="valid-feedback">
+						        Looks good!
+						      </div>
+						      <div class="invalid-feedback">
+						        캠핑장 주소를 입력해주세요
+						      </div>
+						    </div>
 						  	<div class="col-md-6">
 							    <label for="specificAdrOfSite" class="form-label">&nbsp;</label>
-							    <input type="text" class="form-control" id="specificAdrOfSite" placeholder="상세주소">
+							    <input type="text" class="form-control" id="addr2" placeholder="상세주소">
 						  	</div>
 					  	</div>
 					  	<div class="mb-3">
@@ -244,6 +293,7 @@
 						  <input class="form-control form-control-sm" id="pictureOfSite" type="file" multiple>
 						</div>
 			      	</form>
+			      	<button type="button" class="btn btn-dark" id="camp_add">추가</button>
 				  </div>
 				</div>
 	      	</div>	
@@ -253,61 +303,120 @@
 		      	<div class="supportManagement row">
 					<div class="d-flex justify-content-between mb-3">
 						<p class="">문의사항</p>
-						<form class="d-flex flex-row">
-							<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-							<button class="btn btn-outline-success" type="submit">Search</button>
-						</form>
+						<select class="decl_selc" name="sup">
+							<option value="">기본순으로 보기</option>
+							<option value="&order=decl">신고순으로 보기</option>
+						</select>	
 					</div>
 					<table class="table">
 						<thead>
 							<tr>
 								<th>#</th>
+								<th>게시글ID</th>
+								<th>작성자ID</th>
 								<th>제목</th>
-								<th>이름</th>
-								<th>ID</th>
 								<th>등록일</th>
-								<th>특이사항</th>
 								<th></th>
 							</tr>
 						</thead>
-						<tbody>
-							<tr>
-								<td>1</td>
-								<td><a id="support_ajax" href="#" data-bs-toggle="modal" data-bs-target="#staticBackdrop">일좀 똑바로해</a></td>
-								<td>김덕팔</td>
-								<td>abcde</td>
-								<td>2022/01/01</td>
-								<td>요주의 인물</td>
-								<td>
-									<button type="button" class="btn btn-link">완료</button>
-									<button type="button" class="btn btn-link">삭제</button>
-								</td>
-							</tr>
+						<tbody id="sup_body">
 						</tbody>
 					</table>
 				</div>
 	      	</div>
 	      	<!-- /고객지원 -->
+	      	<!-- 자유 게시판 -->
+	      	<div class="tab-pane fade" id="board-tab">
+		      	<div class="board row">
+					<div class="d-flex justify-content-between mb-3">
+						<p class="">자유게시판</p>
+						<select class="decl_selc" name="board">
+							<option value="">기본순으로 보기</option>
+							<option value="&order=decl">신고순으로 보기</option>
+						</select>	
+					</div>
+					<table class="table">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>게시글ID</th>
+								<th>작성자ID</th>
+								<th>제목</th>
+								<th>등록일</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody id="board_body">
+						</tbody>
+					</table>
+				</div>
+	      	</div>
+	      	<!-- /자유 게시판 -->
+	      	<!-- 댓글 -->
+	      	<div class="tab-pane fade" id="comment-tab">
+		      	<div class="comment row">
+					<div class="d-flex justify-content-between mb-3">
+						<p class="">댓글</p>
+						<select class="decl_selc" name="comment">
+							<option value="">기본순으로 보기</option>
+							<option value="&order=decl">신고순으로 보기</option>
+						</select>	
+					</div>
+					<table class="table">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>게시글ID</th>
+								<th>등록자ID</th>
+								<th>댓글</th>
+								<th>신고수</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody id="comment_body">
+						</tbody>
+					</table>
+				</div>
+	      	</div>
+	      	<!-- /댓글 -->
+	      	<!-- 리뷰 -->
+	      	<div class="tab-pane fade" id="review-tab">
+		      	<div class="review row">
+					<div class="d-flex justify-content-between mb-3">
+						<p class="">리뷰</p>
+						<select class="decl_selc" name="review">
+							<option value="">기본순으로 보기</option>
+							<option value="&order=decl">신고순으로 보기</option>
+						</select>	
+					</div>
+					<table class="table">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>리뷰ID</th>
+								<th>제목</th>
+								<th>리뷰</th>
+								<th>등록일</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody id="review_body">
+						</tbody>
+					</table>
+				</div>
+	      	</div>
+	      	<!-- /리뷰 -->
 	    </div>
 	<!-- /컨텐츠 -->
-	
-	<!-- 페이지 번호 -->
-	<!-- <div class="row mt-5">
-	  <div class="col text-center">
-	    <div class="block-27">
-	      <ul>
-	        <li><a href="#">&lt;</a></li>
-	        <li class="active"><span>1</span></li>
-	        <li><a href="#">2</a></li>
-	        <li><a href="#">3</a></li>
-	        <li><a href="#">4</a></li>
-	        <li><a href="#">5</a></li>
-	        <li><a href="#">&gt;</a></li>
-	      </ul>
-	    </div>
-	  </div>
-	</div> -->
-	<!-- /페이지 번호 -->
+</div>
+<div class="row mt-5">
+  <div class="col text-center">
+    <div class="block-27">
+      <ul id="paging"> 	
+		
+      </ul>
+</div>
+</div>
 </div>
 </section>
 
@@ -329,8 +438,10 @@
     </div>
   </div>
 </div>
-	
+
 <!-- /수정 -->
+
+
 
 <section class="ftco-intro ftco-section ftco-no-pt">
  <div class="container">
@@ -414,13 +525,11 @@
 
 
 <!-- loader -->
-<%-- <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div> --%>
-
-
+<div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 <script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
 <script src="<c:url value="/resources/js/jquery-migrate-3.0.1.min.js"/>"></script>
-<script src="<c:url value="/resources/js/popper.min.js"/>"></script>
-<script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
+<!-- <script src="<c:url value="/resources/js/popper.min.js"/>"></script>-->
+ <script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
 <script src="<c:url value="/resources/js/jquery.easing.1.3.js"/>"></script>
 <script src="<c:url value="/resources/js/jquery.waypoints.min.js"/>"></script>
 <script src="<c:url value="/resources/js/jquery.stellar.min.js"/>"></script>
@@ -429,13 +538,17 @@
 <script src="<c:url value="/resources/js/jquery.animateNumber.min.js"/>"></script>
 <script src="<c:url value="/resources/js/bootstrap-datepicker.js"/>"></script>
 <script src="<c:url value="/resources/js/scrollax.min.js"/>"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-<script src="<c:url value="/resources/js/google-map.js"/>"></script>
 <script src="<c:url value="/resources/js/main.js"/>"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
-<script src="<c:url value="/resources/js/jangManager.js"/>"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" ></script>
+<script src="<c:url value="/resources/js/jangManager.js?after"/>"></script>
+<script src="<c:url value="/resources/js/manager.set.data.js?after"/>"></script>
+<script src="<c:url value="/resources/js/pagination.js?after"/>"></script>
+<script src="<c:url value="/resources/js/set.post.js?after"/>"></script>
+<script src="<c:url value="/resources/js/contextpath.js?after"/>"></script>
+<script src="<c:url value="/resources/js/manager.rest.js?after"/>"></script>
+
 <!-- 주소검색 -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-</html>
+</html></html>

@@ -10,14 +10,19 @@
 		</layout>
 	</appender>
 	
-	<appender name="console-infolog" class="org.apache.log4j.ConsoleAppender">
-          <layout class="org.apache.log4j.PatternLayout">
-              <param name="ConversionPattern" value="%d %5p %m%n"/>
-          </layout>  
-    </appender>
 
+ 	<logger name="jdbc.connection">
+		<level value="info" />
+	</logger>
+	 
+	<logger name="jdbc.sqlonly">
+		<level value="info"/>
+	</logger>
 	
-	<!-- Application Loggers -->
+	<logger name="jdbc.resultsettable">
+		<level value="info"/>
+	</logger> 
+	
 	<logger name="com.spring.project">
 		<level value="info" />
 	</logger>

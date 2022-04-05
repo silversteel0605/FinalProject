@@ -7,7 +7,7 @@ p, div {
 	padding: 0px;
 }
 
-.userId, .contentsTitle {
+.pointer {
 	cursor: pointer;
 }
 
@@ -29,4 +29,12 @@ p, div {
 	-webkit-line-clamp: 3;
   	-webkit-box-orient: vertical;
 
+}
+
+.b {
+	border: solid 1px black;
+}
+
+.ck-editor__editable {
+    min-height: 300px;
 }

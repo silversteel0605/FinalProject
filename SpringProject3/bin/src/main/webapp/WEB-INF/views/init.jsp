@@ -28,7 +28,7 @@
 	
 		insert.addEventListener('click', () => {
 			console.log(`${contextPath }`);
-			xhttp_insert.open('POST', contextPath + '/data');
+			xhttp_insert.open('POST', contextPath + '/init');
 			xhttp_insert.send();
 		});
 	</script>

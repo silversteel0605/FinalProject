@@ -5,9 +5,11 @@ import java.util.List;
 
 import org.jdom2.JDOMException;
 
-import com.spring.project.camping.DTO.CampingReviewDTO;
+import com.spring.project.camping.DTO.CampingImgVO;
 import com.spring.project.camping.DTO.CampingVO;
 import com.spring.project.camping.DTO.SearchVO;
+import com.spring.project.camping.DTO.TourImgVO;
+import com.spring.project.camping.DTO.TourismVO;
 
 public interface CampingService {
 	
@@ -16,6 +18,8 @@ public interface CampingService {
 	public void getAllXML() throws  IOException, JDOMException;
 	
 	public CampingVO[] getXMLData();
+	
+	public void getTest();
 
 	public CampingVO[] getDbSearchData(SearchVO vo);
 	
@@ -27,13 +31,27 @@ public interface CampingService {
 	
 	public CampingVO getInfo(String contentId);
 	
+	public int addData(CampingVO vo);
+	
+	public int updateData(CampingVO vo);
+	
+	public int deleteData(String contentId);
+	
+	//Img Data
+	public List<CampingImgVO> getCampingImgXML(String contentId) throws IOException, JDOMException;
+	//Img Data
+
 	public void addViews(String contentId);
-	
-	
-	//Review
-	public List<CampingReviewDTO> getReviewAllInfoList(String contentId);	//All Reviews
-	public CampingReviewDTO getReviewInfo(int reviewId);					//Review Data Select
-	public void initReviewData(CampingReviewDTO c_dto);						//Review Data Insert
-	public void reviewClickNumUp(int reviewId);								//ReviewClickNum Data Updata
+
+	public void tourXML(TourismVO vo) throws IOException, JDOMException;
+
+	public void getTourismXML(TourismVO vo);
+
+	public TourismVO[] getTourismData();
+
+	public List<TourImgVO> getTourImgXML(String contentId) throws IOException, JDOMException;
+
+	TourismVO[] getTourismXML();
+
 	
 }

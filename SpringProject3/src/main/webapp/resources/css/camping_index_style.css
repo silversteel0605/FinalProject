@@ -33,6 +33,7 @@
 .obj_row_center{
     display: flex;
     align-items: center;
+    flex-wrap: nowrap;
 }
 
 .obj_row_bottom{
@@ -68,14 +69,7 @@
 }
 
 .bgc_color_box{
-
     
-    position: relative;
-    left: -5%;
-    z-index: -1;
-
-    
-    width: 30%;
     background-color: wheat;
 }
 
@@ -103,19 +97,6 @@
 
 .boders > *{
 	border: solid 1px black;
-}
-
-.img-fluid{
-	width: 450px;
-	height:300px;
-	background-color:  aqua;
-	overflow: hidden;
-	background-image: url("https://i.hizliresim.com/mX07R4.png");
-	background-repeat:no-repeat;
-	background-size: cover;
-	object-fit: fill;
-	
-	padding-right: 10px;
 }
 
 .carosuel-title {
@@ -166,3 +147,40 @@
     font-soze: 18px;
 }
 /* borad */
+
+
+
+/*Ä³·¯¼¿*/
+
+.carousel_size{
+	width: 80%;
+}
+
+.carousel_location{
+	
+}
+
+.carousel-inner .carousel-item.active,
+.carousel-inner .carousel-item-next,
+.carousel-inner .carousel-item-prev {
+  display: flex;
+}
+
+.carousel-inner .carousel-item-right.active,
+.carousel-inner .carousel-item-next {
+  transform: translateX(25%);
+}
+
+.carousel-inner .carousel-item-left.active, 
+.carousel-inner .carousel-item-prev {
+  transform: translateX(-25%);
+}
+  
+.carousel-inner .carousel-item-right,
+.carousel-inner .carousel-item-left{ 
+  transform: translateX(0);
+  
+}
+
+
+
