@@ -29,13 +29,21 @@ a:hover, a:active {text-decoration: none; color:red;}
 	justify-content: space-between;
 }
 
-.dark-nav-link.active[area=camp] {
-	background: #212529 !important;
+.nav-link.active {
 	color: black !important;
+}
+
+.dark-a, .dark-a:hover {
+	color: white !important;
+	text-decoration: none !important;
 }
 
 .dark-nav-link, .dark-nav-link:hover {
 	color: white !important;
+}
+
+.dark-bb{
+	border-bottom: 3px solid white !important;
 }
 
 .header-style{

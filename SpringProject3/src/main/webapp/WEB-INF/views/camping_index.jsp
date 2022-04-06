@@ -96,7 +96,7 @@
 <% CampingVO info = (CampingVO)request.getAttribute("info"); %>
 
 <section class="wrap">
-	<div class="container-lg bb mb-5">
+	<div id="title_wrap" class="container-lg bb mb-5">
 		<div class="sub_title">
 			<div class="tit mb-2"><p id="top_title">CAMPGROUND DETAILS</p></div>
 			<div class="txt"><%= info.getFacltNm() %></div>
@@ -365,7 +365,7 @@
 			      							<img class="null_img img" src="https://placeimg.com/300/250" alt="" />
 			      						</div>
 			      						<div class="review_text_box">
-				      						<h3 id="review_txt" class="heading"><a href="/project/reviewViewer?reviewId=${review.review_id}">${review.title}</a></h3>
+				      						<h3 class="heading"><a id="review_txt" href="/project/reviewViewer?reviewId=${review.review_id}">${review.title}</a></h3>
 				      						<p>${review.review}</p>					      						
 			      						</div>
 									</div>

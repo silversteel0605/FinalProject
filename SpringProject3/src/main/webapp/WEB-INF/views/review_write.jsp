@@ -34,8 +34,8 @@
 <section class="wrap">
 	<div class="container-lg bb mb-5">
 	<div class="sub_title">
-		<div class="tit mb-2">리뷰</div>
-		<div class="txt">리뷰 작성</div>
+		<div class="tit mb-2"><p id="top_title">REIVEW</p></div>
+		<div class="txt">REIVEW WRITE PAGE</div>
 	</div>
 </div>
 

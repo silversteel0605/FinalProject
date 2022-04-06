@@ -11,6 +11,7 @@ var tab03 = document.getElementById("contact-tab");
 var reg_date = document.getElementById("reg_date");
 var write_btn = document.getElementById("write_btn");
 var review_txt = document.getElementById("review_txt");
+var title_wrap = document.getElementById("title_wrap");
 
  $(document).ready(function() {
 	
@@ -104,6 +105,9 @@ $("#checkBoxId").change(function(){   // 클릭시 쿠키의 값 변경 및 새�
 
 if(getCookie("DarkMode")=="Y"){  // 화면이동시에 쿠키값확인후 체크 변경
 	
+	title_wrap.classList.remove("bb");
+	title_wrap.className += " dark-bb";
+	
 	top_title.style.color = "White";
 	content01.style.background = "#3C056E";
 	camping_title.style.background = "#86679C";
@@ -113,6 +117,6 @@ if(getCookie("DarkMode")=="Y"){  // 화면이동시에 쿠키값확인후 체크
 	tab03.className += " dark-nav-link";
 	
 	reg_date.style.background = "black";
-	review_txt.style.color = "white";
+	review_txt.className += "dark-a";
 }
 
