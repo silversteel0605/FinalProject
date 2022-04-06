@@ -14,7 +14,7 @@
 
 			<div class="collapse navbar-collapse" id="ftco-nav">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+					<li class="nav-item"><a href="/" class="nav-link">Home</a></li>
 					<li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
 					<li class="nav-item"><a href="destination.html" class="nav-link">Destination</a></li>
 					<li class="nav-item"><a href="hotel.html" class="nav-link">Hotel</a></li>
@@ -30,7 +30,7 @@
 					<li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
 				</ul>
 				<label id="darkmodecheck" >
-					<input type="checkbox" id="checkBoxId" checked>
+					<input type="checkbox" id="checkBoxId" >
 					<span id="moonsun">
 						<ion-icon name='sunny-outline'></ion-icon>
 					</span>
@@ -51,18 +51,6 @@
 	    <span></span>
 	    <span></span>
 	    <span></span>
-	    <div class="bird-container bird-container-one">
-	      <div class="bird bird-one"></div>
-	    </div>
-	    <div class="bird-container bird-container-two">
-	        <div class="bird bird-two"></div>
-	    </div>
-	    <div class="bird-container bird-container-three">
-	        <div class="bird bird-three"></div>
-	    </div>
-	    <div class="bird-container bird-container-four">
-	        <div class="bird bird-four"></div>
-	    </div>
 	</section>
 	
 </body>

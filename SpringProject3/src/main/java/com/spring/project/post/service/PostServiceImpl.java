@@ -58,18 +58,48 @@ public class PostServiceImpl implements PostService {
 	}
 	
 	@Override
-	public void addComment(CommentVO comment) {
-		postMapper.addComment(comment);
-	};
+	public Integer increaseViews(PostVO post) {
+		log.info("증가 전 조회수: " + post.getViews());
+		post.setViews(post.getViews() + 1);
+		log.info("증가 후 조회수: " + post.getViews());
+		postMapper.increaseViews(post);
+		return post.getViews();
+	}
 	
 	@Override
 	public List<PostVO> getComments(PostVO post) {
 		return postMapper.getComments(post);
 	}
 	
+	public Integer getCommentsEA(Integer post_id) {
+		return postMapper.getCommentsEA(post_id);
+	};
+	
 	@Override
 	public void addPost(PostVO post) {
 		postMapper.addPost(post);
+	}
+	
+	@Override
+	public void editPost(PostVO post) {
+		postMapper.editPost(post);
+	}
+	
+	@Override
+	public List<PostVO> getIndividual(String id) {
+		return postMapper.getIndividual(id);
+	}
+	
+	@Override
+	public void addReport(Integer post_id, Integer report) {
+		Integer updateNum = report + 1;
+		
+		postMapper.addReport(post_id, updateNum);
+	}
+	
+	@Override
+	public Integer getReport(Integer post_id) {
+		return postMapper.getReport(post_id);
 	}
 	
 	public PostVO[] getAllPost(PostVO vo) {

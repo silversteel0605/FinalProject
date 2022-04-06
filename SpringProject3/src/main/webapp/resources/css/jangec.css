@@ -2,15 +2,30 @@
 
 /* °øÅë */
 
-p, div {
+p, div, a {
 	margin: 0px;
 	padding: 0px;
 }
 
+a, li {
+	text-decoration: none;
+	color: black;
+}
+
+li, ul {
+	list-style: none;
+}
+
+tr, th, td {
+	text-align: center;
+}
 .pointer {
 	cursor: pointer;
 }
 
+.navCategory div a:hover {
+	text-decoration: underline;
+}
 /* Free Board */
 
 .paragraph_body {
@@ -36,5 +51,31 @@ p, div {
 }
 
 .ck-editor__editable {
-    min-height: 300px;
+    min-height: 500px;
 }
+
+.contentsNavTopHori {
+	border-bottom: 3px solid black;
+	color: black;
+}
+
+i {
+	padding-right: 5px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

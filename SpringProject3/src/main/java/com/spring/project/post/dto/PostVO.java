@@ -1,7 +1,5 @@
 package com.spring.project.post.dto;
 
-import com.spring.project.utill.PageSearchVO;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,6 +18,6 @@ public class PostVO {
 	private Integer contents_category;
 	private Integer process;
 	private String imgURL;
+	private Integer views;
 	private Integer total;
-	
 }

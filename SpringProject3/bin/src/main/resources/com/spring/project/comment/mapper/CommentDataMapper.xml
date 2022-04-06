@@ -24,4 +24,28 @@
 		update comments set member_id = #{member_id}, comments = #{blindComment}, blind = #{blind} 
 		where comment_id = #{comment_id} and blind = 'false'
 	</update>
+<<<<<<< HEAD
+
+	<insert id="addComment">
+	<selectKey keyProperty="comment_id" resultType="_integer" order="BEFORE">
+    	SELECT comment_id_seq.nextval FROM dual
+	</selectKey>
+		INSERT INTO 
+			comments (
+				comment_id, post_id, category_id, comments, classnum, ordernum, groupnum, decl, views, member_id, blind 
+			) 
+		VALUES (
+			#{comment_id}, #{post_id}, #{category_id}, #{comments}, #{classnum}, #{ordernum}, 
+			<choose>
+			<when test="groupnum eq null">
+			#{comment_id}
+			</when>
+			<otherwise>
+			#{groupnum} 
+			</otherwise>
+			</choose>, 0, 0, #{member_id}, 'false'
+		)
+	</insert>
+=======
+>>>>>>> refs/heads/master
 </mapper>

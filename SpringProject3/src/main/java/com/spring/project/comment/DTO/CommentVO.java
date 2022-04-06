@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 public class CommentVO extends PageSearchVO{
-	private String comment_id;      
+	private Integer comment_id;      
 	private String post_id;    
 	private String member_id;
 	private String category_id;      
