@@ -20,5 +20,4 @@ public class PostVO {
 	private String imgURL;
 	private Integer views;
 	private Integer total;
-	
 }

@@ -30,7 +30,7 @@
 	
 	<select id="getPostList" resultType="com.spring.project.post.dto.PostVO">
 		SELECT 
-			post.rownumber, post.post_id,  post.member_id, post.title, post.contents, to_char(post.reg_date, 'yyyy. MM. dd.'), 
+			post.rownumber, post.post_id,  post.member_id, post.title, post.contents, to_char(post.reg_date, 'yyyy. MM. dd.') as reg_date, 
 			post.board_class, post.contents_category, post.process, post.imgurl, post.views
 		FROM 
 			(
@@ -62,7 +62,7 @@
 	
 	<select id="getPostSearch" resultType="com.spring.project.post.dto.PostVO" parameterType="com.spring.project.post.dto.SearchVO">
 		SELECT 
-			post.rownumber, post.post_id,  post.member_id, post.title, post.contents,to_char(post.reg_date, 'yyyy. MM. dd.'), 
+			post.rownumber, post.post_id,  post.member_id, post.title, post.contents, to_char(post.reg_date, 'yyyy. MM. dd.') as reg_date, 
 			post.board_class, post.contents_category, post.process, post.imgurl, post.views
 		FROM 
 			(
@@ -99,7 +99,7 @@
 	<!-- mainContents -->
 	<select id="getContents" resultType="com.spring.project.post.dto.PostVO">
 		SELECT 
-			post.rownumber, post.post_id,  post.member_id, post.title, post.contents,to_char(post.reg_date, 'yyyy. MM. dd.'), 
+			post.rownumber, post.post_id,  post.member_id, post.title, post.contents,to_char(post.reg_date, 'yyyy. MM. dd.') as reg_date, 
 			post.board_class, post.contents_category, post.process, post.imgurl, post.views
 		FROM 
 			(

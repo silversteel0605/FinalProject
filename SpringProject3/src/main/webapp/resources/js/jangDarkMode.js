@@ -115,7 +115,6 @@ $(document).ready(function(){
 		$(modalButton).removeClass('darkmodeFont');
 		$(h2tag).removeAttr('style');
 		$(h2tag).attr('style', 'border-bottom: 2px solid #111');
-		$(pageActive).removeAttr('style');
 		$(pageActive).attr('style', 'color: #202124 !important; background: #D6D6D7 !important;');	
 	}
 });
