@@ -15,3 +15,4 @@ function showPopUp(reviewId, contentId) {
 		location.href="/project/reviewDelete?reviewId="+reviewId+"&contentId="+contentId;
 	}
 }
+

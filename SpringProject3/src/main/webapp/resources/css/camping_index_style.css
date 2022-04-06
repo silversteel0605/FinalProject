@@ -29,6 +29,15 @@ a:hover, a:active {text-decoration: none; color:red;}
 	justify-content: space-between;
 }
 
+.dark-nav-link.active[area=camp] {
+	background: #212529 !important;
+	color: black !important;
+}
+
+.dark-nav-link, .dark-nav-link:hover {
+	color: white !important;
+}
+
 .header-style{
 	padding-bottom: 1.75rem;
 }

@@ -12,7 +12,6 @@
 	<link href="<c:url value="/resources/css/template.css?after"/>" rel="stylesheet" />
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 	<link src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=77mbzylhqr"></link>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 	
 	<!-- header css -->
 	<link rel="stylesheet" href="<c:url value="/resources/css/renewal_nav.css"/>"/>
@@ -42,6 +41,15 @@
 	
 <header>
 	<jsp:include page='renewal_nav.jsp'/>
+	<div id="main_ani">
+		<h2 id=main_text><span>Let's go</span><br>Camping</h2>
+		<img src="resources/images/moon.png" id="moon">
+		<img src="resources/images/bird1.png" id="bird1">
+		<img src="resources/images/bird2.png" id="bird2">
+		<img src="resources/images/forest.png" id="forest">
+		<img src="resources/images/rocks.png" id="rocks">
+		<img src="resources/images/water.png" id="water">
+	</div>
 </header>
 <!-- 
 <header>
@@ -90,7 +98,7 @@
 <section class="wrap">
 	<div class="container-lg bb mb-5">
 		<div class="sub_title">
-			<div class="tit mb-2">CAMPGROUND DETAILS</div>
+			<div class="tit mb-2"><p id="top_title">CAMPGROUND DETAILS</p></div>
 			<div class="txt"><%= info.getFacltNm() %></div>
 		</div>
 	</div>
@@ -99,7 +107,7 @@
 			
 			<!-- Swiper -->
 			<div #swiperRef="" class="swiper mySwiper img_boxs container flex_1">
-				<div class = "obj_row_center container bgc_box">
+				<div id="camping_title" class = "obj_row_center container bgc_box">
 					<div class="ftco-section align-items-center bgc_box_size">
 						<div class="title_txt">
 							<h2 class="h2_size ibm-bold-font"><%= info.getFacltNm() %></h2>
@@ -311,9 +319,14 @@
 			  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 			  	<div class = "map_warp">
 						<div class="map_text inner_content">
-							<c:if test="">
-								<p>林家瘤 : <%= info.getAddr1() %> <%= info.getAddr2() %></p>
-							</c:if>
+							<p>林家瘤 :
+								<c:if test="${info.addr1 != null }">
+									<%= info.getAddr1() %>
+								</c:if>
+								<c:if test="${info.addr2 != null }">
+									<%= info.getAddr2() %>
+								</c:if>
+								</p>
 						</div>
 						
 						<div id = "map">
@@ -346,13 +359,13 @@
 								<c:forEach var="review" items="${lists}">
 									<div class="viewer">
 			      						<div class="review_img_box">
-			      							<div class="day">
+			      							<div id="reg_date" class="day">
 												<span class="date_text">${review.up_date}</span>
 		        							</div>
 			      							<img class="null_img img" src="https://placeimg.com/300/250" alt="" />
 			      						</div>
 			      						<div class="review_text_box">
-				      						<h3 class="heading"><a href="/project/reviewViewer?reviewId=${review.review_id}">${review.title}</a></h3>
+				      						<h3 id="review_txt" class="heading"><a href="/project/reviewViewer?reviewId=${review.review_id}">${review.title}</a></h3>
 				      						<p>${review.review}</p>					      						
 			      						</div>
 									</div>
@@ -466,14 +479,11 @@
 <script src="//code.jquery.com/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
-<!-- bootstrap -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
 <!-- Swiper JS -->
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
 <script src="./resources/js/jquery.min.js"></script>
-<script src="./resources/js/camping_index.js"></script>
+
 
 <!-- review -->
 <script type="text/javascript" src="./resources/js/page_tab.js"></script>
@@ -487,5 +497,7 @@
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 <script src="<c:url value="/resources/js/darkmode.js"/>"></script>
+
+<script src="./resources/js/camping_index.js"></script>
 </body>
 </html>
