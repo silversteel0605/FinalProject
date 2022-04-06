@@ -9,12 +9,17 @@
             <li class="modal_btn" id="modal_day_btn"><ion-icon class="nav_icon" name="calendar-number-outline"></ion-icon>날짜</li>
         </ul>
         <ul id="main_nav" class="nav">
-           <li><a href="#" class="potal">HOME</a></li>
-           <li><a href="#" class="potal">Find Campsite</a></li>
-           <li><a href="#" class="potal">Free Board</a></li>
-           <li><a href="#" class="potal">Service Center</a></li>
-           <li><a href="#" class="potal">Login</a></li>
-           <label id="darkmodecheck" >
+			<li><a href="#" class="potal">HOME</a></li>
+			<li class="nav-item dropdown show"><a href="#" class="potal ">Find Campsite</a>
+				<div id="dropmenu"class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+					<a class="dropdown-item" href="free_board.html"><span class="dropdown_item">지도 검색</span></a>
+					<a class="dropdown-item" href="review.html"><span class="dropdown_item">일반 검색</span></a>
+				</div>
+			</li>
+			<li><a href="#" class="potal">Free Board</a></li>
+			<li><a href="#" class="potal">Service Center</a></li>
+			<li><a href="#" class="potal">Login</a></li>
+			<label id="darkmodecheck" >
                <input type="checkbox" id="checkBoxId" >
                <span id="moonsun">
                    <ion-icon name='sunny-outline'></ion-icon>
@@ -56,17 +61,7 @@
 	    	</div>
 		</div>
     </div>
- <!-- END nav -->
- <!-- 다크모드 애니 -->
-	<section class="skybird" id="sky">
-	    <span></span>
-	    <span></span>
-	    <span></span>
-	    <span></span>
-	    <span></span>
-	    <span></span>
-	    <span></span>
-	    <span></span>
-	    <span></span>
-	    <span></span>
-	</section>
+	
+</body>
+
+</html>

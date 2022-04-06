@@ -104,8 +104,17 @@
   font-size: 20px;
   display:none;
 }
+#contants{
+	padding-top:76px;
+}
+#main_contents{
+	padding-top:76px;
+}
 #maindk{
 	display: flex;
+}
+.potal:hover{
+	color:orange;
 }
 @media screen and (max-width: 1092px) { 
 	#navbar{
@@ -113,10 +122,23 @@
 		flex-direction: column;
 		justify-content: flex-start;
 	}
-	#main_nav{
+	#main_nav>li{
+		height:50px;
+		text-align:center;
 		display: flex;
 		flex-direction: column;
+		width:100%;
 	}
+	#main_nav{
+		padding:0;
+		margin:0;
+	}
+	#find>li{
+		text-align:center;
+		width:50%;
+		margin:0 !important;
+	}
+	/*
 	#find>li{
 		text-align:center;
 		width:100%;
@@ -129,14 +151,16 @@
 		height:50px;
 		width:100%;
 		padding-left:0;
-	}
-	#main_ani{
-	}
+	}*/
 	.navbar__toggleBtn {
 		display: block;
 	}
+	#dropmenu{
+		display:none;
+	}
 	#navbar>ul{
-	display:none;}
+	display:none;
+	}
  }
 
 
