@@ -18,7 +18,7 @@ var label = document.querySelectorAll('.section label');
 var itag = document.querySelectorAll('.section i');
 var litag = document.querySelectorAll('.section li');
 var ultag = document.querySelectorAll('.section ul');
-var pageActive = document.querySelectorAll('.page-item.active');
+var pageActive = document.querySelectorAll('.active');
 var modalDiv = document.querySelectorAll('.modal-content div');
 var modalH5 = document.querySelectorAll('.modal-content h5');
 var modalButton = document.querySelectorAll('.modal-content button');
@@ -61,6 +61,7 @@ $(document).ready(function(){
 		$(selecttag).addClass('darkmodeDiv');
 		$(input).addClass('darkmodeFont')
 		$(input).addClass('darkmodeDiv')
+		$(atag).removeClass('text-dark');
 		$(atag).addClass('darkmodeFont');
 		$(atag).addClass('darkmodeDiv');
 		$(thtag).addClass('darkmodeFont');
@@ -113,5 +114,6 @@ $(document).ready(function(){
 		$(modalButton).removeClass('darkmodeFont');
 		$(h2tag).removeAttr('style');
 		$(h2tag).attr('style', 'border-bottom: 2px solid #111');
+		$(pageActive).attr('style', 'background: #ffffff')
 	}
 });

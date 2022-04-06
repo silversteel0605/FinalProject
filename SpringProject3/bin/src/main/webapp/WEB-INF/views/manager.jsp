@@ -30,9 +30,9 @@ String member_id = (String)session.getAttribute("member_id");
 </head>
 <body>
 	<script>
-		<c:if test="${empty member_id}">
+		<c:if test="${member_id ne 'admin'}">
 			alert("권한이 없습니다");
-			history.back();
+			location.href = './about';
 		</c:if>
 	</script>
 	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
@@ -81,10 +81,6 @@ String member_id = (String)session.getAttribute("member_id");
 	      <li class="nav-item">
 	        <a class="nav-link" data-toggle="tab" href="#BmemberManagement" id="Bmember">사업자관리</a>
 	      </li>
-	      
-	      <li class="nav-item">
-	        <a class="nav-link" data-toggle="tab" href="#reservationManagement">예약관리</a>
-	      </li>
 	      <li class="nav-item">
 	        <a class="nav-link" data-toggle="tab" href="#siteManagement" id="camp">캠핑장관리</a>
 	      </li>
@@ -109,31 +105,24 @@ String member_id = (String)session.getAttribute("member_id");
 		    		<div class="col">
 		    			<p>회원가입</p>
 		    		</div>
-					<div class="form-check form-switch col justify-content-start">
-						<div class="row">
-							<span class="col-6" id="joinProhibitSentence"></span>
-							<input class="form-check-input col-6" type="checkbox" role="checkbox" id="joinProhibitSwitch">
-						</div>
-					</div>
 				</div>
 				<hr />
 				<div class="searchMember">
 					<div class="d-flex justify-content-between mb-3">
 						<p class="">회원검색</p>
-						<form class="d-flex flex-row">
-							<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-							<button class="btn btn-outline-success" type="submit">Search</button>
-						</form>
+						<div class="d-flex flex-row">
+							<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="member_search">
+							<button class="btn btn-outline-success" id="member_sub">Search</button>
+						</div>
 					</div>
 					<table class="table">
 						<thead>
 							<tr>
 								<th>#</th>
-								<th>이름</th>
 								<th>ID</th>
+								<th>이름</th>
 								<th>주소</th>
-								<th>가입상태</th>
-								<th></th>
+								<th>이메일</th>
 							</tr>
 						</thead>
 						<tbody id="member_body" type="0">
@@ -148,28 +137,26 @@ String member_id = (String)session.getAttribute("member_id");
 		    		<div class="col">
 		    			<p>회원가입</p>
 		    		</div>
-					<div class="form-check form-switch col justify-content-start">
-						<div class="row">
-							<span class="col-6" id="joinProhibitSentence"></span>
-							<input class="form-check-input col-6" type="checkbox" role="checkbox" id="joinProhibitSwitch">
-						</div>
-					</div>
 				</div>
+				<select id="Bm_selc">
+					<option value="">모든 회원보기</option>
+					<option value="&permit=0">가입허용 안된 회원만 보기</option>
+				</select>
 				<hr />
 				<div class="searchMember">
 					<div class="d-flex justify-content-between mb-3">
 						<p class="">회원검색</p>
-						<form class="d-flex flex-row">
-							<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-							<button class="btn btn-outline-success" type="submit">Search</button>
-						</form>
+						<div class="d-flex flex-row">
+							<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="Bmember_search">
+							<button class="btn btn-outline-success" id="Bmember_sub" >Search</button>
+						</div>
 					</div>
 					<table class="table">
 						<thead>
 							<tr>
 								<th>#</th>
-								<th>이름</th>
 								<th>ID</th>
+								<th>이름</th>
 								<th>캠핑장</th>
 								<th>가입상태</th>
 								<th></th>
@@ -181,7 +168,7 @@ String member_id = (String)session.getAttribute("member_id");
 					</table>
 				</div>
 			</div>
-	      	<!-- 예약관리 -->
+	      	<!-- 예약관리
 	      	<div class="tab-pane fade" id="reservationManagement">
 		      	<div class="reservationManagement">
 					<div class="d-flex justify-content-between mb-3">
@@ -218,7 +205,7 @@ String member_id = (String)session.getAttribute("member_id");
 					</table>
 				</div>
 	      	</div>
-	      	<!-- /예약관리 -->
+	      	 /예약관리 -->
 	      	<!-- 캠핑장관리 -->
 	      	<div class="tab-pane fade" id="siteManagement">
 	      		<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
@@ -248,8 +235,8 @@ String member_id = (String)session.getAttribute("member_id");
 							<thead>
 								<tr>
 									<th>#</th>
+									<th>캠핑장ID</th>
 									<th>이름</th>
-									<th>등록번호</th>
 									<th>등록일</th>
 									<th>특이사항</th>
 									<th></th>
@@ -262,11 +249,18 @@ String member_id = (String)session.getAttribute("member_id");
 					</div>
 				  </div>
 				  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-			      	<form action="" class="row">
-					    <div class="col-md-6">
-						    <label for="nameOfSite" class="form-label">캠핑장 이름</label>
-						    <input type="text" class="form-control" id="nameOfSite">
-					  	</div>
+			      	<form  id="needs-validation" class="row">
+
+					  	<div class="form-group col-md-6">
+					      <label for="nameOfSite" class="form-label">캠핑장 이름</label>
+					      <input type="text" class="form-control" id="nameOfSite" placeholder="캠핑장 이름" required="" minlength="1">
+					      <div class="valid-feedback">
+					        Looks good!
+					      </div>
+					      <div class="invalid-feedback">
+					        캠핑장 이름을 기입하세요
+					      </div>
+					    </div>
 			      		<div class="col-md-6">
 						    <label for="lineIntro" class="form-label">한줄소개</label>
 						    <input type="text" class="form-control" id="lineIntro">
@@ -279,10 +273,16 @@ String member_id = (String)session.getAttribute("member_id");
 							</div>
 					  	</div>
 					  	<div class="row mb-3">
-						  	<div class="col-md-6">
-							    <label for="adrOfSite" class="form-label">캠핑장 주소</label>
-							    <input type="text" class="form-control" id="addr1" readonly>
-						  	</div>
+						  	<div class="form-group col-md-6">
+						      <label for="adrOfSite" class="form-label">캠핑장 주소</label>
+						      <input type="text" class="form-control" id="addr1" readonly>
+						      <div class="valid-feedback">
+						        Looks good!
+						      </div>
+						      <div class="invalid-feedback">
+						        캠핑장 주소를 입력해주세요
+						      </div>
+						    </div>
 						  	<div class="col-md-6">
 							    <label for="specificAdrOfSite" class="form-label">&nbsp;</label>
 							    <input type="text" class="form-control" id="addr2" placeholder="상세주소">
@@ -293,7 +293,7 @@ String member_id = (String)session.getAttribute("member_id");
 						  <input class="form-control form-control-sm" id="pictureOfSite" type="file" multiple>
 						</div>
 			      	</form>
-			      	<button type="button" class="btn btn-primary" id="camp_add">추가</button>
+			      	<button type="button" class="btn btn-dark" id="camp_add">추가</button>
 				  </div>
 				</div>
 	      	</div>	
@@ -303,23 +303,23 @@ String member_id = (String)session.getAttribute("member_id");
 		      	<div class="supportManagement row">
 					<div class="d-flex justify-content-between mb-3">
 						<p class="">문의사항</p>
-						<form class="d-flex flex-row">
-							<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-							<button class="btn btn-outline-success" type="submit">Search</button>
-						</form>
+						<select class="decl_selc" name="sup">
+							<option value="">기본순으로 보기</option>
+							<option value="&order=decl">신고순으로 보기</option>
+						</select>	
 					</div>
 					<table class="table">
 						<thead>
 							<tr>
 								<th>#</th>
+								<th>게시글ID</th>
+								<th>작성자ID</th>
 								<th>제목</th>
-								<th>이름</th>
-								<th>ID</th>
 								<th>등록일</th>
 								<th></th>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody id="sup_body">
 						</tbody>
 					</table>
 				</div>
@@ -330,18 +330,18 @@ String member_id = (String)session.getAttribute("member_id");
 		      	<div class="board row">
 					<div class="d-flex justify-content-between mb-3">
 						<p class="">자유게시판</p>
-						<form class="d-flex flex-row">
-							<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-							<button class="btn btn-outline-success" type="submit">Search</button>
-						</form>
+						<select class="decl_selc" name="board">
+							<option value="">기본순으로 보기</option>
+							<option value="&order=decl">신고순으로 보기</option>
+						</select>	
 					</div>
 					<table class="table">
 						<thead>
 							<tr>
 								<th>#</th>
+								<th>게시글ID</th>
+								<th>작성자ID</th>
 								<th>제목</th>
-								<th>이름</th>
-								<th>ID</th>
 								<th>등록일</th>
 								<th></th>
 							</tr>
@@ -357,19 +357,19 @@ String member_id = (String)session.getAttribute("member_id");
 		      	<div class="comment row">
 					<div class="d-flex justify-content-between mb-3">
 						<p class="">댓글</p>
-						<form class="d-flex flex-row">
-							<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-							<button class="btn btn-outline-success" type="submit">Search</button>
-						</form>
+						<select class="decl_selc" name="comment">
+							<option value="">기본순으로 보기</option>
+							<option value="&order=decl">신고순으로 보기</option>
+						</select>	
 					</div>
 					<table class="table">
 						<thead>
 							<tr>
 								<th>#</th>
-								<th>등록자ID</th>
-								<th>ID</th>
 								<th>게시글ID</th>
-								<th>게시글 카테고리 ID</th>
+								<th>등록자ID</th>
+								<th>댓글</th>
+								<th>신고수</th>
 								<th></th>
 							</tr>
 						</thead>
@@ -384,18 +384,18 @@ String member_id = (String)session.getAttribute("member_id");
 		      	<div class="review row">
 					<div class="d-flex justify-content-between mb-3">
 						<p class="">리뷰</p>
-						<form class="d-flex flex-row">
-							<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-							<button class="btn btn-outline-success" type="submit">Search</button>
-						</form>
+						<select class="decl_selc" name="review">
+							<option value="">기본순으로 보기</option>
+							<option value="&order=decl">신고순으로 보기</option>
+						</select>	
 					</div>
 					<table class="table">
 						<thead>
 							<tr>
 								<th>#</th>
+								<th>리뷰ID</th>
 								<th>제목</th>
-								<th>이름</th>
-								<th>ID</th>
+								<th>리뷰</th>
 								<th>등록일</th>
 								<th></th>
 							</tr>
@@ -528,8 +528,8 @@ String member_id = (String)session.getAttribute("member_id");
 <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 <script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
 <script src="<c:url value="/resources/js/jquery-migrate-3.0.1.min.js"/>"></script>
-<script src="<c:url value="/resources/js/popper.min.js"/>"></script>
-<script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
+<!-- <script src="<c:url value="/resources/js/popper.min.js"/>"></script>-->
+ <script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
 <script src="<c:url value="/resources/js/jquery.easing.1.3.js"/>"></script>
 <script src="<c:url value="/resources/js/jquery.waypoints.min.js"/>"></script>
 <script src="<c:url value="/resources/js/jquery.stellar.min.js"/>"></script>
@@ -540,11 +540,11 @@ String member_id = (String)session.getAttribute("member_id");
 <script src="<c:url value="/resources/js/scrollax.min.js"/>"></script>
 <script src="<c:url value="/resources/js/main.js"/>"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" ></script>
-<script src="<c:url value="/resources/js/pagination.js?after"/>"></script>
 <script src="<c:url value="/resources/js/jangManager.js?after"/>"></script>
-<script src="<c:url value="/resources/js/contextpath.js?after"/>"></script>
-<script src="<c:url value="/resources/js/set.post.js?after"/>"></script>
 <script src="<c:url value="/resources/js/manager.set.data.js?after"/>"></script>
+<script src="<c:url value="/resources/js/pagination.js?after"/>"></script>
+<script src="<c:url value="/resources/js/set.post.js?after"/>"></script>
+<script src="<c:url value="/resources/js/contextpath.js?after"/>"></script>
 <script src="<c:url value="/resources/js/manager.rest.js?after"/>"></script>
 
 <!-- 주소검색 -->

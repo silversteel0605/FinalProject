@@ -6,6 +6,15 @@
 <head>
 <meta charset="EUC-KR">
 <title>Insert title here</title>
+<!-- header css -->
+<link rel="stylesheet" href="<c:url value="/resources/css/renewal_nav.css"/>"/>
+<!--다크모드 관련 css-->
+<link rel="stylesheet" href="<c:url value="/resources/css/darkmode.css"/>"/>
+<!-- 모달 css -->
+<link rel="stylesheet" href="<c:url value="/resources/css/modal.css"/>"/>
+<!-- 페이지 css -->
+<link rel="stylesheet" href="<c:url value="/resources/css/template.css"/>"/>
+<link rel="stylesheet" href="<c:url value="/resources/css/jangDarkMode.css"/>"/>
 <style>
 .login {
   width: 410px;
@@ -99,8 +108,11 @@ ul {
 }
 </style>
 </head>
-<body>
-  <section class="login">
+<body style="overflow-x: hidden">
+<!-- header 호출 -->
+<jsp:include page='renewal_nav.jsp'/>
+<!-- /header 호출 -->
+  <section class="login section" id ="contants" style="padding-top: 76px">
       <h2>캠핑장 운영자 로그인</h2>
       <ul>
         <form id="login">
@@ -141,7 +153,21 @@ ul {
         </ul>
       </div>
     </section>
+<!-- Footer -->
+<!-- /Footer -->
+<!-- jquery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- 다크모드 js-->
+<script src="<c:url value="/resources/js/main_ani.js"/>"></script>
+<script src="<c:url value="/resources/js/anime.min.js"/>"></script>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script src="<c:url value="/resources/js/darkmode.js"/>"></script>
+<!-- 모달 JS -->
+<script src="<c:url value="/resources/js/modal.js"/>"></script>
+<!-- 페이지 js -->
 <script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
 <script src="<c:url value="/resources/js/login.js"/>"></script>
+<script src="<c:url value="/resources/js/jangDarkMode.js"/>"></script>
 </body>
 </html>

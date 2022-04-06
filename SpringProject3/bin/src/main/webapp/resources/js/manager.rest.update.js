@@ -19,9 +19,9 @@ function updateCampingInfo() {
 	  type: "put",
 	  dataType: "json",
 	  data : data,
-	  contentType : 'application/json',
+	  contentType : 'application/json;charset=UTF-8',
 	  success : function(result) {
-      	alert("¾÷µ¥ÀÌÆ®¸¦ ¿Ï·áÇß½À´Ï´Ù");
+      	alert("ì—…ë°ì´íŠ¸ë¥¼ ì™„ë£Œí•˜ì˜€ìŠµë‹ˆë‹¤");
       	window.close();
       	opener.location.reload();
     },
