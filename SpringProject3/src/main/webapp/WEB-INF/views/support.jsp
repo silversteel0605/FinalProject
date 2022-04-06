@@ -19,7 +19,7 @@
 	<link rel="stylesheet" href="<c:url value="/resources/css/jangec.css"/>"/>
 	<link rel="stylesheet" href="<c:url value="/resources/css/jangSupport.css"/>"/>
 	<link rel="stylesheet" href="<c:url value="/resources/css/jangDarkMode.css"/>"/>
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
 </head>
 <body style="overflow-x: hidden">
 	

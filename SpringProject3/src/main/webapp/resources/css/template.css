@@ -31,7 +31,7 @@ li {
 
 .page-item.active .page-link, .page-link:hover {
 	color: black !important;
-	background: #ffffff  !important;
+	background: #ffffff !important;
 }
 
 .nav-link.active[area=camp] {
