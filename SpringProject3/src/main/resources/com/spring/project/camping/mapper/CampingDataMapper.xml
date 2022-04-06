@@ -17,6 +17,7 @@
 		#{themaEnvrnCl}, #{sbrsCl}, #{mapX}, #{mapY}
 		)
 	</insert>
+	
 	<insert id="addData">
 		insert into camping_list (contentId, addr1, addr2, doNm, sigunguNm, facltNm, lineIntro) 
 		values (content_id_seq.nextval, #{addr1}, #{addr2}, #{doNm}, #{sigunguNm}, #{facltNm}, #{lineIntro})
@@ -168,8 +169,39 @@
     	update camping_list set views = views + 1 where contentId = #{contentId}
     </update>
     
+    <update id="addCampingUpdataData">
+    	
+    	update camping_list set 
+    		tel = #{tel},
+    		intro = #{intro},
+    		homepage = #{homepage},
+    		operDeCl = #{operDeCl},
+    		siteBottomCl1 = #{siteBottomCl1},
+    		siteBottomCl2 = #{siteBottomCl2},
+    		siteBottomCl3 = #{siteBottomCl3},
+    		siteBottomCl4 = #{siteBottomCl4},
+    		siteBottomCl5 = #{siteBottomCl5}, 
+    		gnrlSiteCo = #{gnrlSiteCo},
+    		autoSiteCo = #{autoSiteCo},
+    		glampSiteCo = #{glampSiteCo},
+    		caravSiteCo = #{caravSiteCo},
+    		sitedStnc = #{sitedStnc},
+    		sbrsEtc = #{sbrsEtc},
+    		posblFcltyCl = #{posblFcltyCl},
+    		posblFcltyEtc = #{posblFcltyEtc},
+    		eqpmnLendCl = #{eqpmnLendCl},
+    		animalCmgCl = #{animalCmgCl}
+    	where contentId = #{contentId}
+    	
+    </update>
+    
     <update id="updateData" >
-    	update camping_list set facltNm = #{facltNm}, doNm = #{doNm}, sigunguNm = #{sigunguNm}, addr1 = #{addr1}, lineIntro = #{lineIntro} 
+    	update camping_list set 
+    		facltNm = #{facltNm}, 
+    		doNm = #{doNm}, 
+    		sigunguNm = #{sigunguNm}, 
+    		addr1 = #{addr1}, 
+    		lineIntro = #{lineIntro}
     	where contentId = #{contentId}
     </update>
     

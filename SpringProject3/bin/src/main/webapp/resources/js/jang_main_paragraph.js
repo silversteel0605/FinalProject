@@ -74,6 +74,27 @@ xhttpComments.addEventListener('readystatechange', (e) => {
 					);
 		}
 	}
+<<<<<<< HEAD
+=======
+=======
+const contentsDelete = document.getElementById('contentsDelete');
+contentsDelete.addEventListener('click', (e) => {
+	Swal.fire({
+		template: '#deleteModal'
+	}).then((result) => {
+		if (result.isConfirmed) {
+			Swal.fire(
+				document.getElementById('deleteForm').submit()
+<<<<<<< HEAD
+
+			)
+		}
+=======
+		)}
+>>>>>>> refs/heads/master
+	})
+>>>>>>> branch 'john' of https://github.com/leejohn0038/LastProject.git
+>>>>>>> branch 'leejungho' of https://github.com/leejohn0038/LastProject.git
 	
 });
 

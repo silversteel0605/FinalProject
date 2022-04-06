@@ -1,6 +1,7 @@
 package com.spring.project.camping.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +22,7 @@ import com.spring.project.review.DTO.CampingReviewDTO;
 import com.spring.project.review.controller.CampingReviewController;
 import com.spring.project.review.service.CampingReviewService;
 import com.spring.project.utill.PagingVO;
+import com.spring.project.utill.WordChange;
 
 import lombok.extern.log4j.Log4j;
 
@@ -43,9 +45,6 @@ public class CampingController {
 		controlling(m, nowPage, vo);
 		return "main_search";
 	}
-
-
-
 	
 	@RequestMapping(value = "/CampInfo", method = RequestMethod.GET)
 	public String info(
@@ -57,21 +56,21 @@ public class CampingController {
 			@RequestParam(value="value", required=false)String value
 		) throws IOException, JDOMException {
 		
-		log.info("value : " + value);
-		
-		//service.getTest();
-		
+		List<String> sbrsCls=null;
 		List<CampingImgVO> img_vo = service.getCampingImgXML(contentId);
 		
-		log.info("img_vo : " + img_vo);
-		
 		service.addViews(contentId);
+		
 		CampingVO info = service.getInfo(contentId);
-
+		
+		if(info.getSbrsCl()!= null) {
+			sbrsCls = new WordChange().strBackCut(info.getSbrsCl());	
+		}
+		
+		
 		type = type != null ? type :"1";
 		
-		log.info(type);
-		
+		m.addAttribute("sbrsCls", sbrsCls);
 		m.addAttribute("info", info);
 		m.addAttribute("type", type);
 		m.addAttribute("img_vo", img_vo);
@@ -130,6 +129,7 @@ public class CampingController {
 		
 		int reviewTotal;
 		List<CampingReviewDTO> reviews;
+		
 		PagingVO pvo;
 		Map<String, Object> reviewMap = new HashMap();
 		
@@ -143,9 +143,7 @@ public class CampingController {
 		
 		pvo = new PagingVO(reviewTotal, Integer.parseInt(nowPage), cntPerPage);
 		vo.calcStartEnd(Integer.parseInt(nowPage), pvo.getCntPerPage());
-		log.info("vo.getStart() " + vo.getStart());
-		log.info("vo.getEnd() " +vo.getEnd());
-		
+
 		if (searchTy != null) {
 			if (searchTy.equals("condition")) {
 				vo.setConditionUri();
@@ -154,9 +152,7 @@ public class CampingController {
 			}
 		}
 		vo.setOrderUri();
-		
-		log.info("vo.getUri() " + vo.getUri());
-		
+
 		reviewMap.put("contentId", Integer.parseInt(contentId));
 		reviewMap.put("start", vo.getStart());
 		reviewMap.put("end", vo.getEnd());
@@ -166,14 +162,8 @@ public class CampingController {
 		}else {
 			reviewMap.put("value", value);
 		}
-		
-		log.info("value : " + value);
-		
+
 		reviews = reviewService.getReviewSearchData(reviewMap);
-		
-		log.info(nowPage);
-		log.info("reviewTotal " + reviewTotal);
-		log.info("reviews " + reviews);
 		
 		m.addAttribute("search", vo);
 		m.addAttribute("paging", pvo);
