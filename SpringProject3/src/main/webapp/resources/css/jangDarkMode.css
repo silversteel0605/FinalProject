@@ -1,11 +1,7 @@
 .darkmodeSection, 
 .darkmodeDiv
-/* .pagination > .active, */
-/* .pagination > li > a:focus,
-.pagination > li > span:focus */
-/* .pagination > li > span:hover */
- {
-	background: #202124 !important;
+{
+	background: #323639 !important;
 	border-color: #D6D6D7 !important;
 }
 
@@ -15,8 +11,4 @@
 
 .darkmodeFont {
 	color: #D6D6D7 !important;
-}
-
-.page-item.active .page-link {
-	/* background: #202124; */
 }
