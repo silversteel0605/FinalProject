@@ -7,6 +7,7 @@
 <meta charset="EUC-KR">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <title>Insert title here</title>
 <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Arizonia&display=swap" rel="stylesheet">
@@ -18,12 +19,8 @@
   <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap-datepicker.css"/>"/>
   <link rel="stylesheet" href="<c:url value="/resources/css/jquery.timepicker.css"/>"/>
   <link rel="stylesheet" href="<c:url value="/resources/css/flaticon.css"/>" />
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <link rel="stylesheet" href="<c:url value="/resources/css/style.css"/>"/>
-  <!-- 페이지 css -->
   <link rel="stylesheet" href="<c:url value="/resources/css/jangec.css"/>"/>
-  <link rel="stylesheet" href="<c:url value="/resources/css/jangSupport.css"/>"/>
-  
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
@@ -53,7 +50,7 @@
     <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
       <div class="col-md-9 ftco-animate pb-5 text-center">
        <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="fa fa-chevron-right"></i></a></span> <span>Blog <i class="fa fa-chevron-right"></i></span></p>
-       <h1 class="mb-0 bread">고객센터</h1>
+       <h1 class="mb-0 bread">Blog</h1>
      </div>
    </div>
  </div>
@@ -63,161 +60,49 @@
 <section class="ftco-section">
 	<div class="container">
 		<!-- 컨텐츠 -->
-		<div class="contents container">
-			<!-- Support Board Nav -->
-<<<<<<< HEAD
-			  <div class="container">
-			  	<div class="row mb-5">
-					<h1 class="text-start">고객의 소리에 주목합니다</h1>
-			  	</div>
-			  	<div class="row">
-				    <div class="col-md-5">
-				      <form class="d-flex" action="./support" method="POST" accept-charset="EUC-KR">
-						<div class="input-group input-group-sm mb-3">
-							<select id="inputState" class="form-select form-select-sm col-md-3" name="searchByWhat">
-								<option selected value="all">전체</option>
-								<option value="title">제목</option>
-								<option value="contents">내용</option>
-							</select>
-							<input type="text" class="form-control-sm border-light shadow-none" aria-label="Text input with dropdown button" name="searchKeyword">
-							<button class="btn btn-outline-secondary btn-sm" type="submit">Search</button>
-						</div>
-				      </form>
-				    </div>
-				    <div class="col-md-5 offset-md-2">
-				    	<div class="row">
-						    <div class="col-9">
-							    <div class="d-flex flex-row">
-								    <a class="categoryClass ml-3 align-bottom" href="./support?categoryName=supportAll">전체</a>
-								    <a class="categoryClass ml-3" href="./support?categoryName=notice">공지사항</a>
-								    <a class="categoryClass ml-3" href="./support?categoryName=askEdit">수정요청</a>
-							    </div>
-						    </div>
-						    <div class="col-3">
-							   	<a class="" href="./write?board_class=supportBoard">글쓰기</a>
-						    </div>
-				    	</div>
-				    </div>
-				  </div>
-=======
-			<nav class="navbar navbar-expand-lg navbar-light">
-			  <div class="container-fluid">
-			    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-			      <form class="d-flex" action="./support" method="POST" accept-charset="EUC-KR">
-					<div class="input-group mb-3">
-						<select id="inputState" class="form-select col-md-3" name="searchByWhat">
-							<option selected value="all">전체</option>
-							<option value="title">제목</option>
-							<option value="contents">내용</option>
-						</select>
-						<input type="text" class="form-control" aria-label="Text input with dropdown button" name="searchKeyword">
-						<button class="btn btn-outline-success" type="submit">Search</button>
-					</div>
-			      </form>
-			      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-			        <li class="nav-item">
-			          <a class="nav-link categoryClass active" aria-current="page" href="./support?categoryName=supportAll">전체</a>
-			        </li>
-			        <li class="nav-item">
-			          <a class="nav-link categoryClass " href="./support?categoryName=notice">공지사항</a>
-			        </li>
-			        <li class="nav-item">
-			          <a class="nav-link categoryClass " href="./support?categoryName=askEdit">수정요청</a>
-			        </li>
-			      </ul>
-			    </div>
-			   	<a class="" href="./write?board_class=supportBoard">글쓰기</a>
->>>>>>> refs/heads/master
-			  </div>
-			<!-- /Support Board Nav -->
-			<!-- Table -->
-			<table class="table table-hover">
-			  <thead>
-			    <tr>
-			      <th scope="col">#</th>
-			      <th scope="col">분류</th>
-			      <th scope="col">제목</th>
-			      <th scope="col">작성자</th>
-			      <th scope="col">작성일</th>
-			      <th scope="col">처리여부</th>
-			      <th scope="col">조회수</th>
-			    </tr>
-			  </thead>
-			  <tbody>
-			    <c:forEach items="${supportContentsList }" var="supportContents">
-			    	<tr>
-			    		<td>${supportContents.post_id }</td>
-			    		<td>
-			    			<c:choose>
-			    				<c:when test="${supportContents.contents_category eq 6 }">공지사항</c:when>
-			    				<c:otherwise>수정요청</c:otherwise>
-			    			</c:choose>
-			    		</td>
-			    		<td id="${supportContents.post_id }" class="pointer" onClick="mainContents(${supportContents.post_id})">${supportContents.title }</td>
-			    		<td class="userId pointer" id="${supportContents.member_id }">${supportContents.member_id }</td>
-			    		<td>${supportContents.reg_date }</td>
-			    		<td>
-		    			<c:choose>
-		    				<c:when test="${supportContents.process eq 1}">미결</c:when>
-		    				<c:when test="${supportContents.process eq 2}">해결</c:when>
-		    				<c:otherwise>-</c:otherwise>
-		    			</c:choose>
-		    			</td>
-		    			<td>${supportContents.views }</td>
-			    	</tr>
-			    </c:forEach>
-			  </tbody>
-			</table>
-			<!-- /Table -->
-		</div>	
-		<!-- Paging -->
-		<div class="row mt-5">
-			<div class="col text-center">
-				<div class="block-27">
-					<ul>
-						<li><a href="./support?nowPage=1&cntPerPage=${paging.cntPerPage}">&lt;&lt;</a></li>
-							<c:choose>
-								<c:when test="${paging.startPage != 1}">
-									<li><a href="./support?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a></li>
-								</c:when>
-								<c:otherwise>
-									<li><a href="./support?nowPage=${paging.startPage }&cntPerPage=${paging.cntPerPage}">&lt;</a></li>
-								</c:otherwise>
-							</c:choose>      
-							<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
-								<c:choose>
-									<c:when test="${p == paging.nowPage }">
-										<li class="active"><a href="./support?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a></li>
-									</c:when>
-									<c:when test="${p != paging.nowPage }">
-										<li><a href="./support?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a></li>
-									</c:when>
-								</c:choose>
-							</c:forEach>
-							<c:choose>
-								<c:when test="${paging.endPage != paging.lastPage}">
-									<li><a href="./support?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a></li>
-								</c:when>
-								<c:otherwise>
-									<li><a href="./support?nowPage=${paging.endPage }&cntPerPage=${paging.cntPerPage}">&gt;</a></li>
-								</c:otherwise>
-							</c:choose>
-						<li><a href="./support?nowPage=${paging.lastPage }&cntPerPage=${paging.cntPerPage}">&gt;&gt;</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		<!-- /paging -->	
+		<div class="contents">
+			
+		</div>		
+		<!-- /컨텐츠 -->
+		<!-- 페이지 번호 -->
+		<!-- <div class="row mt-5">
+		  <div class="col text-center">
+		    <div class="block-27">
+		      <ul>
+		        <li><a href="#">&lt;</a></li>
+		        <li class="active"><span>1</span></li>
+		        <li><a href="#">2</a></li>
+		        <li><a href="#">3</a></li>
+		        <li><a href="#">4</a></li>
+		        <li><a href="#">5</a></li>
+		        <li><a href="#">&gt;</a></li>
+		      </ul>
+		    </div>
+		  </div>
+		</div> -->
+		<!-- /페이지 번호 -->
 	</div>
 </section>
 
-<!-- Modal & PopUp Menu -->
-<div id="popUpMenu" style="display:none;">
-	<ul class="list-group list-group-flush">
-		<li id="memberPost" class="indiPopUp list-group-item list-group-item-primary opacity-75" style="cursor:pointer">작성글 보기</li>
-	</ul>
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      	<p>너네는 돈받고 일은 안하니?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Understood</button>
+      </div>
+    </div>
+  </div>
 </div>
-
+	
 <!-- /수정 -->
 
 <section class="ftco-intro ftco-section ftco-no-pt">
@@ -320,8 +205,6 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 <script src="<c:url value="/resources/js/google-map.js"/>"></script>
 <script src="<c:url value="/resources/js/main.js"/>"></script>
-<!-- 페이지 js -->
-<script src="<c:url value="/resources/js/jangSupport.js"/>"></script>
 <script src="<c:url value="/resources/js/jangec.js"/>"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>

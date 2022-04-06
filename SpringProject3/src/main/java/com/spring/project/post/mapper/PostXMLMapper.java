@@ -18,11 +18,18 @@ public interface PostXMLMapper {
 	
 	public PostVO getContents(Integer post_id);
 	public void deletePost(Integer post_id);
+	public Integer increaseViews(@Param("post") PostVO post);
 	
-	public void addComment(CommentVO comment);
 	public List<PostVO> getComments(PostVO post);
+	public Integer getCommentsEA(Integer post_id);
 	
 	public void addPost(PostVO post);
+	public void editPost(PostVO post);
+	
+	public List<PostVO> getIndividual(String id);
+	
+	public void addReport(@Param("post_id") Integer post_id, @Param("report") Integer report);
+	public Integer getReport(Integer post_id);
 	
 	// 관리자에서 불러오기
 	public PostVO[] getAllPost(PostVO vo);

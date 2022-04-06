@@ -1,10 +1,21 @@
 eclipse.preferences.version=1
 <<<<<<< HEAD
+<<<<<<< HEAD
 encoding//src/main/webapp/WEB-INF/views/signin.jsp=UTF-8
 =======
+encoding//src/main/webapp/resources/js/jangDarkMode.js=EUC-KR
+encoding//src/main/webapp/resources/js/jangWriteTest.js=EUC-KR
+encoding//src/main/webapp/resources/js/jang_main_paragraph.js=EUC-KR
+encoding//src/main/webapp/resources/js/jangec.js=EUC-KR
+>>>>>>> branch 'master' of https://github.com/leejohn0038/LastProject.git
+=======
 encoding//src/main/webapp/WEB-INF/views/renewal_nav.jsp=EUC-KR
+<<<<<<< HEAD
 <<<<<<< HEAD
 encoding//src/main/webapp/resources/js/login.js=EUC-KR
 =======
 >>>>>>> refs/heads/master
 >>>>>>> branch 'leejungho' of https://github.com/leejohn0038/LastProject.git
+=======
+>>>>>>> refs/heads/master
+>>>>>>> branch 'master' of https://github.com/leejohn0038/LastProject.git

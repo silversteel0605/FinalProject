@@ -1,19 +1,13 @@
 package com.spring.project.post.controller;
 
-import java.io.UnsupportedEncodingException;
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.spring.project.post.dto.CommentVO;
 import com.spring.project.post.dto.PostVO;
 import com.spring.project.post.dto.SearchVO;
 import com.spring.project.post.service.PostService;
@@ -27,21 +21,21 @@ public class PostRestController {
 
 	@Autowired
 	PostService postService;
-
-	@PostMapping(value = "/main_paragraph", produces = MediaType.APPLICATION_JSON_VALUE)
-	public CommentVO comments(HttpServletRequest request, @RequestBody CommentVO comment) throws UnsupportedEncodingException {
-		HttpSession session = request.getSession();
-		log.info("수정 전: " + comment);
-		comment.setMember_id((String)session.getAttribute("currentUser"));
-		
-		// Integer groupNum = postService.getGroupnum();
-		
-		log.info("수정 후: " + comment);
-		postService.addComment(comment);
-		
-		return comment;
+	
+	@GetMapping(value = "/rest/individual", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<PostVO> individualPage(String member_id) {
+		List<PostVO> postList = postService.getIndividual(member_id);
+		return postList;
 	}
 	
+	@PutMapping(value = "/rest/main_paragraph", produces = MediaType.APPLICATION_JSON_VALUE)
+	public Integer report(Integer post_id) {
+		Integer report = postService.getReport(post_id);
+		postService.addReport(post_id, report);
+		report = postService.getReport(post_id);
+		return report;
+	}
+		
 	@GetMapping(value="/rest/manager/post")
 	public List<PostVO> getAllPost( String nowPage, SearchVO search) {
 		Integer total = postService.getCount(search);

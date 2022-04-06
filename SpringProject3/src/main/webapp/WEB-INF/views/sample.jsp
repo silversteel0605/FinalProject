@@ -50,6 +50,8 @@
 
 
 
+	<script src="<c:url value="/resources/js/main_ani.js"/>"></script>
+	<script src="<c:url value="/resources/js/anime.min.js"/>"></script>
 	<!-- jquery -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<!-- 다크모드 js-->
@@ -60,7 +62,6 @@
 	<script src="<c:url value="/resources/js/modal.js"/>"></script>
 	<script src="//code.jquery.com/jquery.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-	<!-- dropdown -->	
 	<script src="<c:url value="/resources/js/dropdown.js"/>"></script>
 	<script src="<c:url value="/resources/js/main_ani.js"/>"></script>
 </body>

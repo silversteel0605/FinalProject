@@ -10,4 +10,9 @@ public interface CommentService {
 	public int CommentCnt();
 	
 	public int blind(CommentVO vo);
+	
+	public void addComment(CommentVO comment);
+	public void deleteComment(Integer commentId);
+	public void commentReport(Integer commentId, Integer reportNum);
+	public Integer getCommentReport(Integer commentId);
 }
