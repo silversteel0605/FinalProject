@@ -3,22 +3,23 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 	<nav id="navbar">
-	    <div><a href="#" class="potal">CAMPING</a></div>
+	    <div><a href="./main" class="potal">CAMPING</a></div>
         <ul class="nav" id="find">
             <li class="modal_btn" id="modal_place_btn"><ion-icon class="nav_icon" name="location-outline"></ion-icon>장소</li>
             <li class="modal_btn" id="modal_day_btn"><ion-icon class="nav_icon" name="calendar-number-outline"></ion-icon>날짜</li>
         </ul>
         <ul id="main_nav" class="nav">
-			<li><a href="#" class="potal">HOME</a></li>
-			<li class="nav-item dropdown show"><a href="#" class="potal ">Find Campsite</a>
+			<li><a href="./main" class="potal">HOME</a></li>
+			<li class="nav-item dropdown show"><a href="./search" class="potal ">Find Campsite</a>
 				<div id="dropmenu"class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-					<a class="dropdown-item" href="free_board.html"><span class="dropdown_item">지도 검색</span></a>
-					<a class="dropdown-item" href="review.html"><span class="dropdown_item">일반 검색</span></a>
+					<a class="dropdown-item" href="./map"><span class="dropdown_item">지도 검색</span></a>
+					<a class="dropdown-item" href="./search"><span class="dropdown_item">일반 검색</span></a>
 				</div>
 			</li>
-			<li><a href="#" class="potal">Free Board</a></li>
-			<li><a href="#" class="potal">Service Center</a></li>
-			<li><a href="#" class="potal">Login</a></li>
+			<li><a href="./board" class="potal">Free Board</a></li>
+			<li><a href="./support" class="potal">Service Center</a></li>
+			<li><a href="./login" class="potal">Login</a></li>
+			<li><a href="./login?member_type=1" class="potal">Business Login</a></li>
 			<label id="darkmodecheck" >
                <input type="checkbox" id="checkBoxId" >
                <span id="moonsun">

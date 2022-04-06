@@ -6,62 +6,50 @@
 <head>
 <meta charset="EUC-KR">
 <title>update</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Arizonia&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="<c:url value="/resources/css/animate.css"/>"/>
-  <link rel="stylesheet" href="<c:url value="/resources/css/owl.carousel.min.css"/>"/>
-  <link rel="stylesheet" href="<c:url value="/resources/css/owl.theme.default.min.css"/>"/>
-  <link rel="stylesheet" href="<c:url value="/resources/css/magnific-popup.css"/>"/>
-  <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap-datepicker.css"/>"/>
-  <link rel="stylesheet" href="<c:url value="/resources/css/jquery.timepicker.css"/>"/>
-  <link rel="stylesheet" href="<c:url value="/resources/css/flaticon.css"/>" />
+
+  <link rel="stylesheet" href="<c:url value="/resources/css/template.css"/>"/>
+  
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-  <link rel="stylesheet" href="<c:url value="/resources/css/style.css"/>"/>
-  <link rel="stylesheet" href="<c:url value="/resources/css/jangec.css"/>"/>
+
 </head>
 <body>
-<section class="ftco-section">
-	<div class="container">
-	 <div class="tab-pane fade show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-      	<form action="" class="row">
-      		<input type="text" value=${info.contentId } id="contentId"/>
-		    <div class="col-6">
-			    <label for="nameOfSite" class="form-label">캠핑장 이름</label>
-			    <input type="text" class="form-control" id="nameOfSite" value=${info.facltNm }>
-		  	</div>
-      		<div class="col-6">
-			    <label for="lineIntro" class="form-label">한줄소개</label>
-			    <input type="text" class="form-control" id="lineIntro" value=${info.lineIntro }>
-		  	</div>
-		  	<div class="col-4 mb-3">
-				<label for="postNumOfSite" class="form-label">우편번호</label>
-		  		<div class="input-group">
-				  	<input type="text" class="form-control" id="post" readonly>
-				  	<button class="btn btn-outline-secondary" type="button" id="findAdrr" onclick="findAdr()">우편번호찾기</button>
-				</div>
-		  	</div>
-		  	<div class="row mb-3">
-			  	<div class="col-md-6">
-				    <label for="adrOfSite" class="form-label">캠핑장 주소</label>
-				    <input type="text" class="form-control" id="addr1" readonly">
-			  	</div>
-			  	<div class="col-6">
-				    <label for="specificAdrOfSite" class="form-label">&nbsp;</label>
-				    <input type="text" class="form-control" id="addr2" placeholder="상세주소">
-			  	</div>
-		  	</div>
-		  	<div class="mb-3">
-			  <label for="pictureOfSite" class="form-label">첨부파일</label>
-			  <input class="form-control form-control-sm" id="pictureOfSite" type="file" multiple>
-			</div>
-      	</form>
-      	<button type="button" class="btn btn-primary" id="camp_update">수정</button>
-	  </div>
+<section class="wrap">
+	<div class="container-lg">
+	 <form class="row">
+							    <div class="col-md-6">
+								    <label for="nameOfSite" class="form-label">캠핑장 이름</label>
+								    <input type="text" class="form-control" id="nameOfSite" value=${info.facltNm }>
+							  	</div>
+					      		<div class="col-md-6">
+								    <label for="lineIntro" class="form-label">한줄소개</label>
+								    <input type="text" class="form-control" id="lineIntro" value=${info.lineIntro }>
+							  	</div>
+							  	<div class="col-md-4 mb-3">
+									<label for="postNumOfSite" class="form-label">우편번호</label>
+							  		<div class="input-group">
+									  	<input type="text" class="form-control" id="post" readonly>
+									  	<button class="btn btn-outline-secondary" type="button" id="findAdrr" onclick="findAdr()">우편번호찾기</button>
+									</div>
+							  	</div>
+							  	
+							  	<div class="row p-0 mb-3 m-0">
+								  	<div class="col-md-6">
+									    <label for="adrOfSite" class="form-label">캠핑장 주소</label>
+									    <input type="text" class="form-control" id="addr1" readonly">
+								  	</div>
+								  	<div class="col-md-6">
+									    <label for="specificAdrOfSite" class="form-label">&nbsp;</label>
+									    <input type="text" class="form-control" id="addr2" placeholder="상세주소">
+								  	</div>
+							  	</div>
+							  	<div class="col-md-6 mb-3">
+								  <label for="pictureOfSite" class="form-label">첨부파일</label>
+								  <input class="form-control form-control-sm" id="pictureOfSite" type="file" multiple>
+								</div>
+				      		</form>
+				      	<button type="button" class="btn btn-dark" id="camp_add">추가</button>
   </div>
  </section>
- <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 <script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
 <script src="<c:url value="/resources/js/jquery-migrate-3.0.1.min.js"/>"></script>
 <script src="<c:url value="/resources/js/popper.min.js"/>"></script>

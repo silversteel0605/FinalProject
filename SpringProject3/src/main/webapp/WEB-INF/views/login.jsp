@@ -6,13 +6,20 @@
 <head>
 <meta charset="EUC-KR">
 <title>Insert title here</title>
-<!-- header css -->
-<link rel="stylesheet" href="<c:url value="/resources/css/renewal_nav.css"/>"/>
-<!--다크모드 관련 css-->
-<link rel="stylesheet" href="<c:url value="/resources/css/darkmode.css"/>"/>
-<!-- 모달 css -->
-<link rel="stylesheet" href="<c:url value="/resources/css/modal.css"/>"/>
-<!-- 페이지 css -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=77mbzylhqr"></link>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+	<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="<c:url value="/resources/css/reset.css"/>"/>
+	<!-- header css -->
+	<link rel="stylesheet" href="<c:url value="/resources/css/renewal_nav.css"/>"/>
+    <!--다크모드 관련 css-->
+    <link rel="stylesheet" href="<c:url value="/resources/css/darkmode.css"/>"/>
+    <!-- 모달 css -->
+    <link rel="stylesheet" href="<c:url value="/resources/css/modal.css"/>"/>
+    <!-- 드롭다운 -->
+    <link rel="stylesheet" href="<c:url value="/resources/css/dropdown.css"/>"/>
 <link rel="stylesheet" href="<c:url value="/resources/css/template.css"/>"/>
 <link rel="stylesheet" href="<c:url value="/resources/css/jangDarkMode.css"/>"/>
 <style>

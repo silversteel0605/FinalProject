@@ -100,7 +100,7 @@ $(document).ready(function(){
 		$(atag).removeClass('darkmodeDiv');
 		$(thtag).removeClass('darkmodeFont');
 		$(tdtag).removeClass('darkmodeFont');
-		$(h2tag).remoceClass('darkmodeFont');
+		$(h2tag).removeClass('darkmodeFont');
 		$(h5tag).removeClass('darkmodeFont');
 		$(spantag).removeClass('darkmodeFont');
 		$(smalltag).removeClass('darkmodeFont');
