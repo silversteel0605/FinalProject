@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="<c:url value="/resources/css/darkmode.css"/>"/>
     <!-- 모달 css -->
     <link rel="stylesheet" href="<c:url value="/resources/css/modal.css"/>"/>
+    <!-- 드롭다운 -->
+    <link rel="stylesheet" href="<c:url value="/resources/css/dropdown.css"/>"/>
 	<!-- 페이지 css -->
 	<link rel="stylesheet" href="<c:url value="/resources/css/template.css"/>"/>
 	<link rel="stylesheet" href="<c:url value="/resources/css/jangec.css"/>"/>
@@ -188,6 +190,8 @@
 <script src="<c:url value="/resources/js/darkmode.js"/>"></script>
 <!-- 모달 JS -->
 <script src="<c:url value="/resources/js/modal.js"/>"></script>
+<!-- dropdown -->	
+<script src="<c:url value="/resources/js/dropdown.js"/>"></script>
 <!-- 페이지 js -->
 <script src="<c:url value="/resources/js/jangec.js"/>"></script>
 <script src="<c:url value="/resources/js/jangDarkMode.js"/>"></script>
