@@ -81,12 +81,13 @@
 			    			</where>
 			    		</when>
 			    		<when test='searchTy.equals("tag")'>
-		    				<if test='tagId != null &amp;&amp; tagId.length != 0'>
-		    					tagId in
-			    				<foreach collection="tagId" item="index" separator="," open="(" close=")">
-									 #{index}
-								</foreach>
-			    			</if>
+			    			where
+			    				<if test='tagId != null &amp;&amp; tagId.length != 0'>
+			    					tagId in
+				    				<foreach collection="tagId" item="index" separator="," open="(" close=")">
+										 #{index}
+									</foreach>
+				    			</if>
 			    		</when>
 			    	</choose>
 			    </if>
@@ -150,17 +151,18 @@
 	    			</if>
     			</where>
     		</when>
-    		<when test='searchTy.equals("tag")'>
-    			<if test='tagId != null &amp;&amp; tagId.length != 0'>
-   					tagId in
-    				<foreach collection="tagId" item="index" separator="," open="(" close=")">
-						 #{index}
-					</foreach>
-    			</if>
-    		</when>
+			<when test='searchTy.equals("tag")'>
+				where
+	   				<if test='tagId != null &amp;&amp; tagId.length != 0'>
+	  					tagId in
+	   					<foreach collection="tagId" item="index" separator="," open="(" close=")">
+						 	#{index}
+						</foreach>
+	   				</if>
+  			</when>
     	</choose>
-    	</if>
-    </select>
+	</if>
+   </select>
     
     <update id="addViews">
     	update camping_list set views = views + 1 where contentId = #{contentId}

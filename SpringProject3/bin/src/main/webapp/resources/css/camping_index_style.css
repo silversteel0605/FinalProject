@@ -69,14 +69,7 @@
 }
 
 .bgc_color_box{
-
     
-    position: relative;
-    left: -5%;
-    z-index: -1;
-
-    
-    width: 30%;
     background-color: wheat;
 }
 

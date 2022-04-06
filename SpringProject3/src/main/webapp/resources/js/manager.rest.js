@@ -505,20 +505,19 @@ function paging(li) {
 
 function selectPage(pgNm, nowPage) {
 	console.log(pgNm);
-	if(pgNm === 'camping') {
+	if(pgNm.indexOf('camping') > -1) {
 		getCampingList(nowPage);
-	} else if (pgNm === 'member') {
+	} else if (pgNm.indexOf('member') > -1) {
 		getMemberList(nowPage);
-	} else if (pgNm === 'comment') {
-		console.log(pgNm);
+	} else if (pgNm.indexOf('comment') > -1) {
 		getCommentList(nowPage);
-	} else if (pgNm === 'Bmember') {
+	} else if (pgNm.indexOf('Bmember') > -1) {
 		getBMemberList(nowPage);
-	} else if (pgNm === 'sup') {
+	} else if (pgNm.indexOf('sup') > -1) {
 		getSupList(nowPage);
-	} else if (pgNm === 'board') {
+	} else if (pgNm.indexOf('board') > -1) {
 		getBoardList(nowPage);
-	} else if (pgNm === 'review') {
+	} else if (pgNm.indexOf('review') > -1) {
 		getReviewList(nowPage);
 	}
 }
