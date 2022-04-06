@@ -38,7 +38,7 @@
 	<!-- 실내용 기입란 -->
 
 	<section id ="contants">
-		
+	
 	</section>
 	
 	
@@ -62,7 +62,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 	<!-- dropdown -->	
 	<script src="<c:url value="/resources/js/dropdown.js"/>"></script>
-	
+	<script src="<c:url value="/resources/js/main_ani.js"/>"></script>
 </body>
 
 </html>
