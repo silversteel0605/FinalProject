@@ -10,6 +10,10 @@ var date = new Date();
 var potal = document.getElementsByClassName("potal");
 var dropmenu = document.getElementById("dropmenu");
 var dropitem = document.getElementsByClassName('dropdown_item');
+var type = document.getElementById("type");
+var swiper = document.getElementsByClassName('swiper-slide');
+var card = document.getElementsByClassName('card');
+
 date.setDate(date.getDate()+1);
 
 function getCookie(cname) {        // 쿠키 체크 함수
@@ -69,6 +73,9 @@ if(getCookie("DarkMode")=="Y"){  // 화면이동시에 쿠키값확인후 체크
 	$(main_ani).addClass('darkmode');
 	$(dropmenu).addClass('darkmodeY');
 	$(dropitem).addClass('darkmodeY');
+	$(swiper).addClass('darkmodeY');
+	$(type).addClass('darkmodeY2');
+	$(card).addClass('darkmodeY2');
 	moon.style.display = "flex"
 	
 }else if(getCookie("DarkMode")=="N"){
@@ -81,6 +88,9 @@ if(getCookie("DarkMode")=="Y"){  // 화면이동시에 쿠키값확인후 체크
 	$(potal).removeClass("darkmodeY");
 	$(chkbox).addClass('cbbgcd');
     $(chkbox).removeClass('cbbgcn');
+    $(swiper).removeClass('darkmodeY');
+    $(type).removeClass('darkmodeY2');
+    $(card).removeClass('darkmodeY2');
     $(main_ani).removeClass('darkmode');
 }
 

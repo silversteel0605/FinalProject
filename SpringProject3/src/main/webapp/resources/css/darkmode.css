@@ -10,7 +10,7 @@
 	border: 1px solid red;
 }
 .cbbgcn{
-	border: 1px solid rgb(55, 49, 89);
+	border: 1px solid #2b1055;
 }
 .navbd{
 	background : #fff !important;
@@ -23,15 +23,19 @@
 	background: linear-gradient(#2b1055,#7597de) !important;
 }
 .darkmodeY{
-    background: #2b1055 !important;
-    color : #fff !important;
+    background: #323639 !important;
+    color : #D6D6D7 !important;
+}
+.darkmodeY2{
+	background: #282b2e !important;
+    color : #D6D6D7 !important;
 }
 .darkmodeN{
     background: #fff !important;
     color : black !important;
 }
 .color-white{
-	color : #fff !important;
+	color : #D6D6D7 !important;
 }
 #darkmodecheck input{
     appearance: none;

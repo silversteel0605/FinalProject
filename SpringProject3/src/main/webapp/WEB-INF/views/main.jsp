@@ -120,7 +120,7 @@
                             </div>            
                         </a>
                     </div>
-                    <div class="swiper-slide">
+                    <div  class="swiper-slide">
                         <a href="#">
                             <div class="card ">
                                 <div class="card-image" id="recommended_img4"></div>
