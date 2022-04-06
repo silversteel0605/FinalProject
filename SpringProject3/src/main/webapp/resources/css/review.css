@@ -49,3 +49,7 @@
 .padding_left_10px{
 	padding-left: 10px;
 }
+
+.dark-bb{
+	border-bottom: 3px solid white !important;
+}

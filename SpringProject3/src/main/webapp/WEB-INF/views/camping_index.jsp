@@ -372,47 +372,45 @@
 								</c:forEach>
 							</div>
 						</div>
-						<div class="row mt-5">
-							<div class="col text-center">
-								    <div class="block-27">
-								      <ul class = "page_number">	
-										<li>
-											<a data-toggle="tab" href="./CampInfo?contentId=<%= info.getContentId() %>&nowPage=1&cntPerPage=${paging.cntPerPage}${search.uri}&type=3#tab03">&lt;&lt;</a>
-										</li>
-										
+						
+						<div class="container-lg">
+							<div class="row">
+							  <div class="col-12">
+							      <ul class="pagination"> 	
+									<li class="page-item"><a class="page-link  arrow" href="./CampInfo?contentId=<%= info.getContentId() %>&nowPage=1&cntPerPage=${paging.cntPerPage}${search.uri}&type=3#tab03" class="page-link">&lt;&lt;</a></li>
+									<c:choose>
+										<c:when test="${paging.startPage != 1}">
+											<li class="page-item"><a class="page-link  arrow" href="./CampInfo?contentId=<%= info.getContentId() %>&nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}${search.uri}&type=3#tab03" class="page-link">&lt;</a></li>
+										</c:when>
+										<c:otherwise>
+											<li class="page-item"><a class="page-link  arrow" href="./CampInfo?contentId=<%= info.getContentId() %>&nowPage=${paging.startPage }&cntPerPage=${paging.cntPerPage}${search.uri}&type=3#tab03" class="page-link">&lt;</a></li>
+										</c:otherwise>
+									</c:choose>
+									<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
 										<c:choose>
-											<c:when test="${paging.startPage != 1}">
-												<li class="page_btn"><a href="./CampInfo?contentId=<%= info.getContentId() %>&nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}${search.uri}&type=3#tab03">&lt;</a></li>
+											<c:when test="${p == paging.nowPage }">
+												<li class="page-item"><a class="page-link  arrow" href="./CampInfo?contentId=<%= info.getContentId() %>&nowPage=${p }&cntPerPage=${paging.cntPerPage}${search.uri}&type=3#tab03">${p }</a></li>
 											</c:when>
-											<c:otherwise>
-												<li class="page_btn"><a href="./CampInfo?contentId=<%= info.getContentId() %>&nowPage=${paging.startPage }&cntPerPage=${paging.cntPerPage}${search.uri}&type=3#tab03">&lt;</a></li>
-											</c:otherwise>
-										</c:choose>
-										      
-										<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
-											<c:choose>
-												<c:when test="${p == paging.nowPage }">
-													<li class="page_numbering active"><a href="./CampInfo?contentId=<%= info.getContentId() %>&nowPage=${p }&cntPerPage=${paging.cntPerPage}${search.uri}&type=3#tab03">${p }</a></li>
-												</c:when>
-												<c:when test="${p != paging.nowPage }">
-													<li class= "page_numbering"><a href="./CampInfo?contentId=<%= info.getContentId() %>&nowPage=${p }&cntPerPage=${paging.cntPerPage}${search.uri}&type=3#tab03">${p }</a></li>
-												</c:when>
-											</c:choose>
-										</c:forEach>
-										
-										<c:choose>
-											<c:when test="${paging.endPage != paging.lastPage}">
-												<li class="page_btn"><a href="./CampInfo?contentId=<%= info.getContentId() %>&nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}${search.uri}&type=3#tab03">&gt;</a></li>
+											<c:when test="${p != paging.nowPage }">
+												<li class="page-item"><a class="page-link  arrow" href="./CampInfo?contentId=<%= info.getContentId() %>&nowPage=${p }&cntPerPage=${paging.cntPerPage}${search.uri}&type=3#tab03">${p }</a></li>
 											</c:when>
-											<c:otherwise>
-												<li class="page_btn"><a href="./CampInfo?contentId=<%= info.getContentId() %>&nowPage=${paging.endPage }&cntPerPage=${paging.cntPerPage}${search.uri}&type=3#tab03">&gt;</a></li>
-											</c:otherwise>
 										</c:choose>
-										<li><a href="./CampInfo?contentId=<%= info.getContentId() %>&nowPage=${paging.lastPage }&cntPerPage=${paging.cntPerPage}${search.uri}&type=3#tab03">&gt;&gt;</a></li>
-								      </ul>
+									</c:forEach>
+									
+									<c:choose>
+										<c:when test="${paging.endPage != paging.lastPage}">
+											<li class="page-item"><a class="page-link  arrow" href="./CampInfo?contentId=<%= info.getContentId() %>&nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}${search.uri}&type=3#tab03" class="page-link">&gt;</a></li>
+										</c:when>
+										<c:otherwise>
+											<li class="page-item"><a class="page-link  arrow" href="./CampInfo?contentId=<%= info.getContentId() %>&nowPage=${paging.endPage }&cntPerPage=${paging.cntPerPage}${search.uri}&type=3#tab03" class="page-link">&gt;</a></li>
+										</c:otherwise>
+									</c:choose>
+									<li class="page-item"><a class="page-link  arrow" href="./CampInfo?contentId=<%= info.getContentId() %>&nowPage=${paging.lastPage }&cntPerPage=${paging.cntPerPage}${search.uri}&type=3#tab03" class="page-link">&gt;&gt;</a></li>
+							      </ul>
 								</div>
 							</div>
 						</div>
+						
 					</section>	
 		
 					
