@@ -123,34 +123,34 @@
 			<div class="col d-flex justify-content-center">
 				<div class="block-27">
 					<ul class="pagination">
-						<li class="page-item"><a class="page-link text-dark" href="./support?nowPage=1&cntPerPage=${paging.cntPerPage}">&lt;&lt;</a></li>
+						<li class="page-item"><a class="page-link text-dark" href="./board?nowPage=1&cntPerPage=${paging.cntPerPage}">&lt;&lt;</a></li>
 							<c:choose>
 								<c:when test="${paging.startPage != 1}">
-									<li class="page-item"><a class="page-link text-dark" href="./support?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a></li>
+									<li class="page-item"><a class="page-link text-dark" href="./board?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a></li>
 								</c:when>
 								<c:otherwise>
-									<li class="page-item"><a class="page-link text-dark" href="./support?nowPage=${paging.startPage }&cntPerPage=${paging.cntPerPage}">&lt;</a></li>
+									<li class="page-item"><a class="page-link text-dark" href="./board?nowPage=${paging.startPage }&cntPerPage=${paging.cntPerPage}">&lt;</a></li>
 								</c:otherwise>
 							</c:choose>      
 							<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
 								<c:choose>
 									<c:when test="${p == paging.nowPage }">
-										<li class="page-item active"><a class="page-link text-dark" href="./support?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a></li>
+										<li class="page-item active"><a class="page-link text-dark" href="./board?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a></li>
 									</c:when>
 									<c:when test="${p != paging.nowPage }">
-										<li class="page-item"><a class="page-link text-dark" href="./support?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a></li>
+										<li class="page-item"><a class="page-link text-dark" href="./board?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a></li>
 									</c:when>
 								</c:choose>
 							</c:forEach>
 							<c:choose>
 								<c:when test="${paging.endPage != paging.lastPage}">
-									<li class="page-item"><a class="page-link text-dark" href="./support?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a></li>
+									<li class="page-item"><a class="page-link text-dark" href="./board?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a></li>
 								</c:when>
 								<c:otherwise>
-									<li class="page-item"><a class="page-link text-dark" href="./support?nowPage=${paging.endPage }&cntPerPage=${paging.cntPerPage}">&gt;</a></li>
+									<li class="page-item"><a class="page-link text-dark" href="./board?nowPage=${paging.endPage }&cntPerPage=${paging.cntPerPage}">&gt;</a></li>
 								</c:otherwise>
 							</c:choose>
-						<li class="page-item"><a class="page-link text-dark" href="./support?nowPage=${paging.lastPage }&cntPerPage=${paging.cntPerPage}">&gt;&gt;</a></li>
+						<li class="page-item"><a class="page-link text-dark" href="./board?nowPage=${paging.lastPage }&cntPerPage=${paging.cntPerPage}">&gt;&gt;</a></li>
 					</ul>
 				</div>
 			</div>
