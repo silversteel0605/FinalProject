@@ -65,13 +65,13 @@ public class MemberController {
 		int type = vo.getMember_type();
 		session.setAttribute("auth", M_TYPE.get(type));
 		session.setAttribute("member_id", id);		
-		return "redirect:/about";
+		return "redirect:/main";
 	}
 	
 	@RequestMapping(value = "/member/logout")
 	public String logout(HttpSession session) {
 		session.setAttribute("auth", null);
-		return "redirect:/about";
+		return "redirect:/main";
 	}
 	
 	@RequestMapping(value="/kakao/login")

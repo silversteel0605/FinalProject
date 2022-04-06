@@ -21,7 +21,7 @@ function updateCampingInfo() {
 	  data : data,
 	  contentType : 'application/json;charset=UTF-8',
 	  success : function(result) {
-      	alert("ì—…ë°ì´íŠ¸ë¥¼ ì™„ë£Œí•˜ì˜€ìŠµë‹ˆë‹¤");
+      	alert("¾÷µ¥ÀÌÆ® ¿Ï·á");
       	window.close();
       	opener.location.reload();
     },

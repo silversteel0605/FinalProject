@@ -108,7 +108,7 @@ function campingBtn(btn) {
 	var tr = $(btn).parent().parent();
 	var td = tr.children();
 	var contentId = td.eq(1).text();
-	if (btn.innerText === 'ï¿½ï¿½ï¿½ï¿½') {
+	if (btn.innerText === '¼öÁ¤ÇÏ±â') {
 		makeUpdateWindow(contentId);
 	} else {
 		deleteCamping(contentId);
@@ -153,7 +153,7 @@ function getBoardList(nowPage) {
 			+ '<td>' + support.member_id + '</td>' 
 			+ '<td>' + support.title + '</td>' 
 			+ '<td>' + support.reg_date + '</td>'
-			+ '<td><button type="button" class="btn btn-link" onclick="goTo(this)">ï¿½Ûºï¿½ï¿½ï¿½</button></td>'
+			+ '<td><button type="button" class="btn btn-link" onclick="goTo(this)">±Ûº¸±â</button></td>'
 			+ '</tr>');
 		})
 		if (res.length > 0) {			
@@ -181,7 +181,7 @@ function getSupList(nowPage) {
 			+ '<td>' + support.member_id + '</td>' 
 			+ '<td>' + support.title + '</td>' 
 			+ '<td>' + support.reg_date + '</td>'
-			+ '<td><button type="button" class="btn btn-link" onclick="goTo(this)">ï¿½Ûºï¿½ï¿½ï¿½</button></td>'
+			+ '<td><button type="button" class="btn btn-link" onclick="goTo(this)">±Ûº¸±â</button></td>'
 			+ '</tr>');
 		})
 		if (res.length > 0) {			
@@ -211,7 +211,7 @@ function getReviewList(nowPage) {
 			+ '<td>' + review.title + '</td>' 
 			+ '<td>' + review.review + '</td>' 
 			+ '<td>' + Unix_timestamp(review.reg_date) + '</td>'
-			+ '<td><button type="button" class="btn btn-link" onclick="goTo(this)">ï¿½Ûºï¿½ï¿½ï¿½</button></td>'
+			+ '<td><button type="button" class="btn btn-link" onclick="goTo(this)">±Ûº¸±â</button></td>'
 			+ '</tr>');
 			console.log(review.reg_date);
 		})
@@ -240,9 +240,9 @@ function permitting(btn) {
 		  contentType : 'application/json',
 		  success : function(result) {
 			if(result == 1) {
-				alert("ï¿½ï¿½ï¿½Ô½ï¿½Ã»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ß½ï¿½ï¿½Ï´ï¿½");
+				alert("Çã¿ëµÇ¾ú½À´Ï´Ù");
 			} else {
-				alert("ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½Ô½ï¿½Ã»ï¿½ï¿½ ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½");
+				alert("ÀÌ¹Ì Çã¿ëµÇ¾ú½À´Ï´Ù");
 				
 			}
 	    },
@@ -268,7 +268,7 @@ function getCommentList(nowPage) {
 			+ '<td>' + comment.member_id + '</td>' 
 			+ '<td>' + comment.comments + '</td>' 
 			+ '<td>' + comment.decl + '</td>'
-			+ '<td><button type="button" class="btn btn-link" onclick="blind(this)">ï¿½ï¿½ï¿½ï¿½Îµï¿½</button></td>'
+			+ '<td><button type="button" class="btn btn-link" onclick="blind(this)">ºí¶óÀÎµå</button></td>'
 			+ '</tr>');				
 		})
 		if (res.length > 0) {			
@@ -301,9 +301,9 @@ function blind(btn) {
 		  contentType : 'application/json',
 		  success : function(result) {
 			if(result == 2) {
-		      	alert("ï¿½ï¿½ï¿½ï¿½Îµï¿½ Ã³ï¿½ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ï¿½Ï´ï¿½");				
+		      	alert("ºí¶óÀÎµå Ã³¸® µÇ¾ú½À´Ï´Ù");				
 			} else {
-				alert("ï¿½ï¿½ï¿½ï¿½Îµï¿½ Ã³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ß½ï¿½ï¿½Ï´ï¿½");
+				alert("ÀÌ¹Ì ºí¶óÀÎµå Ã³¸®µÈ ±ÛÀÔ´Ï´Ù");
 			}
 	    },
 	    error: function(request, status, error) {
@@ -369,9 +369,9 @@ function getBMemberList(nowPage) {
 			+ '<td>' + member.member_name + '</td>' 
 			+ '<td>' + member.camp + '</td>' 
 			+ '<td>' + (member.permit == 1 ?
-			 'ï¿½Ï·ï¿½</td>' :
-			 'ï¿½ï¿½ï¿½Ô½ï¿½Ã»</td>')
-		 	+ '<td><button type="button" class="btn btn-link" onclick="permitting(this)">ï¿½ï¿½ï¿½ï¿½Ï±ï¿½</button></td>'
+			 '¿Ï·á</td>' :
+			 '°¡ÀÔ½ÅÃ»</td>')
+		 	+ '<td><button type="button" class="btn btn-link" onclick="permitting(this)">Çã¿ëÇÏ±â</button></td>'
 			+ '</tr>');				
 		})
 		if (res.length > 0) {			
@@ -394,7 +394,7 @@ function deleteCamping(contentId) {
 	  dataType: "text",
 	  data : contentId,
 	  success : function(result) {
-      	alert("Ä·ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ï¿½Ï´ï¿½");
+      	alert("Ä·ÇÎÀå Á¤º¸°¡ »èÁ¦µÇ¾ú½À´Ï´Ù");
       	window.location.reload(true);			
     },
     error: function(request, status, error) {
@@ -419,7 +419,7 @@ function insertCampingInfo() {
 	  dataType: "json",
 	  data : data,
 	  success : function(result) {
-      	alert("Ä·ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ï¿½Ï´ï¿½");
+      	alert("Ä·ÇÎÀå Á¤º¸¸¦ Ãß°¡Çß½À´Ï´Ù");
       	window.location.reload(true);
     },
     error: function(request, status, error) {
@@ -444,8 +444,8 @@ function getCampingList(nowPage) {
 			+ '<td>' + camping.facltNm + '</td>' 
 			+ '<td>' + camping.tel + '</td>' 
 			+ '<td>' + camping.doNm + '</td>'
-			+ '<td><button type="button" class="btn btn-link" onclick="campingBtn(this)">ï¿½ï¿½ï¿½ï¿½</button>'
-			+ '<button type="button" class="btn btn-link" onclick="campingBtn(this)">ï¿½ï¿½ï¿½ï¿½</button></td>'  
+			+ '<td><button type="button" class="btn btn-link" onclick="campingBtn(this)">¼öÁ¤ÇÏ±â</button>'
+			+ '<button type="button" class="btn btn-link" onclick="campingBtn(this)">»èÁ¦ÇÏ±â</button></td>'  
 			+ '</tr>');				
 		})
 		if (res.length > 0) {			

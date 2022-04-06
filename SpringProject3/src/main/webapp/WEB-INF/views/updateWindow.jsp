@@ -15,7 +15,8 @@
 <body>
 <section class="wrap">
 	<div class="container-lg">
-	 <form class="row">
+	 <form class="row">		
+	<input type="hidden" id="contentId" value="${contentId }"></input>
 							    <div class="col-md-6">
 								    <label for="nameOfSite" class="form-label">캠핑장 이름</label>
 								    <input type="text" class="form-control" id="nameOfSite" value=${info.facltNm }>
@@ -47,7 +48,7 @@
 								  <input class="form-control form-control-sm" id="pictureOfSite" type="file" multiple>
 								</div>
 				      		</form>
-				      	<button type="button" class="btn btn-dark" id="camp_add">추가</button>
+				      	<button type="button" class="btn btn-dark" id="camp_update">추가</button>
   </div>
  </section>
 <script src="<c:url value="/resources/js/jquery.min.js"/>"></script>

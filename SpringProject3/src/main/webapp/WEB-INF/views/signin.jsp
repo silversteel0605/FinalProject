@@ -15,9 +15,9 @@
 	<link rel="stylesheet" href="<c:url value="/resources/css/reset.css"/>"/>
 	<!-- header css -->
 	<link rel="stylesheet" href="<c:url value="/resources/css/renewal_nav.css"/>"/>
-    <!--╢ые╘╦П╣Е ╟Э╥ц css-->
+    <!--О©╫О©╫е╘О©╫О©╫О©╫ О©╫О©╫О©╫О©╫ css-->
     <link rel="stylesheet" href="<c:url value="/resources/css/darkmode.css"/>"/>
-    <!-- ╦П╢ч css -->
+    <!-- О©╫О©╫О©╫ css -->
     <link rel="stylesheet" href="<c:url value="/resources/css/modal.css"/>"/>
 <style type="text/css">.row1{
   margin: 0px auto;
@@ -33,7 +33,7 @@
 	<div class="container-lg bb mb-5">
 	<div class="sub_title">
 		<div class="tit mb-2">JOIN</div>
-		<div class="txt">х╦О©╫О©╫О©╫О©╫О©╫О©╫</div>
+		<div class="txt">М ▄Л⌡░Й╟─Л·┘</div>
 	</div>
 </div>
 
@@ -127,13 +127,13 @@
  
   <!-- jquery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <!-- ╢ые╘╦П╣Е js-->
+    <!-- О©╫О©╫е╘О©╫О©╫О©╫ js-->
 	<script src="<c:url value="/resources/js/main_ani.js"/>"></script>
 	<script src="<c:url value="/resources/js/anime.min.js"/>"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script src="<c:url value="/resources/js/darkmode.js"/>"></script>
-    <!-- ╦П╢ч JS -->
+    <!-- О©╫О©╫О©╫ JS -->
     <script src="<c:url value="/resources/js/modal.js"/>"></script>
  <script src="//code.jquery.com/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -274,20 +274,7 @@ $(function(){
 			return;
 		}
 		
-		const tel2Rule = ^\\d{7,8}$;
-		if(tel2=="")
-		{
-			alert("Л═└М≥■К╡┬М≤╦К╔╪ Л·┘К═╔М∙≤Л└╦Л ■.");
-			$('#tel2').focus();
-			return;
-		}
-		
-		if(!tel2Rule.test(tel2))
-		{
-			alert("Л═└М≥■К╡┬М≤╦ Л√▒Л▀²Л≈░Л└° К╡≈Л√╢К┌╘К▀┬К▀╓.");
-			$('#tel2').focus();
-			return;
-		}
+	
 		
 		const tel = $('#tel1 option:selected').val() + $('#tel2').val();
 		$.ajax({
