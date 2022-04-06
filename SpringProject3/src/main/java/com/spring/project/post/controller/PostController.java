@@ -70,10 +70,10 @@ public class PostController {
 	public String supportPage(HttpServletRequest request, Model model, String nowPage, String categoryName, SearchVO search, boolean delete) {
 		HttpSession session = request.getSession();
 		
-		// 임시 ID 세션 저장
-		session.setAttribute("member_id", "admin");
+		if (model.getAttribute("member_id") == null) {
+			model.addAttribute("member_id", session.getAttribute("member_id"));
+		}
 		
-		log.info("들어오는 세션: " + session.getAttribute("search"));
 		// 초기 세션 생성
 		if (session.getAttribute("search") == null || ((SearchVO)session.getAttribute("search")).getBoard_class() != 1) {
 			Integer category = categoryNameMap.get("supportAll");
@@ -92,13 +92,12 @@ public class PostController {
 		
 		// 게시글 삭제
 		if (delete) {
-			log.info("고객센터 삭제됨");
 			postService.deletePost((Integer) session.getAttribute("tempPostId"));
 			session.removeAttribute("tempPostId");
 		}
 		
 		// Paging
-		Integer cntPerPage = 9;
+		Integer cntPerPage = 11;
 		
 		nowPage = nowPage != null ? nowPage :"1";
 		Integer total = postService.getCount((SearchVO) session.getAttribute("search"));
@@ -109,14 +108,13 @@ public class PostController {
 		postList = postService.getPostList((SearchVO) session.getAttribute("search"), pvo);
 		model.addAttribute("supportContentsList", postList);
 		
-		log.info("나가는 세션: " + session.getAttribute("search"));
 		return "support";
 	}
 	
 	@PostMapping("/support")
-	public String supportSearch(HttpServletRequest request, Model model, SearchVO search, String nowPage, DeleteVO del) {
+	public String supportSearch(HttpServletRequest request, Model model, SearchVO search, String nowPage) {
 		HttpSession session = request.getSession();
-		log.info("들어오는 세션: " + session.getAttribute("search"));
+		
 		// 검색 출력
 		search.setBoard_class(boardClassMap.get("supportBoard"));
 		search.setCategory(((SearchVO) session.getAttribute("search")).getCategory());
@@ -144,10 +142,9 @@ public class PostController {
 	public String board(HttpServletRequest request, Model model, String nowPage, SearchVO search, String categoryName, boolean delete) {
 		HttpSession session = request.getSession();
 		
-		// 임시 ID 세션 저장
-		session.setAttribute("member_id", "admin");
-		
-		log.info("들어오는 세션: " + session.getAttribute("search"));
+		if (model.getAttribute("member_id") == null) {
+			model.addAttribute("member_id", session.getAttribute("member_id"));
+		}
 		
 		// 초기 세션 생성
 		if (session.getAttribute("search") == null || ((SearchVO)session.getAttribute("search")).getBoard_class() != 0) {
@@ -184,14 +181,13 @@ public class PostController {
 		postList = postService.getPostList((SearchVO) session.getAttribute("search"), pvo);
 		model.addAttribute("freeBoardContentsList", postList);
 		
-		log.info("나가는 세션: " + session.getAttribute("search"));
 		return "freeBoard";
 	}
 	
 	@PostMapping("/board")
 	public String boardSearch(HttpServletRequest request, Model model, SearchVO search, String nowPage) {
 		HttpSession session = request.getSession();
-		log.info("들어오는 세션: " + session.getAttribute("search"));
+		
 		// 검색 출력
 		search.setBoard_class(boardClassMap.get("freeBoard"));
 		search.setCategory(((SearchVO) session.getAttribute("search")).getCategory());
@@ -209,7 +205,6 @@ public class PostController {
 		postList = postService.getPostSearch((SearchVO) session.getAttribute("search"), pvo);
 		model.addAttribute("freeBoardContentsList", postList);
 		
-		log.info("나가는 세션: " + session.getAttribute("search"));
 		return "freeBoard";
 	}
 	
@@ -217,27 +212,24 @@ public class PostController {
 	@GetMapping("/main_paragraph")
 	public String mainContents(HttpServletRequest request, Model model, Integer post_id, boolean delete) {
 		HttpSession session = request.getSession();
-		log.info("들어오는 세션: " + session.getAttribute("search"));
-		
-		// 임시 ID 세션 저장
-		session.setAttribute("member_id", "testAuth1");
 		
 		session.setAttribute("tempPostId", post_id);
 		PostVO post = postService.getContents(post_id);
+		Integer views = postService.increaseViews(post);
+		post.setViews(views);
 		model.addAttribute("contents", post);
 		
 		// 수정권한 부여
 		String member_id = (String) session.getAttribute("member_id");
-		log.info("세션아이디: " + member_id);
-		log.info("가져온 아이디: " + post.getMember_id());
-		
-		if (post.getMember_id().equals(member_id)) {
-			log.info("수정권한 인증됨");
-			model.addAttribute("editAuth", true);
+		if (member_id != null) {
+			if (post.getMember_id().equals(member_id) || member_id.equals("admin")) {
+				model.addAttribute("editAuth", true);
+			}
 		}
 		
-		log.info("post: " + post);
-		log.info("나가는 세션: " + session.getAttribute("search"));
+		// 코멘트 개수
+		model.addAttribute("commentsEA", postService.getCommentsEA(post_id));
+		model.addAttribute("reportNum", postService.getReport(post_id));
 		
 		// 댓글 불러오기
 		List<PostVO> commentsList = postService.getComments(post);
@@ -249,13 +241,11 @@ public class PostController {
 	// 기타
 	@GetMapping("/tempIndividualInfo")
 	public String tempIndividualInfo(String id) {
-		log.info("GetId: " + id);
 		return null;
 	}
 	
 	@GetMapping("/tempIndividualPost")
 	public String tempIndividualPost(String id) {
-		log.info("GetId: " + id);
 		return null;
 	}
 	
@@ -270,18 +260,16 @@ public class PostController {
 	
 	//글작성하기
 	@GetMapping("/write")
-	public String write(HttpServletRequest request, Model model, String board_class, Integer post_id) {
+	public String write(HttpServletRequest request, Model model, String board_class, Integer post_id, boolean edit) {
 		HttpSession session = request.getSession();
-		
-		if (post_id != null) {
+		if (edit) {
 			model.addAttribute("contents", postService.getContents(post_id));
 		}
 		
-		log.info("board_class: " + board_class);
-		log.info("session 아이디: " + session.getAttribute("member_id"));
 		model.addAttribute("manager", session.getAttribute("member_id"));
 		model.addAttribute("board_class", board_class);
 		model.addAttribute("boardString", board_class.equals("freeBoard") ? "board" : "support");
+		model.addAttribute("post_id", post_id);
 		return "writeTest";
 	}
 	
@@ -291,29 +279,34 @@ public class PostController {
 		request.setCharacterEncoding("EUC-KR");
 		
 		String data = request.getParameter("contents");
-		log.info(data);
 		PostVO post = new PostVO();
-		log.info(post);
+		String[] dataArr = data.split(","); 
 		
-		String[] dataArr = data.split(","); for(String item : dataArr) {
-			log.info(item); }
-		
+		post.setMember_id((String)session.getAttribute("member_id"));
+		post.setTitle(dataArr[0]); 
+		post.setContents(dataArr[1]);
 		post.setMember_id((String)session.getAttribute("member_id"));
 		post.setTitle(dataArr[0]); post.setContents(dataArr[1]);
 		post.setBoard_class(boardClassMap.get(dataArr[2]));
 		post.setContents_category(categoryNameMap.get(dataArr[3]));
-		
 		if (boardClassMap.get(dataArr[2]) == 1) { post.setProcess(1); }
 		
-		postService.addPost(post);
+		if (dataArr.length > 4) {
+			
+			if (Boolean.parseBoolean(dataArr[5])) {
+				post.setPost_id(Integer.parseInt(dataArr[4]));
+				postService.editPost(post);
+			}
+			
+		} else {
+			postService.addPost(post);
+		}
 		
 		return "redirect:" + mkUri(dataArr[2]);
-		
 	}
 	
 	@PostMapping("/upload/image")
 	public void postImage(MultipartHttpServletRequest multiFile, HttpServletRequest req, HttpServletResponse resp) {
-		log.info("image 업로드 들어옴");
 		
 		JsonObject json = new JsonObject();
 		OutputStream out = null;
@@ -326,11 +319,9 @@ public class PostController {
         	try {
         		UUID uuid = UUID.randomUUID();
         		String fileName = file.getOriginalFilename();
-        		log.info("fileName: " + fileName);
         		byte[] bytes = file.getBytes();
         		
         		String imgUploadPath = uploadPath + File.separator + uuid + "_" + fileName;
-        		log.info(imgUploadPath);
         		
         		out = new FileOutputStream(imgUploadPath);
         		out.write(bytes);
@@ -339,9 +330,7 @@ public class PostController {
         		printWriter = resp.getWriter();
         		resp.setContentType("application/json");
         		String callback = req.getParameter("CKEditorFuncNum");
-        		log.info(callback);
         		String fileUrl = "/project/ckUpload?uuid=" + uuid + "&fileName=" + fileName;
-        		log.info("fileUrl: " + fileUrl);
         		
         		json.addProperty("filename", fileName);
         		json.addProperty("uploaded", 1);
@@ -365,14 +354,9 @@ public class PostController {
 	public void chUpload(@RequestParam(value="uuid") String uuid
     		, @RequestParam(value="fileName") String fileName
     		, HttpServletRequest req, HttpServletResponse resp) throws IOException {
-		log.info("ckUpload 들어옴");
-		log.info("uuid: "  + uuid);
-		log.info("ckUpload FileName: " + fileName);
 		
 		String path = "D:\\JavaWeb_Ethan\\project-workspace\\LastProject\\SpringProject3\\src\\main\\webapp\\resources\\images\\";	// 저장된 이미지 경로
-    	System.out.println("path:"+path);
     	String sDirPath = path + uuid + "_" + fileName;
-    	log.info(sDirPath);
     	
     	File imgFile = new File(sDirPath);
     	

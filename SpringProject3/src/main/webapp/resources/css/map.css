@@ -1,0 +1,19 @@
+#map img {
+
+	max-width: none;
+
+	height: auto;
+
+	border: 0
+
+}
+
+.map_warp{
+	display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.map_text{
+	width: 100%;
+}

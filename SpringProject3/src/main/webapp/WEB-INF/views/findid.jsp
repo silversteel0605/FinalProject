@@ -40,13 +40,13 @@
      <tr>
        <th class="text-right danger" width="15%">이름</th>
        <td width=85%>
-         <input type="text" name="name" class="input-sm" placeholder = "등록한 이름">
+         <input type="text" name="member_name" class="input-sm" placeholder = "등록한 이름">
        </td>
      </tr>
      <tr>
        <th class="text-right danger" width="15%">번호</th>
        <td width=85%>
-         <input type="number" name="phone" class="input-sm"  id="pwd" placeholder = "휴대폰번호를 '-'없이 입력">
+         <input type="number" name="tel" class="input-sm"  id="pwd" placeholder = "휴대폰번호를 '-'없이 입력">
        </td>
      </tr>
      <td colspan="2" class="text-center">
@@ -58,6 +58,7 @@
     </table>
     </form>
   </div>
+
 </div>
     
 

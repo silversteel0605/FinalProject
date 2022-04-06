@@ -23,7 +23,6 @@
     background-color: #f9f9f9;
     min-width : 200px;
   }
-  
   .dropdown-content a{
     display : block;
     text-decoration : none;
@@ -31,7 +30,9 @@
     font-size: 12px;
     padding : 12px 20px;
   }
-  
+  .dropdown-item>span{
+  	color:black;
+  }
   .all{
       cursor :pointer;
   }

@@ -23,7 +23,7 @@
 				(member_id, member_pwd, member_type, member_name, email, birthday, post, addr1, addr2, tel) 
 				values (#{member_id}, #{member_pwd}, #{member_type}, #{member_name}, #{email}, #{birthday}, #{post}, #{addr1}, #{addr2}, #{tel})	
 			</when>
-			<otherwise>1
+			<otherwise>
 			   (member_id, member_pwd, member_name, camp, email, member_type, permit)
 			   values (#{member_id}, #{member_pwd}, #{member_name}, #{camp}, #{email}, #{member_type}, #{permit})
 			</otherwise>

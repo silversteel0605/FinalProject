@@ -1,0 +1,14 @@
+.darkmodeSection, 
+.darkmodeDiv
+{
+	background: #323639 !important;
+	border-color: #D6D6D7 !important;
+}
+
+.pagination > li > a:hover {
+	background-color: transparent !important;
+}
+
+.darkmodeFont {
+	color: #D6D6D7 !important;
+}

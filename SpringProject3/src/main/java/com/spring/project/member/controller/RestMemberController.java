@@ -34,6 +34,7 @@ public class RestMemberController {
 	@GetMapping(value = "/join")
 	public int join(MemberVO vo) {
 		int rs;
+		log.info(vo);
 		if((rs = service.join(vo)) == 1) {
 			return rs + service.isPermit(vo);
 		} else {

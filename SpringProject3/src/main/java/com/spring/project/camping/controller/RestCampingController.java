@@ -54,6 +54,21 @@ public class RestCampingController {
 		return service.deleteData(contentId);
 	}
 	
+	@PutMapping(value="/updata")
+	public void updata() throws IOException, JDOMException {
+		service.getAllXML();
+		
+		log.info("test");
+		
+		CampingVO[] lists = service.getXMLData();
+		
+		for(CampingVO list : lists) {
+			log.info(list.getAddr2());
+			service.addCampingUpdataData(list);
+			
+		}
+	}
+	
 	@PostMapping(value="/init")
 	public void init() throws IOException, JDOMException {
 		service.getAllXML();

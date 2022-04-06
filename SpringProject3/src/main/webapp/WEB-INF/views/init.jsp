@@ -8,6 +8,7 @@
 </head>
 <body>
 	<button id="insert">캠핑장 데이터 초기화 하기</button>
+	<button id="updata">캠핑장 데이터 DATA 추가하기</button>
 	
 	<script> 
 		const contextPath = '/project/rest';
@@ -30,6 +31,27 @@
 			console.log(`${contextPath }`);
 			xhttp_insert.open('POST', contextPath + '/init');
 			xhttp_insert.send();
+		});
+		
+		const updata = document.getElementById('updata');
+		const xhttp_updata = new XMLHttpRequest();
+	
+		xhttp_updata.addEventListener('readystatechange', (e) => {
+			const target = e.target;
+			const readyState = target.readyState;
+			const status = target.status;
+			
+			if (readyState == 4) {
+				if(status == 200) {
+					alert("updata success");
+				}
+			}	
+		});
+	
+		updata.addEventListener('click', () => {
+			console.log(`${contextPath }`);
+			xhttp_updata.open('PUT', contextPath + '/updata');
+			xhttp_updata.send();
 		});
 	</script>
 </body>

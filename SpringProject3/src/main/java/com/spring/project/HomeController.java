@@ -45,9 +45,9 @@ public class HomeController {
 	public String reservation2() {
 		return "sample";
 	}
-	@RequestMapping(value = "/test3", method = RequestMethod.GET)
+	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String reservation3() {
-		return "reservation3";
+		return "main";
 	}
 	
 	@RequestMapping(value = "/sample", method = RequestMethod.GET)

@@ -30,7 +30,7 @@
 </head>
 <body style="overflow-x: hidden">
 
-	<jsp:include page='nav.jsp'/>
+	<jsp:include page='renewal_nav.jsp'/>
 	
 	<div id="mainimg" class="hero-wrap js-fullheight" style="background-image: url('resources/images/bg_5.jpg');">
 		<div class="overlay"></div>

@@ -1,5 +1,6 @@
 @charset "EUC-KR";
 
+
 body {
 	overflow-x: hidden;
 	
@@ -31,7 +32,7 @@ li {
 
 .page-item.active .page-link, .page-link:hover {
 	color: black !important;
-	background: #ffffff  !important;
+	background: #ffffff !important;
 }
 
 .nav-link.active[area=camp] {
@@ -140,7 +141,6 @@ li {
 	body {
 		overflow-x : hidden;
 	}
-}     
-      
-      
-      
+}
+     
+

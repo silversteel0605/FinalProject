@@ -20,5 +20,7 @@ public interface CampingDataMapper {
 	public int deleteData(String contentId);
 
 	public void addViews(String contentId);
+	
+	public int addCampingUpdataData(CampingVO vo);
 
 }

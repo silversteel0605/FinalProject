@@ -18,10 +18,9 @@
 	<logger name="jdbc.sqlonly">
 		<level value="info"/>
 	</logger>
-	
 	<logger name="jdbc.resultsettable">
 		<level value="info"/>
-	</logger> 
+	</logger> -->
 	
 	<logger name="com.spring.project">
 		<level value="info" />

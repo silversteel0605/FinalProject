@@ -61,6 +61,7 @@ public class MemberController {
 	@RequestMapping(value = "/member/login")
 	public String login(HttpSession session, MemberVO vo) {
 		String id = vo.getMember_id();
+		log.info(id);
 		int type = vo.getMember_type();
 		session.setAttribute("auth", M_TYPE.get(type));
 		session.setAttribute("member_id", id);		

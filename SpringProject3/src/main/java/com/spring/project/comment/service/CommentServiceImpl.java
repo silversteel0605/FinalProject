@@ -31,5 +31,25 @@ public class CommentServiceImpl implements CommentService{
 	public int blind(CommentVO vo) {
 		return dataMapper.blind(vo);
 	}
-
+	
+	
+	@Override
+	public void addComment(CommentVO comment) {
+		dataMapper.addComment(comment);
+	};
+	
+	@Override
+	public void deleteComment(Integer commentId) {
+		dataMapper.deleteComment(commentId);
+	}
+	
+	@Override
+	public void commentReport(Integer commentId, Integer reportNum) {
+		dataMapper.commentReport(commentId, reportNum);
+	}
+	
+	@Override
+	public Integer getCommentReport(Integer commentId) {
+		return dataMapper.getCommentReport(commentId); 
+	}
 }

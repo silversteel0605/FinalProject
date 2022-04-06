@@ -30,13 +30,13 @@
 	
 	<select id="getPostList" resultType="com.spring.project.post.dto.PostVO">
 		SELECT 
-			post.rownumber, post.post_id,  post.member_id, post.title, post.contents, to_char(post.reg_date, 'yyyy. MM. dd.'), 
-			post.board_class, post.contents_category, post.process, post.imgurl , post.decl
+			post.rownumber, post.post_id,  post.member_id, post.title, post.contents, to_char(post.reg_date, 'yyyy. MM. dd.') as reg_date, 
+			post.board_class, post.contents_category, post.process, post.imgurl, post.views
 		FROM 
 			(
 				SELECT 
 					rownum as rownumber, post_id, member_id, title, contents, reg_date, 
-					board_class, contents_category, process, imgurl, decl
+					board_class, contents_category, process, imgurl, views
 				FROM 
 					post
 				WHERE
@@ -62,13 +62,13 @@
 	
 	<select id="getPostSearch" resultType="com.spring.project.post.dto.PostVO" parameterType="com.spring.project.post.dto.SearchVO">
 		SELECT 
-			post.rownumber, post.post_id,  post.member_id, post.title, post.contents,to_char(post.reg_date, 'yyyy. MM. dd.'), 
-			post.board_class, post.contents_category, post.process, post.imgurl
+			post.rownumber, post.post_id,  post.member_id, post.title, post.contents, to_char(post.reg_date, 'yyyy. MM. dd.') as reg_date, 
+			post.board_class, post.contents_category, post.process, post.imgurl, post.views
 		FROM 
 			(
 				SELECT 
 					rownum as rownumber, post_id, member_id, title, contents, reg_date, 
-					board_class, contents_category, process, imgurl
+					board_class, contents_category, process, imgurl, views
 				FROM 
 					post
 				WHERE
@@ -99,13 +99,13 @@
 	<!-- mainContents -->
 	<select id="getContents" resultType="com.spring.project.post.dto.PostVO">
 		SELECT 
-			post.rownumber, post.post_id,  post.member_id, post.title, post.contents,to_char(post.reg_date, 'yyyy. MM. dd.'), 
-			post.board_class, post.contents_category, post.process, post.imgurl
+			post.rownumber, post.post_id,  post.member_id, post.title, post.contents,to_char(post.reg_date, 'yyyy. MM. dd.') as reg_date, 
+			post.board_class, post.contents_category, post.process, post.imgurl, post.views
 		FROM 
 			(
 				SELECT 
 					rownum as rownumber, post_id, member_id, title, contents, reg_date, 
-					board_class, contents_category, process, imgurl
+					board_class, contents_category, process, imgurl, views
 				FROM 
 					post
 			) 
@@ -116,28 +116,17 @@
 	<delete id="deletePost">
 		DELETE FROM post WHERE post_id = #{post_id}
 	</delete>
-	<insert id="addComment">
-		<selectKey keyProperty="comment_id" resultType="_integer" order="BEFORE">
-	    	SELECT comment_id_seq.nextval FROM dual
-		</selectKey>
-		INSERT INTO 
-			comments 
-		VALUES (
-			#{comment_id}, #{post_id}, #{category_id}, #{member_id}, #{comments}, #{classnum}, #{ordernum}, 
-			<choose>
-			<when test="groupnum eq null">
-			#{comment_id}
-			</when>
-			<otherwise>
-			#{groupnum} 
-			</otherwise>
-			</choose>
-		)
-	</insert>
+	
+	<update id="increaseViews">
+		UPDATE post SET views = #{post.views} WHERE post_id = #{post.post_id} 
+	</update>
 	
 	<!-- Comments -->
 	<select id="getComments" resultType="com.spring.project.post.dto.CommentVO">
 		SELECT * FROM comments WHERE post_id = #{post_id} AND category_id = #{board_class}
+	</select>
+	<select id="getCommentsEA" resultType="_integer">
+		SELECT count(*) FROM comments WHERE post_id = #{post_id}
 	</select>
 	
 	<!-- addPost -->
@@ -147,13 +136,36 @@
 		</selectKey>
 			INSERT INTO 
 				post 
-			(post_id, member_id, title, contents, reg_date, board_class, contents_category, process, imgurl)
+			(post_id, member_id, title, contents, reg_date, board_class, contents_category, process, imgurl, views)
 			VALUES (
 				#{post_id}, #{member_id}, #{title}, #{contents}, sysdate, 
-				#{board_class}, #{contents_category}, #{process}, null
+				#{board_class}, #{contents_category}, #{process}, null, 0
 			)
 	</insert>
+	<update id="editPost">
+		UPDATE post
+		SET
+			title = #{title},
+			contents = #{contents}
+		WHERE
+			post_id = #{post_id}
+	</update>
 	
+	<select id="getIndividual" resultType="com.spring.project.post.dto.PostVO">
+		SELECT * FROM post WHERE member_id = #{id}
+	</select>
+	
+	<!-- Report -->
+	<update id="addReport">
+		UPDATE post
+		SET
+			decl = #{report}
+		WHERE
+			post_id = #{post_id}
+	</update>
+	<select id="getReport" resultType="_integer">
+		SELECT decl FROM post WHERE post_id = #{post_id}
+	</select>
 </mapper>
 
 

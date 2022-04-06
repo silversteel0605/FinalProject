@@ -16,12 +16,18 @@ public interface PostService {
 	
 	public PostVO getContents(Integer post_id);
 	public void deletePost(Integer post_id);
+	public Integer increaseViews(PostVO post);
 	
-	public void addComment(CommentVO comment);
 	public List<PostVO> getComments(PostVO post);
+	public Integer getCommentsEA(Integer post_id);
 	
 	public void addPost(PostVO post);
+	public void editPost(PostVO post);
 	
+	public List<PostVO> getIndividual(String id);
+	
+	public void addReport(Integer post_id, Integer report);
+	public Integer getReport(Integer post_id);
 	public PostVO[] getAllPost(PostVO vo);
 	
 	public int getAllCounts();

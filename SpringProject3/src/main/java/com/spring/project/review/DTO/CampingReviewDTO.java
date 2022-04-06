@@ -22,6 +22,7 @@ public class CampingReviewDTO extends PageSearchVO{
 	private String imgUrl;
 	private int starRanking;
 	private int views;
+	private int reviewGreate;
 	private int decl;
 	private int total;
 	private int rn;

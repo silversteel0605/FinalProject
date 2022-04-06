@@ -1,40 +1,39 @@
-function moreInfoFunc() {
-	  var mores = document.getElementById("mores");
-	  if (mores.style.display === "none" || mores.style.display === "") {
-	    mores.style.display = "block";
-	  } else {
-	    mores.style.display = "none";
-	  }
-	}
-	
-	var tags = document.querySelectorAll('.tag ');
-	tags.forEach(tag => {
-		tag.onclick = () => {
-			if (tag.classList.contains('active')) {				
-				tag.style.backgroundColor = "#ffffff";
-				tag.style.color = "#343a40";
-				tag.classList.remove('active');
-				
-			} else {
-				tag.style.backgroundColor = "#343a40";
-				tag.style.color = "#ffffff";
-				tag.classList.add('active');
-			}
+const Tags = document.querySelectorAll('.tag');
+Tags.forEach(tag => {
+	tag.onclick = () => {
+		if (tag.classList.contains('active')) {				
+			tag.style.backgroundColor = "#ffffff";
+			tag.style.color = "#212529";
+			tag.classList.remove('active');
+			
+		} else {
+			tag.style.backgroundColor = "#212529";
+			tag.style.color = "#ffffff";
+			tag.classList.add('active');
 		}
-	})
+	}
+})
 	
-	var searchBtn = document.getElementsByClassName('tagSearch')[0];
-	searchBtn.onclick = () => {
+
+
+$('#submit').click(function() {
+	const form = document.condition;
+	if ($('#condition').hasClass('active')) {
+		form.method = "get";
+		form.action = './search';
+		form.submit();
+	} else {		
 		let uri = location.pathname + '?searchTy=tag';
-		tags.forEach(tag => {
+		Tags.forEach(tag => {
 			if(tag.classList.contains('active')) {
-				let id = tag.id;
+				var id = tag.id;
 				uri += '&tagId=' + id;
 			}
 		})
 		location.href = uri;
 	}
-	
+})
+/*		
 	var order = document.getElementById('order');
 	
 	order.addEventListener('change', (e) => {
@@ -56,3 +55,4 @@ function moreInfoFunc() {
 		pathname = pathname.replace('nowPage=[0-9]+', 'nowPage=1');
 		location.href = pathname + search;
 	})
+*/

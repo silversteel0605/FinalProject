@@ -99,6 +99,27 @@
 	       			<div class="mb-3">
 						<label for="writeEditor">내용</label>
 						<textarea class="form-control" rows="5" name="contents" id="writeEditor" placeholder="내용을 입력해 주세요" >
+<<<<<<< HEAD
+							<c:if test="${contents.contents != null }">
+								${contents.contents }
+							</c:if>
+						</textarea>
+					</div>	
+			    </form>
+				<button id="writeSavBtn" class="btn">저장</button>
+			</div>
+		<!-- /컨텐츠 -->	
+		</div>		
+	</div>
+</section>
+
+<!-- 변수 -->
+<input type="hidden" id="board_class" value="${board_class }" />
+<input type="hidden" id="post_id" value="${post_id }" />
+<c:if test="${contents.contents != null }">
+<input type="hidden" id="edit" value="true" />
+</c:if>
+=======
 							
 						</textarea>
 					</div>	
@@ -110,6 +131,7 @@
 		</div>		
 	</div>
 </section>
+>>>>>>> refs/heads/master
 
 <!-- Modal -->
 	
